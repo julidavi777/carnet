@@ -1,0 +1,40 @@
+.logo {
+  max-width: 200px;
+  display: inline-block;
+}
+.fondo {
+  background-color: black;
+}
+
+.logo-container {
+  text-align: center;
+  margin-top: 10%;
+}
+
+.grid-container {
+  padding: 0;
+  height: 500%;
+  color: var(--ion-color-dark-tint);
+  background-color: black;
+  //background-image: url('../../assets/icon/Captura.png');
+}
+.barra-lateral {
+  background-color: rgb(215, 240, 250);
+  background-image: url('../../assets/icon/ingeniería.png');
+  background-size:100% ;
+  width: 100;
+  height: 100;
+}
+
+
+
+.main-row {
+  height: 100%;
+}
+
+@media (min-width: 800px) {
+  .login-col {
+      padding: 50px 150px;
+  }
+}
+

@@ -1,0 +1,25 @@
+ion-app {
+  background-color: rgb(188, 198, 207);
+
+  // background-image:  url(/frontend/src/assets/icon/Logo_Cbk_4.png);
+  background-image: no-repeat;
+  background-image: fixed;
+  background-image: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+ }
+.logo{
+  width: 100px;
+  height: 100px;
+  position: center;
+
+}
+.center {
+  display: block;
+  margin: auto;
+  width: 50%;
+
+  opacity: 0.2;
+ }
