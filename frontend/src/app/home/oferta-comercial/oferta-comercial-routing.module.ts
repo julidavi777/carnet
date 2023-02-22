@@ -9,8 +9,8 @@ const routes: Routes = [
     component: OfertaComercialPage
   },
   {
-    path: 'ofertas',
-    loadChildren: () => import('./ofertas/ofertas.module').then( m => m.OfertasPageModule)
+    path: 'crear-oferta',
+    loadChildren: () => import('./crear-oferta/crear-oferta.module').then( m => m.CrearOfertaPageModule)
   },
   {
     path: 'cotizaciones',

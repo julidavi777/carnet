@@ -11,15 +11,18 @@ ion-app {
   background-size: cover;
  }
 .logo{
-  width: 100px;
-  height: 100px;
-  position: center;
+  width: 30rem;
+  height: 30rem;
 
 }
-.center {
-  display: block;
-  margin: auto;
-  width: 50%;
+.logo-cubikar-background {
+  position: absolute;
+  width: 100%;
+  height: 10rem;
+  margin-top: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  opacity: 0.2;
- }
+  opacity: 0.3;
+}

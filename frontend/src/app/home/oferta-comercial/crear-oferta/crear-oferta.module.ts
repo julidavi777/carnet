@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { OfertasPageRoutingModule } from './ofertas-routing.module';
+import { CrearOfertaPageRoutingModule } from './crear-oferta-routing.module';
 
-import { OfertasPage } from './ofertas.page';
+import { CrearOfertaPage } from './crear-oferta.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OfertasPageRoutingModule
+    CrearOfertaPageRoutingModule
   ],
-  declarations: [OfertasPage]
+  declarations: [CrearOfertaPage]
 })
-export class OfertasPageModule {}
+export class CrearOfertaPageModule {}
