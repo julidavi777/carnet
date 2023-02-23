@@ -5,41 +5,73 @@
   <form>
     <div class="row">
       <div class="form-group col-md-6">
-        <label for="validation01">Nombres</label>
+        <label for="validation01">Nombres y Apellidos</label>
         <input type="text" class="form-control" id="validation01" placeholder="Nombres" value="Mark" required>
       </div>
+
       <div class="form-group col-md-6">
+        <label for="validation01">Tipo de documento</label>
         <select class="form-select" aria-label="Default select example">
-          <option selected>Tipo de documento</option>
+          <option selected></option>
           <option value="1">CC</option>
           <option value="2">NIT</option>
           <option value="3">CE</option>
         </select>
       </div>
+
       <div class="form-group col-md-6">
         <label for="validation03">Numero identificacion</label>
-        <input type="text" class="form-control" id="validation03" placeholder="#" required>
+        <input type="number" class="form-control" id="validation03" placeholder="" required>
       </div>
+      <div class="form-group col-md-1">
+        <label for="validation03">DV</label>
+        <input type="number" class="form-control" id="validation03" placeholder="#" required>
+      </div>
+
       <div class="form-group col-md-6">
         <label for="validation04">Direccion</label>
         <input type="text" class="form-control" id="validation04" placeholder="Direccion" required>
       </div>
+
       <div class="form-group col-md-6">
-        <label for="validation05">Telefono</label>
-        <input type="text" class="form-control" id="validation05" placeholder=" # Telefono" required>
+        <label for="validation05">Número telefonico</label>
+        <input type="number" class="form-control" id="validation05" placeholder=" # Telefono" required>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="validation05">Contacto comercial #1</label>
+        <input type="text"  class="form-control" id="validation05" placeholder=" Número Telefono" required textarea>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="validation05">Contacto comercial #2</label>
+        <input type="text"  class="form-control" id="validation05" placeholder=" Número Telefono" required textarea>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="validation05">Contacto comercial #3</label>
+        <input type="text"  class="form-control" id="validation05" placeholder=" Número Telefono" required textarea>
       </div>
       <div class="form-group col-md-6">
-        <label for="validation06">Razon social</label>
-        <input type="text" class="form-control" id="validation06" placeholder="Razon social" required>
+        <label for="validation06">Razón social</label>
+        <input type="text" class="form-control" id="validation06" placeholder="" required>
       </div>
+
+      <div class="form-group col-md-6">
+        <label for="validation06">Razón comercial</label>
+        <input type="text" class="form-control" id="validation06" placeholder="" required>
+      </div>
+
       <div class="form-group col-md-6">
         <label for="validation07">RUT</label>
-        <input type="text" class="form-control" id="validation07" placeholder="RUT" required>
+        <input type="file" class="form-control" id="validation07" placeholder="" required>
       </div>
+
       <div class="form-group col-md-6">
         <label for="validation08">Camara de comercio</label>
         <input type="file" class="form-control" id="validation08" placeholder="Cargue archivo" required>
       </div>
+
       <div class="form-group col-md-6">
         <label for="validation09">Declaracion de renta</label>
         <input type="file" class="form-control" id="validation09" placeholder="Cargue archivo" required>
