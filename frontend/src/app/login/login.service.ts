@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CrearClienteService {
+export class LoginService {
 
   readonly API_URL = environment.baseUrl;
 
@@ -13,7 +14,9 @@ export class CrearClienteService {
     private http:HttpClient,
   ) { }
 
-  saveCustomer(data: any){
-    return this.http.post(`${this.API_URL}customers`, data);
+  login(data: any){
+    return this.http.post(`${this.API_URL}login`, data);
   }
+
+
 }

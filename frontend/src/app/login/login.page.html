@@ -11,19 +11,25 @@
         </div>
         <p style="text-align: center;">Ingresa tu correo y contraseña  para iniciar sesión</p>
 
-        <!-- <form [formGroup]="loginForm" style="bottom: 0;" (ngSubmit)="login()"> -->
+        <form [formGroup]="loginForm"  (ngSubmit)="login()">
           <ion-item class="ion-margin-bottom">
             <ion-label position="floating"><ion-icon name="person-circle-outline"></ion-icon> Correo</ion-label>
-            <ion-input type="email"  ></ion-input>
+            <ion-input type="email" formControlName="email"  ></ion-input>
           </ion-item>
-          <ion-item class="ion-margin-bottom">
+          <ion-item class="ion-margin-bottom" style="margin-top: 10px;">
             <ion-label position="floating"><ion-icon name="lock-closed-outline"></ion-icon> Contraseña</ion-label>
-            <ion-input type="password"></ion-input>
+            <ion-input type="password" formControlName="password"></ion-input>
           </ion-item>
-          <ion-button type="submit" class="ion-margin-bottom" expand="block" >Iniciar Sesión</ion-button>
-        <!-- </form> -->
+          <ion-button type="submit" [disabled]="loginForm.invalid" class="ion-margin-bottom" style="margin-top: 10px;" expand="block" >Iniciar Sesión</ion-button>
+        </form>
         <div style="text-align: center;">
           <a routerLink="restore-pass"><b>¿Olvidaste tu contraseña?</b></a>
+        </div>
+        <div *ngIf="isInvalidData" class="mt-2">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Mensaje</strong> contraseña o correo invalido 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
         </div>
       </ion-col>
     </ion-row>

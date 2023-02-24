@@ -1,7 +1,118 @@
 <ion-title>Listado de clientes</ion-title>
 
 
-<div class="content">
+<ngx-datatable
+class="material"
+[rows]="rows"
+[headerHeight]="50"
+[footerHeight]="50"
+rowHeight="auto"
+[limit]="10"
+[scrollbarH]="true"
+>
+<ngx-datatable-column [resizeable]="true" [width]="200">
+  <ng-template ngx-datatable-header-template>
+    Tipo identificación:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.identification_type}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="200">
+  <ng-template ngx-datatable-header-template>
+    Identificación:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.identification}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="200">
+  <ng-template ngx-datatable-header-template>
+    Nombre:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.name}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="200">
+  <ng-template ngx-datatable-header-template>
+    Apellido:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.surname}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="200">
+  <ng-template ngx-datatable-header-template>
+    Numero telefono:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.phone_number}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="200">
+  <ng-template ngx-datatable-header-template>
+    Razon social
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.razon_social}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="200">
+  <ng-template ngx-datatable-header-template>
+    Razon comercial
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.razon_comercial}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="200">
+  <ng-template ngx-datatable-header-template>
+    RUT
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    <ion-button (click)="watchDocument(row.rut_file)">
+      <ion-icon  slot="icon-only" name="document-sharp"></ion-icon>
+    </ion-button>
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="200">
+  <ng-template ngx-datatable-header-template>
+    Cámara de comercio
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    <ion-button (click)="watchDocument(row.camara_commerce_file)">
+      <ion-icon  slot="icon-only" name="document-sharp"></ion-icon>
+    </ion-button>
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="200">
+  <ng-template ngx-datatable-header-template>
+    Declaración de renta
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+   <!--  {{row.income_statement_file}} -->
+    <ion-button (click)="watchDocument(row.income_statement_file)">
+      <ion-icon  slot="icon-only" name="document-sharp"></ion-icon>
+    </ion-button>
+    
+  </ng-template>
+</ngx-datatable-column>
+
+
+</ngx-datatable>
+
+
+<div class="content" *ngIf="false">
   <table class="table table-hover">
     <thead>
       <tr>

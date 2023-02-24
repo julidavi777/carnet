@@ -9,6 +9,8 @@ import { CrearClienteService } from './crear-cliente.service';
 })
 export class CrearClientePage implements OnInit {
 
+  registeredSuccessfully:boolean = false;
+
   customerForm: any = new FormGroup({
     identification_type: new FormControl('', [Validators.required]),
     identification: new FormControl('', [Validators.required]),
@@ -17,6 +19,7 @@ export class CrearClientePage implements OnInit {
     surname: new FormControl('', [Validators.required]),
     phone_number: new FormControl(''),
     address: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     commercial_contact_1: new FormControl('', [Validators.required]),
     commercial_contact_2: new FormControl('',),
     commercial_contact_3: new FormControl('',),
@@ -41,6 +44,8 @@ export class CrearClientePage implements OnInit {
   }
 
   onSubmit(){
+    this.registeredSuccessfully = false;
+
     console.log(this.customerForm.value)
 
     const formData = new FormData();
@@ -52,20 +57,28 @@ export class CrearClientePage implements OnInit {
     formData.append('surname', this.customerForm.get('surname').value);
     formData.append('phone_number', this.customerForm.get('phone_number').value);
     formData.append('address', this.customerForm.get('address').value);
+    formData.append('email', this.customerForm.get('address').value);
     formData.append('commercial_contact_1', this.customerForm.get('commercial_contact_1').value);
     formData.append('commercial_contact_2', this.customerForm.get('commercial_contact_2').value);
     formData.append('commercial_contact_3', this.customerForm.get('commercial_contact_3').value);
     formData.append('razon_social', this.customerForm.get('razon_social').value);
     formData.append('razon_comercial', this.customerForm.get('razon_comercial').value);
 
-    formData.append('file', this.customerForm.get('rut_file').value);
-    formData.append('file', this.customerForm.get('camara_commerce_file').value);
-    formData.append('file', this.customerForm.get('income_statement_file').value);
+    formData.append('rut_file', this.customerForm.get('rut_file').value);
+    formData.append('camara_commerce_file', this.customerForm.get('camara_commerce_file').value);
+    formData.append('income_statement_file', this.customerForm.get('income_statement_file').value);
 
     this.crearClienteService.saveCustomer(formData).subscribe(res => {
-        console.log(res);
-        alert('Uploaded Successfully.');
-    });
+        //alert('Uploaded Successfully.');
+        this.registeredSuccessfully = true;
+        setTimeout(() => {
+          this.registeredSuccessfully = false;
+        }, 3000);
+    }, err => {
+
+      alert('error al registrar.');
+    }
+    );
   }
 
   onFileChange(event: any, name_field: string){

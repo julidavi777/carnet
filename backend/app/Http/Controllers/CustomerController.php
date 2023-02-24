@@ -38,7 +38,7 @@ class CustomerController extends ApiController
             'surname' => 'required|string|max:50',
             'phone_number' => 'required|integer',
             'address' => 'required|string|max:50',
-            'email' => 'required|email:rfc,dns',
+            'email' => 'required|string',
             'commercial_contact_1' => 'nullable|integer',
             'commercial_contact_2' => 'nullable|integer',
             'commercial_contact_3' => 'nullable|integer',
