@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,13 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::post('/login',  [AuthController::class, 'login']);
+
+//CUSTOMERS
+
+
+Route::post('/customers',  [CustomerController::class, 'store']);
+Route::get('/customers',  [CustomerController::class, 'index']);
+Route::get('/customers/{customer}',  [CustomerController::class, 'show']);
 
 Route::group([
 
