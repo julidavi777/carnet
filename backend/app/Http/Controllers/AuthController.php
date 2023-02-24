@@ -27,7 +27,7 @@ class AuthController extends Controller
     public function login()
     {
         $credentials = request(['email', 'password']);
-        
+
         $token = auth()->attempt($credentials);
 
         if (! $token) {
@@ -86,3 +86,4 @@ class AuthController extends Controller
     }
 
 }
+// hacer api y ruta de login pendiente

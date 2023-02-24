@@ -32,7 +32,7 @@ export class CrearClientePage implements OnInit {
     income_statement_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
     income_statement_file: new FormControl('',),
   });
-  
+
   constructor(
     private crearClienteService: CrearClienteService
   ) { }
@@ -48,13 +48,24 @@ export class CrearClientePage implements OnInit {
     formData.append('identification', this.customerForm.get('identification').value);
     formData.append('digit_v', this.customerForm.get('digit_v').value);
     formData.append('identification_type', this.customerForm.get('identification_type').value);
-    
-    formData.append('file', this.customerForm.get('rut_file').value);
+    formData.append('name', this.customerForm.get('name').value);
+    formData.append('surname', this.customerForm.get('surname').value);
+    formData.append('phone_number', this.customerForm.get('phone_number').value);
+    formData.append('address', this.customerForm.get('address').value);
+    formData.append('commercial_contact_1', this.customerForm.get('commercial_contact_1').value);
+    formData.append('commercial_contact_2', this.customerForm.get('commercial_contact_2').value);
+    formData.append('commercial_contact_3', this.customerForm.get('commercial_contact_3').value);
+    formData.append('razon_social', this.customerForm.get('razon_social').value);
+    formData.append('razon_comercial', this.customerForm.get('razon_comercial').value);
 
-    /* this.crearClienteService.saveCustomer(formData).subscribe(res => {
+    formData.append('file', this.customerForm.get('rut_file').value);
+    formData.append('file', this.customerForm.get('camara_commerce_file').value);
+    formData.append('file', this.customerForm.get('income_statement_file').value);
+
+    this.crearClienteService.saveCustomer(formData).subscribe(res => {
         console.log(res);
         alert('Uploaded Successfully.');
-    }); */
+    });
   }
 
   onFileChange(event: any, name_field: string){
