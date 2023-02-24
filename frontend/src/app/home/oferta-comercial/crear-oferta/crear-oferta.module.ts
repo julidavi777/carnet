@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CrearOfertaPageRoutingModule } from './crear-oferta-routing.module';
 
 import { CrearOfertaPage } from './crear-oferta.page';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CrearOfertaPageRoutingModule
+    CrearOfertaPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [CrearOfertaPage]
 })
