@@ -5,7 +5,7 @@
   <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="form-group col-md-4">
-        <label for="validation01">Tipo de documento</label>
+        <label for="validation01">Tipo de documento *</label>
         <select class="form-select" formControlName="identification_type" aria-label="Default select example" >
           <option selected></option>
           <option value="1">CC</option>
@@ -14,7 +14,7 @@
         </select>
       </div>
       <div class="form-group col-md-6">
-        <label for="validation03">Numero identificacion</label>
+        <label for="validation03">Numero identificacion *</label>
         <input type="number" class="form-control" formControlName="identification" id="validation03" placeholder="" required>
       </div>
       <div class="form-group col-md-2">
@@ -22,39 +22,39 @@
         <input type="number" class="form-control" formControlName="digit_v" id="validation03" placeholder="#" required>
       </div>
       <div class="form-group col-md-6">
-        <label for="validation01">Nombres</label>
+        <label for="validation01">Nombres *</label>
         <input type="text" class="form-control" formControlName="name" id="validation01" placeholder="Nombres" value="Mark" required>
       </div>
       <div class="form-group col-md-6">
-        <label for="validation01">Apellidos</label>
+        <label for="validation01">Apellidos *</label>
         <input type="text" class="form-control"  formControlName="surname" id="validation01" placeholder="Apellidos" value="Mark" required>
       </div>
 
 
 
       <div class="form-group col-md-6">
-        <label for="validation05">Número telefónico</label>
+        <label for="validation05">Número telefónico * </label>
         <input type="number" class="form-control" formControlName="phone_number" id="validation05" placeholder=" # Telefono" required>
       </div>
 
       <div class="form-group col-md-6">
-        <label for="validation04">Dirección</label>
+        <label for="validation04">Dirección *</label>
         <input type="text" class="form-control" formControlName="address"  id="validation04" placeholder="Direccion" required>
       </div>
 
       <div class="form-group col-md-12">
-        <label for="validation04">Correo electrónico</label>
+        <label for="validation04">Correo electrónico *</label>
         <input type="email" class="form-control" formControlName="email"  id="validation04" placeholder="ejemplo@gmail.com" required>
       </div>
 
       <div class="form-group col-md-6">
-        <label for="validation04">Nombre contacto comercial </label>
+        <label for="validation04">Nombre contacto comercial * </label>
         <input type="text" class="form-control" formControlName="contact_commer"  id="validation04" placeholder="Nombres" required>
       </div>
 
 
       <div class="form-group col-md-6">
-        <label for="validation05">Contacto comercial #1</label>
+        <label for="validation05">Contacto comercial #1 *</label>
         <input type="text"  class="form-control" formControlName="commercial_contact_1" id="validation05" placeholder=" Número Telefono" required textarea>
       </div>
 
@@ -68,17 +68,17 @@
         <input type="text"  class="form-control" formControlName="commercial_contact_3" id="validation05" placeholder=" Número Telefono" required textarea>
       </div>
       <div class="form-group col-md-6">
-        <label for="validation06">Razón social</label>
+        <label for="validation06">Razón social *</label>
         <input type="text" class="form-control" formControlName="razon_social" id="validation06" placeholder="" required>
       </div>
 
       <div class="form-group col-md-6">
-        <label for="validation06">Razón comercial</label>
+        <label for="validation06">Razón comercial *</label>
         <input type="text" class="form-control" formControlName="razon_comercial" id="validation06" placeholder="" required>
       </div>
 
       <div class="form-group col-md-6">
-        <label for="validation07">RUT</label>
+        <label for="validation07">RUT *</label>
         <input type="file" class="form-control"   formControlName="rut_file_field" (change)="onFileChange($event, 'rut_file_field')" id="validation07" placeholder="" required>
       </div>
 
