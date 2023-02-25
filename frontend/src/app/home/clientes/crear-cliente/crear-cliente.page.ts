@@ -25,6 +25,7 @@ export class CrearClientePage implements OnInit {
     commercial_contact_3: new FormControl('',),
     razon_social: new FormControl('',),
     razon_comercial: new FormControl('',),
+    contact_commer: new FormControl('',),
 
     rut_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
     rut_file: new FormControl('',),
@@ -63,6 +64,7 @@ export class CrearClientePage implements OnInit {
     formData.append('commercial_contact_3', this.customerForm.get('commercial_contact_3').value);
     formData.append('razon_social', this.customerForm.get('razon_social').value);
     formData.append('razon_comercial', this.customerForm.get('razon_comercial').value);
+    formData.append('contact_commer', this.customerForm.get('contact_commer').value);
 
     formData.append('rut_file', this.customerForm.get('rut_file').value);
     formData.append('camara_commerce_file', this.customerForm.get('camara_commerce_file').value);

@@ -27,7 +27,7 @@
       </div>
       <div class="form-group col-md-6">
         <label for="validation01">Apellidos</label>
-        <input type="text" class="form-control"  formControlName="surname" id="validation01" placeholder="Nombres" value="Mark" required>
+        <input type="text" class="form-control"  formControlName="surname" id="validation01" placeholder="Apellidos" value="Mark" required>
       </div>
 
 
@@ -47,18 +47,23 @@
         <input type="email" class="form-control" formControlName="email"  id="validation04" placeholder="ejemplo@gmail.com" required>
       </div>
 
+      <div class="form-group col-md-6">
+        <label for="validation04">Nombre contacto comercial </label>
+        <input type="text" class="form-control" formControlName="contact_commer"  id="validation04" placeholder="Nombres" required>
+      </div>
 
-      <div class="form-group col-md-4">
+
+      <div class="form-group col-md-6">
         <label for="validation05">Contacto comercial #1</label>
         <input type="text"  class="form-control" formControlName="commercial_contact_1" id="validation05" placeholder=" Número Telefono" required textarea>
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="validation05">Contacto comercial #2</label>
         <input type="text"  class="form-control" formControlName="commercial_contact_2" id="validation05" placeholder=" Número Telefono" required textarea>
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="validation05">Contacto comercial #3</label>
         <input type="text"  class="form-control" formControlName="commercial_contact_3" id="validation05" placeholder=" Número Telefono" required textarea>
       </div>
@@ -74,7 +79,7 @@
 
       <div class="form-group col-md-6">
         <label for="validation07">RUT</label>
-        <input type="file" class="form-control" formControlName="rut_file_field" (change)="onFileChange($event, 'rut_file_field')" id="validation07" placeholder="" required>
+        <input type="file" class="form-control"   formControlName="rut_file_field" (change)="onFileChange($event, 'rut_file_field')" id="validation07" placeholder="" required>
       </div>
 
       <div class="form-group col-md-6">

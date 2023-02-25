@@ -9,7 +9,7 @@
     <div class="row">
       <div class="form-group col-md-2">
         <label for="validation01"># Consecutivo</label>
-        <input type="number" class="form-control is-valid" id="validationServer01" value="Otto" required placeholder="#" value="#" required>
+        <input type="number" class="form-control is-valid" id="validationServer01" value="Otto" required placeholder="#" value="#" required disabled>
       </div>
 
       <div class="form-group col-md-5">
@@ -34,19 +34,7 @@
         <input type="text" class="form-control" formControlName="razon_comercial" id="validation06" placeholder="" required>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation09">Estado actual del proceso</label>
-        <select class="form-select" formControlName="process_status" aria-label="Default select example">
-          <option selected>Seleccione</option>
-          <option value="1">Descartada</option>
-          <option value="2">En revisión</option>
-          <option value="3">MP- En espera de sorteo</option>
-          <option value="3">No favorecidos sorteo</option>
-          <option value="3">No presentada</option>
-          <option value="3">Presentada- Adjudicada a otro</option>
-          <option value="3">Presentada- En evaluacion entidad/option>
-        </select>
-      </div>
+
 
       <div class="form-group col-md-6">
         <label for="validation03">Responsable</label>
@@ -55,41 +43,48 @@
 
 
       <div class="form-group col-md-6">
-        <label for="validation09">Check List Diligenciado</label>
-        <select class="form-select" formControlName="icompleted_check_list" aria-label="Default select example">
-          <option selected>Seleccione</option>
-          <option value="1">N/A</option>
-          <option value="2">OK</option>
-          <option value="3">Pendiente</option>
-        </select>
-
-      </div>
-      <div class="form-group col-md-6">
-        <label for="validation06">Entidad</label>
-        <input type="text" class="form-control" formControlName="razon_social" id="validation06" placeholder="Razon social" required>
-      </div>
-      <div class="form-group col-md-6">
-        <label for="validation09">Modalidad</label>
+        <label for="validation09">Tipo de contratación</label>
         <select class="form-select"  formControlName="modalidad"aria-label="Default select example">
           <option selected>Seleccione</option>
-          <option value="1">Contratación minima cuantia</option>
-          <option value="2">Entidades descentralizadas</option>
-          <option value="3">Licitación</option>
-          <option value="3">Licitación publica (Obra publica)</option>
-          <option value="3">Privada</option>
-          <option value="3">Regimen especial</option>
-          <option value="3">Selección abreviada de menor cuantia (Ley 1150 de 207)</option>
-          <option value="3">Solicitud estudio de mercados (SENA)</option>
+          <option value="1">Precio global fijo</option>
+          <option value="2">Precio unitario fijo</option>
+          <option value="3">Administración delegada</option>
         </select>
       </div>
+
       <div class="form-group col-md-6">
-        <label for="validation08">Número</label>
-        <input type="number" class="form-control" formControlName="number_code" id="validation08" placeholder="#" required>
+        <label for="validation09">Tipo de servicio</label>
+        <select class="form-select"  formControlName="modalidad"aria-label="Default select example">
+          <option selected>Seleccione</option>
+          <option value="1">Construcción</option>
+          <option value="2">Mantenimiento</option>
+          <option value="3">Consultoria</option>
+        </select>
       </div>
+
+      <div class="form-group col-md-6">
+        <label for="validation09">Sector productivo</label>
+        <select class="form-select"  formControlName="modalidad"aria-label="Default select example">
+          <option selected>Seleccione</option>
+          <option value="1">Industrial</option>
+          <option value="2">Logistico</option>
+          <option value="3">Comercial</option>
+          <option value="3">Salud/Hospitalario</option>
+          <option value="3">Institucional</option>
+        </select>
+      </div>
+
       <div class="form-group col-md-6">
         <label for="validation09">Objeto</label>
         <input type="text" class="form-control" formControlName="object_description" id="validation09" placeholder="Objeto" required>
       </div>
+
+      <div class="form-group col-md-6">
+        <label for="validation08">Número</label>
+        <input type="number" class="form-control" formControlName="number_code" id="validation08" placeholder="#" required>
+      </div>
+
+
       <div class="form-group col-md-6">
         <label for="validation09">Cuantía (Presupuesto oficial)</label>
         <input type="text" class="form-control" formControlName="cuantia" id="validation09" placeholder="$" required>
@@ -99,28 +94,36 @@
         <input type="text" class="form-control"  formControlName="location" id="validation09" placeholder="" required>
       </div>
       <br>
-      <div class="form-group col-md-6">
-        <label for="validation09">Estado (SECOP)</label>
-        <select class="form-select"  formControlName="estado_secop" aria-label="Default select example">
-          <option selected>Seleccione</option>
-          <option value="1">Adjudicado</option>
-          <option value="2">Convocatoria</option>
-          <option value="3">No aplica</option>
-        </select>
-      </div>
+
       <div class="form-group col-md-6">
         <label for="validation09">Fecha de publicación</label>
         <input type="date" class="form-control"  formControlName="release_date" id="validation09" placeholder="Cargue archivo" required>
       </div>
+
       <div class="form-group col-md-6">
-        <label for="validation09">Portal de origen</label>
-        <input type="text" class="form-control"  formControlName="origin_portal" id="validation09" placeholder="Seleccione" required>
+        <label for="validation09">Fecha de entrega</label>
+        <input type="date" class="form-control"  formControlName="origin_portal" id="validation09" placeholder="Seleccione" required>
       </div>
     </div>
+    <div class="form-group col-md-6">
+      <label for="validation09">Fecha de visita</label>
+      <input type="date" class="form-control"  formControlName="origin_portal" id="validation09" placeholder="Seleccione" required>
+    </div>
+
 
     <div class="form-group col-md-6">
       <label for="validation09">Observaciones</label>
       <input type="textarea" class="form-control"  formControlName="observations" id="validation09" placeholder="Seleccione" required textarea>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="validation09">Anexos</label>
+      <input type="file" class="form-control"  formControlName="observations" id="validation09" placeholder="Seleccione" required textarea>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="validation09">Logo cliente</label>
+      <input type="file" class="form-control"  formControlName="observations" id="validation09" placeholder="Seleccione" required textarea>
     </div>
 
 
