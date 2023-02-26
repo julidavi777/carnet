@@ -7,13 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { OfertaComercialPageRoutingModule } from './oferta-comercial-routing.module';
 
 import { OfertaComercialPage } from './oferta-comercial.page';
-
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OfertaComercialPageRoutingModule
+    OfertaComercialPageRoutingModule,
+    NgxDatatableModule
   ],
   declarations: [OfertaComercialPage]
 })

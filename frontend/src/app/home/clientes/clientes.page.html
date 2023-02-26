@@ -4,14 +4,14 @@
 <ngx-datatable
 class="material"
 [rows]="rows"
-[headerHeight]="50"
-[footerHeight]="50"
+[headerHeight]="70"
+[footerHeight]="70"
 rowHeight="auto"
 [limit]="10"
-[scrollbarH]="true"
+[scrollbarH]="false"
 
 >
-<ngx-datatable-column [resizeable]="true" [width]="200">
+<ngx-datatable-column [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Tipo identificación:
   </ng-template>
@@ -20,7 +20,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="200">
+<ngx-datatable-column [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Identificación:
   </ng-template>
@@ -29,7 +29,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="200">
+<ngx-datatable-column [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Nombre:
   </ng-template>
@@ -38,7 +38,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="200">
+<ngx-datatable-column [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Apellido:
   </ng-template>
@@ -47,7 +47,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="200">
+<ngx-datatable-column [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Razon social
   </ng-template>
@@ -56,7 +56,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="200">
+<ngx-datatable-column [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Razon comercial
   </ng-template>
@@ -65,7 +65,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="200">
+<ngx-datatable-column [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Asesor comercial:
   </ng-template>
@@ -74,7 +74,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="200">
+<ngx-datatable-column [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Numero telefono:
   </ng-template>
@@ -83,7 +83,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="200">
+<ngx-datatable-column [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Correo electronico:
   </ng-template>
@@ -92,7 +92,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="200">
+<ngx-datatable-column [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Dirección:
   </ng-template>
@@ -102,7 +102,7 @@ rowHeight="auto"
 </ngx-datatable-column>
 
 
-<ngx-datatable-column [resizeable]="true" [width]="200">
+<ngx-datatable-column [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     RUT
   </ng-template>
@@ -113,7 +113,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="200">
+<ngx-datatable-column [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Cámara de comercio
   </ng-template>
@@ -124,7 +124,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="200">
+<ngx-datatable-column [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Declaración de renta
   </ng-template>
@@ -141,83 +141,3 @@ rowHeight="auto"
 </ngx-datatable>
 
 
-<div class="content" *ngIf="false">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nombres</th>
-        <th scope="col">Tipo de documento</th>
-        <th scope="col">Numero identificacion</th>
-        <th scope="col">Direccion</th>
-        <th scope="col">Telefono</th>
-        <th scope="col">Razon social</th>
-        <th scope="col">RUT</th>
-        <th scope="col">Camara de comercio</th>
-        <th scope="col">Declaracion de renta</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>MariaC</td>
-        <td>cc</td>
-        <td>1088312276</td>
-        <td>cra 4ta</td>
-        <td>3027445485</td>
-        <td>apolooo</td>
-        <td>1088312276</td>
-        <td>archivo</td>
-        <td>archivo</td>
-
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-    </tbody>
-  </table>
-</div>

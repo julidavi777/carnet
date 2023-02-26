@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { OfertaComercialService } from './oferta-comercial.service';
 
 @Component({
   selector: 'app-oferta-comercial',
@@ -6,10 +8,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./oferta-comercial.page.scss'],
 })
 export class OfertaComercialPage implements OnInit {
+  rows: any = []
 
-  constructor() { }
+  readonly STORAGE_URL = environment.storageUrl;
+
+  constructor(
+    private ofertaComercialService: OfertaComercialService
+
+  ) { }
 
   ngOnInit() {
+    this.getOfertas();
   }
+  getOfertas(){
+    this.ofertaComercialService.getOfertas().subscribe((res: any) => {
+      this.rows = res.data;
+    })
+  }
+  watchDocument(value:any){
+
+    let url = JSON.parse(value)
+
+
+    let result = url.server_hash_name.replace("public/", "");
+    console.log(result)
+
+    window.open(this.STORAGE_URL+result, "_blank");
+  }
+
 
 }

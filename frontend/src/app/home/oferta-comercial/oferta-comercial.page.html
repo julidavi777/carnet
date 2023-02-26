@@ -1,104 +1,178 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>ofertas</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-title>Listado de ofertas</ion-title>
 
 
-<div class="content">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">Consecutivo</th>
-        <th scope="col">Estado actual del proceso</th>
-        <th scope="col">Responsable</th>
-        <th scope="col">Fecha de asignación</th>
-        <th scope="col">Entidad</th>
-        <th scope="col">Modalidad</th>
-        <th scope="col">Número</th>
-        <th scope="col">Objeto</th>
-        <th scope="col">Cuantía (Presupuesto oficial)</th>
-        <th scope="col">Ubicación</th>
-        <th scope="col">Estado (SECOP)</th>
-        <th scope="col">Fecha de publicación</th>
-        <th scope="col">Portal de origen</th>
+<ngx-datatable
+class="material"
+[rows]="rows"
+[headerHeight]="50"
+[footerHeight]="50"
+rowHeight="auto"
+[limit]="10"
+[scrollbarH]="true"
 
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Descartada</td>
-        <td>MariaC</td>
-        <td>01/02/2023</td>
-        <td>INDEPENDITE</td>
-        <td>Licitación</td>
-        <td>0001</td>
-        <td>Desarrollo de sistema de información</td>
-        <td>10.000.000</td>
-        <td>n/a</td>
-        <td>31/01/2023</td>
-        <td>Referido</td>
+>
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Consecutivo:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.identification_type}}
+  </ng-template>
+</ngx-datatable-column>
 
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Descartada</td>
-        <td>MariaC</td>
-        <td>01/02/2023</td>
-        <td>INDEPENDITE</td>
-        <td>Licitación</td>
-        <td>0001</td>
-        <td>Desarrollo de sistema de información</td>
-        <td>10.000.000</td>
-        <td>n/a</td>
-        <td>31/01/2023</td>
-        <td>Referido</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Descartada</td>
-        <td>MariaC</td>
-        <td>01/02/2023</td>
-        <td>INDEPENDITE</td>
-        <td>Licitación</td>
-        <td>0001</td>
-        <td>Desarrollo de sistema de información</td>
-        <td>10.000.000</td>
-        <td>n/a</td>
-        <td>31/01/2023</td>
-        <td>Referido</td>
-      </tr>
-      <tr>
-        <th scope="row">4</th>
-        <td>Descartada</td>
-        <td>MariaC</td>
-        <td>01/02/2023</td>
-        <td>INDEPENDITE</td>
-        <td>Licitación</td>
-        <td>0001</td>
-        <td>Desarrollo de sistema de información</td>
-        <td>10.000.000</td>
-        <td>n/a</td>
-        <td>31/01/2023</td>
-        <td>Referido</td>
-      </tr>
-      <tr>
-        <th scope="row">5</th>
-        <td>Descartada</td>
-        <td>MariaC</td>
-        <td>01/02/2023</td>
-        <td>INDEPENDITE</td>
-        <td>Licitación</td>
-        <td>0001</td>
-        <td>Desarrollo de sistema de información</td>
-        <td>10.000.000</td>
-        <td>n/a</td>
-        <td>31/01/2023</td>
-        <td>Referido</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Estado actual del proceso:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.identification_type}}
+  </ng-template>
+</ngx-datatable-column>
 
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Identificación cliente:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.identification}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Nombre:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.name}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Apellido:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.surname}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Razon social:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.razon_social}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Responsable:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.razon_comercial}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Tipo de contratación:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.contact_commer}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Tipo de servicio:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.phone_number}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Sector productivo:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.email}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Objeto:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.address}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Número:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.address}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Ubicación:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.address}}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    :
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{row.address}}
+  </ng-template>
+</ngx-datatable-column>
+
+
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Anexos:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    <ion-button (click)="watchDocument(row.rut_file)">
+      <ion-icon  slot="icon-only" name="document-sharp"></ion-icon>
+    </ion-button>
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column [resizeable]="true" [width]="100">
+  <ng-template ngx-datatable-header-template>
+    Logo cliente:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    <ion-button (click)="watchDocument(row.camara_commerce_file)">
+      <ion-icon  slot="icon-only" name="document-sharp"></ion-icon>
+    </ion-button>
+  </ng-template>
+</ngx-datatable-column>
+
+</ngx-datatable>
+
+<!-- <div class="form-group col-md-6">
+  <label for="validation09">Estado actual del proceso</label>
+  <select class="form-select" formControlName="process_status" aria-label="Default select example">
+    <option selected>Seleccione</option>
+    <option value="1">Descartada</option>
+    <option value="2">En revisión</option>
+    <option value="3">MP- En espera de sorteo</option>
+    <option value="3">No favorecidos sorteo</option>
+    <option value="3">No presentada</option>
+    <option value="3">Presentada- Adjudicada a otro</option>
+    <option value="3">Presentada- En evaluacion entidad/option>
+  </select>
+</div> -->
 
