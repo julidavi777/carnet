@@ -1,94 +1,93 @@
-<ion-title>Crear Cliente</ion-title>
 
-<div class="content">
 
+<div class="container">
+  <p class="h2 my-3">Crear Cliente</p>
   <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
     <div class="row">
-      <div class="form-group col-md-4">
-        <label for="validation01">Tipo de documento *</label>
-        <select class="form-select" formControlName="identification_type" aria-label="Default select example" >
-          <option selected></option>
+      <div class="mb-3 form-group col-md-4">
+        <label for="identification_type" class="form-label">Tipo de documento *</label>
+        <select class="form-select" formControlName="identification_type" id="identification_type" aria-label="Default select example" >
           <option value="1">CC</option>
           <option value="2">NIT</option>
           <option value="3">CE</option>
         </select>
       </div>
-      <div class="form-group col-md-6">
-        <label for="validation03">Numero identificacion *</label>
-        <input type="number" class="form-control" formControlName="identification" id="validation03" placeholder="" required>
+      <div class="mb-3 form-group col-md-6">
+        <label for="identification" class="form-label">Numero identificacion *</label>
+        <input type="number" class="form-control" formControlName="identification" id="identification" placeholder="" required>
       </div>
-      <div class="form-group col-md-2">
-        <label for="validation03">DV</label>
-        <input type="number" class="form-control" formControlName="digit_v" id="validation03" placeholder="#" required>
+      <div class="mb-3 form-group col-md-2">
+        <label for="digit_v" class="form-label">DV</label>
+        <input type="number" class="form-control" formControlName="digit_v" id="digit_v" placeholder="#" required>
       </div>
-      <div class="form-group col-md-6">
-        <label for="validation01">Nombres *</label>
-        <input type="text" class="form-control" formControlName="name" id="validation01" placeholder="Nombres" value="Mark" required>
+      <div class="mb-3 form-group col-md-6">
+        <label for="name" class="form-label">Nombres *</label>
+        <input type="text" class="form-control" formControlName="name" id="name" placeholder="Nombres" value="Mark" required>
       </div>
-      <div class="form-group col-md-6">
-        <label for="validation01">Apellidos *</label>
-        <input type="text" class="form-control"  formControlName="surname" id="validation01" placeholder="Apellidos" value="Mark" required>
-      </div>
-
-
-
-      <div class="form-group col-md-6">
-        <label for="validation05">Número telefónico * </label>
-        <input type="number" class="form-control" formControlName="phone_number" id="validation05" placeholder=" # Telefono" required>
+      <div class="mb-3 form-group col-md-6">
+        <label for="surname" class="form-label">Apellidos *</label>
+        <input type="text" class="form-control"  formControlName="surname" id="surname" placeholder="Apellidos" value="Mark" required>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation04">Dirección *</label>
+
+
+      <div class="mb-3 form-group col-md-6">
+        <label for="phone_number" class="form-label">Número telefónico * </label>
+        <input type="number" class="form-control" formControlName="phone_number" id="phone_number" placeholder=" # Telefono" required>
+      </div>
+
+      <div class="mb-3 form-group col-md-6">
+        <label for="validation04" class="form-label">Dirección *</label>
         <input type="text" class="form-control" formControlName="address"  id="validation04" placeholder="Direccion" required>
       </div>
 
-      <div class="form-group col-md-12">
-        <label for="validation04">Correo electrónico *</label>
+      <div class="mb-3 form-group col-md-12">
+        <label for="validation04" class="form-label">Correo electrónico *</label>
         <input type="email" class="form-control" formControlName="email"  id="validation04" placeholder="ejemplo@gmail.com" required>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation04">Nombre contacto comercial * </label>
+      <div class="mb-3 form-group col-md-6">
+        <label for="validation04" class="form-label">Nombre contacto comercial * </label>
         <input type="text" class="form-control" formControlName="contact_commer"  id="validation04" placeholder="Nombres" required>
       </div>
 
 
-      <div class="form-group col-md-6">
-        <label for="validation05">Contacto comercial #1 *</label>
+      <div class="mb-3 form-group col-md-6">
+        <label for="validation05" class="form-label">Contacto comercial #1 *</label>
         <input type="text"  class="form-control" formControlName="commercial_contact_1" id="validation05" placeholder=" Número Telefono" required textarea>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation05">Contacto comercial #2</label>
+      <div class="mb-3 form-group col-md-6">
+        <label for="validation05" class="form-label">Contacto comercial #2</label>
         <input type="text"  class="form-control" formControlName="commercial_contact_2" id="validation05" placeholder=" Número Telefono" required textarea>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation05">Contacto comercial #3</label>
+      <div class="mb-3 form-group col-md-6">
+        <label for="validation05" class="form-label">Contacto comercial #3</label>
         <input type="text"  class="form-control" formControlName="commercial_contact_3" id="validation05" placeholder=" Número Telefono" required textarea>
       </div>
-      <div class="form-group col-md-6">
-        <label for="validation06">Razón social *</label>
+      <div class="mb-3 form-group col-md-6">
+        <label for="validation06" class="form-label">Razón social *</label>
         <input type="text" class="form-control" formControlName="razon_social" id="validation06" placeholder="" required>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation06">Razón comercial *</label>
+      <div class="mb-3 form-group col-md-6">
+        <label for="validation06" class="form-label">Razón comercial *</label>
         <input type="text" class="form-control" formControlName="razon_comercial" id="validation06" placeholder="" required>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation07">RUT *</label>
+      <div class="mb-3 form-group col-md-6">
+        <label for="validation07" class="form-label">RUT *</label>
         <input type="file" class="form-control"   formControlName="rut_file_field" (change)="onFileChange($event, 'rut_file_field')" id="validation07" placeholder="" required>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation08">Camara de comercio</label>
+      <div class="mb-3 form-group col-md-6">
+        <label for="validation08" class="form-label">Camara de comercio</label>
         <input type="file" class="form-control" formControlName="camara_commerce_file_field" (change)="onFileChange($event, 'camara_commerce_file_field')" id="validation08" placeholder="Cargue archivo" required>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation09">Declaracion de renta</label>
+      <div class="mb-3 form-group col-md-6">
+        <label for="validation09" class="form-label">Declaracion de renta</label>
         <input type="file" class="form-control" formControlName="income_statement_file_field" (change)="onFileChange($event, 'income_statement_file_field')" id="validation09" placeholder="Cargue archivo" required>
       </div>
     </div>

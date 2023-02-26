@@ -1,49 +1,45 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>oferta Comercial </ion-title>
-  </ion-toolbar>
-</ion-header>
-<div class="content">
 
+<div class="container">
+  <p class="h2 my-3">Crear oferta comercial</p>
   <form [formGroup]="offersForm" (ngSubmit)="onSubmit()">
     <div class="row">
-      <div class="form-group col-md-2">
-        <label for="validation01"># Consecutivo</label>
+      <div class="mb-3 form-group col-md-2">
+        <label class="form-label" for="validation01"># Consecutivo</label>
         <input type="number" class="form-control is-valid" id="validationServer01" value="Otto" required placeholder="#" value="#" required disabled>
       </div>
 
-      <div class="form-group col-md-5">
-        <label for="validation03">Número identificación cliente *</label>
+      <div class="mb-3 form-group col-md-5">
+        <label class="form-label" for="validation03">Número identificación cliente *</label>
         <input type="number" class="form-control" formControlName="sequential_number" id="validation03" placeholder="" required>
       </div>
-      <div class="form-group col-md-5">
-        <label for="validation04">Fecha de asignación</label>
+      <div class="mb-3 form-group col-md-5">
+        <label class="form-label" for="validation04">Fecha de asignación</label>
         <input type="date" class="form-control" formControlName="assignment_date" id="validation04" placeholder="Fecha" required>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation01">Nombres *</label>
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation01">Nombres *</label>
         <input type="text" class="form-control" formControlName="name" id="validation01" placeholder="Nombres" value="Mark" required>
       </div>
-      <div class="form-group col-md-6">
-        <label for="validation01">Apellidos *</label>
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation01">Apellidos *</label>
         <input type="text" class="form-control"  formControlName="surname" id="validation01" placeholder="Nombres" value="Mark" required>
       </div>
-      <div class="form-group col-md-12">
-        <label for="validation06">Razón comercial *</label>
+      <div class="mb-3 form-group col-md-12">
+        <label class="form-label" for="validation06">Razón comercial *</label>
         <input type="text" class="form-control" formControlName="razon_comercial" id="validation06" placeholder="" required>
       </div>
 
 
 
-      <div class="form-group col-md-6">
-        <label for="validation03">Responsable *</label>
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation03">Responsable *</label>
         <input type="text" class="form-control"  formControlName="responsible" id="validation03" placeholder="" required>
       </div>
 
 
-      <div class="form-group col-md-6">
-        <label for="validation09">Tipo de contratación *</label>
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation09">Tipo de contratación *</label>
         <select class="form-select"  formControlName="modalidad"aria-label="Default select example">
           <option selected>Seleccione</option>
           <option value="1">Precio global fijo</option>
@@ -52,8 +48,8 @@
         </select>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation09">Tipo de servicio *</label>
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation09">Tipo de servicio *</label>
         <select class="form-select"  formControlName="modalidad"aria-label="Default select example">
           <option selected>Seleccione</option>
           <option value="1">Construcción</option>
@@ -62,8 +58,8 @@
         </select>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation09">Sector productivo *</label>
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation09">Sector productivo *</label>
         <select class="form-select"  formControlName="modalidad"aria-label="Default select example">
           <option selected>Seleccione</option>
           <option value="1">Industrial</option>
@@ -74,55 +70,55 @@
         </select>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation09">Objeto *</label>
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation09">Objeto *</label>
         <input type="text" class="form-control" formControlName="object_description" id="validation09" placeholder="Objeto" required>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation08">Número</label>
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation08">Número</label>
         <input type="number" class="form-control" formControlName="number_code" id="validation08" placeholder="#" required>
       </div>
 
 
-      <div class="form-group col-md-6">
-        <label for="validation09">Cuantía (Presupuesto oficial)</label>
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation09">Cuantía (Presupuesto oficial)</label>
         <input type="text" class="form-control" formControlName="cuantia" id="validation09" placeholder="$" required>
       </div>
-      <div class="form-group col-md-6">
-        <label for="validation09">Ubicación *</label>
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation09">Ubicación *</label>
         <input type="text" class="form-control"  formControlName="location" id="validation09" placeholder="" required>
       </div>
       <br>
 
-      <div class="form-group col-md-6">
-        <label for="validation09">Fecha de publicación *</label>
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation09">Fecha de publicación *</label>
         <input type="date" class="form-control"  formControlName="release_date" id="validation09" placeholder="Cargue archivo" required>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="validation09">Fecha de entrega * </label>
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation09">Fecha de entrega * </label>
         <input type="date" class="form-control"  formControlName="origin_portal" id="validation09" placeholder="Seleccione" required>
       </div>
     </div>
-    <div class="form-group col-md-6">
-      <label for="validation09">Fecha de visita </label>
+    <div class="mb-3 form-group col-md-6">
+      <label class="form-label" for="validation09">Fecha de visita </label>
       <input type="date" class="form-control"  formControlName="origin_portal" id="validation09" placeholder="Seleccione" required>
     </div>
 
 
-    <div class="form-group col-md-6">
-      <label for="validation09">Observaciones</label>
+    <div class="mb-3 form-group col-md-6">
+      <label class="form-label" for="validation09">Observaciones</label>
       <input type="textarea" class="form-control"  formControlName="observations" id="validation09" placeholder="Seleccione" required textarea>
     </div>
 
-    <div class="form-group col-md-6">
-      <label for="validation09">Anexos</label>
+    <div class="mb-3 form-group col-md-6">
+      <label class="form-label" for="validation09">Anexos</label>
       <input type="file" class="form-control"  formControlName="observations" id="validation09" placeholder="Seleccione" required textarea>
     </div>
 
-    <div class="form-group col-md-6">
-      <label for="validation09">Logo cliente</label>
+    <div class="mb-3 form-group col-md-6">
+      <label class="form-label" for="validation09">Logo cliente</label>
       <input type="file" class="form-control"  formControlName="observations" id="validation09" placeholder="Seleccione" required textarea>
     </div>
 

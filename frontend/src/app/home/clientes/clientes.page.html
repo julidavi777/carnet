@@ -1,17 +1,18 @@
-<ion-title>Listado de clientes</ion-title>
+<ion-title class="mt-2">Listado de clientes</ion-title>
 
 
 <ngx-datatable
-class="material"
+class="material mt-2"
 [rows]="rows"
 [headerHeight]="70"
 [footerHeight]="70"
 rowHeight="auto"
 [limit]="10"
 [scrollbarH]="false"
+[sortType]="SortType.multi"
 
 >
-<ngx-datatable-column [resizeable]="true" [width]="100">
+<ngx-datatable-column name="identification_type" [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Tipo identificación:
   </ng-template>
@@ -20,7 +21,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="100">
+<ngx-datatable-column name="identification" [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Identificación:
   </ng-template>
@@ -29,7 +30,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="100">
+<ngx-datatable-column name="name" [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Nombre:
   </ng-template>
@@ -38,7 +39,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="100">
+<ngx-datatable-column name="surname" [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Apellido:
   </ng-template>
@@ -47,7 +48,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="100">
+<ngx-datatable-column  name="razon_social"  [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Razon social
   </ng-template>
@@ -56,7 +57,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="100">
+<ngx-datatable-column name="razon_comercial" [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Razon comercial
   </ng-template>
@@ -65,16 +66,16 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="100">
+<!-- <ngx-datatable-column name="contact_commer" [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Asesor comercial:
   </ng-template>
   <ng-template let-row="row" ngx-datatable-cell-template>
     {{row.contact_commer}}
   </ng-template>
-</ngx-datatable-column>
+</ngx-datatable-column> -->
 
-<ngx-datatable-column [resizeable]="true" [width]="100">
+<ngx-datatable-column  name="phone_number"  [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Numero telefono:
   </ng-template>
@@ -83,7 +84,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="100">
+<ngx-datatable-column name="phone_number"  [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Correo electronico:
   </ng-template>
@@ -92,7 +93,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="100">
+<ngx-datatable-column  name="address" [resizeable]="true" [width]="200">
   <ng-template ngx-datatable-header-template>
     Dirección:
   </ng-template>
@@ -102,7 +103,34 @@ rowHeight="auto"
 </ngx-datatable-column>
 
 
-<ngx-datatable-column [resizeable]="true" [width]="100">
+<ngx-datatable-column  name="acciones" [resizeable]="false" [width]="170">
+  <ng-template ngx-datatable-header-template>
+    Acciones:
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    <ion-buttons class="grid-container" style="margin-left: 10px;" > 
+      <ion-button (click)="watchDocument(row.rut_file)" style="color: #007bff" data-tooltip="RUT" data-tooltip-conf="right">
+        <ion-icon name="document-sharp"></ion-icon>
+      </ion-button>
+      <ion-button (click)="watchDocument(row.camara_commerce_file)" style="color: #dc3545" data-tooltip="Camara comercio" data-tooltip-conf="bottom">
+        <ion-icon name="document-attach"></ion-icon>
+      </ion-button>
+      <ion-button (click)="watchDocument(row.income_statement_file)" style="color: #28a745" data-tooltip="Declaración renta" data-tooltip-conf="left">
+        <ion-icon name="cash"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="watchDocument(row.rut_file)" style="color: #ffc107" data-tooltip="Editar" data-tooltip-conf="right">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
+      <ion-button (click)="watchDocument(row.camara_commerce_file)" style="color: #dc3545" data-tooltip="Eliminar" data-tooltip-conf="up">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+  </ng-template>
+</ngx-datatable-column>
+
+<!-- <ngx-datatable-column name="rut_file"  [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     RUT
   </ng-template>
@@ -113,7 +141,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="100">
+<ngx-datatable-column name="camara_commerce_file" [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Cámara de comercio
   </ng-template>
@@ -124,19 +152,19 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column [resizeable]="true" [width]="100">
+<ngx-datatable-column name="income_statement_file" [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Declaración de renta
   </ng-template>
   <ng-template let-row="row" ngx-datatable-cell-template>
-   <!--  {{row.income_statement_file}} -->
+  
     <ion-button (click)="watchDocument(row.income_statement_file)">
-      <ion-icon  slot="icon-only" name="document-sharp"></ion-icon>
+      <ion-icon  slot="icon-only" name="cash"></ion-icon>
     </ion-button>
 
   </ng-template>
 </ngx-datatable-column>
-
+ -->
 
 </ngx-datatable>
 

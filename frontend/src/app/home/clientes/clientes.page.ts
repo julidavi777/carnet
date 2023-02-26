@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SortType } from '@swimlane/ngx-datatable';
 import { environment } from 'src/environments/environment';
 import { ClientesService } from './clientes.service';
 
@@ -11,7 +12,8 @@ export class ClientesPage implements OnInit {
   rows: any = []
 
   readonly STORAGE_URL = environment.storageUrl;
-
+  SortType = SortType;
+  
   constructor(
     private clientesService: ClientesService
   ) { }

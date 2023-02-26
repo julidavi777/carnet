@@ -32,13 +32,16 @@
               }
             ],
             "styles": [
-              "src/theme/variables.scss", 
               "src/global.scss",
+              "src/theme/variables.scss", 
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/@swimlane/ngx-datatable/index.css",
               "./node_modules/@swimlane/ngx-datatable/themes/material.css",
               "./node_modules/@swimlane/ngx-datatable/assets/icons.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
