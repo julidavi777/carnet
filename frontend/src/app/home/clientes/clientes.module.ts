@@ -8,6 +8,7 @@ import { ClientesPageRoutingModule } from './clientes-routing.module';
 
 import { ClientesPage } from './clientes.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { TipoIdentificacionPipe } from './pipes/tipo-identificacion.pipe';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     ClientesPageRoutingModule,
     NgxDatatableModule
   ],
-  declarations: [ClientesPage]
+  declarations: [ClientesPage, TipoIdentificacionPipe ]
 })
 export class ClientesPageModule {}
