@@ -27,8 +27,12 @@ export class CrearClientePage implements OnInit {
     razon_comercial: new FormControl('',),
     contact_commer: new FormControl('',),
 
+
     rut_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
     rut_file: new FormControl('',),
+
+    logo_customers_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
+    logo_customers_file: new FormControl('',),
 
     camara_commerce_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
     camara_commerce_file: new FormControl('',),
@@ -66,9 +70,11 @@ export class CrearClientePage implements OnInit {
     formData.append('razon_comercial', this.customerForm.get('razon_comercial').value);
     formData.append('contact_commer', this.customerForm.get('contact_commer').value);
 
+
     formData.append('rut_file', this.customerForm.get('rut_file').value);
     formData.append('camara_commerce_file', this.customerForm.get('camara_commerce_file').value);
     formData.append('income_statement_file', this.customerForm.get('income_statement_file').value);
+    formData.append('logo_customers', this.customerForm.get('logo_customers').value);
 
     this.crearClienteService.saveCustomer(formData).subscribe(res => {
         //alert('Uploaded Successfully.');
@@ -107,6 +113,15 @@ export class CrearClientePage implements OnInit {
         const file = event.target.files[0];
         this.customerForm.patchValue({
           income_statement_file: file
+        });
+      }
+    }
+
+    if(name_field ==  "logo_customers_file_field"){
+      if (event.target.files.length > 0) {
+        const file = event.target.files[0];
+        this.customerForm.patchValue({
+          camara_commerce_file: file
         });
       }
     }

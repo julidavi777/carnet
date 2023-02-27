@@ -2,10 +2,17 @@
 <div class="container">
   <p class="h2 my-3">Crear oferta comercial</p>
   <form [formGroup]="offersForm" (ngSubmit)="onSubmit()">
+
     <div class="row">
+
       <div class="mb-3 form-group col-md-2">
         <label class="form-label" for="validation01"># Consecutivo</label>
-        <input type="number" class="form-control is-valid" id="validationServer01" value="Otto" required placeholder="#" value="#" required disabled>
+        <input type="number" class="form-control is-valid"   id="validationServer01" value="Otto" required placeholder="#" value="#" required disabled>
+      </div>
+
+      <div class="mb-3 form-group col-md-2">
+        <label class="form-label" for="validation01">Fecha de asignación</label>
+        <input type="number" class="form-control is-valid"  formControlName="assignment_date" id="validationServer01" value="Otto" required placeholder="#" value="#" required >
       </div>
 
       <div class="mb-3 form-group col-md-10">
@@ -30,13 +37,13 @@
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation03">Responsable *</label>
-        <input type="text" class="form-control"  formControlName="responsible" id="validation03" placeholder="" required>
+        <input type="text" class="form-control"  formControlName="responsable" id="validation03" placeholder="" required>
       </div>
 
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Tipo de contratación *</label>
-        <select class="form-select"  formControlName="modalidad"aria-label="Default select example">
+        <select class="form-select"  formControlName="contract_type"aria-label="Default select example">
           <option selected>Seleccione</option>
           <option value="1">Precio global fijo</option>
           <option value="2">Precio unitario fijo</option>
@@ -46,7 +53,7 @@
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Tipo de servicio *</label>
-        <select class="form-select"  formControlName="modalidad"aria-label="Default select example">
+        <select class="form-select"  formControlName="service_type"aria-label="Default select example">
           <option selected>Seleccione</option>
           <option value="1">Construcción</option>
           <option value="2">Mantenimiento</option>
@@ -56,7 +63,7 @@
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Sector productivo *</label>
-        <select class="form-select"  formControlName="modalidad"aria-label="Default select example">
+        <select class="form-select"  formControlName="sector_productivo"aria-label="Default select example">
           <option selected>Seleccione</option>
           <option value="1">Industrial</option>
           <option value="2">Logistico</option>
@@ -73,7 +80,7 @@
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation08">Número</label>
-        <input type="number" class="form-control" formControlName="number_code" id="validation08" placeholder="#" required>
+        <input type="number" class="form-control" formControlName="numero" id="validation08" placeholder="#" required>
       </div>
 
 
@@ -94,12 +101,12 @@
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Fecha de entrega * </label>
-        <input type="date" class="form-control"  formControlName="origin_portal" id="validation09" placeholder="Seleccione" required>
+        <input type="date" class="form-control"  formControlName="delivery_date" id="validation09" placeholder="Seleccione" required>
       </div>
     </div>
     <div class="mb-3 form-group col-md-6">
       <label class="form-label" for="validation09">Fecha de visita </label>
-      <input type="date" class="form-control"  formControlName="origin_portal" id="validation09" placeholder="Seleccione" required>
+      <input type="date" class="form-control"  formControlName="visit_date" id="validation09" placeholder="Seleccione" required>
     </div>
 
 
@@ -110,13 +117,10 @@
 
     <div class="mb-3 form-group col-md-6">
       <label class="form-label" for="validation09">Anexos</label>
-      <input type="file" class="form-control"  formControlName="observations" id="validation09" placeholder="Seleccione" required textarea>
+      <input type="file" class="form-control"  formControlName="anexos" id="validation09" placeholder="Seleccione" required textarea>
     </div>
 
-    <div class="mb-3 form-group col-md-6">
-      <label class="form-label" for="validation09">Logo cliente</label>
-      <input type="file" class="form-control"  formControlName="observations" id="validation09" placeholder="Seleccione" required textarea>
-    </div>
+
 
 
     <div class="d-flex justify-content-end col-md-12">
