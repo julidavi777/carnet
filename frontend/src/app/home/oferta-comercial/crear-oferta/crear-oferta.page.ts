@@ -12,7 +12,6 @@ export class CrearOfertaPage implements OnInit {
 
     offersForm: any = new FormGroup({
     sequential_number: new FormControl('', [Validators.required]),
-    responsible: new FormControl('', [Validators.required]),
     assignment_date: new FormControl('',[Validators.required]),
     razon_comercial: new FormControl('', [Validators.required]),
     responsable: new FormControl('', [Validators.required]),
@@ -27,7 +26,7 @@ export class CrearOfertaPage implements OnInit {
     delivery_date: new FormControl('',),
     visit_date: new FormControl('',),
     observations: new FormControl('',),
-    anexos: new FormControl('',),
+
 
 
     anexos_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
