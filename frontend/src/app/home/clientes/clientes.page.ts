@@ -38,6 +38,9 @@ export class ClientesPage implements OnInit {
   }
 
   watchDocument(value:any){
+    if(value == null){
+      return;
+    }
 
     let url = JSON.parse(value)
 

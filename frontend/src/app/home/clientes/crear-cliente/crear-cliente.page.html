@@ -4,19 +4,19 @@
   <p class="h2 my-3">Crear Cliente</p>
   <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
     <div class="row">
-      <div class="mb-3 form-group col-md-4">
+      <div class="mb-3 form-group col-md-4" >
         <label for="identification_type" class="form-label">Tipo de documento *</label>
-        <select class="form-select" formControlName="identification_type" id="identification_type" aria-label="Default select example" >
+        <select class="form-select"  (change)="changeSelect($event)" formControlName="identification_type" id="identification_type" aria-label="Default select example" >
           <option value="1">CC</option>
           <option value="2">NIT</option>
           <option value="3">CE</option>
         </select>
       </div>
-      <div class="mb-3 form-group col-md-6">
+      <div class="mb-3 form-group " [ngClass]="expandAllClass === true ? 'col-md-8' : 'col-md-6'">
         <label for="identification" class="form-label">Numero identificacion *</label>
         <input type="number" class="form-control" formControlName="identification" id="identification" placeholder="" required>
       </div>
-      <div class="mb-3 form-group col-md-2">
+      <div *ngIf="showDigitV" class="mb-3 form-group col-md-2">
         <label for="digit_v" class="form-label">DV</label>
         <input type="number" class="form-control" formControlName="digit_v" id="digit_v" placeholder="#" required>
       </div>
@@ -48,7 +48,7 @@
 
       <div class="mb-3 form-group col-md-6">
         <label for="validation04" class="form-label">Nombre contacto comercial * </label>
-        <input type="text" class="form-control" formControlName="contact_commer"  id="validation04" placeholder="Nombres" required>
+        <input type="text" class="form-control" formControlName="nombre_contacto_comercial"  id="validation04" placeholder="Nombres" required>
       </div>
 
 
@@ -93,7 +93,7 @@
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Logo cliente</label>
-        <input type="file" class="form-control"  formControlName="logo_customers" id="validation09" placeholder="Seleccione" required textarea>
+        <input type="file" class="form-control"  formControlName="cliente_logo_field" (change)="onFileChange($event, 'cliente_logo_field')" accept="image/png, image/jpeg" id="validation09" placeholder="Seleccione" required textarea>
       </div>
 
     </div>

@@ -24,17 +24,19 @@ class Customers extends Migration
             $table->string('phone_number');
             $table->string('address');
             $table->string('email');
+            $table->string('nombre_contacto_comercial');
             $table->string('commercial_contact_1');
             $table->string('commercial_contact_2');
             $table->string('commercial_contact_3');
             $table->string('razon_social');
             $table->string('razon_comercial');
             
-            $table->json('rut_file');
-            $table->json('camara_commerce_file');
-            $table->json('income_statement_file');
+            $table->json('rut_file')->nullable();
+            $table->json('camara_commerce_file')->nullable();
+            $table->json('income_statement_file')->nullable();
+            $table->json('cliente_logo')->nullable();
 
-            $table->boolean('status')->nullable();
+            $table->boolean('status')->default('1');
             $table->timestamps();
         });
     }

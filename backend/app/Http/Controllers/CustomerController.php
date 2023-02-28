@@ -39,14 +39,16 @@ class CustomerController extends ApiController
             'phone_number' => 'required|integer',
             'address' => 'required|string|max:50',
             'email' => 'required|string',
-            'commercial_contact_1' => 'nullable|integer',
+            'nombre_contacto_comercial' => 'required|string',
+            'commercial_contact_1' => 'required|integer',
             'commercial_contact_2' => 'nullable|integer',
             'commercial_contact_3' => 'nullable|integer',
             'razon_social' => 'required|string|max:50',
             'razon_comercial' => 'required|string|max:50',
-            'rut_file' => 'required|file|mimes:doc,docx,jpg,png,pdf',
-            'camara_commerce_file' => 'required|file|mimes:doc,docx,jpg,png,pdf',
-            'income_statement_file' => 'required|file|mimes:doc,docx,jpg,png,pdf',
+            'rut_file' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
+            'camara_commerce_file' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
+            'income_statement_file' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
+            'cliente_logo' => 'nullable|file|mimes:jpg,png',
         ]);
 
         if ($validator->fails()) {
@@ -54,23 +56,33 @@ class CustomerController extends ApiController
         }
 
         //SAVING FILES
-        
+
+            $rut_file_json_urls = null;
         if ($request->hasFile('rut_file')) {
             $file = $request->file('rut_file');
             $rut_file_json_urls = $this->saveFile($file);
-            //$path = $file->storeAs('public', $filename);
+            
         }
 
+        $camara_commerce_file_json_urls = null;
         if ($request->hasFile('camara_commerce_file')) {
             $file = $request->file('camara_commerce_file');
             $camara_commerce_file_json_urls = $this->saveFile($file);
-            //$path = $file->storeAs('public', $filename);
+            
         }
 
+        $income_statement_file_json_urls = null;
         if ($request->hasFile('income_statement_file')) {
             $file = $request->file('income_statement_file');
             $income_statement_file_json_urls = $this->saveFile($file);
-            //$path = $file->storeAs('public', $filename);
+            
+        }
+
+        $cliente_logo_file_json_urls = null;
+        if ($request->hasFile('cliente_logo')) {
+            $file = $request->file('cliente_logo');
+            $cliente_logo_file_json_urls = $this->saveFile($file);
+            
         }
 
 
@@ -83,6 +95,7 @@ class CustomerController extends ApiController
             'phone_number' => $request->post('phone_number'),
             'address' => $request->post('address'),
             'email' => $request->post('email'),
+            'nombre_contacto_comercial' => $request->post('nombre_contacto_comercial'),
             'commercial_contact_1' => $request->post('commercial_contact_1'),
             'commercial_contact_2' => $request->post('commercial_contact_2'),
             'commercial_contact_3' => $request->post('commercial_contact_3'),
@@ -91,6 +104,7 @@ class CustomerController extends ApiController
             'rut_file' => $rut_file_json_urls,
             'camara_commerce_file' => $camara_commerce_file_json_urls,
             'income_statement_file' => $income_statement_file_json_urls,
+            'cliente_logo' => $cliente_logo_file_json_urls,
         ]);
 
         if($created){
