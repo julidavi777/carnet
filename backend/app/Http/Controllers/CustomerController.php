@@ -17,7 +17,7 @@ class CustomerController extends ApiController
     public function index()
     {
         $customers = Customer::get();
-        return response()->json(["data" => $customers], 200);
+        return $this->showAll($customers);
     }
 
     /**
@@ -154,5 +154,23 @@ class CustomerController extends ApiController
         );
 
         return json_encode($urls);
+    }
+
+    public function searchFilterByName(Request $request){
+        $paramValue = $request->query('filterParam');
+        
+        if(is_null($paramValue)){
+            $customers = Customer::get();
+            return $this->showAll($customers);
+        }
+  
+        $customers = Customer::where('identification', 'ilike', '%'.$paramValue.'%')->
+                               orWhere('name', 'ilike', '%'.$paramValue.'%')->
+                               orWhere('surname', 'ilike', '%'.$paramValue.'%')->
+                               orWhere('razon_social', 'ilike', '%'.$paramValue.'%')->
+                               orWhere('razon_comercial', 'ilike', '%'.$paramValue.'%')
+                                ->get();
+                                
+        return $this->showAll($customers);
     }
 }

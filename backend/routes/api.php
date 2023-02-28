@@ -24,6 +24,7 @@ Route::post('/login',  [AuthController::class, 'login']);
 Route::post('/customers',  [CustomerController::class, 'store']);
 Route::get('/customers',  [CustomerController::class, 'index']);
 Route::get('/customers/{customer}',  [CustomerController::class, 'show']);
+Route::get('/customers/searchFilterByName/filter',  [CustomerController::class, 'searchFilterByName']);
 
 Route::group([
 

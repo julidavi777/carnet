@@ -9,6 +9,7 @@ import { ClientesPageRoutingModule } from './clientes-routing.module';
 import { ClientesPage } from './clientes.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { TipoIdentificacionPipe } from './pipes/tipo-identificacion.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { TipoIdentificacionPipe } from './pipes/tipo-identificacion.pipe';
     FormsModule,
     IonicModule,
     ClientesPageRoutingModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ReactiveFormsModule
   ],
   declarations: [ClientesPage, TipoIdentificacionPipe ]
 })
