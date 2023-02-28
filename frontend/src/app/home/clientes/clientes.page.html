@@ -30,7 +30,7 @@ rowHeight="auto"
 [sortType]="SortType.multi"
 [loadingIndicator]="loadingIndicator"
 >
-<ngx-datatable-column name="identification_type" [resizeable]="true" [width]="100">
+<ngx-datatable-column name="identification_type" [resizeable]="true" [width]="120">
   <ng-template ngx-datatable-header-template>
     Tipo identificación:
   </ng-template>
@@ -75,7 +75,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column name="razon_comercial" [resizeable]="true" [width]="100">
+<ngx-datatable-column name="razon_comercial" [resizeable]="true" [width]="110">
   <ng-template ngx-datatable-header-template>
     Razon comercial
   </ng-template>
@@ -84,16 +84,16 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column name="contact_commer" [resizeable]="true" [width]="100">
+<ngx-datatable-column name="contact_commer" [resizeable]="true" [width]="120">
   <ng-template ngx-datatable-header-template>
     Asesor comercial:
   </ng-template>
   <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.contact_commer}}
+    {{row.nombre_contacto_comercial}}
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column  name="phone_number"  [resizeable]="true" [width]="100">
+<ngx-datatable-column  name="phone_number"  [resizeable]="true" [width]="120">
   <ng-template ngx-datatable-header-template>
     Numero telefono:
   </ng-template>
@@ -102,7 +102,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column name="phone_number"  [resizeable]="true" [width]="100">
+<ngx-datatable-column name="phone_number"  [resizeable]="true" [width]="120">
   <ng-template ngx-datatable-header-template>
     Correo electronico:
   </ng-template>
@@ -111,7 +111,7 @@ rowHeight="auto"
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column  name="address" [resizeable]="true" [width]="200">
+<ngx-datatable-column  name="address" [resizeable]="true" [width]="100">
   <ng-template ngx-datatable-header-template>
     Dirección:
   </ng-template>

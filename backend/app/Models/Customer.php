@@ -18,6 +18,7 @@ class Customer extends Model
         'phone_number',
         'address',
         'email',
+        'nombre_contacto_comercial',
         'commercial_contact_1',
         'commercial_contact_2',
         'commercial_contact_3',
@@ -26,11 +27,13 @@ class Customer extends Model
         'rut_file',
         'camara_commerce_file',
         'income_statement_file',
+        'cliente_logo'
     ];
 
     protected $casts = [
         'rut_file' => 'array',
         'camara_commerce_file' => 'array',
         'income_statement_file' => 'array',
+        'cliente_logo' => 'array'
     ];
 }

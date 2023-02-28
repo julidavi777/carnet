@@ -10,6 +10,8 @@ import { CrearClienteService } from './crear-cliente.service';
 export class CrearClientePage implements OnInit {
 
   registeredSuccessfully:boolean = false;
+  expandAllClass: boolean = true;
+  showDigitV: boolean = false
 
   customerForm: any = new FormGroup({
     identification_type: new FormControl('', [Validators.required]),
@@ -20,12 +22,12 @@ export class CrearClientePage implements OnInit {
     phone_number: new FormControl(''),
     address: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
+    nombre_contacto_comercial: new FormControl('',),
     commercial_contact_1: new FormControl('', [Validators.required]),
     commercial_contact_2: new FormControl('',),
     commercial_contact_3: new FormControl('',),
     razon_social: new FormControl('',),
     razon_comercial: new FormControl('',),
-    contact_commer: new FormControl('',),
 
 
     rut_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
@@ -39,6 +41,9 @@ export class CrearClientePage implements OnInit {
 
     income_statement_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
     income_statement_file: new FormControl('',),
+    
+    cliente_logo_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
+    cliente_logo: new FormControl('',),
   });
 
   constructor(
@@ -63,18 +68,18 @@ export class CrearClientePage implements OnInit {
     formData.append('phone_number', this.customerForm.get('phone_number').value);
     formData.append('address', this.customerForm.get('address').value);
     formData.append('email', this.customerForm.get('address').value);
+    formData.append('nombre_contacto_comercial', this.customerForm.get('nombre_contacto_comercial').value);
     formData.append('commercial_contact_1', this.customerForm.get('commercial_contact_1').value);
     formData.append('commercial_contact_2', this.customerForm.get('commercial_contact_2').value);
     formData.append('commercial_contact_3', this.customerForm.get('commercial_contact_3').value);
     formData.append('razon_social', this.customerForm.get('razon_social').value);
     formData.append('razon_comercial', this.customerForm.get('razon_comercial').value);
-    formData.append('contact_commer', this.customerForm.get('contact_commer').value);
 
 
     formData.append('rut_file', this.customerForm.get('rut_file').value);
     formData.append('camara_commerce_file', this.customerForm.get('camara_commerce_file').value);
     formData.append('income_statement_file', this.customerForm.get('income_statement_file').value);
-    formData.append('logo_customers', this.customerForm.get('logo_customers').value);
+    formData.append('cliente_logo', this.customerForm.get('cliente_logo').value);
 
     this.crearClienteService.saveCustomer(formData).subscribe(res => {
         //alert('Uploaded Successfully.');
@@ -87,6 +92,14 @@ export class CrearClientePage implements OnInit {
       alert('error al registrar.');
     }
     );
+  }
+
+  changeSelect(event: any){
+    console.log(event.target.value)
+    if(event.target.value === "2"){
+      this.expandAllClass = false;
+      this.showDigitV = true;
+    }
   }
 
   onFileChange(event: any, name_field: string){
@@ -122,6 +135,15 @@ export class CrearClientePage implements OnInit {
         const file = event.target.files[0];
         this.customerForm.patchValue({
           camara_commerce_file: file
+        });
+      }
+    }
+
+    if(name_field ==  "cliente_logo_field"){
+      if (event.target.files.length > 0) {
+        const file = event.target.files[0];
+        this.customerForm.patchValue({
+          cliente_logo: file
         });
       }
     }
