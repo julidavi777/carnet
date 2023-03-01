@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,13 +20,13 @@ use App\Http\Controllers\CustomerController;
 Route::post('/login',  [AuthController::class, 'login']);
 
 //CUSTOMERS
-
-
 Route::post('/customers',  [CustomerController::class, 'store']);
 Route::get('/customers',  [CustomerController::class, 'index']);
 Route::get('/customers/{customer}',  [CustomerController::class, 'show']);
 Route::get('/customers/searchFilterByName/filter',  [CustomerController::class, 'searchFilterByName']);
 
+//USERS
+Route::get('/users',  [UserController::class, 'index']);
 Route::group([
 
     'middleware' => 'api',

@@ -36,4 +36,12 @@ class Customer extends Model
         'income_statement_file' => 'array',
         'cliente_logo' => 'array'
     ];
+
+    /**
+     * Get the commercial offers for the customer.
+     */
+    public function commercialOffers()
+    {
+        return $this->hasMany(CommercialOffer::class);
+    }
 }
