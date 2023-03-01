@@ -14,6 +14,18 @@ export class CrearOfertaService {
   ) { }
 
   saveOffer(data: any){
-    return this.http.post(`${this.API_URL}`, data);
+    return this.http.post(`${this.API_URL}commercialOffers`, data);
+  }
+
+  getSequentialNumber(){
+    return this.http.get(`${this.API_URL}commercialOffers/others/getNextValue`)
+  }
+
+  searchFilterByIdentification(valueParam: string){
+    return this.http.get(`${this.API_URL}customers/searchFilterByName/filter?filterParamIdentification=${valueParam}`)
+  }
+
+  getUsers(){
+    return this.http.get(`${this.API_URL}users`)
   }
 }

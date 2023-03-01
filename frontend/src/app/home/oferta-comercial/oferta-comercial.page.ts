@@ -9,6 +9,7 @@ import { OfertaComercialService } from './oferta-comercial.service';
 })
 export class OfertaComercialPage implements OnInit {
   rows: any = []
+  loadingIndicator: boolean = true;
 
   readonly STORAGE_URL = environment.storageUrl;
 
@@ -23,6 +24,7 @@ export class OfertaComercialPage implements OnInit {
   getOfertas(){
     this.ofertaComercialService.getOfertas().subscribe((res: any) => {
       this.rows = res.data;
+      this.loadingIndicator = false;
     })
   }
   watchDocument(value:any){

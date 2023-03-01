@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CommercialOffer;
+use App\Models\Customer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -37,6 +38,7 @@ class CommercialOfferController extends ApiController
         $data = $request->all();
 
         $validator = Validator::make($data, [
+            'customer_identification' => 'required|integer|exists:customers,identification',
             'sequential_number' => 'required|integer|unique:commercial_offers',
             'contract_type' => 'required|string|max:50',
             'service_type' => 'required|string|max:50',
@@ -50,7 +52,6 @@ class CommercialOfferController extends ApiController
             'visit_date' => 'required|date',
             'observations' => 'nullable|string',
             'anexos' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
-            'customer_id' => 'required|integer|exists:customers,id',
             'responsable_id' => 'required|integer|exists:users,id'
         ]);
 
@@ -67,6 +68,8 @@ class CommercialOfferController extends ApiController
             
         }
 
+        //get Customer
+        $customer = Customer::where('identification', $request->post('customer_identification'))->first();
 
         $created = CommercialOffer::create([
             'sequential_number'  => $request->post('sequential_number'),
@@ -83,7 +86,7 @@ class CommercialOfferController extends ApiController
             'visit_date'  => $request->post('visit_date'),
             'observations'  => $request->post('observations'),
             'anexos'  => $anexos_json_urls,
-            'customer_id'  => $request->post('customer_id'),
+            'customer_id'  => $customer->id,
             'responsable_id'  => $request->post('responsable_id')
         ]);
 

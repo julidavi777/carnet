@@ -1,13 +1,13 @@
 
 <div class="container">
   <p class="h2 my-3">Crear oferta comercial</p>
-  <form [formGroup]="offersForm" (ngSubmit)="onSubmit()">
+  <form  [formGroup]="offersForm" (ngSubmit)="onSubmit()">
 
     <div class="row">
 
       <div class="mb-3 form-group col-md-2">
         <label class="form-label" for="validation01"># Consecutivo</label>
-        <input type="number" class="form-control is-valid"   id="validationServer01" value="Otto" required placeholder="#" value="#" required disabled>
+        <input type="number"  [readonly]="true" formControlName="sequential_number" class="form-control is-valid"   id="validationServer01" placeholder="#" >
       </div>
 
       <!-- <div class="mb-3 form-group col-md-2">
@@ -17,28 +17,37 @@
 
       <div class="mb-3 form-group col-md-10">
         <label class="form-label" for="validation03">Número identificación cliente *</label>
-        <input type="number" class="form-control" formControlName="sequential_number" id="validation03" placeholder="" required>
+        <input type="number" class="form-control" [ngClass]="isCustomerFound === null ? '' : isCustomerFound ? 'is-valid' : 'is-invalid'" formControlName="customer_identification" id="validation03" placeholder="" >
+        <div class="valid-feedback">
+          Cliente encontrado
+        </div>
+        <div class="invalid-feedback">
+          Cliente no encontrado por favor digite un numero correcto.
+        </div>
       </div>
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation01">Nombres *</label>
-        <input type="text" class="form-control" formControlName="name" id="validation01" placeholder="Nombres" value="Mark" required>
+        <input type="text" class="form-control" formControlName="name" [readonly]="true" id="validation01"  >
       </div>
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation01">Apellidos *</label>
-        <input type="text" class="form-control"  formControlName="surname" id="validation01" placeholder="Nombres" value="Mark" required>
+        <input type="text" class="form-control"  formControlName="surname" [readonly]="true" id="validation01"  >
       </div>
       <div class="mb-3 form-group col-md-12">
         <label class="form-label" for="validation06">Razón comercial *</label>
-        <input type="text" class="form-control" formControlName="razon_comercial" id="validation06" placeholder="" required>
+        <input type="text" class="form-control" formControlName="razon_comercial" [readonly]="true" id="validation06" placeholder="" required>
       </div>
 
 
 
       <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation03">Responsable *</label>
-        <input type="text" class="form-control"  formControlName="responsable" id="validation03" placeholder="" required>
+        <label class="form-label" for="validation09">Responsable *</label>
+        <select class="form-select"  formControlName="responsable_id"aria-label="Default select example">
+          <option *ngFor="let user of usersList" [value]="user.id">{{user.name}}</option>
+        </select>
       </div>
+
 
 
       <div class="mb-3 form-group col-md-6">
@@ -112,12 +121,12 @@
 
     <div class="mb-3 form-group col-md-6">
       <label class="form-label" for="validation09">Observaciones</label>
-      <input type="textarea" class="form-control"  formControlName="observations" id="validation09" placeholder="Seleccione" required textarea>
+      <input type="textarea" class="form-control"  formControlName="observations" id="validation09" placeholder="Seleccione" >
     </div>
 
     <div class="mb-3 form-group col-md-6">
       <label class="form-label" for="validation09">Anexos</label>
-      <input type="file" class="form-control"  formControlName="anexos" id="validation09" placeholder="Seleccione" required textarea>
+      <input type="file" class="form-control"  formControlName="anexos_file_field" (change)="onFileChange($event, 'anexos_file_field')" id="validation09" placeholder="Seleccione" required textarea>
     </div>
 
 
@@ -125,6 +134,11 @@
 
     <div class="d-flex justify-content-end col-md-12">
       <button type="submit" class="btn btn-primary">Crear oportunidad</button>
+    </div>
+
+    <div *ngIf="registeredSuccessfully" class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+      <strong>Mensaje</strong> Cliente registrado exitosamente
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
   </form>
