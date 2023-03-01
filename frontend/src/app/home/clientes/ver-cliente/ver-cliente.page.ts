@@ -1,16 +1,17 @@
+import { CrearClienteService } from './../crear-cliente/crear-cliente.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { read } from 'fs';
-import { CrearClienteService } from './crear-cliente.service';
+import { VerClienteService } from './ver-cliente.service';
 
 interface HtlmInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
 }
 
 @Component({
-  selector: 'app-crear-cliente',
-  templateUrl: './crear-cliente.page.html',
-  styleUrls: ['./crear-cliente.page.scss'],
+  selector: 'app-ver-cliente',
+  templateUrl: './ver-cliente.page.html',
+  styleUrls: ['./ver-cliente.page.scss'],
 })
 export class CrearClientePage implements OnInit {
 
@@ -55,6 +56,7 @@ export class CrearClientePage implements OnInit {
   });
 
   constructor(
+    private verClienteService: VerClienteService,
     private crearClienteService: CrearClienteService
   ) { }
 
@@ -154,10 +156,6 @@ export class CrearClientePage implements OnInit {
           cliente_logo: file
 
         });
-
-        // const reader = new FileReader();
-        // reader.onload = event => this.photoSelected = reader.result;
-        // reader.readAsDataURL(this.photoSelected)
       }
     }
   }

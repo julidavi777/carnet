@@ -23,5 +23,9 @@ export class ClientesService {
     return this.http.get(`${this.API_URL}customers/searchFilterByName/filter?filterParam=${valueParam}`)
   }
 
+  getClientes(id: string){
+    return this.http.get(`${this.API_URL}/$(id)`);
+  }
+
 
 }
