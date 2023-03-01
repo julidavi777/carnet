@@ -42,6 +42,14 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     /**
+     * Get the commercial offers for the customer.
+     */
+    public function commercialOffers()
+    {
+        return $this->hasMany(CommercialOffer::class, 'responsable_id');
+    }
+
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed
