@@ -16,7 +16,7 @@ export class OfertaComercialService {
   ) { }
 
   getOfertas(){
-    return this.http.get(`${this.API_URL}data`);
+    return this.http.get(`${this.API_URL}commercialOffers`);
   }
 
 }
