@@ -16,7 +16,7 @@ class CreateCommercialOffersTable extends Migration
         Schema::create('commercial_offers', function (Blueprint $table) {
             $table->id();
 
-            $table->string('sequential_number');
+            $table->string('sequential_number')->unique();
             $table->string('contract_type');
             $table->string('service_type');
             $table->string('sector_productivo');

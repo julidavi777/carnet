@@ -15,7 +15,6 @@ class CommercialOffer extends Model
         'service_type',
         'sector_productivo',
         'object_description',
-        'sequential_number',
         'numero',
         'cuantia',
         'location',

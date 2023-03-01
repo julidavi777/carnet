@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommercialOfferController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 
@@ -23,10 +24,16 @@ Route::post('/login',  [AuthController::class, 'login']);
 Route::post('/customers',  [CustomerController::class, 'store']);
 Route::get('/customers',  [CustomerController::class, 'index']);
 Route::get('/customers/{customer}',  [CustomerController::class, 'show']);
-Route::get('/customers/searchFilterByName/filter',  [CustomerController::class, 'searchFilterByName']);
+Route::get('/customers/searchFilterByName/filter',  [CustomerController::class, 'searchFilter']);
 
 //USERS
 Route::get('/users',  [UserController::class, 'index']);
+
+//COMMERCIAL OFFERS
+Route::post('/commercialOffers',  [CommercialOfferController::class, 'store']);
+Route::get('/commercialOffers',  [CommercialOfferController::class, 'index']);
+Route::get('/commercialOffers/others/getNextValue',  [CommercialOfferController::class, 'getNextValue']);
+
 Route::group([
 
     'middleware' => 'api',

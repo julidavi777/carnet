@@ -31,7 +31,7 @@ class CustomerController extends ApiController
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'identification_type' => 'required|string|max:50',
+            'identification_type' => 'required|integer',
             'identification' => 'required|integer|unique:customers',
             'digit_v' => 'nullable|integer',
             'name' => 'required|string|max:50',
@@ -60,28 +60,28 @@ class CustomerController extends ApiController
             $rut_file_json_urls = null;
         if ($request->hasFile('rut_file')) {
             $file = $request->file('rut_file');
-            $rut_file_json_urls = $this->saveFile($file);
+            $rut_file_json_urls = $this->saveFile($file, 'customersFiles');
             
         }
 
         $camara_commerce_file_json_urls = null;
         if ($request->hasFile('camara_commerce_file')) {
             $file = $request->file('camara_commerce_file');
-            $camara_commerce_file_json_urls = $this->saveFile($file);
+            $camara_commerce_file_json_urls = $this->saveFile($file, 'customersFiles');
             
         }
 
         $income_statement_file_json_urls = null;
         if ($request->hasFile('income_statement_file')) {
             $file = $request->file('income_statement_file');
-            $income_statement_file_json_urls = $this->saveFile($file);
+            $income_statement_file_json_urls = $this->saveFile($file, 'customersFiles');
             
         }
 
         $cliente_logo_file_json_urls = null;
         if ($request->hasFile('cliente_logo')) {
             $file = $request->file('cliente_logo');
-            $cliente_logo_file_json_urls = $this->saveFile($file);
+            $cliente_logo_file_json_urls = $this->saveFile($file, 'customersFiles');
             
         }
 
@@ -155,24 +155,20 @@ class CustomerController extends ApiController
         //
     }
 
-    private function saveFile($file){
-        $dt = Carbon::now();
-
-        $hash = $file->hashName();
-
-        $photo_url = $file->storeAs('public/files/customersFiles/'.$dt->toDateString(),'time_'.$dt->format('h_i_s').'_'.  $hash);
-
-        $urls = array(
-            "server_hash_name" => $photo_url,
-            "original_name" => $file->getClientOriginalName()
-        );
-
-        return json_encode($urls);
-    }
-
-    public function searchFilterByName(Request $request){
+    public function searchFilter(Request $request){
         $paramValue = $request->query('filterParam');
+        $paramValueIdentification = $request->query('filterParamIdentification');
         
+        if(!is_null($paramValueIdentification)){
+            $customer = Customer::where('identification', $paramValueIdentification)->first();
+            
+            if(is_null($customer)){
+                return response()->json(["data" => []]);
+            }
+
+            return $this->showOne($customer);
+        }
+
         if(is_null($paramValue)){
             $customers = Customer::get();
             return $this->showAll($customers);
