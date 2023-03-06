@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: "http://localhost:8000/api/",
-  storageUrl: "http://localhost:8000/storage/",
+  baseUrl: "http://servidor1.cubikar.com/projects/cubikar/backend/public/api/",
+  storageUrl: "http://servidor1.cubikar.com/projects/cubikar/backend/public/storage/",
 };
