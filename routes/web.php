@@ -18,7 +18,7 @@ Route::get('/', function () {
 })->name('dashboard');
 
 Route::get('/cuadros-principales', function () {
-    //return view('dashboard');
+    return view('cuadros-principales');
 })->name('cuadros.principales');
 
 /*
