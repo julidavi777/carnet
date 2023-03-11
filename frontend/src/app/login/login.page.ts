@@ -29,9 +29,10 @@ export class LoginPage implements OnInit {
     this.isInvalidData = false;
     //console.log(this.loginForm.valid);
     //console.log(this.loginForm.value)
-    this.loginService.login(this.loginForm.value).subscribe(res => {
+    this.loginService.login(this.loginForm.value).subscribe((res: any) => {
       //CUANDO ES EXITOSO status 200 OK
-
+      console.log(res.access_token)
+      localStorage.setItem('auth_token', res.access_token)
       this.router.navigate(['home']); 
     }, err => {
       //CUANDO ES ERROR status 401 unasdjaj
