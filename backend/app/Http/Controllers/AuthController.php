@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\VerifyAccountNotificationMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -101,24 +104,46 @@ class AuthController extends Controller
                 'message' => $validator->errors()], 422);
         }
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-        $token = Auth::login($user);
+       
 
-        return response()->json([
-            'is_error' => false,
-            'message' => 'User created successfully',
-            'user' => $user,
-            'Auth' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
-        ]);
 
+        return DB::transaction(function() use ($request) {
+            try{
+                $user = User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                ]);
+    
+                $token = Auth::login($user);
+    
+                
+                try {
+                    $myEmail = 'nygarcia46@misena.edu.co';
+                    Mail::to($myEmail)->send(new VerifyAccountNotificationMail());
+    
+                    return response()->json([
+                        'is_error' => false,
+                        'message' => 'User created successfully',
+                        'user' => $user,
+                        'Auth' => [
+                            'token' => $token,
+                            'type' => 'bearer',
+                        ]
+                    ]);
+                } catch (\Throwable $ex) {
+                    DB::rollback();
+                    return response()->json(['status' => false, 'message' => 'something went wrong send email'.$ex], 400);
+                }
+                
+            }catch (\Exception $ex) {
+                DB::rollback();
+                // throw $ex;
+                return response()->json(['status' => false, 'message' => 'something went wrong registro dog o usuario'.$ex], 400);
+            }
+           
+            
+        });
     }
-
 }
 // hacer api y ruta de login pendiente
