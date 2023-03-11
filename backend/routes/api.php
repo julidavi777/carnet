@@ -34,6 +34,7 @@ Route::get('users',  [UserController::class, 'index']);
 //COMMERCIAL OFFERS
 Route::post('commercialOffers',  [CommercialOfferController::class, 'store']);
 Route::get('commercialOffers',  [CommercialOfferController::class, 'index']);
+Route::put('commercialOffers/{commercialOffer}',  [CommercialOfferController::class, 'update']);
 Route::get('commercialOffers/others/getNextValue',  [CommercialOfferController::class, 'getNextValue']);
 
 Route::group([
