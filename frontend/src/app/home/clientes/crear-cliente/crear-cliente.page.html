@@ -93,7 +93,8 @@
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Logo cliente</label>
-        <input type="file" class="form-control"  formControlName="cliente_logo_field" (change)="onFileChange($event, 'cliente_logo_field')" accept="image/png, image/jpeg" id="validation09" placeholder="Seleccione" required textarea>
+        <input type="file" class="d-none"  formControlName="cliente_logo_field" (change)="onFileChange($event, 'cliente_logo_field')" #logoInput accept="image/png, image/jpeg" id="validation09" placeholder="Seleccione" required textarea>
+        <img src="assets/icon/5a1a5de62a55e.jpg"width="80" height="80" (click)="logoInput.click()">
       </div>
 
     </div>

@@ -4,6 +4,7 @@ import { SortType } from '@swimlane/ngx-datatable';
 import { debounceTime, delay } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ClientesService } from './clientes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clientes',
@@ -21,7 +22,8 @@ export class ClientesPage implements OnInit {
   showCancelButton = false
 
   constructor(
-    private clientesService: ClientesService
+    private clientesService: ClientesService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -44,7 +46,7 @@ export class ClientesPage implements OnInit {
 
     let url = JSON.parse(value)
 
-    
+
     let result = url.server_hash_name.replace("public/", "");
     console.log(result)
 
@@ -52,7 +54,7 @@ export class ClientesPage implements OnInit {
   }
 
   searchInputActions(){
-    
+
     this.searchInput.valueChanges.pipe(
       debounceTime(370)
     ).subscribe((res: any) => {
@@ -71,4 +73,8 @@ export class ClientesPage implements OnInit {
     this.searchInput.setValue('');
     this.showCancelButton = false;
   }
+
+  selectedCliente(id: string){
+    this.router.navigate(['/ver-cliente', id]);
+ }
 }

@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { read } from 'fs';
 import { CrearClienteService } from './crear-cliente.service';
+
+interface HtlmInputEvent extends Event {
+  target: HTMLInputElement & EventTarget;
+}
 
 @Component({
   selector: 'app-crear-cliente',
@@ -11,7 +16,10 @@ export class CrearClientePage implements OnInit {
 
   registeredSuccessfully:boolean = false;
   expandAllClass: boolean = true;
-  showDigitV: boolean = false
+  showDigitV: boolean = false;
+
+
+
 
   customerForm: any = new FormGroup({
     identification_type: new FormControl('', [Validators.required]),
@@ -41,7 +49,7 @@ export class CrearClientePage implements OnInit {
 
     income_statement_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
     income_statement_file: new FormControl('',),
-    
+
     cliente_logo_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
     cliente_logo: new FormControl('',),
   });
@@ -94,7 +102,7 @@ export class CrearClientePage implements OnInit {
     );
   }
 
-  changeSelect(event: any){
+  changeSelect(event: any ){
     console.log(event.target.value)
     if(event.target.value === "2"){
       this.expandAllClass = false;
@@ -102,7 +110,7 @@ export class CrearClientePage implements OnInit {
     }
   }
 
-  onFileChange(event: any, name_field: string){
+  onFileChange(event: any, name_field: string, ){
     if(name_field == "rut_file_field" ){
       if (event.target.files.length > 0) {
         const file = event.target.files[0];
@@ -144,7 +152,12 @@ export class CrearClientePage implements OnInit {
         const file = event.target.files[0];
         this.customerForm.patchValue({
           cliente_logo: file
+
         });
+
+        // const reader = new FileReader();
+        // reader.onload = event => this.photoSelected = reader.result;
+        // reader.readAsDataURL(this.photoSelected)
       }
     }
   }
