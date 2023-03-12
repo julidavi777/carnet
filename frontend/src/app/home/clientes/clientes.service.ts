@@ -22,7 +22,7 @@ export class ClientesService {
 
   updateCustomer(data: any, id: any){
 
-    return this.http.put(`${this.API_URL}customers/${id}`, data);
+    return this.http.get(`${this.API_URL}customers/${id}`, data);
   }
 
 

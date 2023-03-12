@@ -137,7 +137,7 @@ rowHeight="auto"
         <ion-icon name="cash"></ion-icon>
       </ion-button>
 
-      <ion-button (click)="editCustomer(row.data, row.id)"  style="color: #ffc107" data-tooltip="Editar" data-tooltip-conf="right" data-bs-toggle="modal" data-bs-target="#editCustomer">
+      <ion-button (click)="editCustomer(row.data, row.id)" routerLink="./cliente-editar" style="color: #ffc107" data-tooltip="Editar" data-tooltip-conf="right" data-bs-toggle="modal" data-bs-target="#editCustomer">
         <ion-icon name="pencil"></ion-icon>
       </ion-button>
 
