@@ -147,7 +147,9 @@ class AuthController extends Controller
     }
 
     public function test(){
-        return "hello";
+        $user = User::where('id', 1)->first();
+
+        dd($user->getAllPermissions()->pluck('name')->toArray()) ;
     }
 }
 // hacer api y ruta de login pendiente
