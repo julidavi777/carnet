@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Mail\VerifyAccountNotificationMail;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+use Spatie\Permission\Models\Role;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -21,7 +24,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register', 'test']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'test', 'verifyAccount']]);
     }
 
     /**
@@ -29,17 +32,31 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(Request $request)
     {
         $credentials = request(['email', 'password']);
 
         $token = auth()->attempt($credentials);
-
         if (! $token) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
+        $user = User::where('email', $request->post('email'))->first();
+
+        if(is_null($user->email_verified_at)){
+            return response()->json(['message' => 'You need verify your email'], 401);
+        }
+
+        DB::table('users')->where('email', $request->post('email'))->update(['token_session' => $token]);
+
+
         return $this->respondWithToken($token);
+    }
+
+    public function getUserByRawToken($token){
+        $user = User::where('token_session', $token)->first();
+
+        return $user;
     }
 
     /**
@@ -96,6 +113,7 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'role_id' => 'required|exists:roles,id',
         ]);
 
         if ($validator->fails()) {
@@ -113,14 +131,14 @@ class AuthController extends Controller
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
-                ]);
+                ])->assignRole($request->role_id/* Role::where('id', $request->role_id)->first()['name'] */);
     
                 $token = Auth::login($user);
     
                 
                 try {
-                    $myEmail = 'nygarcia46@misena.edu.co';
-                    Mail::to($myEmail)->send(new VerifyAccountNotificationMail());
+                    $myEmail = $user->email;
+                    Mail::to($myEmail)->send(new VerifyAccountNotificationMail($token));
     
                     return response()->json([
                         'is_error' => false,
@@ -144,6 +162,23 @@ class AuthController extends Controller
            
             
         });
+    }
+
+    public function verifyAccount(Request $request){
+        $user = auth()->user();
+
+        if(is_null($user)){
+            return response()->json(['message' => 'User not found, token expired'], 422);
+        }
+        
+        $updated = User::where('id', $user->id)->update([
+            'email_verified_at' => Carbon::now()
+        ]);
+
+        if($updated){
+            return response()->json(['message' => 'Account verified']);
+        }
+        return response()->json(['message' => 'Error account not verified']);
     }
 
     public function test(){

@@ -14,7 +14,14 @@ class UserController extends ApiController
      */
     public function index()
     {
-        $customers = User::get();
-        return $this->showAll($customers);
+        $users = User::get();
+
+        $users = $users->filter(function($user){
+            if(!$user->hasRole('admin')){
+                return $user;
+            }
+        })->values();
+        
+        return $this->showAll($users);
     }
 }

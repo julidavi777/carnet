@@ -18,8 +18,8 @@ export class LoginService {
     return this.http.post(`${this.API_URL}login`, data);
   }
 
-  confirmAccount(){
-    
+  confirmAccount(token: string){
+    return this.http.get(`${this.API_URL}verifyAccount?token=${token}`)
   }
 
 }

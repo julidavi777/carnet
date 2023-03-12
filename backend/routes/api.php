@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommercialOfferController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -17,9 +19,21 @@ use App\Http\Controllers\UserController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+//AUTH
 Route::get('testRoute',  [AuthController::class, 'test']);
 Route::post('login',  [AuthController::class, 'login']);
 Route::post('register',  [AuthController::class, 'register']);
+Route::get('verifyAccount',  [AuthController::class, 'verifyAccount']);
+
+//USERS
+Route::get('users',  [UserController::class, 'index']);
+
+//ROLES
+Route::get('roles', [RoleController::class, 'index']);
+Route::post('roles', [RoleController::class, 'store']);
+//PERMISSIONS
+Route::get('permissions', [PermissionController::class, 'index']);
+
 
 //CUSTOMERS
 Route::post('customers',  [CustomerController::class, 'store']);
@@ -28,8 +42,6 @@ Route::get('customers/{customer}',  [CustomerController::class, 'show']);
 Route::put('customers/{customer}',  [CustomerController::class, 'update']);
 Route::get('customers/searchFilterByName/filter',  [CustomerController::class, 'searchFilter']);
 
-//USERS
-Route::get('users',  [UserController::class, 'index']);
 
 //COMMERCIAL OFFERS
 Route::post('commercialOffers',  [CommercialOfferController::class, 'store']);

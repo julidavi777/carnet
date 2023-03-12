@@ -18,6 +18,8 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'superAdmin@gmail.com',
             'password' => bcrypt('123qwe*'),
+            'status' => false,
+            'email_verified_at' => now()
         ])->assignRole('admin');
 
         \App\Models\User::factory(10)->create();
