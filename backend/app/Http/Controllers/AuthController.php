@@ -21,7 +21,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'test']]);
     }
 
     /**
@@ -144,6 +144,10 @@ class AuthController extends Controller
            
             
         });
+    }
+
+    public function test(){
+        return "hello";
     }
 }
 // hacer api y ruta de login pendiente
