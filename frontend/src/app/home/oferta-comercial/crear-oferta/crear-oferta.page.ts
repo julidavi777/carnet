@@ -47,7 +47,7 @@ export class CrearOfertaPage implements OnInit {
 
   get sequential_number () { return this.offersForm.get('sequential_number') }
   get customer_identification () { return this.offersForm.get('customer_identification') }
-  
+
   get name () { return this.offersForm.get('name') }
   get surname () { return this.offersForm.get('surname') }
   get razon_comercial () { return this.offersForm.get('razon_comercial') }
@@ -119,9 +119,9 @@ export class CrearOfertaPage implements OnInit {
           this.isCustomerFound = false;
         }else{
           this.isCustomerFound = true;
-          this.name.setValue(resFilter.data.name); 
-          this.surname.setValue(resFilter.data.surname)  
-          this.razon_comercial.setValue(resFilter.data.razon_comercial)  
+          this.name.setValue(resFilter.data.name);
+          this.surname.setValue(resFilter.data.surname)
+          this.razon_comercial.setValue(resFilter.data.razon_comercial)
         }
         //this.rows = resFilter.data;
         //this.loadingIndicator = false;
