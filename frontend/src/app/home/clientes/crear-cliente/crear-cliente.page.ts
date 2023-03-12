@@ -17,9 +17,13 @@ export class CrearClientePage implements OnInit {
   registeredSuccessfully:boolean = false;
   expandAllClass: boolean = true;
   showDigitV: boolean = false;
+<<<<<<< Updated upstream
 
 
 
+=======
+  selectedFile: string = '';
+>>>>>>> Stashed changes
 
   customerForm: any = new FormGroup({
     identification_type: new FormControl('', [Validators.required]),
@@ -55,6 +59,7 @@ export class CrearClientePage implements OnInit {
   });
 
   constructor(
+
     private crearClienteService: CrearClienteService
   ) { }
 
@@ -161,5 +166,20 @@ export class CrearClientePage implements OnInit {
       }
     }
   }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        if (reader.result !== null) {
+          this.selectedFile = reader.result.toString();
+        }
+      };
+    }
+  }
+
+
 
 }
