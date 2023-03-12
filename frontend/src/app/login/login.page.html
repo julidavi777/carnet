@@ -22,12 +22,12 @@
           </ion-item>
           <ion-button type="submit" [disabled]="loginForm.invalid" class="ion-margin-bottom" style="margin-top: 10px;" expand="block" >Iniciar Sesión</ion-button>
         </form>
-        <div style="text-align: center;">
+        <!-- <div style="text-align: center;">
           <a routerLink="restore-pass"><b>¿Olvidaste tu contraseña?</b></a>
-        </div>
+        </div> -->
         <div *ngIf="isInvalidData" class="mt-2">
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Mensaje</strong> contraseña o correo invalido 
+            <strong>Mensaje</strong> contraseña, correo invalido o cuenta no verificada
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         </div>

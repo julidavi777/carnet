@@ -1,12 +1,51 @@
 <div class="d-flex h-100 justify-content-center  text-center text-white bg-dark">
   
   
-    <div class="px-3  " style="    margin-top: 111px;">
-      <h1>Cuenta confirmada</h1>
-      <p class="lead">Ahora puede iniciar sesión en cubikar</p>
-      <p class="lead">
-        <a href="http://servidor1.cubikar.com/projects/cubikar/www/" class="btn btn-lg btn-secondary fw-bold border-white bg-white " style="color:black">Iniciar sesión</a>
-      </p>
+    <div class="px-3  " style="    margin-top: 57px;">
+  
+      <div *ngIf="is_confirming; else confirmed">
+
+        <h1>Verificando</h1>
+        <div class="d-flex">
+
+          <div class="spinner-grow text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <div class="spinner-grow text-secondary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <div class="spinner-grow text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <div class="spinner-grow text-danger" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <div class="spinner-grow text-warning" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <div class="spinner-grow text-info" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <div class="spinner-grow text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+      <ng-template #confirmed>
+        <div *ngIf="error_confirming; else confirmed2">
+          <h1>Error cuenta no confirmada</h1>
+          <p class="lead">Por favor ingresar al login de <a href="http://servidor1.cubikar.com/projects/cubikar/www/">Cubikar</a>  y dar en la opcion restablecer cuenta</p>
+        </div>
+        <ng-template #confirmed2>
+          <h1>Cuenta confirmada</h1>
+          <p class="lead">Ahora puede iniciar sesión en cubikar</p>
+          <p class="lead">
+            <a href="http://servidor1.cubikar.com/projects/cubikar/www/" class="btn btn-lg  fw-bold  bg-primary " style="color:white">Iniciar sesión</a>
+        </p>
+        </ng-template>
+
+      
+      </ng-template>
     </div>
   
 

@@ -20,6 +20,7 @@ use App\Http\Controllers\UserController;
 Route::get('testRoute',  [AuthController::class, 'test']);
 Route::post('login',  [AuthController::class, 'login']);
 Route::post('register',  [AuthController::class, 'register']);
+Route::get('verifyAccount',  [AuthController::class, 'verifyAccount']);
 
 //CUSTOMERS
 Route::post('customers',  [CustomerController::class, 'store']);

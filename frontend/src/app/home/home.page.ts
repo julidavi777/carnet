@@ -19,7 +19,8 @@ export class HomePage {
         localStorage.removeItem('auth_token')
         this.router.navigate(['login'])
     }, err => {
-
+        localStorage.removeItem('auth_token')
+        this.router.navigate(['login'])
     })
   }
 
