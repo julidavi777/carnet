@@ -25,7 +25,7 @@
                     <div style="color: rgb(0, 0, 0); text-align: left;">
                       <h1 style="margin: 1rem 0">Paso final...</h1>
                       <p style="padding-bottom: 16px">Haz click en en siguiente enlace para activar tu cuenta</p>
-                      <p style="padding-bottom: 16px"><a href="#" target="_blank"
+                      <p style="padding-bottom: 16px"><a href=" {{ config('app.url_frontend') }}confirm-account" target="_blank"
                           style="padding: 12px 24px; border-radius: 4px; color: #FFF; background: #2B52F5;display: inline-block;margin: 0.5rem 0;">Confirmar ahora</a></p>
                       <p style="padding-bottom: 16px">Si no solicitaste verificar esta dirección, puedes ignorar este correo electrónico.</p>
                     </div>
