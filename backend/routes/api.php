@@ -17,29 +17,32 @@ use App\Http\Controllers\UserController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::post('/login',  [AuthController::class, 'login']);
+Route::get('testRoute',  [AuthController::class, 'test']);
+Route::post('login',  [AuthController::class, 'login']);
+Route::post('register',  [AuthController::class, 'register']);
 
 //CUSTOMERS
-Route::post('/customers',  [CustomerController::class, 'store']);
-Route::get('/customers',  [CustomerController::class, 'index']);
-Route::get('/customers/{customer}',  [CustomerController::class, 'show']);
-Route::get('/customers/searchFilterByName/filter',  [CustomerController::class, 'searchFilter']);
+Route::post('customers',  [CustomerController::class, 'store']);
+Route::get('customers',  [CustomerController::class, 'index']);
+Route::get('customers/{customer}',  [CustomerController::class, 'show']);
+Route::put('customers/{customer}',  [CustomerController::class, 'update']);
+Route::get('customers/searchFilterByName/filter',  [CustomerController::class, 'searchFilter']);
 
 //USERS
-Route::get('/users',  [UserController::class, 'index']);
+Route::get('users',  [UserController::class, 'index']);
 
 //COMMERCIAL OFFERS
-Route::post('/commercialOffers',  [CommercialOfferController::class, 'store']);
-Route::get('/commercialOffers',  [CommercialOfferController::class, 'index']);
-Route::get('/commercialOffers/others/getNextValue',  [CommercialOfferController::class, 'getNextValue']);
+Route::post('commercialOffers',  [CommercialOfferController::class, 'store']);
+Route::get('commercialOffers',  [CommercialOfferController::class, 'index']);
+Route::put('commercialOffers/{commercialOffer}',  [CommercialOfferController::class, 'update']);
+Route::get('commercialOffers/others/getNextValue',  [CommercialOfferController::class, 'getNextValue']);
 
 Route::group([
 
     'middleware' => 'api',
-
 ], function ($router) {
     Route::post('me',  [AuthController::class, 'me']);
+    Route::post('logout',  [AuthController::class, 'logout']);
 
 
 });

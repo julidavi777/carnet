@@ -123,7 +123,78 @@ class CommercialOfferController extends ApiController
      */
     public function update(Request $request, CommercialOffer $commercialOffer)
     {
-        //
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'customer_identification' => 'nullable|integer|exists:customers,identification',
+            'contract_type' => 'nullable|string|max:50',
+            'service_type' => 'nullable|string|max:50',
+            'sector_productivo' => 'nullable|string|max:50',
+            'object_description' => 'nullable|string',
+            'numero' => 'nullable|integer',
+            'cuantia' => 'nullable|integer',
+            'location' => 'nullable|string|max:50',
+            'release_date' => 'nullable|date',
+            'delivery_date' => 'nullable|date',
+            'visit_date' => 'nullable|date',
+            'observations' => 'nullable|string',
+            'anexos' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
+            'responsable_id' => 'nullable|integer|exists:users,id'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+         //get Customer
+         $customer = Customer::where('identification', $request->post('customer_identification'))->first();
+
+        //SAVING FILES
+
+        $anexos_json_urls = $commercialOffer->anexos;
+        if ($request->hasFile('anexos')) {
+
+            //DELETE FILE
+            if(!is_null($commercialOffer->anexos)){
+                unlink(storage_path('app/'.$commercialOffer->anexos['server_hash_name']));
+            }
+
+
+            $file = $request->file('anexos');
+            $anexos_json_urls = $this->saveFile($file, 'commercialOffersFiles');
+            
+        }
+
+  
+        $updated = CommercialOffer::where('id', $commercialOffer->id)->update([    
+            'contract_type'  => $request->post('contract_type'),
+            'service_type'  => $request->post('service_type'),
+            'sector_productivo'  => $request->post('sector_productivo'),
+            'object_description'  => $request->post('object_description'),
+            'sequential_number'  => $request->post('sequential_number'),
+            'numero'  => $request->post('numero'),
+            'cuantia'  => $request->post('cuantia'),
+            'location'  => $request->post('location'),
+            'release_date'  => $request->post('release_date'),
+            'delivery_date'  => $request->post('delivery_date'),
+            'visit_date'  => $request->post('visit_date'),
+            'observations'  => $request->post('observations'),
+            'anexos'  => $anexos_json_urls,
+            'customer_id'  => $customer->id,
+            'responsable_id'  => $request->post('responsable_id')
+        ]);
+
+        if ($updated) {
+            return response()->json([
+                "status" => true,
+                "message" => "edited sucessfully"
+            ], 200);
+        } else {
+            return response()->json([
+                "status" => false,
+                "message" => "cannot edit"
+            ], 400);
+        }
     }
 
     /**

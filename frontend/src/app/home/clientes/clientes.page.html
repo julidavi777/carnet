@@ -126,7 +126,7 @@ rowHeight="auto"
     Acciones:
   </ng-template>
   <ng-template let-row="row" ngx-datatable-cell-template>
-    <ion-buttons class="grid-container" style="margin-left: 10px;" > 
+    <ion-buttons class="grid-container" style="margin-left: 10px;" >
       <ion-button (click)="watchDocument(row.rut_file)" style="color: #007bff" data-tooltip="RUT" data-tooltip-conf="right">
         <ion-icon name="document-sharp"></ion-icon>
       </ion-button>
@@ -175,7 +175,7 @@ rowHeight="auto"
     Declaración de renta
   </ng-template>
   <ng-template let-row="row" ngx-datatable-cell-template>
-  
+
     <ion-button (click)="watchDocument(row.income_statement_file)">
       <ion-icon  slot="icon-only" name="cash"></ion-icon>
     </ion-button>

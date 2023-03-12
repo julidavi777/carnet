@@ -18,5 +18,8 @@ export class LoginService {
     return this.http.post(`${this.API_URL}login`, data);
   }
 
+  confirmAccount(){
+    
+  }
 
 }

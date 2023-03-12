@@ -53,6 +53,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'url_frontend' => env('APP_URL_FRONTEND', 'http://localhost:8100/'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -176,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
     ],
 
     /*

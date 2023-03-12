@@ -17,6 +17,6 @@ trait SaveFile{
              "original_name" => $file->getClientOriginalName()
          );
  
-         return json_encode($urls);
+         return $urls;
      }
 }

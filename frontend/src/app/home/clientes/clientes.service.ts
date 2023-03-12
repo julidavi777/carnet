@@ -19,8 +19,18 @@ export class ClientesService {
     return this.http.get(`${this.API_URL}customers`);
   }
 
+  updateCustomer(data: any, id: any){
+    return this.http.put(`${this.API_URL}customers/${id}`, data);
+  }
+
+
+
   searchFilter(valueParam: string){
     return this.http.get(`${this.API_URL}customers/searchFilterByName/filter?filterParam=${valueParam}`)
+  }
+
+  getClientes(id: string){
+    return this.http.get(`${this.API_URL}/$(id)`);
   }
 
 
