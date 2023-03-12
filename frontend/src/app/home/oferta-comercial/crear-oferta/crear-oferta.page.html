@@ -117,7 +117,7 @@
 
 <!-- Modal -->
    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-primary" formControlName="visit_date"  for="validation09" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Adicionar Visita
 </button>
 <br>
@@ -136,9 +136,9 @@
           <input type="text" class="form-control">
         </div>
 
-        <div class="mb-3 form-group col-md-8">
-          <label class="form-label" for="validation01">Fecha visita</label>
-          <input type="date" class="form-control">
+        <div class="mb-3 form-group col-md-6">
+          <label class="form-label" for="validation09">Fecha visita * </label>
+          <input type="date" class="form-control"  formControlName="visit_date" id="validation09" placeholder="Seleccione" required>
         </div>
 
         <div class="mb-3 form-group col-md-8">
