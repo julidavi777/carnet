@@ -17,13 +17,13 @@ export class CrearClientePage implements OnInit {
   registeredSuccessfully:boolean = false;
   expandAllClass: boolean = true;
   showDigitV: boolean = false;
-<<<<<<< Updated upstream
 
 
 
-=======
+
+
   selectedFile: string = '';
->>>>>>> Stashed changes
+
 
   customerForm: any = new FormGroup({
     identification_type: new FormControl('', [Validators.required]),

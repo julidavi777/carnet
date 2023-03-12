@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,17 +21,17 @@ export class ClientesService {
   }
 
   updateCustomer(data: any, id: any){
-<<<<<<< Updated upstream
+
     return this.http.put(`${this.API_URL}customers/${id}`, data);
   }
 
 
 
-=======
-    return this.http.get(`${this.API_URL}customers/${id}`, data);
-  }
 
->>>>>>> Stashed changes
+  //   return this.http.get(`${this.API_URL}customers/${id}`, data);
+  // }
+
+
   searchFilter(valueParam: string){
     return this.http.get(`${this.API_URL}customers/searchFilterByName/filter?filterParam=${valueParam}`)
   }

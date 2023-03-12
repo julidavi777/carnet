@@ -75,11 +75,11 @@ export class ClientesPage implements OnInit {
     this.showCancelButton = false;
   }
 
-<<<<<<< Updated upstream
+
   selectedCliente(id: string){
     this.router.navigate(['/ver-cliente', id]);
  }
-=======
+
   editCustomer(data: any, id: any){
     this.clientesService.updateCustomer(data, id).subscribe((res: any)=>{
       this.rows = res.data;
@@ -87,5 +87,5 @@ export class ClientesPage implements OnInit {
 
     })
   }
->>>>>>> Stashed changes
+
 }

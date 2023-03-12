@@ -11,7 +11,12 @@ const routes: Routes = [
   {
     path: 'crear-cliente',
     loadChildren: () => import('./crear-cliente/crear-cliente.module').then( m => m.CrearClientePageModule)
-  }
+  },
+
+  // {
+  //   path: 'cliente-editar',
+  //   loadChildren: () => import('./cliente-editar/cliente-editar.module').then( m => m.ClienteEditarPageModule)
+  // }
 ];
 
 @NgModule({
