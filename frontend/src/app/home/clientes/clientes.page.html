@@ -137,13 +137,12 @@ rowHeight="auto"
         <ion-icon name="cash"></ion-icon>
       </ion-button>
 
-      <ion-button (click)="editCustomer(row.data, row.id)"  style="color: #ffc107" data-tooltip="Editar" data-tooltip-conf="right" data-bs-toggle="modal" data-bs-target="#editCustomer">
+      <ion-button  (click)="editCustomer(row.data, row.id)"  style="color: #ffc107" data-tooltip="Editar" data-tooltip-conf="right">
         <ion-icon name="pencil"></ion-icon>
       </ion-button>
 
 
-
-      <ion-button (click)="watchDocument(row.camara_commerce_file)" style="color: #dc3545" data-tooltip="Eliminar" data-tooltip-conf="up">
+      <ion-button (click)="eliminarCustomer(row.data, row.id)"  style="color: #dc3545" data-tooltip="Eliminar" data-tooltip-conf="up">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
 

@@ -76,10 +76,6 @@ export class ClientesPage implements OnInit {
   }
 
 
-  selectedCliente(id: string){
-    this.router.navigate(['/ver-cliente', id]);
- }
-
   editCustomer(data: any, id: any){
     this.router.navigate(['home/clientes/cliente-editar'], data);
     /* this.clientesService.updateCustomer(data, id).subscribe((res: any)=>{
