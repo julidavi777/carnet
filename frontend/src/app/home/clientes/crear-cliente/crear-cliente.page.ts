@@ -112,6 +112,9 @@ export class CrearClientePage implements OnInit {
     if(event.target.value === "2"){
       this.expandAllClass = false;
       this.showDigitV = true;
+    }else{
+      this.expandAllClass = true;
+      this.showDigitV = false;
     }
   }
 

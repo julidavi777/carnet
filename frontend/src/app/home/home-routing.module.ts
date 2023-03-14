@@ -18,6 +18,10 @@ const routes: Routes = [
             path: 'crear-cliente',
             loadChildren: () => import('./clientes/crear-cliente/crear-cliente.module').then( m => m.CrearClientePageModule)
           },
+          {
+            path: 'cliente-editar',
+            loadChildren: () => import('./clientes/cliente-editar/cliente-editar.module').then( m => m.ClienteEditarPageModule)
+          }
         ]
       },
       {

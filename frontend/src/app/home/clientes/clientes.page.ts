@@ -81,11 +81,12 @@ export class ClientesPage implements OnInit {
  }
 
   editCustomer(data: any, id: any){
-    this.clientesService.updateCustomer(data, id).subscribe((res: any)=>{
+    this.router.navigate(['home/clientes/cliente-editar'], data);
+    /* this.clientesService.updateCustomer(data, id).subscribe((res: any)=>{
       this.rows = res.data;
-      // this.router.navigate(['./cliente-editar']);
+      
 
-    })
+    }) */
   }
 
 }
