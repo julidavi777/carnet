@@ -16,6 +16,8 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
 
+        @stack('styles')
+
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
@@ -34,6 +36,8 @@
                 {{ $slot }}
             </main>
         </div>
+
+        @stack('scripts')
 
         @livewireScripts
     </body>
