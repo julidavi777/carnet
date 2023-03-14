@@ -25,6 +25,11 @@ export class ClientesService {
     return this.http.get(`${this.API_URL}customers/${id}`, data);
   }
 
+  deleteCustomer(data: any, id: any){
+
+    return this.http.delete(`${this.API_URL}customers/${id}`, data);
+  }
+
 
 
 

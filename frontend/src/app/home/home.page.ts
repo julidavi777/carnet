@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
+  showPassword = false;
+
   constructor(
     private homeService: HomeService,
     private router: Router
@@ -24,4 +26,16 @@ export class HomePage {
     })
   }
 
+  // irAPagina() {
+  //   this.router.navigate(['registrar-usuario']);
+  // }
+
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+
+
 }
+
+

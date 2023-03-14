@@ -72,7 +72,91 @@
       </div>
       <button (click)="logout()" type="button"  data-tooltip="Cerrar sesión" data-tooltip-conf="bottom" class="btn btn-primary"><i class="bi bi-power"></i></button>
     </div>
-  </nav>
+
+    </nav>
+
+    <!-- <button (click)="irAPagina()" class="bi bi-person-circle">Registrar usuario</button> -->
+
+    <!-- Button trigger modal -->
+<button type="button" class= "btn btn-primary mi-boton bi bi-person-check"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Crear Registro
+</button>
+
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registrar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+<div class="container">
+
+  <form class="mi-formulario">
+    <div class="row">
+
+
+      <div class="mb-3  col-md-6">
+        <label for="name" class="label">Nombres *</label>
+        <input type="text" class="mi-input" placeholder="Nombres" value="" required>
+      </div>
+      <div class="mb-3  col-md-6">
+        <label for="surname" class="label">Usuario *</label>
+        <input type="text" class="mi-input"  id="surname" placeholder="Usuario" value="" required>
+      </div>
+
+      <div class="mb-3  col-md-12">
+        <label for="validation04" class="label">Correo electrónico *</label>
+        <input type="email" class="mi-input"   id="validation04" placeholder="ejemplo@gmail.com" required>
+      </div>
+
+      <div class="mb-3  col-md-12">
+        <label for="password">Contraseña:</label>
+        <input type="{{ showPassword ? 'text' : 'password' }}" id="password" name="password" class="mi-input">
+        <button (click)="togglePassword()"><i class="bi bi-eye-fill"></i></button>
+      </div>
+
+
+      <div class="mb-3  col-md-12">
+        <label for="password">Confirmar contraseña:</label>
+        <input type="{{ showPassword ? 'text' : 'password' }}" id="password" name="password" class="mi-input">
+        <button (click)="togglePassword()"><i class="bi bi-eye-fill"></i></button>
+      </div>
+
+
+      <div class="mb-3  col-md-12" >
+        <label for="" class="">Roles</label>
+        <select class="form-select mi-input"  aria-label="Default select example">
+          <option selected>Seleccione</option>
+          <option value="1">Administrador</option>
+          <option value="2">Arquitecto</option>
+          <option value="3">Comercial</option>
+          <option value="3">Ingeniero</option>
+        </select>
+      </div>
+
+    </div>
+
+  </form>
+
+</div>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Crear Usuario</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <router-outlet></router-outlet>
 

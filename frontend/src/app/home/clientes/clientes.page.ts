@@ -76,14 +76,17 @@ export class ClientesPage implements OnInit {
   }
 
 
-  selectedCliente(id: string){
-    this.router.navigate(['/ver-cliente', id]);
- }
-
   editCustomer(data: any, id: any){
     this.clientesService.updateCustomer(data, id).subscribe((res: any)=>{
       this.rows = res.data;
-      this.router.navigate(['./cliente-editar']);
+      this.router.navigate(['/cliente-editar', id]);
+
+    })
+  }
+
+  eliminarCustomer(data: any, id: any){
+    this.clientesService.deleteCustomer(data, id).subscribe((res: any)=>{
+      this.rows = res.data;
 
     })
   }

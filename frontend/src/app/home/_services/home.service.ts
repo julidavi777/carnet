@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -11,6 +12,8 @@ export class HomeService {
 
   constructor(
     private http:HttpClient,
+    router:Router
+
   ) { }
 
   logout(){
@@ -20,4 +23,7 @@ export class HomeService {
     })
     return this.http.post(this.API_URL+'logout', {}, {headers: headers})
   }
+
+
+
 }
