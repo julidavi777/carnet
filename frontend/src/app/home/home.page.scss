@@ -89,3 +89,10 @@ ion-menu::part(container) {
   box-shadow: 0px 0px 5px rgba(0,0,0,0.1); /* Sombra */
 }
 
+.space {
+  position: absolute;
+  top: 50px;
+  left: 100px;
+  align-items: center;
+}
+
