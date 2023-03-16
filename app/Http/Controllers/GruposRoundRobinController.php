@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ParametrosTablaCuadroRequest;
 use App\Services\RoundRobinService;
 
 class GruposRoundRobinController extends Controller
@@ -21,26 +22,9 @@ class GruposRoundRobinController extends Controller
         return view('dashboard', ['total_grupos' => $this->grupo]);
     }
 
-    protected function getGruposRoundRobin(Request $request)
+    protected function getGruposRoundRobin(ParametrosTablaCuadroRequest $request)
     {
-        $validated = $request->validate([
-            "torneo" => "required|numeric",
-            "categoria" => "required|numeric",
-            "genero" => "required|string",
-            "modalidad" => "required|string",
-            "cuadro" => "required|string"
-        ], [
-            "torneo.required" => 'El campo torneo debe ser obligatorio',
-            "torneo.numeric" => 'El campo torneo debe ser numérico',
-            "categoria.required" => "Error en el campo categoria",
-            "categoria.numeric" => "Error en el campo categoria",
-            "genero.required" => "Error en el campo genero",
-            "genero.string" => "Error en el campo genero",
-            "modalidad.required" => "Error en el campo modalidad",
-            "modalidad.string" => "Error en el campo modalidad",
-            "cuadro.required" => "Error en el campo cuadro",
-            "cuadro.string" => "Error en el campo cuadro "
-        ]);
+        $validated = $request->validated();
 
         session()->flashInput($request->input());
 
