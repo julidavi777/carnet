@@ -7,13 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { RolesPageRoutingModule } from './roles-routing.module';
 
 import { RolesPage } from './roles.page';
-
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import {ButtonModule} from 'primeng/button';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RolesPageRoutingModule
+    RolesPageRoutingModule,
+    NgxDatatableModule,
+    ButtonModule
   ],
   declarations: [RolesPage]
 })

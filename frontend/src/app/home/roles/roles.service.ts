@@ -14,4 +14,12 @@ export class RolesService {
   getRoles() {
     return this.http.get(`${this.API_URL}roles`);
   }
+
+  createRole(data: any){
+    return this.http.post(`${this.API_URL}roles`, data);
+  }
+
+  getPermissions(){
+    return this.http.get(`${this.API_URL}permissions`);
+  }
 }
