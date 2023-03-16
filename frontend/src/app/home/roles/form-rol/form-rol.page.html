@@ -1,8 +1,8 @@
 <div class="container mt-4">
-  
-  <form [formGroup]="rolForm" (ngSubmit)="onSubmit()">
+
+  <form [formGroup]="rolForm" (ngSubmit)="onSubmit()" class="formu">
     <div class="row">
-    
+
       <div class="mb-3 col-md-6">
         <label for="name" class="form-label">Nombre rol</label>
         <input type="text" class="form-control" placeholder="Admin" required formControlName="name">
@@ -10,11 +10,11 @@
 
       <div class="row mt-2">
         <div class="col-12">
-          <ngx-datatable class="material" 
-          [rows]="permisos" 
-          [columnMode]="'force'" 
-          [headerHeight]="50" 
-          [footerHeight]="50" 
+          <ngx-datatable class="material"
+          [rows]="permisos"
+          [columnMode]="'force'"
+          [headerHeight]="50"
+          [footerHeight]="50"
           [rowHeight]="'auto'"
           [loadingIndicator]="loadingIndicator">
             <ngx-datatable-column name="identification_type" [resizeable]="true"  [width]="300">
@@ -36,7 +36,7 @@
           </ngx-datatable>
         </div>
       </div>
-    
+
     </div>
     <p-button label="Guardar" type="submit" class="mt-2" [disabled]="rolForm.invalid"></p-button>
   </form>
