@@ -23,35 +23,35 @@ export class HomePage {
     this.items = [
       {
           label:'Administración',
-          icon:'pi pi-fw pi-file',
+          icon:'pi pi-fw pi-sitemap',
           items:[
               {
                   label:'Usuarios',
-                  icon:'pi pi-fw pi-plus',
+                  icon:'pi pi-fw pi-users',
               },
               {
                 separator:true
               },
               {
                   label:'Roles',
-                  icon:'pi pi-fw pi-trash'
+                  icon:'pi pi-fw pi-id-card'
               },
-              
+
           ]
       },
       {
           label:'Clientes',
-          icon:'pi pi-fw pi-pencil',
+          icon:'pi pi-fw pi-user',
           items:[
               {
-                
+
                   label:'Crear cliente',
-                  icon:'pi pi-fw pi-align-left',
+                  icon:'pi pi-fw pi-user-plus',
                   routerLink: ['clientes/crear-cliente']
               },
               {
                   label:'Clientes',
-                  icon:'pi pi-fw pi-align-right',
+                  icon:'pi pi-fw pi-users',
                   routerLink: ['clientes/clientes-list']
               },
 
@@ -59,16 +59,16 @@ export class HomePage {
       },
       {
           label:'Oportunidad Comercial',
-          icon:'pi pi-fw pi-user',
+          icon:'pi pi-fw pi-tag',
           items:[
               {
                   label:'Crear oportunidad comercial',
-                  icon:'pi pi-fw pi-user-plus',
+                  icon:'pi pi-fw pi-tag',
                   routerLink: ['oferta-comercial/crear-oferta']
               },
               {
                   label:'Oportunidades comerciales',
-                  icon:'pi pi-fw pi-user-minus',
+                  icon:'pi pi-fw pi-tags',
                   routerLink: ['oferta-comercial/ofertas']
               },
               {
@@ -76,17 +76,55 @@ export class HomePage {
               },
               {
                 label:'Nueva cotizacion',
-                icon:'pi pi-fw pi-users',
+                icon:'pi pi-fw pi-dollar',
                 routerLink: ['oferta-comercial/cotizaciones']
              },
               {
-                  label:'Contizaciones',
-                  icon:'pi pi-fw pi-users',
+                  label:'Cotizaciones',
+                  icon:'pi pi-fw pi-money-bill',
                   routerLink: ['oferta-comercial/crear-cotizacion']
               },
-            
+
           ]
-      }
+      },
+
+      {
+        label:'Indicadores',
+        icon:'pi pi-fw pi-chart-bar',
+        items:[
+            {
+
+                label:'Oportunidades abiertas',
+                icon:'pi pi-fw pi-lock-open',
+                routerLink: ['clientes/crear-cliente']
+            },
+            {
+                label:' Oportunidades cerradas',
+                icon:'pi pi-fw pi-lock',
+                routerLink: ['clientes/clientes-list']
+            },
+
+        ]
+    },
+
+    {
+      label:'Informes',
+      icon:'pi pi-fw pi-file',
+      items:[
+          // {
+
+          //     label:'Crear cliente',
+          //     icon:'pi pi-fw pi-user-plus',
+          //     routerLink: ['clientes/crear-cliente']
+          // },
+          // {
+          //     label:'Clientes',
+          //     icon:'pi pi-fw pi-users',
+          //     routerLink: ['clientes/clientes-list']
+          // },
+
+      ]
+  },
   ];
   }
   logout(){

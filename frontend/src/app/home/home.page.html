@@ -1,13 +1,20 @@
-<p-menubar [model]="items" [ngStyle]="{backgroundColor:'var(--blue-500)'}">
+<p-menubar [model]="items" [ngStyle]="{backgroundColor:''}">
   <ng-template pTemplate="start">
-      <img src="../../assets/icon/Logo_Cbk_4.png" height="40" class="mr-2">
+      <img src="../../assets/icon/Logo_Cbk_3.png" height="40" class="mr-2">
   </ng-template>
   <ng-template pTemplate="end" >
-    <button (click)="logout()" pButton label="Logout" icon="pi pi-power-off" pTooltip="Cerrar sesión" tooltipPosition="bottom" ></button>
+    <button (click)="logout()" pButton label="Cerrar sesión" icon="pi pi-power-off" pTooltip="Cerrar sesión" tooltipPosition="bottom" ></button>
   </ng-template>
 </p-menubar>
 
 <router-outlet></router-outlet>
+
+<div class="logo-cubikar-background" >
+  <img class="logo " src="../../assets/icon/Logo_Cubikar_2.png" >
+</div>
+<div style="background-color: rgba(165, 182, 179, 0.29); height: 136vh; color: rgb(239, 237, 237)">
+
+</div>
 <!-- </ion-header> -->
 
 
