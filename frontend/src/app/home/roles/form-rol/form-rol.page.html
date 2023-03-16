@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  
+  <form [formGroup]="rolForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+    
+      <div class="mb-3 col-md-6">
+        <label for="name" class="form-label">Nombre rol</label>
+        <input type="text" class="form-control" placeholder="Admin" required formControlName="name">
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12">
+          <ngx-datatable class="material" 
+          [rows]="permisos" 
+          [columnMode]="'force'" 
+          [headerHeight]="50" 
+          [footerHeight]="50" 
+          [rowHeight]="'auto'"
+          [loadingIndicator]="loadingIndicator">
+            <ngx-datatable-column name="identification_type" [resizeable]="true"  [width]="300">
+              <ng-template ngx-datatable-header-template>
+                Permiso:
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.description }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="identification_type" [resizeable]="true"  [width]="300">
+              <ng-template ngx-datatable-header-template>
+                Acciones:
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <p-inputSwitch (onChange)="handleChange($event, row)"></p-inputSwitch>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    
+    </div>
+    <p-button label="Guardar" type="submit" class="mt-2" [disabled]="rolForm.invalid"></p-button>
+  </form>
+
+
+  <p-toast position="bottom-center" key="bc"></p-toast>
+</div>

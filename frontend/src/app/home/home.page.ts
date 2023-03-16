@@ -10,7 +10,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class HomePage {
 
-  showPassword = false;
+
   items: MenuItem[] = [];
 
 
@@ -27,14 +27,24 @@ export class HomePage {
           items:[
               {
                   label:'Usuarios',
+
                   icon:'pi pi-fw pi-users',
+
+
+                  routerLink: ['users']
+
               },
               {
                 separator:true
               },
               {
                   label:'Roles',
-                  icon:'pi pi-fw pi-id-card'
+
+                  icon:'pi pi-fw pi-id-card',
+
+
+                  routerLink: ['roles']
+
               },
 
           ]
@@ -143,9 +153,7 @@ export class HomePage {
   // }
 
 
-  togglePassword() {
-    this.showPassword = !this.showPassword;
-  }
+
 
 
 }
