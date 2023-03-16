@@ -5,6 +5,7 @@ import { debounceTime, delay } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ClientesService } from './clientes.service';
 import { Router } from '@angular/router';
+import { ClienteEditarService } from './cliente-editar/cliente-editar.service';
 
 @Component({
   selector: 'app-clientes',
@@ -23,6 +24,7 @@ export class ClientesPage implements OnInit {
 
   constructor(
     private clientesService: ClientesService,
+    private clienteEditarService: ClienteEditarService,
     private router: Router
   ) { }
 
@@ -76,13 +78,10 @@ export class ClientesPage implements OnInit {
   }
 
 
-  editCustomer(data: any, id: any){
-    this.router.navigate(['home/clientes/cliente-editar'], data);
-    /* this.clientesService.updateCustomer(data, id).subscribe((res: any)=>{
-      this.rows = res.data;
-      
-
-    }) */
+  editCustomer(data: any,){
+    console.log(data)
+    this.clienteEditarService.setDataCliente(data);
+    this.router.navigate(['home/clientes/cliente-editar']);
   }
 
 }

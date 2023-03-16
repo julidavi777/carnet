@@ -60,7 +60,7 @@ export class CrearClientePage implements OnInit {
 
   constructor(
 
-    private crearClienteService: CrearClienteService
+    private crearClienteService: CrearClienteService,
   ) { }
 
   ngOnInit() {
@@ -155,7 +155,7 @@ export class CrearClientePage implements OnInit {
       }
     }
 
-    if(name_field ==  "cliente_logo_field"){
+    /* if(name_field ==  "cliente_logo_field"){
       if (event.target.files.length > 0) {
         const file = event.target.files[0];
         this.customerForm.patchValue({
@@ -167,12 +167,15 @@ export class CrearClientePage implements OnInit {
         // reader.onload = event => this.photoSelected = reader.result;
         // reader.readAsDataURL(this.photoSelected)
       }
-    }
+    } */
   }
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
+      this.customerForm.patchValue({
+        cliente_logo: file
+      });
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {

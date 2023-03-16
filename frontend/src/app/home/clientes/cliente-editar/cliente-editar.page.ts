@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClienteEditarService } from './cliente-editar.service';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cliente-editar',
@@ -9,7 +11,12 @@ import { ClienteEditarService } from './cliente-editar.service';
 })
 export class ClienteEditarPage implements OnInit {
 
+  STORAGE_URL = environment.storageUrl;
+  client_logo: string | null = null;
+  id_customer: number | null = null;
+
   registeredSuccessfully:boolean = false;
+  
   expandAllClass: boolean = true;
   showDigitV: boolean = false;
   selectedFile: string = '';
@@ -49,16 +56,41 @@ export class ClienteEditarPage implements OnInit {
 
   constructor(
 
-    private ClienteEditarService: ClienteEditarService
+    private clienteEditarService: ClienteEditarService,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    let dataCliente = this.clienteEditarService.getDataCliente();
+    if (!dataCliente) {
+      this.router.navigate(['home/clientes/clientes-list']);
+      return;
+    }
+    //SET ID
+    this.id_customer = dataCliente.id;
+
+    //console.log(dataCliente)
+    if(dataCliente.cliente_logo){
+      let clienteL = dataCliente.cliente_logo.server_hash_name.replace("public", "");
+      this.client_logo =  this.STORAGE_URL + clienteL;
+    }
+    this.customerForm.patchValue(dataCliente)
+    //NULL FOR cliente_logo
+    this.customerForm.patchValue({
+      rut_file: null,
+      camara_commerce_file: null,
+      income_statement_file: null,
+      cliente_logo: null
+    })
+   
   }
 
   onSubmit(){
+    
+  
     this.registeredSuccessfully = false;
 
-    console.log(this.customerForm.value)
+
 
     const formData = new FormData();
 
@@ -78,18 +110,21 @@ export class ClienteEditarPage implements OnInit {
     formData.append('razon_comercial', this.customerForm.get('razon_comercial').value);
 
 
-    formData.append('rut_file', this.customerForm.get('rut_file').value);
-    formData.append('camara_commerce_file', this.customerForm.get('camara_commerce_file').value);
-    formData.append('income_statement_file', this.customerForm.get('income_statement_file').value);
-    formData.append('cliente_logo', this.customerForm.get('cliente_logo').value);
+    formData.append('rut_file', this.customerForm.get('rut_file').value ? this.customerForm.get('rut_file').value : '');
+    formData.append('camara_commerce_file', this.customerForm.get('camara_commerce_file').value ? this.customerForm.get('camara_commerce_file').value : '' );
+    formData.append('income_statement_file', this.customerForm.get('income_statement_file').value ? this.customerForm.get('income_statement_file').value : '');
+    formData.append('cliente_logo', this.customerForm.get('cliente_logo').value ? this.customerForm.get('cliente_logo').value : '');
 
-    this.ClienteEditarService.saveCustomer(formData).subscribe(res => {
+
+
+    this.clienteEditarService.editCustomer(formData, this.id_customer).subscribe((res: any) => {
         //alert('Uploaded Successfully.');
         this.registeredSuccessfully = true;
         setTimeout(() => {
           this.registeredSuccessfully = false;
         }, 3000);
-    }, err => {
+
+    }, (err: any) => {
 
       alert('error al registrar.');
     }
@@ -101,6 +136,9 @@ export class ClienteEditarPage implements OnInit {
     if(event.target.value === "2"){
       this.expandAllClass = false;
       this.showDigitV = true;
+    }else{
+      this.expandAllClass = true;
+      this.showDigitV = false;
     }
   }
 
@@ -141,19 +179,22 @@ export class ClienteEditarPage implements OnInit {
       }
     }
 
-    if(name_field ==  "cliente_logo_field"){
+    /* if(name_field ==  "cliente_logo_field"){
       if (event.target.files.length > 0) {
         const file = event.target.files[0];
         this.customerForm.patchValue({
           cliente_logo: file
         });
       }
-    }
+    } */
   }
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
+      this.customerForm.patchValue({
+        cliente_logo: file
+      });
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {

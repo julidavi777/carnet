@@ -139,8 +139,10 @@ class CustomerController extends ApiController
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, $idCustomer)
     {
+        $customer = Customer::findOrFail($idCustomer);
+
         $data = $request->all();
 
         $validator = Validator::make($data, [
@@ -222,7 +224,6 @@ class CustomerController extends ApiController
             $cliente_logo_file_json_urls = $this->saveFile($file, 'customersFiles');
             
         }
-
   
         $updated = Customer::where('id', $customer->id)->update([    
             'identification_type' => $request->post('identification_type'),
