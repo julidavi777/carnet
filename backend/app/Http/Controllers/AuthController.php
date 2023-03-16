@@ -111,6 +111,7 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'role_id' => 'required|exists:roles,id',
@@ -129,6 +130,7 @@ class AuthController extends Controller
             try{
                 $user = User::create([
                     'name' => $request->name,
+                    'surname' => $request->surname,
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                 ])->assignRole($request->role_id/* Role::where('id', $request->role_id)->first()['name'] */);
