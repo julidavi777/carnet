@@ -1,4 +1,4 @@
-<div wire:poll.60s="getTablaRoundRobin">
+<div wire:poll.300s="getTablaRoundRobin">
     {{-- <div wire:poll.300s> 5 min --}}
     <table>
         <thead>
