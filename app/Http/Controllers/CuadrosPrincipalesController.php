@@ -14,8 +14,8 @@ class CuadrosPrincipalesController extends Controller
 
     protected function getCuadrosPrincipales(ParametrosTablaCuadroRequest $request)
     {
-        $validated = $request->validated();
-        dd($validated);
-        session()->flashInput($request->input());
+        //$validated = $request->validated();
+        //dd($validated);
+        //session()->flashInput($request->input());
     }
 }
