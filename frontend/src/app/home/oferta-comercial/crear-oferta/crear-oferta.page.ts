@@ -10,6 +10,10 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./crear-oferta.page.scss'],
 })
 export class CrearOfertaPage implements OnInit {
+  tipoContratacion = '';
+  tipoServicio = '';
+  sectorProductivo = '';
+
 
     nextSequentialNumber: number = 0;
     isCustomerFound: boolean | null= null;
@@ -61,6 +65,7 @@ export class CrearOfertaPage implements OnInit {
     this.getSequentialNumber();
     this.searchIdentificationActions();
     this.getUsers();
+
   }
 
   onSubmit(){

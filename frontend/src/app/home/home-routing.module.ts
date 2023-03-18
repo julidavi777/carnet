@@ -50,14 +50,16 @@ const routes: Routes = [
           {
             path: 'cotizaciones',
             loadChildren: () => import('./oferta-comercial/cotizaciones/cotizaciones.module').then( m => m.CotizacionesPageModule)
-          }
+          },
+
+
 
         ]
 
       }
     ]
   },
-  
+
 
 ];
 
