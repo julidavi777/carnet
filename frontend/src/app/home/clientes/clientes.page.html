@@ -1,7 +1,7 @@
-<p class="fs-3">Listado de clientes</p>
+<p class="fs-3"><b>Listado de Clientes</b> </p>
 <div class="row justify-content-md-center">
   <div class="col-6 ">
-   
+
     <div class="input-group mb-3 ">
       <input [formControl]="searchInput" type="text" class="form-control" placeholder="Ingresa nombre, apellido o documento de identificación" >
       <button *ngIf="showCancelButton" (click)="clearInputSearch()" type="button" class="btn bg-transparent" style="margin-left: -40px; z-index: 100;">
@@ -41,7 +41,7 @@
       {{row.identification_type | tipoIdentificacion}}
     </ng-template>
   </ngx-datatable-column>
-  
+
   <ngx-datatable-column name="identification" [resizeable]="true" [width]="100">
     <ng-template ngx-datatable-header-template>
       Identificación:
@@ -50,7 +50,7 @@
       {{row.identification}}
     </ng-template>
   </ngx-datatable-column>
-  
+
   <ngx-datatable-column name="name" [resizeable]="true" [width]="100">
     <ng-template ngx-datatable-header-template>
       Nombre:
@@ -59,7 +59,7 @@
       {{row.name}}
     </ng-template>
   </ngx-datatable-column>
-  
+
   <ngx-datatable-column name="surname" [resizeable]="true" [width]="100">
     <ng-template ngx-datatable-header-template>
       Apellido:
@@ -68,7 +68,7 @@
       {{row.surname}}
     </ng-template>
   </ngx-datatable-column>
-  
+
   <ngx-datatable-column  name="razon_social"  [resizeable]="true" [width]="100">
     <ng-template ngx-datatable-header-template>
       Razon social
@@ -77,7 +77,7 @@
       {{row.razon_social}}
     </ng-template>
   </ngx-datatable-column>
-  
+
   <ngx-datatable-column name="razon_comercial" [resizeable]="true" [width]="110">
     <ng-template ngx-datatable-header-template>
       Razon comercial
@@ -86,7 +86,7 @@
       {{row.razon_comercial}}
     </ng-template>
   </ngx-datatable-column>
-  
+
   <ngx-datatable-column name="contact_commer" [resizeable]="true" [width]="120">
     <ng-template ngx-datatable-header-template>
       Asesor comercial:
@@ -95,7 +95,7 @@
       {{row.nombre_contacto_comercial}}
     </ng-template>
   </ngx-datatable-column>
-  
+
   <ngx-datatable-column  name="phone_number"  [resizeable]="true" [width]="120">
     <ng-template ngx-datatable-header-template>
       Numero telefono:
@@ -104,7 +104,7 @@
       {{row.phone_number}}
     </ng-template>
   </ngx-datatable-column>
-  
+
   <ngx-datatable-column name="phone_number"  [resizeable]="true" [width]="120">
     <ng-template ngx-datatable-header-template>
       Correo electronico:
@@ -113,7 +113,7 @@
       {{row.email}}
     </ng-template>
   </ngx-datatable-column>
-  
+
   <ngx-datatable-column  name="address" [resizeable]="true" [width]="100">
     <ng-template ngx-datatable-header-template>
       Dirección:
@@ -122,8 +122,8 @@
       {{row.address}}
     </ng-template>
   </ngx-datatable-column>
-  
-  
+
+
   <ngx-datatable-column  name="acciones" [resizeable]="false" [width]="170">
     <ng-template ngx-datatable-header-template>
       Acciones:
@@ -139,20 +139,20 @@
         <ion-button (click)="watchDocument(row.income_statement_file)" style="color: #28a745" data-tooltip="Declaración renta" data-tooltip-conf="left">
           <ion-icon name="cash"></ion-icon>
         </ion-button>
-  
+
         <ion-button  (click)="editCustomer(row)"  style="color: #ffc107" data-tooltip="Editar" data-tooltip-conf="right">
           <ion-icon name="pencil"></ion-icon>
         </ion-button>
-  
-  
+
+
         <ion-button  style="color: #dc3545" data-tooltip="Eliminar" data-tooltip-conf="up">
           <ion-icon name="trash"></ion-icon>
         </ion-button>
-  
+
       </ion-buttons>
     </ng-template>
   </ngx-datatable-column>
-  
+
   <!-- <ngx-datatable-column name="rut_file"  [resizeable]="true" [width]="100">
     <ng-template ngx-datatable-header-template>
       RUT
@@ -163,7 +163,7 @@
       </ion-button>
     </ng-template>
   </ngx-datatable-column>
-  
+
   <ngx-datatable-column name="camara_commerce_file" [resizeable]="true" [width]="100">
     <ng-template ngx-datatable-header-template>
       Cámara de comercio
@@ -174,21 +174,21 @@
       </ion-button>
     </ng-template>
   </ngx-datatable-column>
-  
+
   <ngx-datatable-column name="income_statement_file" [resizeable]="true" [width]="100">
     <ng-template ngx-datatable-header-template>
       Declaración de renta
     </ng-template>
     <ng-template let-row="row" ngx-datatable-cell-template>
-  
+
       <ion-button (click)="watchDocument(row.income_statement_file)">
         <ion-icon  slot="icon-only" name="cash"></ion-icon>
       </ion-button>
-  
+
     </ng-template>
   </ngx-datatable-column>
    -->
-  
+
   </ngx-datatable>
 
 </div>

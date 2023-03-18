@@ -1,6 +1,6 @@
 
 <div class="container">
-  <p class="h2 my-3"><strong>Crear oferta comercial</strong>.</p>
+  <p class="h2 my-3"><b>Crear oferta comercial</b>.</p>
   <form  [formGroup]="offersForm" (ngSubmit)="onSubmit()" class="formu">
 
     <div class="row">
@@ -52,34 +52,51 @@
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Tipo de contratación *</label>
-        <select class="form-select"  formControlName="contract_type"aria-label="Default select example">
+        <select  [(ngModel)]="tipoContratacion" class="form-select"  formControlName="contract_type"aria-label="Default select example">
           <option selected>Seleccione</option>
           <option value="1">Precio global fijo</option>
           <option value="2">Precio unitario fijo</option>
           <option value="3">Administración delegada</option>
+          <option value="otro">Otro</option>
         </select>
+        <br>
+        <input class="form-control" *ngIf="tipoContratacion === 'otro'" type="text" placeholder="Ingrese el tipo de contratación">
+
       </div>
 
+
+
+
+
+
       <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation09">Tipo de servicio *</label>
-        <select class="form-select"  formControlName="service_type"aria-label="Default select example">
+        <label  class="form-label" for="validation09">Tipo de servicio *</label>
+        <select  [(ngModel)]="tipoServicio" class="form-select"  formControlName="service_type"aria-label="Default select example">
           <option selected>Seleccione</option>
           <option value="1">Construcción</option>
           <option value="2">Mantenimiento</option>
           <option value="3">Consultoria</option>
+          <option value="otro">Otro</option>
         </select>
+        <br>
+        <input class="form-control" *ngIf="tipoServicio === 'otro'" type="text" placeholder="Ingrese el tipo de servicio">
+
       </div>
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Sector productivo *</label>
-        <select class="form-select"  formControlName="sector_productivo"aria-label="Default select example">
+        <select [(ngModel)]="sectorProductivo" class="form-select"  formControlName="sector_productivo"aria-label="Default select example">
           <option selected>Seleccione</option>
           <option value="1">Industrial</option>
           <option value="2">Logistico</option>
           <option value="3">Comercial</option>
           <option value="3">Salud/Hospitalario</option>
           <option value="3">Institucional</option>
+          <option value="otro">Otro</option>
         </select>
+        <br>
+        <input class="form-control" *ngIf="sectorProductivo === 'otro'" type="text" placeholder="Ingrese el sector productivo">
+
       </div>
 
       <div class="mb-3 form-group col-md-6">

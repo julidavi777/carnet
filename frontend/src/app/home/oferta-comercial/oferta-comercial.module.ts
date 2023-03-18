@@ -8,13 +8,16 @@ import { OfertaComercialPageRoutingModule } from './oferta-comercial-routing.mod
 
 import { OfertaComercialPage } from './oferta-comercial.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import {ButtonModule} from 'primeng/button';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     OfertaComercialPageRoutingModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ButtonModule
   ],
   declarations: [OfertaComercialPage]
 })
