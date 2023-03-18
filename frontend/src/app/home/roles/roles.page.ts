@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RolesService } from './roles.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class RolesPage implements OnInit {
   loadingIndicator = false;
 
   constructor(
-    private rolesService: RolesService
+    private rolesService: RolesService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -25,5 +27,11 @@ export class RolesPage implements OnInit {
       this.loadingIndicator = false;
 
     })
+  }
+
+  editRole(row: any){
+    this.rolesService.roleData = row;
+    
+    this.router.navigate(['home/roles/form-rol']);
   }
 }
