@@ -26,6 +26,6 @@ export class CrearOfertaService {
   }
 
   getUsers(){
-    return this.http.get(`${this.API_URL}users`)
+    return this.http.get(`${this.API_URL}users?specific_role=responsable`)
   }
 }

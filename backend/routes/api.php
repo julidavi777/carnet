@@ -27,6 +27,7 @@ Route::get('verifyAccount',  [AuthController::class, 'verifyAccount']);
 
 //USERS
 Route::get('users',  [UserController::class, 'index']);
+Route::put('users/{user_id}',  [UserController::class, 'update']);
 
 //ROLES
 Route::get('roles', [RoleController::class, 'index']);

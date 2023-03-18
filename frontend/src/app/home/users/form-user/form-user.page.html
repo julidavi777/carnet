@@ -15,22 +15,24 @@
     
       <div class="mb-3 col-md-12">
         <label for="validation04" class="form-label">Correo electrónico *</label>
-        <input type="email" class="form-control" id="validation04" placeholder="ejemplo@gmail.com" required formControlName="email">
+        <input type="email" class="form-control" id="validation04" placeholder="ejemplo@gmail.com" formControlName="email">
       </div>
-    
-      <div class="mb-3 col-md-12">
-        <label for="password" class="form-label">Contraseña:</label>
-        <div class="input-group">
-          <input type="{{ showPassword ? 'text' : 'password' }}" id="password" name="password" class="form-control" formControlName="password">
-          <button class="btn btn-outline-secondary" type="button" id="togglePasswordBtn"><i class="bi bi-eye-fill"></i></button>
+      <div *ngIf="!isEditingData">
+
+        <div class="mb-3 col-md-12">
+          <label for="password" class="form-label">Contraseña:</label>
+          <div class="input-group">
+            <input type="{{ showPassword ? 'text' : 'password' }}" id="password" name="password" class="form-control" formControlName="password">
+            <button class="btn btn-outline-secondary" (click)="togglePassword()" type="button" id="togglePasswordBtn"><i class="bi bi-eye-fill"></i></button>
+          </div>
         </div>
-      </div>
-    
-      <div class="mb-3 col-md-12">
-        <label for="confirmPassword" class="form-label">Confirmar contraseña:</label>
-        <div class="input-group">
-          <input type="{{ showPassword ? 'text' : 'password' }}" id="confirmPassword" name="confirmPassword" class="form-control" formControlName="password_confirmation">
-          <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPasswordBtn"><i class="bi bi-eye-fill"></i></button>
+      
+        <div class="mb-3 col-md-12">
+          <label for="confirmPassword" class="form-label">Confirmar contraseña:</label>
+          <div class="input-group">
+            <input type="{{ showPassword ? 'text' : 'password' }}" id="confirmPassword" name="confirmPassword" class="form-control" formControlName="password_confirmation">
+            <button class="btn btn-outline-secondary" (click)="togglePassword()" type="button" id="toggleConfirmPasswordBtn"><i class="bi bi-eye-fill"></i></button>
+          </div>
         </div>
       </div>
 
@@ -42,9 +44,10 @@
       </div>
     
     </div>
-    <p-button label="Guardar" type="submit" [disabled]="userForm.invalid"></p-button>
+    <p-button [label]="isEditingData ? 'Editar' :'Guardar'" type="submit" [disabled]="userForm.invalid" [loading]="isSavingData"></p-button>
   </form>
 
-<p-toast position="bottom-center" key="bc"></p-toast>
+<p-toast position="bottom-center" key="successMessage"></p-toast>
+<p-toast position="bottom-center" key="errorMessage"></p-toast>
 </div>
 

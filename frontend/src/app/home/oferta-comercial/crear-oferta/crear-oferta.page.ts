@@ -15,7 +15,7 @@ export class CrearOfertaPage implements OnInit {
     isCustomerFound: boolean | null= null;
     registeredSuccessfully: boolean = false;
 
-    usersList: any = [];
+    usersListResponsable: any = [];
 
     offersForm: any = new FormGroup({
     sequential_number: new FormControl('', [Validators.required]),
@@ -131,7 +131,7 @@ export class CrearOfertaPage implements OnInit {
 
   getUsers(){
     this.crearOfertaService.getUsers().subscribe((res: any) => {
-      this.usersList = res.data;
+      this.usersListResponsable = res.data;
     });
   }
 

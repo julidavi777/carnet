@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from './users.service';
 
@@ -10,7 +11,9 @@ export class UsersPage implements OnInit {
   rows: any = []
   loadingIndicator = false;
 
-  constructor(private usersService: UsersService) { }
+  constructor(
+    private usersService: UsersService,
+    private router: Router) { }
 
 
 
@@ -25,6 +28,17 @@ export class UsersPage implements OnInit {
       this.loadingIndicator = false;
 
     })
+  }
+
+  editUser(row: any){
+    this.router.navigate(['home/users/form-user']);
+
+    //ADD ROLE ID
+    if(row['roles'].length > 0){
+      row['role_id'] = row['roles'][0]['id'];
+    }
+    console.log(row);
+    this.usersService.dataUser = row;
   }
 
 
