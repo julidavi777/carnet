@@ -1,3 +1,6 @@
+import { OfertaEditarService } from './oferta-editar/oferta-editar.service';
+import { Router } from '@angular/router';
+
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { OfertaComercialService } from './oferta-comercial.service';
@@ -13,8 +16,13 @@ export class OfertaComercialPage implements OnInit {
 
   readonly STORAGE_URL = environment.storageUrl;
 
+
+
   constructor(
-    private ofertaComercialService: OfertaComercialService
+    private ofertaComercialService: OfertaComercialService,
+    private router: Router,
+    private OfertaEditarService:OfertaEditarService
+
 
   ) { }
 
@@ -38,10 +46,12 @@ export class OfertaComercialPage implements OnInit {
     window.open(this.STORAGE_URL+result, "_blank");
   }
 
-  editOfert(data: any,){
+  editOffer(data: any,){
     console.log(data)
-    // this.clienteEditarService.setDataCliente(data);
-    // this.router.navigate(['home/clientes/cliente-editar']);
+    this.OfertaEditarService.setDataOffer(data);
+    this.router.navigate(['home/oferta-comercial/oferta-editar']);
+
+
   }
 
 

@@ -15,6 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./home/oferta-comercial/admin-oportunidad/admin-oportunidad.module').then( m => m.AdminOportunidadPageModule)
   },
 
+
   /* {
     path: 'ver-cliente',
     loadChildren: () => import('./home/clientes/ver-cliente/ver-cliente.module').then( m => m.VerClientePageModule)

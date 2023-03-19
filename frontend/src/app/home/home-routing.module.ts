@@ -52,6 +52,11 @@ const routes: Routes = [
             loadChildren: () => import('./oferta-comercial/cotizaciones/cotizaciones.module').then( m => m.CotizacionesPageModule)
           },
 
+          {
+            path: 'oferta-editar',
+            loadChildren: () => import('./oferta-comercial/oferta-editar/oferta-editar.module').then( m => m.OfertaEditarPageModule)
+          }
+
 
 
         ]

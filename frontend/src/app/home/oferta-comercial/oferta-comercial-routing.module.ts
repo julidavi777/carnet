@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'admin-oportunidad',
     loadChildren: () => import('./admin-oportunidad/admin-oportunidad.module').then( m => m.AdminOportunidadPageModule)
+  },
+  {
+    path: 'oferta-editar',
+    loadChildren: () => import('./oferta-editar/oferta-editar.module').then( m => m.OfertaEditarPageModule)
   }
 ];
 
