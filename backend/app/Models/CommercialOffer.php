@@ -11,6 +11,7 @@ class CommercialOffer extends Model
 
     protected $fillable = [
         'sequential_number',
+        'sequential_number_format',
         'contract_type',
         'service_type',
         'sector_productivo',
@@ -20,7 +21,7 @@ class CommercialOffer extends Model
         'location',
         'release_date',
         'delivery_date',
-        'visit_date',
+        //'visit_date',
         'observations',
         'anexos',
         'customer_id',
@@ -45,7 +46,7 @@ class CommercialOffer extends Model
         
         'release_date' => 'datetime:Y-m-d H:m:s',
         'delivery_date' => 'datetime:Y-m-d H:m:s',
-        'visit_date' => 'datetime:Y-m-d H:m:s',
+        //'visit_date' => 'datetime:Y-m-d H:m:s',
         'created_at' => 'datetime:Y-m-d H:m:s'
 
     ];
@@ -64,6 +65,11 @@ class CommercialOffer extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'responsable_id');
+    }
+
+    public function comercial_offer_visit()
+    {
+        return $this->hasOne(CommercialOffersVisit::class);
     }
 
     /**

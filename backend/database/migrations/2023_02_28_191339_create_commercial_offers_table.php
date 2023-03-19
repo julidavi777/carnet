@@ -26,7 +26,7 @@ class CreateCommercialOffersTable extends Migration
             $table->string('location');
             $table->date('release_date');
             $table->date('delivery_date');
-            $table->date('visit_date');
+            //$table->date('visit_date');
             $table->text('observations')->nullable();
 
             $table->json('anexos')->nullable();

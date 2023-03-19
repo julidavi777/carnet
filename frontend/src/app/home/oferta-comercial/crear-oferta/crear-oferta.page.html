@@ -7,7 +7,7 @@
 
       <div class="mb-3 form-group col-md-2">
         <label class="form-label" for="validation01"># Consecutivo</label>
-        <input type="number"  [readonly]="true" formControlName="sequential_number" class="form-control is-valid"   id="validationServer01" placeholder="#" >
+        <input type="text"  [readonly]="true" formControlName="sequential_number" class="form-control is-valid"   id="validationServer01" placeholder="#" >
       </div>
 
       <!-- <div class="mb-3 form-group col-md-2">
@@ -53,7 +53,7 @@
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Tipo de contratación *</label>
         <select  [(ngModel)]="tipoContratacion" class="form-select"  formControlName="contract_type"aria-label="Default select example">
-          <option selected>Seleccione</option>
+          
           <option value="1">Precio global fijo</option>
           <option value="2">Precio unitario fijo</option>
           <option value="3">Administración delegada</option>
@@ -72,7 +72,7 @@
       <div class="mb-3 form-group col-md-6">
         <label  class="form-label" for="validation09">Tipo de servicio *</label>
         <select  [(ngModel)]="tipoServicio" class="form-select"  formControlName="service_type"aria-label="Default select example">
-          <option selected>Seleccione</option>
+          
           <option value="1">Construcción</option>
           <option value="2">Mantenimiento</option>
           <option value="3">Consultoria</option>
@@ -86,7 +86,7 @@
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Sector productivo *</label>
         <select [(ngModel)]="sectorProductivo" class="form-select"  formControlName="sector_productivo"aria-label="Default select example">
-          <option selected>Seleccione</option>
+          
           <option value="1">Industrial</option>
           <option value="2">Logistico</option>
           <option value="3">Comercial</option>
@@ -134,7 +134,7 @@
 
 <!-- Modal -->
    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" formControlName="visit_date"  for="validation09" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-primary"   for="validation09" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Adicionar Visita
 </button>
 <br>
@@ -144,13 +144,13 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Crear visita</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Datos visita</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3 form-group col-md-8">
           <label class="form-label" for="validation01">Lugar visita</label>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" formControlName="visit_place">
         </div>
 
         <div class="mb-3 form-group col-md-6">
@@ -160,18 +160,18 @@
 
         <div class="mb-3 form-group col-md-8">
           <label class="form-label" for="validation01">Persona que atiende</label>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" formControlName="person_attending">
         </div>
 
         <div class="mb-3 form-group col-md-8">
           <label class="form-label" for="validation01">Número de contacto</label>
-          <input type="number" class="form-control">
+          <input type="number" class="form-control" formControlName="phone_number_person_attending">
         </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar Visita</button>
+        <!-- <button type="button" class="btn btn-primary">Guardar Visita</button> -->
       </div>
     </div>
   </div>

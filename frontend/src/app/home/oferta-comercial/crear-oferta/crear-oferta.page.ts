@@ -22,7 +22,8 @@ export class CrearOfertaPage implements OnInit {
     usersListResponsable: any = [];
 
     offersForm: any = new FormGroup({
-    sequential_number: new FormControl('', [Validators.required]),
+    sequential_number: new FormControl(''),
+    sequential_number_format: new FormControl('', [Validators.required]),
     customer_identification: new FormControl('',),
     name: new FormControl('', [Validators.required]),
     surname: new FormControl('',[Validators.required]),
@@ -38,18 +39,23 @@ export class CrearOfertaPage implements OnInit {
     location: new FormControl('',),
     release_date: new FormControl('',),
     delivery_date: new FormControl('',),
-    visit_date: new FormControl('',),
     observations: new FormControl('',),
-
-
-
+    
+    
+    
     anexos_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
     anexos: new FormControl('',),
-
+    
+    //MODAL VISIT
+    visit_date: new FormControl('',),
+    visit_place: new FormControl('',),
+    person_attending: new FormControl('',),
+    phone_number_person_attending: new FormControl('',),
 
   });
 
   get sequential_number () { return this.offersForm.get('sequential_number') }
+  get sequential_number_format () { return this.offersForm.get('sequential_number_format') }
   get customer_identification () { return this.offersForm.get('customer_identification') }
 
   get name () { return this.offersForm.get('name') }
@@ -74,6 +80,7 @@ export class CrearOfertaPage implements OnInit {
     const formData = new FormData();
 
     formData.append('sequential_number', this.offersForm.get('sequential_number').value);
+    formData.append('sequential_number_format', this.offersForm.get('sequential_number_format').value);
     formData.append('responsable_id', this.offersForm.get('responsable_id').value);
     formData.append('customer_identification', this.offersForm.get('customer_identification').value);
     formData.append('assignment_date', this.offersForm.get('assignment_date').value);
@@ -87,15 +94,21 @@ export class CrearOfertaPage implements OnInit {
     formData.append('location', this.offersForm.get('location').value);
     formData.append('release_date', this.offersForm.get('release_date').value);
     formData.append('delivery_date', this.offersForm.get('delivery_date').value);
-    formData.append('visit_date', this.offersForm.get('visit_date').value);
     formData.append('observations', this.offersForm.get('observations').value);
     formData.append('anexos', this.offersForm.get('anexos').value);
-
+    
     formData.append('file', this.offersForm.get('anexos').value);
+
+    //MODAL DATA
+    formData.append('visit_date', this.offersForm.get('visit_date').value);
+    formData.append('visit_place', this.offersForm.get('visit_place').value);
+    formData.append('person_attending', this.offersForm.get('person_attending').value);
+    formData.append('phone_number_person_attending', this.offersForm.get('phone_number_person_attending').value);
 
     this.crearOfertaService.saveOffer(formData).subscribe((res: any) => {
         console.log(res);
         this.registeredSuccessfully = true;
+        this.offersForm.reset();
     },err => {
       alert("Error al registrar")
     });
