@@ -62,7 +62,7 @@ class CommercialOffer extends Model
     /**
      * Get the post that owns the comment.
      */
-    public function user()
+    public function responsableRel()
     {
         return $this->belongsTo(User::class, 'responsable_id');
     }

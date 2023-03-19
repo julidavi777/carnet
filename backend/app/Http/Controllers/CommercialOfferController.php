@@ -19,14 +19,17 @@ class CommercialOfferController extends ApiController
      */
     public function index()
     {
-        $customers = CommercialOffer::get();
+        $commercialOffers = CommercialOffer::get();
 
-        $customers = $customers->map(function($e){
+        $commercialOffers = $commercialOffers->map(function($e){
             $e->assignment_date = Carbon::parse($e->created_at)->format('Y-m-d H:m:s') ;
+            $e->customer;
+            $e->responsableRel;
+            $e->user;
             return $e;
         });
 
-        return $this->showAll($customers);
+        return $this->showAll($commercialOffers);
     }
 
     /**
