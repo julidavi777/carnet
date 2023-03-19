@@ -30,7 +30,11 @@
                 Acciones:
               </ng-template>
               <ng-template let-row="row" ngx-datatable-cell-template>
-                <p-inputSwitch (onChange)="handleChange($event, row)"></p-inputSwitch>
+                <!-- <p-inputSwitch (onChange)="handleChange($event, row)"></p-inputSwitch> -->
+
+                <div class="form-check form-switch fs-4">
+                  <input [checked]="row.is_enabled" class="form-check-input" (change)="handleChange($event, row)" type="checkbox" id="flexSwitchCheckDefault">
+                </div>
               </ng-template>
             </ngx-datatable-column>
           </ngx-datatable>
@@ -38,9 +42,10 @@
       </div>
 
     </div>
-    <p-button label="Guardar" type="submit" class="mt-2" [disabled]="rolForm.invalid"></p-button>
+    <p-button [label]="isEditingData ? 'Editar' :'Guardar'" type="submit" class="mt-2" [disabled]="rolForm.invalid" [loading]="isLoadingButtonSave"></p-button>
   </form>
 
 
-  <p-toast position="bottom-center" key="bc"></p-toast>
+  <p-toast position="bottom-center" key="successMessage"></p-toast>
+  <p-toast position="bottom-center" key="errorMessage"></p-toast>
 </div>

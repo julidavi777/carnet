@@ -32,6 +32,7 @@ Route::put('users/{user_id}',  [UserController::class, 'update']);
 //ROLES
 Route::get('roles', [RoleController::class, 'index']);
 Route::post('roles', [RoleController::class, 'store']);
+Route::put('roles/{role_id}', [RoleController::class, 'update']);
 //PERMISSIONS
 Route::get('permissions', [PermissionController::class, 'index']);
 

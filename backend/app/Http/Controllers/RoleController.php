@@ -56,4 +56,43 @@ class RoleController extends ApiController
     });
     }
     
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\User  $idRole
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $idRole)
+    {
+        $role = Role::findOrFail($idRole);
+
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'name' => 'required|string',
+            'permissions' => 'required|array',
+            'permissions.*' => 'string|exists:permissions,name',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        return DB::transaction(function() use ($data, $role) {
+            try{
+                $role->name = $data['name'];
+
+                $role->syncPermissions($data['permissions']);
+
+                $role->update();
+                return response()->json(['status' => true, 'message' => 'Role updated'], 200);
+                    
+            } catch (\Exception $ex) {
+                DB::rollback();
+                // throw $ex;
+                return response()->json(['status' => false, 'message' => 'something went wrong registro role'.$ex], 400);
+            }
+        });
+    }
 }
