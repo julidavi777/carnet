@@ -38,5 +38,11 @@ export class OfertaComercialPage implements OnInit {
     window.open(this.STORAGE_URL+result, "_blank");
   }
 
+  editOfert(data: any,){
+    console.log(data)
+    // this.clienteEditarService.setDataCliente(data);
+    // this.router.navigate(['home/clientes/cliente-editar']);
+  }
+
 
 }

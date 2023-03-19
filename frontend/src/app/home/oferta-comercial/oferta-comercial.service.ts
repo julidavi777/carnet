@@ -19,4 +19,10 @@ export class OfertaComercialService {
     return this.http.get(`${this.API_URL}commercialOffers`);
   }
 
+  editOfert(data: any,){
+    console.log(data)
+    // this.clienteEditarService.setDataCliente(data);
+    // this.router.navigate(['home/clientes/cliente-editar']);
+  }
+
 }

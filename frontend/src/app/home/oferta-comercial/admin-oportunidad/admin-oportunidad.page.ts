@@ -4,12 +4,17 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-admin-oportunidad',
   templateUrl: './admin-oportunidad.page.html',
   styleUrls: ['./admin-oportunidad.page.scss'],
+
 })
 export class AdminOportunidadPage implements OnInit {
-
+  checked: boolean | undefined;
   determinacionRequisitos = '';
-
-  documentos: any[] = [];
+  determinacionRequisitos1 = '';
+ documentos: any[] = [];
+ archivos = '';
+ val = '';
+ uploadedFiles: { name: string, size: number, type: string }[] = [];
+  selectedFile!: string | Blob;
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -19,11 +24,28 @@ export class AdminOportunidadPage implements OnInit {
     });
   }
 
+
   constructor() { }
 
   ngOnInit() {
 
 
   }
+
+  handleChange(e: { checked: any; }) {
+    var isChecked = e.checked;
+}
+
+onUpload() {
+  const formData = new FormData();
+  formData.append('file', this.selectedFile);
+
+
+  // this.uploadedFiles.push({
+  //   name: this.selectedFile.name,
+  //   size: this.selectedFile.size,
+  //   type: this.selectedFile.type
+  // });
+}
 
 }

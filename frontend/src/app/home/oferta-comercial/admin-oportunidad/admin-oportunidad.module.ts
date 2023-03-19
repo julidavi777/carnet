@@ -7,13 +7,21 @@ import { IonicModule } from '@ionic/angular';
 import { AdminOportunidadPageRoutingModule } from './admin-oportunidad-routing.module';
 
 import { AdminOportunidadPage } from './admin-oportunidad.page';
+import {TableModule} from 'primeng/table';
+import {ToggleButtonModule} from 'primeng/togglebutton';
+import {ButtonModule} from 'primeng/button';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AdminOportunidadPageRoutingModule
+    AdminOportunidadPageRoutingModule,
+    TableModule,
+    ToggleButtonModule,
+    ButtonModule,
+    SelectButtonModule
   ],
   declarations: [AdminOportunidadPage]
 })
