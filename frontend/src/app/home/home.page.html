@@ -1,81 +1,20 @@
-<!-- <ion-header class="bar-balanced"> -->
-  <nav class="navbar navbar-expand-lg " >
-    <div class="container ">
-      <!-- navbar logo -->
-        <a class="navbar-brand" href="#">
-          <img src="../../assets/icon/Logo_Cbk_4.png" width="50" height="50"/>
-        </a>
-      <!-- navbar logo -->
-     <!--  <a class="navbar-brand">Proyectos</a> -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false" ><ion-icon name="people-sharp"></ion-icon>
-            Clientes
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="clientes/crear-cliente" routerLinkActive="is-active"> <ion-icon name="person-add-sharp"></ion-icon>Crear Clientes</a></li>
-              <li><a class="dropdown-item" routerLink="clientes/clientes-list" routerLinkActive="is-active"><ion-icon name="person-sharp"></ion-icon>Clientes </a></li>
+<p-menubar [model]="items" [ngStyle]="{backgroundColor:''}">
+  <ng-template pTemplate="start">
+      <img src="../../assets/icon/Logo_Cbk_3.png" height="40" class="mr-2">
+  </ng-template>
+  <ng-template pTemplate="end" >
+    <button (click)="logout()" pButton icon="pi pi-power-off" pTooltip="Cerrar sesión" tooltipPosition="bottom" ></button>
+  </ng-template>
+</p-menubar>
 
+<router-outlet></router-outlet>
 
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><ion-icon name="pricetags-sharp"></ion-icon>
-              Oportunidad Comercial
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="oferta-comercial/crear-oferta" routerLinkActive="is-active"><ion-icon name="bookmark-sharp"></ion-icon> Nueva Oferta comercial </a></li>
-              <li><a class="dropdown-item" routerLink="oferta-comercial/ofertas" routerLinkActive="is-active"><ion-icon name="bookmarks-sharp"></ion-icon>Ofertas</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" routerLink="oferta-comercial/cotizaciones" routerLinkActive="is-active"><ion-icon name="logo-usd"></ion-icon>Cotizaciones</a></li>
-              <li><a class="dropdown-item" routerLink="oferta-comercial/crear-cotizacion" routerLinkActive="is-active"><ion-icon name="logo-usd"></ion-icon>Nueva cotización</a></li>
+<div class="logo-cubikar-background" >
+  <img class="logo " src="../../assets/icon/Logo_Cubikar_2.png" >
+</div>
 
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false"><ion-icon name="stats-chart-sharp"></ion-icon>
-            Indicadores
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="home/clientes"> <ion-icon name="lock-open-sharp"></ion-icon>Oportunidades abiertas</a></li>
-              <li><a class="dropdown-item" routerLink="home/crear-cliente"><ion-icon name="lock-closed-sharp"></ion-icon>Oportunidades cerradas </a></li>
-
-
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false"><ion-icon name="documents-sharp"></ion-icon>
-            Informes
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="home/clientes">Informe general</a></li>
-              <li><a class="dropdown-item" routerLink="home/crear-cliente">Informe por proyecto </a></li>
-
-
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-        </ul>
-        <!-- <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form> -->
-      </div>
-    </div>
-  </nav>
-
-  
-  <div class="container">
-    <router-outlet ></router-outlet>
-  </div>
 
 <!-- </ion-header> -->
+
+
+

@@ -6,7 +6,9 @@ import { HomePage } from './home.page';
 
 
 import { HomePageRoutingModule } from './home-routing.module';
-
+import {MenubarModule} from 'primeng/menubar';
+import {ButtonModule} from 'primeng/button';
+import {TooltipModule} from 'primeng/tooltip';
 
 @NgModule({
   imports: [
@@ -14,8 +16,9 @@ import { HomePageRoutingModule } from './home-routing.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-
-
+    MenubarModule,
+    ButtonModule,
+    TooltipModule
   ],
   declarations: [HomePage]
 })

@@ -1,220 +1,229 @@
-<ion-title>Listado de ofertas</ion-title>
+<div class="justify-content-md-center">
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-2">
+      <p class="fs-3 my-3"><b>Listado de ofertas</b></p>
+      
+
+    </div>
+    <div class="col-9">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <ngx-datatable
+      class="material"
+      [rows]="rows"
+      [headerHeight]="60"
+      [footerHeight]="60"
+      rowHeight="auto"
+      [limit]="10"
+      [scrollbarH]="true"
+      [loadingIndicator]="loadingIndicator"
+
+      >
+      <ngx-datatable-column [resizeable]="true" [width]="200">
+        <ng-template ngx-datatable-header-template>
+          Consecutivo:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.sequential_number}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="200">
+        <ng-template ngx-datatable-header-template>
+          Identificacion cliente:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row?.customer?.identification}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Nombres:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row?.customer?.name}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Apellidos:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row?.customer?.surname}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Razón comercial:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row?.customer?.razon_comercial}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Responsable:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row?.responsable_rel?.name +' '+ row?.responsable_rel?.surname}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Tipo de contratación:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.contract_type}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Tipo de servicio:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.service_type}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Tipo de productivo:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.sector_productivo}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Objeto:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.object_description}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Número:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.numero}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Cuantia:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.cuantia}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Ubicación:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.location}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Fecha de publicación:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.release_date}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Fecha de entrega:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.delivery_date}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Fecha de visita:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.visit_date}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Observaciones:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.observations}}
+        </ng-template>
+      </ngx-datatable-column>
 
 
-<ngx-datatable
-class="material"
-[rows]="rows"
-[headerHeight]="50"
-[footerHeight]="50"
-rowHeight="auto"
-[limit]="10"
-[scrollbarH]="true"
-[loadingIndicator]="loadingIndicator"
->
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Consecutivo:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.sequential_number}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Identificacion cliente:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Nombres:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Apellidos:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Razón comercial:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.razon_comercial}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Responsable:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.responsable}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Tipo de contratación:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.contract_type}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Tipo de servicio:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.service_type}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Tipo de productivo:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.sector_productivo}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Objeto:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.object_description}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Número:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.numero}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Cuantia:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.cuantia}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Ubicación:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.location}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Fecha de publicación:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.release_date}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Fecha de entrega:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.delivery_date}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Fecha de visita:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.visit_date}}
-  </ng-template>
-</ngx-datatable-column>
-
-<ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Observaciones:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    {{row.observations}}
-  </ng-template>
-</ngx-datatable-column>
-
-
-<!-- <ngx-datatable-column [resizeable]="true" [width]="100">
-  <ng-template ngx-datatable-header-template>
-    Anexos:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    <ion-button (click)="watchDocument(row.anexos)">
-      <ion-icon  slot="icon-only" name="document-sharp"></ion-icon>
-    </ion-button>
-  </ng-template>
-</ngx-datatable-column> -->
-
-
-
-</ngx-datatable>
-
-<ngx-datatable-column  name="acciones" [resizeable]="false" [width]="170">
-  <ng-template ngx-datatable-header-template>
-    Acciones:
-  </ng-template>
-  <ng-template let-row="row" ngx-datatable-cell-template>
-    <ion-buttons class="grid-container" style="margin-left: 10px;" >
-      <ion-button (click)="watchDocument(row.anexos_file)" style="color: #007bff" data-tooltip="ANEXOS" data-tooltip-conf="right">
-        <ion-icon name="document-sharp"></ion-icon>
-      </ion-button>
-
-
-      <ion-button (click)="watchDocument(row.anexos_file)" style="color: #ffc107" data-tooltip="Editar" data-tooltip-conf="right">
-        <ion-icon name="pencil"></ion-icon>
-      </ion-button>
-      <ion-button (click)="watchDocument(row.anexos_file)" style="color: #dc3545" data-tooltip="Eliminar" data-tooltip-conf="up">
-        <ion-icon name="trash"></ion-icon>
-      </ion-button>
-
-    </ion-buttons>
-  </ng-template>
-</ngx-datatable-column>
+      <!-- <ngx-datatable-column [resizeable]="true" [width]="100">
+        <ng-template ngx-datatable-header-template>
+          Anexos:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <ion-button (click)="watchDocument(row.anexos)">
+            <ion-icon  slot="icon-only" name="document-sharp"></ion-icon>
+          </ion-button>
+        </ng-template>
+      </ngx-datatable-column> -->
 
 
 
-<!-- <div class="form-group col-md-6">
-  <label for="validation09">Estado actual del proceso</label>
-  <select class="form-select" formControlName="process_status" aria-label="Default select example">
-    <option selected>Seleccione</option>
-    <option value="1">Descartada</option>
-    <option value="2">En revisión</option>
-    <option value="3">MP- En espera de sorteo</option>
-    <option value="3">No favorecidos sorteo</option>
-    <option value="3">No presentada</option>
-    <option value="3">Presentada- Adjudicada a otro</option>
-    <option value="3">Presentada- En evaluacion entidad/option>
-  </select>
-</div> -->
+      <ngx-datatable-column  name="acciones" [resizeable]="false" [width]="170">
+        <ng-template ngx-datatable-header-template>
+          Acciones:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <ion-buttons class="grid-container" style="margin-left: 10px;" >
+            <ion-button (click)="watchDocument(row.anexos_file)" style="color: #007bff" data-tooltip="ANEXOS" data-tooltip-conf="right">
+              <ion-icon name="document-sharp"></ion-icon>
+            </ion-button>
+
+             <ion-button (click)="editOffer(row)" style="color: #ffc107" data-tooltip="Editar" data-tooltip-conf="right">
+              <ion-icon name="pencil"></ion-icon>
+            </ion-button>
+            <ion-button (click)="watchDocument(row.anexos_file)" style="color: #dc3545" data-tooltip="Eliminar" data-tooltip-conf="right">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+
+          <ion-buttons class="grid-container" style="margin-left: 10px;" >
+          <ion-button  routerLink="./admin-oportunidad" style="color: #59dc35" data-tooltip="Gestionar" data-tooltip-conf="up" >
+            <ion-icon name="document-attach-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+
+        </ng-template>
+
+      </ngx-datatable-column>
+      </ngx-datatable>
+
+    </div>
+    <div class="col-1"></div>
+  </div>
+    </div>
+
 

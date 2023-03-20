@@ -139,9 +139,124 @@ class CustomerController extends ApiController
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, $idCustomer)
     {
-        //
+        $customer = Customer::findOrFail($idCustomer);
+
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'identification_type' => 'nullable|integer',
+            'identification' => 'nullable|integer|unique:customers,identification,'.$customer->id,
+            'digit_v' => 'nullable|integer',
+            'name' => 'nullable|string|max:50',
+            'surname' => 'nullable|string|max:50',
+            'phone_number' => 'nullable|integer',
+            'address' => 'nullable|string|max:50',
+            'email' => 'nullable|string',
+            'nombre_contacto_comercial' => 'nullable|string',
+            'commercial_contact_1' => 'nullable|integer',
+            'commercial_contact_2' => 'nullable|integer',
+            'commercial_contact_3' => 'nullable|integer',
+            'razon_social' => 'nullable|string|max:50',
+            'razon_comercial' => 'nullable|string|max:50',
+            'rut_file' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
+            'camara_commerce_file' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
+            'income_statement_file' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
+            'cliente_logo' => 'nullable|file|mimes:jpg,png',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        //SAVING FILES
+
+        $rut_file_json_urls = $customer->rut_file;
+        if ($request->hasFile('rut_file')) {
+            //DELETE FILE
+            if(!is_null($customer->rut_file)){
+                unlink(storage_path('app/'.$customer->rut_file['server_hash_name']));
+            }
+
+            //SAVE NEW FILE
+
+            $file = $request->file('rut_file');
+            $rut_file_json_urls = $this->saveFile($file, 'customersFiles');
+            
+        }
+
+        $camara_commerce_file_json_urls = $customer->camara_commerce_file;
+        if ($request->hasFile('camara_commerce_file')) {
+            //DELETE FILE
+            if(!is_null($customer->camara_commerce_file)){
+                unlink(storage_path('app/'.$customer->camara_commerce_file['server_hash_name']));
+            }
+
+            //SAVE NEW FILE
+            $file = $request->file('camara_commerce_file');
+            $camara_commerce_file_json_urls = $this->saveFile($file, 'customersFiles');
+            
+        }
+
+        $income_statement_file_json_urls = $customer->income_statement_file;
+        if ($request->hasFile('income_statement_file')) {
+            //DELETE FILE
+            if(!is_null($customer->income_statement_file)){
+                unlink(storage_path('app/'.$customer->income_statement_file['server_hash_name']));
+            }
+
+            //SAVE NEW FILE
+            $file = $request->file('income_statement_file');
+            $income_statement_file_json_urls = $this->saveFile($file, 'customersFiles');
+            
+        }
+
+        $cliente_logo_file_json_urls = $customer->cliente_logo;
+        if ($request->hasFile('cliente_logo')) {
+            //DELETE FILE
+            if(!is_null($customer->cliente_logo)){
+                unlink(storage_path('app/'.$customer->cliente_logo['server_hash_name']));
+            }
+
+            //SAVE NEW FILE
+            $file = $request->file('cliente_logo');
+            $cliente_logo_file_json_urls = $this->saveFile($file, 'customersFiles');
+            
+        }
+  
+        $updated = Customer::where('id', $customer->id)->update([    
+            'identification_type' => $request->post('identification_type'),
+            'identification' => $request->post('identification'),
+            'digit_v' => $request->post('digit_v'),
+            'name' => $request->post('name'),
+            'surname' => $request->post('surname'),
+            'phone_number' => $request->post('phone_number'),
+            'address' => $request->post('address'),
+            'email' => $request->post('email'),
+            'nombre_contacto_comercial' => $request->post('nombre_contacto_comercial'),
+            'commercial_contact_1' => $request->post('commercial_contact_1'),
+            'commercial_contact_2' => $request->post('commercial_contact_2'),
+            'commercial_contact_3' => $request->post('commercial_contact_3'),
+            'razon_social' => $request->post('razon_social'),
+            'razon_comercial' => $request->post('razon_comercial'),
+            'rut_file' => $rut_file_json_urls,
+            'camara_commerce_file' => $camara_commerce_file_json_urls,
+            'income_statement_file' => $income_statement_file_json_urls,
+            'cliente_logo' => $cliente_logo_file_json_urls,
+        ]);
+
+        if ($updated) {
+            return response()->json([
+                "status" => true,
+                "message" => "edited sucessfully"
+            ], 200);
+        } else {
+            return response()->json([
+                "status" => false,
+                "message" => "cannot edit"
+            ], 400);
+        }
     }
 
     /**

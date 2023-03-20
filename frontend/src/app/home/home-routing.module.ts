@@ -8,6 +8,14 @@ const routes: Routes = [
     component: HomePage,
     children: [
       {
+        path: 'roles',
+        loadChildren: () => import('./roles/roles.module').then( m => m.RolesPageModule)
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule)
+      },
+      {
         path: 'clientes',
         children: [
           {
@@ -18,6 +26,10 @@ const routes: Routes = [
             path: 'crear-cliente',
             loadChildren: () => import('./clientes/crear-cliente/crear-cliente.module').then( m => m.CrearClientePageModule)
           },
+          {
+            path: 'cliente-editar',
+            loadChildren: () => import('./clientes/cliente-editar/cliente-editar.module').then( m => m.ClienteEditarPageModule)
+          }
         ]
       },
       {
@@ -38,13 +50,21 @@ const routes: Routes = [
           {
             path: 'cotizaciones',
             loadChildren: () => import('./oferta-comercial/cotizaciones/cotizaciones.module').then( m => m.CotizacionesPageModule)
+          },
+
+          {
+            path: 'oferta-editar',
+            loadChildren: () => import('./oferta-comercial/oferta-editar/oferta-editar.module').then( m => m.OfertaEditarPageModule)
           }
+
+
 
         ]
 
       }
     ]
-  }
+  },
+
 
 ];
 

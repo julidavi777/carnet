@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -19,6 +20,15 @@ const routes: Routes = [
   {
     path: 'crear-cotizacion',
     loadChildren: () => import('./crear-cotizacion/crear-cotizacion.module').then( m => m.CrearCotizacionPageModule)
+  },
+
+  {
+    path: 'admin-oportunidad',
+    loadChildren: () => import('./admin-oportunidad/admin-oportunidad.module').then( m => m.AdminOportunidadPageModule)
+  },
+  {
+    path: 'oferta-editar',
+    loadChildren: () => import('./oferta-editar/oferta-editar.module').then( m => m.OfertaEditarPageModule)
   }
 ];
 

@@ -9,17 +9,102 @@ ion-menu::part(container) {
 }*/
  nav{
  background-color: #33c3cc;
- color: white;
+ color: rgb(17, 16, 16);
 
 }
 
 .is-active{
   color: #33c3cc;
 }
-/* nav a{
-  color: white;
+
+
+.mi-boton {
+  background-color: #1c3bad; /* Color de fondo */
+  border: none; /* Borde sin estilo */
+  color: white; /* Color de texto */
+  padding: 15px 32px; /* Espacio interior */
+  text-align: center; /* Alineación de texto */
+  text-decoration: none; /* Sin subrayado */
+  display: inline-block; /* Mostrar como bloque */
+  font-size: 16px; /* Tamaño de fuente */
+  margin: 4px 2px; /* Espacio exterior */
+  cursor: pointer; /* Tipo de cursor */
+  border-radius: 8px; /* Borde redondeado */
+  width: 200px; /* Ancho del botón */
+
 }
 
-nav li .dropdown {
-  background-color: rgb(255, 18, 18);
-} */ 
+.mi-input {
+  background-color: #F5F5F5; /* Color de fondo */
+  border: 2px solid #D3D3D3; /* Borde sólido */
+  color: #555; /* Color de texto */
+  padding: 8px 16px; /* Espacio interior */
+  font-size: 16px; /* Tamaño de fuente */
+  width: 200px; /* Ancho del campo de entrada */
+  border-radius: 8px; /* Borde redondeado */
+}
+
+.mi-input:focus {
+  outline: none; /* Eliminar el contorno al enfocar */
+  border-color: #6D9EED; /* Cambiar el color del borde al enfocar */
+}
+
+.mi-formulario {
+  background-color: #f2f2f2; /* Color de fondo */
+  border: 1px solid #ccc; /* Borde */
+  color: black; /* Color de texto */
+  padding: 40px; /* Espacio interior */
+  font-size: 16px; /* Tamaño de fuente */
+  width: 400px; /* Ancho del formulario */
+  margin: 0 auto; /* Centrado horizontal */
+  display: block; /* Mostrar como bloque */
+  border-radius: 8px; /* Borde redondeado */
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.1); /* Sombra */
+}
+
+.mi-formulario label {
+  display: block; /* Mostrar etiquetas en línea */
+  margin-bottom: 10px; /* Espacio inferior */
+}
+
+.mi-formulario input[type="text"],
+.mi-formulario input[type="email"],
+.mi-formulario textarea {
+  width: 100%; /* Ancho completo */
+  padding: 10px; /* Espacio interior */
+  margin-bottom: 20px; /* Espacio inferior */
+  border-radius: 4px; /* Borde redondeado */
+  border: none; /* Borde sin estilo */
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.1); /* Sombra */
+}
+
+.mi-formulario input[type="submit"] {
+  background-color: #4CAF50; /* Color de fondo */
+  border: none; /* Borde sin estilo */
+  color: white; /* Color de texto */
+  padding: 10px 20px; /* Espacio interior */
+  font-size: 16px; /* Tamaño de fuente */
+  border-radius: 4px; /* Borde redondeado */
+  cursor: pointer; /* Tipo de cursor */
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.1); /* Sombra */
+}
+
+
+
+.logo{
+  width: 40rem;
+  height: 25rem;
+
+}
+.logo-cubikar-background {
+  position: absolute;
+  width: 100%;
+  height: -0rem;
+  margin-top: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+

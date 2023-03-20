@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\CommercialOffer;
+use App\Models\CommercialOffersVisit;
 use App\Models\Customer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class CommercialOfferController extends ApiController
@@ -17,14 +19,17 @@ class CommercialOfferController extends ApiController
      */
     public function index()
     {
-        $customers = CommercialOffer::get();
+        $commercialOffers = CommercialOffer::get();
 
-        $customers = $customers->map(function($e){
+        $commercialOffers = $commercialOffers->map(function($e){
             $e->assignment_date = Carbon::parse($e->created_at)->format('Y-m-d H:m:s') ;
+            $e->customer;
+            $e->responsableRel;
+            $e->user;
             return $e;
         });
 
-        return $this->showAll($customers);
+        return $this->showAll($commercialOffers);
     }
 
     /**
@@ -39,7 +44,7 @@ class CommercialOfferController extends ApiController
 
         $validator = Validator::make($data, [
             'customer_identification' => 'required|integer|exists:customers,identification',
-            'sequential_number' => 'required|integer|unique:commercial_offers',
+            'sequential_number' => 'required|string|unique:commercial_offers',
             'contract_type' => 'required|string|max:50',
             'service_type' => 'required|string|max:50',
             'sector_productivo' => 'required|string|max:50',
@@ -49,58 +54,86 @@ class CommercialOfferController extends ApiController
             'location' => 'required|string|max:50',
             'release_date' => 'required|date',
             'delivery_date' => 'required|date',
-            'visit_date' => 'required|date',
+            //'visit_date' => 'required|date',
             'observations' => 'nullable|string',
             'anexos' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
-            'responsable_id' => 'required|integer|exists:users,id'
+            'responsable_id' => 'required|integer|exists:users,id',
+
+            'visit_date' => 'nullable|date',
+            'visit_place' => 'nullable|string',
+            'person_attending' => 'nullable|string',
+            'phone_number_person_attending' => 'nullable|integer'
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
+        return DB::transaction(function() use ($request) {
+            try{
+                //SAVING FILES
 
-        //SAVING FILES
+                $anexos_json_urls = null;
+                if ($request->hasFile('anexos')) {
+                    $file = $request->file('anexos');
+                    $anexos_json_urls = $this->saveFile($file, 'commercialOffersFiles');
+                    
+                }
 
-        $anexos_json_urls = null;
-        if ($request->hasFile('anexos')) {
-            $file = $request->file('anexos');
-            $anexos_json_urls = $this->saveFile($file, 'commercialOffersFiles');
-            
-        }
+                //get Customer
+                $customer = Customer::where('identification', $request->post('customer_identification'))->first();
 
-        //get Customer
-        $customer = Customer::where('identification', $request->post('customer_identification'))->first();
+                $createdCommercialOffer = CommercialOffer::create([
+                    'sequential_number'  => strval($request->post('sequential_number')) ,
+                    'contract_type'  => $request->post('contract_type'),
+                    'service_type'  => $request->post('service_type'),
+                    'sector_productivo'  => $request->post('sector_productivo'),
+                    'object_description'  => $request->post('object_description'),
+                    'sequential_number'  => $request->post('sequential_number'),
+                    'numero'  => $request->post('numero'),
+                    'cuantia'  => $request->post('cuantia'),
+                    'location'  => $request->post('location'),
+                    'release_date'  => $request->post('release_date'),
+                    'delivery_date'  => $request->post('delivery_date'),
+                    'observations'  => $request->post('observations'),
+                    'anexos'  => $anexos_json_urls,
+                    'customer_id'  => $customer->id,
+                    'responsable_id'  => $request->post('responsable_id'),
+                    
+                
+                ]);
 
-        $created = CommercialOffer::create([
-            'sequential_number'  => $request->post('sequential_number'),
-            'contract_type'  => $request->post('contract_type'),
-            'service_type'  => $request->post('service_type'),
-            'sector_productivo'  => $request->post('sector_productivo'),
-            'object_description'  => $request->post('object_description'),
-            'sequential_number'  => $request->post('sequential_number'),
-            'numero'  => $request->post('numero'),
-            'cuantia'  => $request->post('cuantia'),
-            'location'  => $request->post('location'),
-            'release_date'  => $request->post('release_date'),
-            'delivery_date'  => $request->post('delivery_date'),
-            'visit_date'  => $request->post('visit_date'),
-            'observations'  => $request->post('observations'),
-            'anexos'  => $anexos_json_urls,
-            'customer_id'  => $customer->id,
-            'responsable_id'  => $request->post('responsable_id')
-        ]);
+                if(
+                    !is_null($request->post('visit_date')) || 
+                    !is_null($request->post('visit_place')) ||
+                    !is_null($request->post('person_attending')) ||
+                    !is_null($request->post('phone_number_person_attending'))
+                ){
+                    CommercialOffersVisit::create([
+                        'visit_date'  => $request->post('visit_date'),
+                        'visit_place' => $request->post('visit_place'),
+                        'person_attending' => $request->post('person_attending'),
+                        'phone_number_person_attending' => $request->post('phone_number_person_attending'),
+                        'commercial_offer_id' => $createdCommercialOffer->id,
+                    ]);
+                }
 
-        if($created){
-            return response()->json([
-                "status" => true,
-                "message" => "created sucessfully"
-            ],201);
-        }else{
-            return response()->json([
-                "status" => false,
-                "message" => "cannot create"
-            ],400);
-        }
+                if($createdCommercialOffer){
+                    return response()->json([
+                        "status" => true,
+                        "message" => "created sucessfully"
+                    ],201);
+                }else{
+                    return response()->json([
+                        "status" => false,
+                        "message" => "cannot create"
+                    ],400);
+                }
+
+        } catch (\Exception $ex) {
+        DB::rollback();
+        // throw $ex;
+        return response()->json(['status' => false, 'message' => 'something went wrong registro dog o usuario'.$ex], 400);
+        }});
     }
 
     /**
@@ -123,7 +156,87 @@ class CommercialOfferController extends ApiController
      */
     public function update(Request $request, CommercialOffer $commercialOffer)
     {
-        //
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'customer_identification' => 'nullable|integer|exists:customers,identification',
+            'contract_type' => 'nullable|string|max:50',
+            'service_type' => 'nullable|string|max:50',
+            'sector_productivo' => 'nullable|string|max:50',
+            'object_description' => 'nullable|string',
+            'numero' => 'nullable|integer',
+            'cuantia' => 'nullable|integer',
+            'location' => 'nullable|string|max:50',
+            'release_date' => 'nullable|date',
+            'delivery_date' => 'nullable|date',
+            //'visit_date' => 'nullable|date',
+            'observations' => 'nullable|string',
+            'anexos' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
+            'responsable_id' => 'nullable|integer|exists:users,id'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        /* return DB::transaction(function() use ($request) {
+        try{
+        } catch (\Exception $ex) {
+            DB::rollback();
+            // throw $ex;
+            return response()->json(['status' => false, 'message' => 'something went wrong registro dog o usuario'.$ex], 400);
+        }}); */
+            //get Customer
+            $customer = Customer::where('identification', $request->post('customer_identification'))->first();
+
+            //SAVING FILES
+
+            $anexos_json_urls = $commercialOffer->anexos;
+            if ($request->hasFile('anexos')) {
+
+                //DELETE FILE
+                if(!is_null($commercialOffer->anexos)){
+                    unlink(storage_path('app/'.$commercialOffer->anexos['server_hash_name']));
+                }
+
+
+                $file = $request->file('anexos');
+                $anexos_json_urls = $this->saveFile($file, 'commercialOffersFiles');
+                
+            }
+
+    
+            $updated = CommercialOffer::where('id', $commercialOffer->id)->update([    
+                'contract_type'  => $request->post('contract_type'),
+                'service_type'  => $request->post('service_type'),
+                'sector_productivo'  => $request->post('sector_productivo'),
+                'object_description'  => $request->post('object_description'),
+                'sequential_number'  => $request->post('sequential_number'),
+                'numero'  => $request->post('numero'),
+                'cuantia'  => $request->post('cuantia'),
+                'location'  => $request->post('location'),
+                'release_date'  => $request->post('release_date'),
+                'delivery_date'  => $request->post('delivery_date'),
+                //'visit_date'  => $request->post('visit_date'),
+                'observations'  => $request->post('observations'),
+                'anexos'  => $anexos_json_urls,
+                'customer_id'  => $customer->id,
+                'responsable_id'  => $request->post('responsable_id')
+            ]);
+
+            if ($updated) {
+                return response()->json([
+                    "status" => true,
+                    "message" => "edited sucessfully"
+                ], 200);
+            } else {
+                return response()->json([
+                    "status" => false,
+                    "message" => "cannot edit"
+                ], 400);
+            }
+
+        
     }
 
     /**
@@ -138,10 +251,26 @@ class CommercialOfferController extends ApiController
     }
 
     public function getNextValue(){
-        $customersCount = CommercialOffer::count();
+
+        $actualYear =  Carbon::now()->format('Y');
+
+        $customers = CommercialOffer::orderByDesc('id')->get();
+         
+        $newSequentialNumber = "";
+        if(count($customers) > 0){
+            $newSequentialNumber = explode('-', $customers[0]['sequential_number'])[1];
+            $newSequentialNumber = intval($newSequentialNumber+1);
+
+        }else{
+            $newSequentialNumber = 1;
+        }
         
+        //FORMAT SPECIAL
+        $newSequentialNumber = $actualYear.'-'.str_pad($newSequentialNumber, 3, "0", STR_PAD_LEFT);
+
+        //return $customersCount;
         return response()->json([
-            "data" => $customersCount + 1
+            "data" => $newSequentialNumber 
         ], 200); 
     }
 }
