@@ -80,7 +80,7 @@ export class CrearClientePage implements OnInit {
     formData.append('surname', this.customerForm.get('surname').value);
     formData.append('phone_number', this.customerForm.get('phone_number').value);
     formData.append('address', this.customerForm.get('address').value);
-    formData.append('email', this.customerForm.get('address').value);
+    formData.append('email', this.customerForm.get('email').value);
     formData.append('nombre_contacto_comercial', this.customerForm.get('nombre_contacto_comercial').value);
     formData.append('commercial_contact_1', this.customerForm.get('commercial_contact_1').value);
     formData.append('commercial_contact_2', this.customerForm.get('commercial_contact_2').value);
