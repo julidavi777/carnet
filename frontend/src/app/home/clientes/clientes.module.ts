@@ -10,6 +10,8 @@ import { ClientesPage } from './clientes.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { TipoIdentificacionPipe } from './pipes/tipo-identificacion.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import {ToastModule} from 'primeng/toast';
+
 
 @NgModule({
   imports: [
@@ -18,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     IonicModule,
     ClientesPageRoutingModule,
     NgxDatatableModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastModule
   ],
   declarations: [ClientesPage, TipoIdentificacionPipe ]
 })

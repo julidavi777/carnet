@@ -57,10 +57,10 @@
           <option value="1">Precio global fijo</option>
           <option value="2">Precio unitario fijo</option>
           <option value="3">Administración delegada</option>
-          <option value="otro">Otro</option>
+          <option value="4">Otro</option>
         </select>
         <br>
-        <input class="form-control" *ngIf="tipoContratacion === 'otro'" type="text" placeholder="Ingrese el tipo de contratación">
+        <input class="form-control" *ngIf="tipoContratacion === '4'" type="text" formControlName="contract_type_other" placeholder="Ingrese el tipo de contratación">
 
       </div>
 
@@ -76,26 +76,26 @@
           <option value="1">Construcción</option>
           <option value="2">Mantenimiento</option>
           <option value="3">Consultoria</option>
-          <option value="otro">Otro</option>
+          <option value="4">Otro</option>
         </select>
         <br>
-        <input class="form-control" *ngIf="tipoServicio === 'otro'" type="text" placeholder="Ingrese el tipo de servicio">
+        <input class="form-control" *ngIf="tipoServicio === '4'" type="text" formControlName="service_type_other" placeholder="Ingrese el tipo de servicio">
 
       </div>
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Sector productivo *</label>
-        <select [(ngModel)]="sectorProductivo" class="form-select"  formControlName="sector_productivo"aria-label="Default select example">
+        <select [(ngModel)]="sectorProductivo" class="form-select"  formControlName="sector_productivo" aria-label="Default select example">
           
           <option value="1">Industrial</option>
           <option value="2">Logistico</option>
           <option value="3">Comercial</option>
-          <option value="3">Salud/Hospitalario</option>
-          <option value="3">Institucional</option>
-          <option value="otro">Otro</option>
+          <option value="4">Salud/Hospitalario</option>
+          <option value="5">Institucional</option>
+          <option value="6">Otro</option>
         </select>
         <br>
-        <input class="form-control" *ngIf="sectorProductivo === 'otro'" type="text" placeholder="Ingrese el sector productivo">
+        <input class="form-control" *ngIf="sectorProductivo === '6'" formControlName="sector_productivo_other" type="text" placeholder="Ingrese el sector productivo">
 
       </div>
 

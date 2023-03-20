@@ -31,8 +31,11 @@ export class CrearOfertaPage implements OnInit {
     razon_comercial: new FormControl('', [Validators.required]),
     responsable_id: new FormControl('', [Validators.required]),
     contract_type: new FormControl(''),
+    contract_type_other: new FormControl(''),
     service_type: new FormControl('', [Validators.required]),
+    service_type_other: new FormControl(''),
     sector_productivo: new FormControl('', [Validators.required]),
+    sector_productivo_other: new FormControl(''),
     object_description: new FormControl('',[Validators.required]),
     numero: new FormControl('',[Validators.required]),
     cuantia: new FormControl('',),
@@ -86,8 +89,11 @@ export class CrearOfertaPage implements OnInit {
     formData.append('assignment_date', this.offersForm.get('assignment_date').value);
     formData.append('razon_comercial', this.offersForm.get('razon_comercial').value);
     formData.append('contract_type', this.offersForm.get('contract_type').value);
+    formData.append('contract_type_other', this.offersForm.get('contract_type_other').value);
     formData.append('service_type', this.offersForm.get('service_type').value);
+    formData.append('service_type_other', this.offersForm.get('service_type_other').value);
     formData.append('sector_productivo', this.offersForm.get('sector_productivo').value);
+    formData.append('sector_productivo_other', this.offersForm.get('sector_productivo_other').value);
     formData.append('object_description', this.offersForm.get('object_description').value);
     formData.append('numero', this.offersForm.get('numero').value);
     formData.append('cuantia', this.offersForm.get('cuantia').value);

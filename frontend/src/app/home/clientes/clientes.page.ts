@@ -6,11 +6,13 @@ import { environment } from 'src/environments/environment';
 import { ClientesService } from './clientes.service';
 import { Router } from '@angular/router';
 import { ClienteEditarService } from './cliente-editar/cliente-editar.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.page.html',
   styleUrls: ['./clientes.page.scss'],
+  providers: [MessageService]
 })
 export class ClientesPage implements OnInit {
   rows: any = []
@@ -25,7 +27,8 @@ export class ClientesPage implements OnInit {
   constructor(
     private clientesService: ClientesService,
     private clienteEditarService: ClienteEditarService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit() {
@@ -43,12 +46,20 @@ export class ClientesPage implements OnInit {
   }
 
   watchDocument(value:any){
+
+    
     if(value == null){
+      console.log(value)
+      this.warningMessage();
       return;
     }
-
-    let url = JSON.parse(value)
-
+    
+    var url = null;
+    try {
+      url = JSON.parse(value);
+    } catch (error) {
+      url = value;
+    }
 
     let result = url.server_hash_name.replace("public/", "");
     console.log(result)
@@ -82,6 +93,10 @@ export class ClientesPage implements OnInit {
     console.log(data)
     this.clienteEditarService.setDataCliente(data);
     this.router.navigate(['home/clientes/cliente-editar']);
+  }
+
+  warningMessage() {
+    this.messageService.add({key: 'warningMessage', severity:'warn', summary: 'Mensaje', detail: 'El archivo no esta registrado'});
   }
 
 }

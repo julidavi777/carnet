@@ -26,8 +26,8 @@ class Customers extends Migration
             $table->string('email');
             $table->string('nombre_contacto_comercial');
             $table->string('commercial_contact_1');
-            $table->string('commercial_contact_2');
-            $table->string('commercial_contact_3');
+            $table->string('commercial_contact_2')->nullable();
+            $table->string('commercial_contact_3')->nullable();
             $table->string('razon_social');
             $table->string('razon_comercial');
             
