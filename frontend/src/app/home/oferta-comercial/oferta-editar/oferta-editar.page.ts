@@ -1,3 +1,4 @@
+import { OfertaEditarService } from './oferta-editar.service';
 import { CrearOfertaService } from './../crear-oferta/crear-oferta.service';
 
 
@@ -61,14 +62,16 @@ export class OfertaEditarPage implements OnInit {
 
 
   constructor(
-    private crearOfertaService:CrearOfertaService
-
+    private crearOfertaService:CrearOfertaService,
+    private ofertaEditarService: OfertaEditarService
   ) { }
 
   ngOnInit() {
     this.getSequentialNumber();
     this.searchIdentificationActions();
     this.getUsers();
+
+    console.log(this.ofertaEditarService.getDataOffer())    
 
   }
 

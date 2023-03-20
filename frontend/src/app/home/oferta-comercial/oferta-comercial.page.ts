@@ -47,7 +47,7 @@ export class OfertaComercialPage implements OnInit {
   }
 
   editOffer(data: any,){
-    console.log(data)
+
     this.OfertaEditarService.setDataOffer(data);
     this.router.navigate(['home/oferta-comercial/oferta-editar']);
 
