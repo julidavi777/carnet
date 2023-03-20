@@ -18,8 +18,11 @@ class CreateCommercialOffersTable extends Migration
 
             $table->string('sequential_number')->unique();
             $table->string('contract_type');
+            $table->string('contract_type_other')->nullable();
             $table->string('service_type');
+            $table->string('service_type_other')->nullable();
             $table->string('sector_productivo');
+            $table->string('sector_productivo_other')->nullable();
             $table->text('object_description');
             $table->string('numero')->nullable();
             $table->bigInteger('cuantia')->nullable();
