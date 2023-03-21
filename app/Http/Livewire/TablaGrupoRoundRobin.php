@@ -7,7 +7,9 @@ use App\Services\RoundRobinService;
 
 class TablaGrupoRoundRobin extends Component
 {
-    public $datos, $grupo, $total_jugadores;
+    public $datos; 
+    public $grupo; 
+    public $total_jugadores;
     public $datos_grupo;
 
     public function mount($datos, $grupo)

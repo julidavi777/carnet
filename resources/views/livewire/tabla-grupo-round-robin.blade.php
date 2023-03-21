@@ -22,9 +22,11 @@
         <tbody>
             @foreach ($datos_grupo as $dato_grupo)
                 <tr>
-                    @foreach ($dato_grupo as $item)
-                        <td>{{ $item }}</td>
-                    @endforeach
+                    @for ($j = 0; $j <= count($dato_grupo) - 1; $j++)
+
+                        <td class="">{{ $dato_grupo[$j] }}</td>
+
+                    @endfor
                 </tr>
             @endforeach
         </tbody>
