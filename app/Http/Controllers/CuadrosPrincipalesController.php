@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ParametrosTablaCuadroRequest;
+use Illuminate\Support\Facades\DB;
 
 class CuadrosPrincipalesController extends Controller
 {
@@ -14,8 +15,10 @@ class CuadrosPrincipalesController extends Controller
 
     protected function getCuadrosPrincipales(ParametrosTablaCuadroRequest $request)
     {
-        //$validated = $request->validated();
-        //dd($validated);
-        //session()->flashInput($request->input());
+        $validated = $request->validated();
+
+        $query = DB::select("SELECT * FROM public.fnc_consultar_cuadro_torneo(11, 1, 'T', 'I', 'A')");
+        dd($query);
+        session()->flashInput($request->input());
     }
 }
