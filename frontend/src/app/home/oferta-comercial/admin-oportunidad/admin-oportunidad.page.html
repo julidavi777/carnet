@@ -1,80 +1,80 @@
 
-<div class="formu">
-  <p class="h2 my-3"><b>Gestion de oportunidades</b>.</p>
-
-
-
-  <div class="row">
+<form  [formGroup]="formGroup" (ngSubmit)="onSubmit()" >
+  <div class="formu">
+    <p class="h2 my-3"><b>Gestión de oportunidades</b>.</p>
+  
+  
+  
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="validation09">Determinación de requisitos</label>
+        <select class="form-select" formControlName="determRequisitos" >
+          <option value="1">Si</option>
+          <option value="2">No</option>
+         </select>
+      </div>
+      <br>
+  
+  
+  
     <div class="form-group col-md-6">
-      <label for="validation09">Determinación de requisitos</label>
-      <select class="form-select" >
-        <option selected>Seleccione</option>
+        <label for="validation09">Estado actual del proceso</label>
+        <select class="form-select"  formControlName="estadoActualProceso" >
+          <option selected>Seleccione</option>
+          <option value="1">Descartada</option>
+          <option value="2">En revisión</option>
+          <option value="3">MP- En espera de sorteo</option>
+          <option value="4">No favorecidos sorteo</option>
+          <option value="5">No presentada</option>
+          <option value="6">Presentada- Adjudicada a otro</option>
+          <option value="7">Presentada- En evaluación entidad</option>
+        </select>
+      </div>
+  
+    </div>
+  
+    <br>
+  
+     <div class="mb-3 form-group col-md-6" *ngIf="isEnabledVerificacionRequisitos">
+      <label class="form-label" for="validation01">Verificación de Requisitos</label>
+      <select  formControlName="verificacionRequisitos" class="form-select" >
         <option value="1">Si</option>
         <option value="2">No</option>
-       </select>
-    </div>
-    <br>
-
-
-
-  <div class="form-group col-md-6">
-      <label for="validation09">Estado actual del proceso</label>
-      <select class="form-select" >
-        <option selected>Seleccione</option>
-        <option value="1">Descartada</option>
-        <option value="2">En revisión</option>
-        <option value="3">MP- En espera de sorteo</option>
-        <option value="3">No favorecidos sorteo</option>
-        <option value="3">No presentada</option>
-        <option value="3">Presentada- Adjudicada a otro</option>
-        <option value="3">Presentada- En evaluacion entidad</option>
       </select>
+      <br>
+      <input  class="form-control" *ngIf="showSelectFileVerificacion" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" >
+      <br>
+      <p-button *ngIf="determinacionRequisitos === 'si'" label="Guardar" ></p-button>
     </div>
-
+  
+  
+  
+    <div class="form-group col-md-6" (change)="onFileSelected($event)">
+  
+  
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tamaño</th>
+            <th>Tipo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let file of uploadedFiles">
+            <td>archivo</td>
+            <td>archivo</td>
+            <td>archivo</td>
+            <td>{{ file.name }}</td>
+            <td>{{ file.size }}</td>
+            <td>{{ file.type }}</td>
+          </tr>
+        </tbody>
+      </table>
+  
   </div>
-
-  <br>
-
-   <div class="mb-3 form-group col-md-6">
-    <label class="form-label" for="validation01">Verificación de Requisitos</label>
-    <select  [(ngModel)]="determinacionRequisitos" class="form-select" >
-      <option selected>Seleccione</option>
-      <option value="si">Si</option>
-      <option value="no">No</option>
-    </select>
-    <br>
-    <input  class="form-control" *ngIf="determinacionRequisitos === 'si'" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" >
-    <br>
-    <p-button *ngIf="determinacionRequisitos === 'si'" label="Guardar" ></p-button>
+  
   </div>
-
-
-
-  <div class="form-group col-md-6" (change)="onFileSelected($event)">
-
-
-    <table>
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Tamaño</th>
-          <th>Tipo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let file of uploadedFiles">
-          <td>archivo</td>
-          <td>archivo</td>
-          <td>archivo</td>
-          <td>{{ file.name }}</td>
-          <td>{{ file.size }}</td>
-          <td>{{ file.type }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-</div>
-
-</div>
+</form>
 
 

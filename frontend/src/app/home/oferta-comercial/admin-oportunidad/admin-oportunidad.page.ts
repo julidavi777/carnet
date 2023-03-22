@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-oportunidad',
@@ -7,6 +8,16 @@ import { Component, OnInit } from '@angular/core';
 
 })
 export class AdminOportunidadPage implements OnInit {
+
+  formGroup: any = new FormGroup({
+    determRequisitos: new FormControl(''),
+    estadoActualProceso: new FormControl(''),
+    verificacionRequisitos: new FormControl(''),
+  });
+
+  isEnabledVerificacionRequisitos: boolean = true;
+  showSelectFileVerificacion: boolean = false;
+
   checked: boolean | undefined;
   determinacionRequisitos = '';
   determinacionRequisitos1 = '';
@@ -28,8 +39,30 @@ export class AdminOportunidadPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.valueChangesSelects();
 
+  }
 
+  valueChangesSelects(){
+    this.formGroup.get('determRequisitos').valueChanges.subscribe((value) => {
+      const NOT = "2";
+      if(value == NOT){
+        this.isEnabledVerificacionRequisitos = false;
+      }
+      else{
+        this.isEnabledVerificacionRequisitos = true;
+      }
+    });
+
+    this.formGroup.get('verificacionRequisitos').valueChanges.subscribe((value) => {
+      const YES = "1";
+      if(value == YES){
+        this.showSelectFileVerificacion = true;
+      }
+      else{
+        this.showSelectFileVerificacion = false;
+      }
+    });
   }
 
   handleChange(e: { checked: any; }) {
@@ -47,5 +80,10 @@ onUpload() {
   //   type: this.selectedFile.type
   // });
 }
+
+  onSubmit(){
+    console.log("valores")
+    console.log(this.formGroup.value)
+  }
 
 }
