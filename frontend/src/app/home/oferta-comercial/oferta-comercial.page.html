@@ -202,7 +202,7 @@
               <ion-icon name="document-sharp"></ion-icon>
             </ion-button>
 
-             <ion-button (click)="editOffer(row)" style="color: #ffc107" data-tooltip="Editar" data-tooltip-conf="right">
+             <ion-button *ngxPermissionsOnly="['admin.commercialOffers.update']" (click)="editOffer(row)" style="color: #ffc107" data-tooltip="Editar" data-tooltip-conf="right">
               <ion-icon name="pencil"></ion-icon>
             </ion-button>
             <ion-button (click)="watchDocument(row.anexos_file)" style="color: #dc3545" data-tooltip="Eliminar" data-tooltip-conf="right">

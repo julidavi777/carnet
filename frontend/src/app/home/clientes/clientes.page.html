@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-1"></div>
   <div class="col-3">
-    <p class="fs-3 my-3">Listado de Clientes</p>
+    <p class="fs-3 my-3" >Listado de Clientes</p>
   </div>
   <div class="col-8"></div>
 </div>
@@ -139,17 +139,17 @@
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
           <ion-buttons class="grid-container" style="margin-left: 10px;" >
-            <ion-button (click)="watchDocument(row.rut_file)" style="color: #007bff" data-tooltip="RUT" data-tooltip-conf="right">
+            <ion-button *ngxPermissionsOnly="['admin.customers.watchDocuments']"  (click)="watchDocument(row.rut_file)" style="color: #007bff" data-tooltip="RUT" data-tooltip-conf="right">
               <ion-icon name="document-sharp"></ion-icon>
             </ion-button>
-            <ion-button (click)="watchDocument(row.camara_commerce_file)" style="color: #dc3545" data-tooltip="Camara comercio" data-tooltip-conf="bottom">
+            <ion-button *ngxPermissionsOnly="['admin.customers.watchDocuments']" (click)="watchDocument(row.camara_commerce_file)" style="color: #dc3545" data-tooltip="Camara comercio" data-tooltip-conf="bottom">
               <ion-icon name="document-attach"></ion-icon>
             </ion-button>
-            <ion-button (click)="watchDocument(row.income_statement_file)" style="color: #28a745" data-tooltip="Declaración renta" data-tooltip-conf="left">
+            <ion-button *ngxPermissionsOnly="['admin.customers.watchDocuments']" (click)="watchDocument(row.income_statement_file)" style="color: #28a745" data-tooltip="Declaración renta" data-tooltip-conf="left">
               <ion-icon name="cash"></ion-icon>
             </ion-button>
     
-            <ion-button  (click)="editCustomer(row)"  style="color: #ffc107" data-tooltip="Editar" data-tooltip-conf="right">
+            <ion-button  *ngxPermissionsOnly="['admin.customers.update']" (click)="editCustomer(row)"  style="color: #ffc107" data-tooltip="Editar" data-tooltip-conf="right">
               <ion-icon name="pencil"></ion-icon>
             </ion-button>
     

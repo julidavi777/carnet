@@ -11,7 +11,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { TipoIdentificacionPipe } from './pipes/tipo-identificacion.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import {ToastModule} from 'primeng/toast';
-
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -21,7 +21,8 @@ import {ToastModule} from 'primeng/toast';
     ClientesPageRoutingModule,
     NgxDatatableModule,
     ReactiveFormsModule,
-    ToastModule
+    ToastModule,
+    NgxPermissionsModule.forChild()
   ],
   declarations: [ClientesPage, TipoIdentificacionPipe ]
 })

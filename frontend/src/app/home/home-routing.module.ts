@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminAccessGuard } from '../guards/admin-access.guard';
 import { HomePage } from './home.page';
 
 const routes: Routes = [
@@ -9,11 +10,13 @@ const routes: Routes = [
     children: [
       {
         path: 'roles',
-        loadChildren: () => import('./roles/roles.module').then( m => m.RolesPageModule)
+        loadChildren: () => import('./roles/roles.module').then( m => m.RolesPageModule),
+        canActivate: [AdminAccessGuard]
       },
       {
         path: 'users',
-        loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule)
+        loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule),
+        canActivate: [AdminAccessGuard]
       },
       {
         path: 'clientes',

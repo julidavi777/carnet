@@ -9,6 +9,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import {MenubarModule} from 'primeng/menubar';
 import {ButtonModule} from 'primeng/button';
 import {TooltipModule} from 'primeng/tooltip';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import {TooltipModule} from 'primeng/tooltip';
     HomePageRoutingModule,
     MenubarModule,
     ButtonModule,
-    TooltipModule
+    TooltipModule,
+    NgxPermissionsModule.forChild()
   ],
   declarations: [HomePage]
 })

@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     NgxDatatableModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxPermissionsModule.forRoot()
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { HomeService } from './_services/home.service';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { NgxPermissionsService } from 'ngx-permissions';
+import { LocalStorageEncryptService } from '../services/local-storage-encrypt.service';
 
 @Component({
   selector: 'app-home',
@@ -16,39 +18,42 @@ export class HomePage {
 
   constructor(
     private homeService: HomeService,
-    private router: Router
+    private router: Router,
+    private localStorageEncryptService: LocalStorageEncryptService,
+    private permissionsService: NgxPermissionsService,
   ) {}
 
   ngOnInit() {
     this.items = [
-      {
-          label:'Administración',
-          icon:'pi pi-fw pi-sitemap',
-          items:[
-              {
-                  label:'Usuarios',
+        {
+            label:'Administración',
+            icon:'pi pi-fw pi-sitemap',
+            items:[
+                {
+                    label:'Usuarios',
+  
+                    icon:'pi pi-fw pi-users',
+  
+  
+                    routerLink: ['users']
+  
+                },
+                {
+                  separator:true
+                },
+                {
+                    label:'Roles',
+  
+                    icon:'pi pi-fw pi-id-card',
+  
+  
+                    routerLink: ['roles']
+  
+                },
+  
+            ]
+        },
 
-                  icon:'pi pi-fw pi-users',
-
-
-                  routerLink: ['users']
-
-              },
-              {
-                separator:true
-              },
-              {
-                  label:'Roles',
-
-                  icon:'pi pi-fw pi-id-card',
-
-
-                  routerLink: ['roles']
-
-              },
-
-          ]
-      },
       {
           label:'Clientes',
           icon:'pi pi-fw pi-user',
@@ -115,7 +120,7 @@ export class HomePage {
             },
 
         ]
-    },
+      },
 
     {
       label:'Informes',
@@ -135,7 +140,32 @@ export class HomePage {
 
       ]
   },
-  ];
+    ];
+
+    var permissions = this.localStorageEncryptService.getJsonValue('permissions');
+    this.permissionsService.loadPermissions(permissions);
+   console.log(permissions)
+
+   if(!permissions.includes('admin')){
+        this.deleteItemMenu('Administración') 
+    }
+
+    if(!permissions.includes('admin.customers.index')){
+        this.deleteItemMenu('Clientes', true, 'Clientes') 
+    }
+    if(!permissions.includes('admin.customers.store')){
+        this.deleteItemMenu('Clientes', true, 'Crear cliente') 
+    }
+
+    if(!permissions.includes('admin.commercialOffers.index')){
+        this.deleteItemMenu('Oportunidad Comercial', true, 'Oportunidades comerciales') 
+    }
+    if(!permissions.includes('admin.commercialOffers.store')){
+        this.deleteItemMenu('Oportunidad Comercial', true, 'Crear oportunidad comercial') 
+    }
+
+
+   
   }
   logout(){
     this.homeService.logout().subscribe((res: any) => {
@@ -152,6 +182,16 @@ export class HomePage {
   //   this.router.navigate(['registrar-usuario']);
   // }
 
+  deleteItemMenu(nameLabel, isChildren = false, nameChildren = ""){
+    let index = this.items.map(e => e.label).indexOf(nameLabel)
+    if(isChildren){
+        let indexChildren = this.items[index].items.map(e => e.label).indexOf(nameChildren)
+        this.items[index].items.splice(indexChildren, 1);
+        return;
+    }
+    
+    this.items.splice(index, 1);
+  }
 
 
 

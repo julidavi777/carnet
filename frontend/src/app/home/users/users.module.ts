@@ -9,6 +9,7 @@ import { UsersPageRoutingModule } from './users-routing.module';
 import { UsersPage } from './users.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {ButtonModule} from 'primeng/button';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {ButtonModule} from 'primeng/button';
     IonicModule,
     UsersPageRoutingModule,
     NgxDatatableModule,
-    ButtonModule
+    ButtonModule,
+    NgxPermissionsModule
   ],
   declarations: [UsersPage]
 })

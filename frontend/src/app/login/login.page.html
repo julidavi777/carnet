@@ -9,18 +9,19 @@
         <div class="logo-container">
           <ion-img class="logo" src="../../assets/icon/Logo_Cubikar_2.png"></ion-img>
         </div>
-        <p style="text-align: center;">Ingresa tu correo y contraseña  para iniciar sesión</p>
+        <p style="text-align: center;">Ingresa tu correo y contraseña</p>
 
-        <form [formGroup]="loginForm"  (ngSubmit)="login()">
+        <form [formGroup]="loginForm"  (ngSubmit)="login()" class="formContainer">
           <ion-item class="ion-margin-bottom">
             <ion-label position="floating"><ion-icon name="person-circle-outline"></ion-icon> Correo</ion-label>
             <ion-input type="email" formControlName="email"  ></ion-input>
           </ion-item>
           <ion-item class="ion-margin-bottom" style="margin-top: 10px;">
             <ion-label position="floating"><ion-icon name="lock-closed-outline"></ion-icon> Contraseña</ion-label>
-            <ion-input type="password" formControlName="password"></ion-input>
+            <ion-input type="password" formControlName="password" (keyup.enter)="login()"></ion-input>
           </ion-item>
-          <ion-button type="submit" [disabled]="loginForm.invalid" class="ion-margin-bottom" style="margin-top: 10px;" expand="block" >Iniciar Sesión</ion-button>
+          <!-- <ion-button type="submit" [disabled]="loginForm.invalid" class="ion-margin-bottom" style="margin-top: 10px;" expand="block" >Iniciar Sesión</ion-button> -->
+          <button pButton type="submit" [disabled]="loginForm.invalid"  label="Iniciar Sesión" class="mt-2 p-button-rounded"   [loading]="isLoadingButton"></button>
         </form>
         <!-- <div style="text-align: center;">
           <a routerLink="restore-pass"><b>¿Olvidaste tu contraseña?</b></a>

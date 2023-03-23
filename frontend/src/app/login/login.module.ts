@@ -8,6 +8,8 @@ import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     IonicModule,
     LoginPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ButtonModule,
+    NgxPermissionsModule.forChild()
   ],
   declarations: [LoginPage]
 })

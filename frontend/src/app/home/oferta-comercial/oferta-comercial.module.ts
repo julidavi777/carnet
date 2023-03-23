@@ -9,6 +9,7 @@ import { OfertaComercialPageRoutingModule } from './oferta-comercial-routing.mod
 import { OfertaComercialPage } from './oferta-comercial.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {ButtonModule} from 'primeng/button';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {ButtonModule} from 'primeng/button';
     IonicModule,
     OfertaComercialPageRoutingModule,
     NgxDatatableModule,
-    ButtonModule
+    ButtonModule,
+    NgxPermissionsModule.forChild()
   ],
   declarations: [OfertaComercialPage]
 })

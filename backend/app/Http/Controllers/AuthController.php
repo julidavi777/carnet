@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -49,8 +50,17 @@ class AuthController extends Controller
 
         DB::table('users')->where('email', $request->post('email'))->update(['token_session' => $token]);
 
+        $user = User::where('email', $request->post('email'))->first();
 
-        return $this->respondWithToken($token);
+        $userPermissions = $user->getAllPermissions()->pluck('name')->toArray();
+        $userRole = $user->getRoleNames();
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth('api')->factory()->getTTL() * 60,
+            'permissions' => $userPermissions,
+            'role' => $userRole[0]
+        ]);
     }
 
     public function getUserByRawToken($token){
@@ -184,9 +194,43 @@ class AuthController extends Controller
     }
 
     public function test(){
-        $user = User::where('id', 1)->first();
+        Permission::create([
+            'name' => 'admin.commercialOffers.update',
+            'description' => 'Actualizar ofertas'
+        ])->syncRoles([1]);
+        
+        return "hellow";
+        /* $user = User::where('id', 1)->first();
 
-        dd($user->getAllPermissions()->pluck('name')->toArray()) ;
+        dd($user->getAllPermissions()->pluck('name')->toArray()) ; */
+        //USERS perms
+        /* Permission::create([
+            'name' => 'admin.users.index',
+            'description' => 'Registrar usuarios'
+        ])->syncRoles([1]);
+        Permission::create([
+            'name' => 'admin.users.store',
+            'description' => 'Actualizar usuarios'
+        ])->syncRoles([1]);
+        Permission::create([
+            'name' => 'admin.users.update',
+            'description' => 'Actualizar usuarios'
+        ])->syncRoles([1]);
+
+        //Roles perms
+        Permission::create([
+            'name' => 'admin.roles.index',
+            'description' => 'Registrar roles'
+        ])->syncRoles([1]);
+        Permission::create([
+            'name' => 'admin.roles.store',
+            'description' => 'Actualizar roles'
+        ])->syncRoles([1]);
+        Permission::create([
+            'name' => 'admin.roles.update',
+            'description' => 'Actualizar roles'
+        ])->syncRoles([1]); */
+
     }
 }
 // hacer api y ruta de login pendiente
