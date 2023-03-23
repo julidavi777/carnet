@@ -4,7 +4,7 @@
     </div>
     <div class="col-2">
       <p class="fs-3 my-3">Listado de ofertas</p>
-      
+
 
     </div>
     <div class="col-9">
@@ -84,16 +84,17 @@
           Tipo de contratación:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{row.contract_type}}
+          {{row.contract_type | tipoContratacion}}
         </ng-template>
       </ngx-datatable-column>
+
 
       <ngx-datatable-column [resizeable]="true" [width]="100">
         <ng-template ngx-datatable-header-template>
           Tipo de servicio:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{row.service_type}}
+          {{row.service_type | tipoServicio}}
         </ng-template>
       </ngx-datatable-column>
 
@@ -102,7 +103,7 @@
           Tipo de productivo:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{row.sector_productivo}}
+          {{row.sector_productivo | sectorProductivo}}
         </ng-template>
       </ngx-datatable-column>
 
