@@ -17,8 +17,8 @@ class CuadrosPrincipalesController extends Controller
     {
         $validated = $request->validated();
 
-        $query = DB::select("SELECT * FROM public.fnc_consultar_cuadro_torneo(11, 1, 'T', 'I', 'A')");
-        dd($query);
-        session()->flashInput($request->input());
+        #$query = DB::select("SELECT * FROM public.fnc_consultar_cuadro_torneo(11, 1, 'T', 'I', 'A')");
+        #dd($query);
+        #session()->flashInput($request->input());
     }
 }
