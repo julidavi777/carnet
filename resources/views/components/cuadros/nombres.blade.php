@@ -10,7 +10,7 @@
     <h3 class="font-mono font-semibold">
         {{ $jugador }}
     </h3>
-    <p class="diagonal-fractions text-xl">
+    <p class="diagonal-fractions text-center text-xl">
         {{ $slot ?? '' }}
     </p>
 </div>

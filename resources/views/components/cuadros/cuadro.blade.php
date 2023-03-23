@@ -1,6 +1,6 @@
 @props(['color'])
 
-<div {{ $attributes->merge(['class' => 'p-4 rounded-lg bg-'. $color.'-400']) }}>
+<div {{ $attributes->merge(['class' => 'p-4 w-3/5 rounded-lg bg-'. $color.'-400']) }}>
 
     <x-cuadros.nombres :margin="true">
         <x-slot name="jugador">
