@@ -165,10 +165,13 @@ class CommercialOfferController extends ApiController
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'customer_identification' => 'nullable|integer|exists:customers,identification',
+            //'customer_identification' => 'nullable|integer|exists:customers,identification',
             'contract_type' => 'nullable|string|max:50',
+            'contract_type_other' => 'nullable|string|max:50',
             'service_type' => 'nullable|string|max:50',
+            'service_type_other' => 'nullable|string|max:50',
             'sector_productivo' => 'nullable|string|max:50',
+            'sector_productivo_other' => 'nullable|string|max:50',
             'object_description' => 'nullable|string',
             'numero' => 'nullable|integer',
             'cuantia' => 'nullable|integer',
@@ -185,15 +188,10 @@ class CommercialOfferController extends ApiController
             return response()->json($validator->errors(), 400);
         }
 
-        /* return DB::transaction(function() use ($request) {
-        try{
-        } catch (\Exception $ex) {
-            DB::rollback();
-            // throw $ex;
-            return response()->json(['status' => false, 'message' => 'something went wrong registro dog o usuario'.$ex], 400);
-        }}); */
+        return DB::transaction(function() use ($request, $commercialOffer) {
+            try{
             //get Customer
-            $customer = Customer::where('identification', $request->post('customer_identification'))->first();
+            //$customer = Customer::where('identification', $request->post('customer_identification'))->first();
 
             //SAVING FILES
 
@@ -214,10 +212,12 @@ class CommercialOfferController extends ApiController
     
             $updated = CommercialOffer::where('id', $commercialOffer->id)->update([    
                 'contract_type'  => $request->post('contract_type'),
+                'contract_type_other'  => $request->post('contract_type_other'),
                 'service_type'  => $request->post('service_type'),
+                'service_type_other'  => $request->post('service_type_other'),
                 'sector_productivo'  => $request->post('sector_productivo'),
+                'sector_productivo_other'  => $request->post('sector_productivo_other'),
                 'object_description'  => $request->post('object_description'),
-                'sequential_number'  => $request->post('sequential_number'),
                 'numero'  => $request->post('numero'),
                 'cuantia'  => $request->post('cuantia'),
                 'location'  => $request->post('location'),
@@ -226,9 +226,34 @@ class CommercialOfferController extends ApiController
                 //'visit_date'  => $request->post('visit_date'),
                 'observations'  => $request->post('observations'),
                 'anexos'  => $anexos_json_urls,
-                'customer_id'  => $customer->id,
+                //'customer_id'  => $customer->id,
                 'responsable_id'  => $request->post('responsable_id')
             ]);
+
+            if(
+                !is_null($request->post('visit_date')) || 
+                !is_null($request->post('visit_place')) ||
+                !is_null($request->post('person_attending')) ||
+                !is_null($request->post('phone_number_person_attending'))
+            ){
+      
+                if($commercialOffer->comercial_offer_visit()->first()->count() > 0){
+                    CommercialOffersVisit::where('id', $commercialOffer->comercial_offer_visit()->first()['id'])->update([
+                        'visit_date'  => $request->post('visit_date'),
+                        'visit_place' => $request->post('visit_place'),
+                        'person_attending' => $request->post('person_attending'),
+                        'phone_number_person_attending' => $request->post('phone_number_person_attending'),
+                    ]);
+                }else{
+                    CommercialOffersVisit::create([
+                        'visit_date'  => $request->post('visit_date'),
+                        'visit_place' => $request->post('visit_place'),
+                        'person_attending' => $request->post('person_attending'),
+                        'phone_number_person_attending' => $request->post('phone_number_person_attending'),
+                        'commercial_offer_id' => $commercialOffer->id,
+                    ]);
+                }
+            }
 
             if ($updated) {
                 return response()->json([
@@ -241,7 +266,12 @@ class CommercialOfferController extends ApiController
                     "message" => "cannot edit"
                 ], 400);
             }
-
+        } catch (\Exception $ex) {
+            DB::rollback();
+            // throw $ex;
+            return response()->json(['status' => false, 'message' => 'something went wrong registro dog o usuario'.$ex], 400);
+            }
+        });
         
     }
 
