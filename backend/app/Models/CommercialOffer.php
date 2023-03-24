@@ -75,6 +75,11 @@ class CommercialOffer extends Model
         return $this->hasOne(CommercialOffersVisit::class);
     }
 
+    public function commercial_offers_management()
+    {
+        return $this->hasOne(CommercialOffersManagement::class);
+    }
+
     /**
 
     * The attributes that should be mutated to dates.

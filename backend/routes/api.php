@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommercialOfferController;
+use App\Http\Controllers\CommercialOffersManagementController;
+use App\Http\Controllers\CommercialOffersManagementFileController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
@@ -50,6 +52,18 @@ Route::post('commercialOffers',  [CommercialOfferController::class, 'store']);
 Route::get('commercialOffers',  [CommercialOfferController::class, 'index']);
 Route::put('commercialOffers/{commercialOffer}',  [CommercialOfferController::class, 'update']);
 Route::get('commercialOffers/others/getNextValue',  [CommercialOfferController::class, 'getNextValue']);
+
+
+//COMMERCIAL OFFERS MANAGEMENT
+Route::post('commercialOffersManagement',  [CommercialOffersManagementController::class,'store']);
+Route::get('commercialOffersManagement/{id_commercial_offer}/commercialOffersManagementFiles',  [CommercialOffersManagementController::class,'showByIdCommercialOffer']);
+
+//COMMERCIAL OffersManagementFile
+
+Route::post('commercialOffersManagementFile',  [CommercialOffersManagementFileController::class,'store']);
+Route::get('commercialOffersManagementFile',  [CommercialOffersManagementFileController::class, 'index']);
+
+
 
 Route::group([
 
