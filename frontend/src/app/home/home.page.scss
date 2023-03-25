@@ -97,7 +97,7 @@ ion-menu::part(container) {
 
 }
 .logo-cubikar-background {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: -0rem;
   margin-top: 300px;
@@ -107,4 +107,9 @@ ion-menu::part(container) {
 
 }
 
+.my-navbar {
+  background-color: #2361ff;
+  color: hwb(0 5% 95%);
+
+}
 
