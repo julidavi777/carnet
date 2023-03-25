@@ -25,6 +25,7 @@ class CommercialOfferController extends ApiController
             $e->assignment_date = Carbon::parse($e->created_at)->format('Y-m-d H:m:s') ;
             $e->customer;
             $e->responsableRel;
+            $e->comercial_offer_visit;
             $e->user;
             return $e;
         });
@@ -160,8 +161,10 @@ class CommercialOfferController extends ApiController
      * @param  \App\Models\CommercialOffer  $commercialOffer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CommercialOffer $commercialOffer)
-    {
+    public function update(Request $request, $commercialOfferId)
+    {  
+        $commercialOffer = CommercialOffer::findOrFail($commercialOfferId);
+        
         $data = $request->all();
 
         $validator = Validator::make($data, [
@@ -208,7 +211,7 @@ class CommercialOfferController extends ApiController
                 $anexos_json_urls = $this->saveFile($file, 'commercialOffersFiles');
                 
             }
-
+    
     
             $updated = CommercialOffer::where('id', $commercialOffer->id)->update([    
                 'contract_type'  => $request->post('contract_type'),
@@ -294,7 +297,7 @@ class CommercialOfferController extends ApiController
          
         $newSequentialNumber = "";
         if(count($customers) > 0){
-            $newSequentialNumber = explode('-', $customers[0]['sequential_number'])[1];
+            $newSequentialNumber = explode('-', $customers[0]['sequential_number'])[0];
             $newSequentialNumber = intval($newSequentialNumber+1);
 
         }else{
@@ -302,7 +305,7 @@ class CommercialOfferController extends ApiController
         }
         
         //FORMAT SPECIAL
-        $newSequentialNumber = $actualYear.'-'.str_pad($newSequentialNumber, 3, "0", STR_PAD_LEFT);
+        $newSequentialNumber = str_pad($newSequentialNumber, 3, "0", STR_PAD_LEFT).'-'.$actualYear;
 
         //return $customersCount;
         return response()->json([

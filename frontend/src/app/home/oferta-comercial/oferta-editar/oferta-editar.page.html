@@ -7,7 +7,7 @@
 
       <div class="mb-3 form-group col-md-2">
         <label class="form-label" for="validation01"># Consecutivo</label>
-        <input type="number"  [readonly]="true" formControlName="sequential_number" class="form-control is-valid"   id="validationServer01" placeholder="#" >
+        <input type="text"  [readonly]="true" formControlName="sequential_number" class="form-control is-valid"   id="validationServer01" placeholder="#" >
       </div>
 
       <!-- <div class="mb-3 form-group col-md-2">
@@ -52,18 +52,16 @@
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Tipo de contratación *</label>
-        <select  [(ngModel)]="tipoContratacion" class="form-select"  formControlName="contract_type"aria-label="Default select example">
-          <option selected>Seleccione</option>
+        <select class="form-select"  formControlName="contract_type"aria-label="Default select example">
           <option value="1">Precio global fijo</option>
           <option value="2">Precio unitario fijo</option>
           <option value="3">Administración delegada</option>
-          <option value="otro">Otro</option>
+          <option value="4">Otro</option>
         </select>
         <br>
-        <input class="form-control" *ngIf="tipoContratacion === 'otro'" type="text" placeholder="Ingrese el tipo de contratación">
+        <input class="form-control" *ngIf="contract_type.value === '4'" type="text" formControlName="contract_type_other" placeholder="Ingrese el tipo de contratación">
 
       </div>
-
 
 
 
@@ -71,31 +69,29 @@
 
       <div class="mb-3 form-group col-md-6">
         <label  class="form-label" for="validation09">Tipo de servicio *</label>
-        <select  [(ngModel)]="tipoServicio" class="form-select"  formControlName="service_type"aria-label="Default select example">
-          <option selected>Seleccione</option>
+        <select class="form-select"  formControlName="service_type"aria-label="Default select example">
           <option value="1">Construcción</option>
           <option value="2">Mantenimiento</option>
           <option value="3">Consultoria</option>
-          <option value="otro">Otro</option>
+          <option value="4">Otro</option>
         </select>
         <br>
-        <input class="form-control" *ngIf="tipoServicio === 'otro'" type="text" placeholder="Ingrese el tipo de servicio">
+        <input class="form-control" *ngIf="service_type.value === '4'" type="text" formControlName="service_type_other" placeholder="Ingrese el tipo de servicio">
 
       </div>
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Sector productivo *</label>
-        <select [(ngModel)]="sectorProductivo" class="form-select"  formControlName="sector_productivo"aria-label="Default select example">
-          <option selected>Seleccione</option>
+        <select class="form-select"  formControlName="sector_productivo"aria-label="Default select example">
           <option value="1">Industrial</option>
           <option value="2">Logistico</option>
           <option value="3">Comercial</option>
-          <option value="3">Salud/Hospitalario</option>
-          <option value="3">Institucional</option>
-          <option value="otro">Otro</option>
+          <option value="4">Salud/Hospitalario</option>
+          <option value="5">Institucional</option>
+          <option value="6">Otro</option>
         </select>
         <br>
-        <input class="form-control" *ngIf="sectorProductivo === 'otro'" type="text" placeholder="Ingrese el sector productivo">
+        <input class="form-control" *ngIf="sector_productivo.value === '6'" type="text" formControlName="sector_productivo_other" placeholder="Ingrese el sector productivo">
 
       </div>
 
@@ -140,17 +136,18 @@
 <br>
 
 <!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Crear visita</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Datos visita</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3 form-group col-md-8">
           <label class="form-label" for="validation01">Lugar visita</label>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" formControlName="visit_place">
         </div>
 
         <div class="mb-3 form-group col-md-6">
@@ -160,18 +157,18 @@
 
         <div class="mb-3 form-group col-md-8">
           <label class="form-label" for="validation01">Persona que atiende</label>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" formControlName="person_attending">
         </div>
 
         <div class="mb-3 form-group col-md-8">
           <label class="form-label" for="validation01">Número de contacto</label>
-          <input type="number" class="form-control">
+          <input type="number" class="form-control" formControlName="phone_number_person_attending">
         </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar Visita</button>
+        <!-- <button type="button" class="btn btn-primary">Guardar Visita</button> -->
       </div>
     </div>
   </div>
@@ -197,7 +194,7 @@
     </div>
 
     <div *ngIf="registeredSuccessfully" class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-      <strong>Mensaje</strong>  Oferta registrada exitosamente
+      <strong>Mensaje</strong>  Oferta actualizada exitosamente
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 

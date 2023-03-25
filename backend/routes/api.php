@@ -50,7 +50,7 @@ Route::get('customers/searchFilterByName/filter',  [CustomerController::class, '
 //COMMERCIAL OFFERS
 Route::post('commercialOffers',  [CommercialOfferController::class, 'store']);
 Route::get('commercialOffers',  [CommercialOfferController::class, 'index']);
-Route::put('commercialOffers/{commercialOffer}',  [CommercialOfferController::class, 'update']);
+Route::post('commercialOffers/{commercialOfferId}',  [CommercialOfferController::class, 'update']);
 Route::get('commercialOffers/others/getNextValue',  [CommercialOfferController::class, 'getNextValue']);
 
 

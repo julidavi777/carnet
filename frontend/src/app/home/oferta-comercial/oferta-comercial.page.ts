@@ -37,13 +37,20 @@ export class OfertaComercialPage implements OnInit {
   }
   watchDocument(value:any){
 
-    let url = JSON.parse(value)
+    if(value){
+      let url = value;
+      if(typeof value === 'string'){
+
+        url = JSON.parse(value)
+      }
 
 
-    let result = url.server_hash_name.replace("public/", "");
-    console.log(result)
-
-    window.open(this.STORAGE_URL+result, "_blank");
+      let result = url.server_hash_name.replace("public/", "");
+      console.log(result)
+  
+      window.open(this.STORAGE_URL+result, "_blank");
+    }
+    
   }
 
   editOffer(data: any,){
