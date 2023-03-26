@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -13,9 +13,6 @@ export class OfertaEditarService {
     private http:HttpClient,
   ) { }
 
-  saveOffer(data: any){
-    return this.http.post(`${this.API_URL}commercialOffers`, data);
-  }
 
 
 
@@ -23,7 +20,7 @@ export class OfertaEditarService {
     return this.http.get(`${this.API_URL}commercialOffers/others/getNextValue`)
   }
 
-  dataOffer: any | undefined;
+  dataOffer: any | null = null;
   setDataOffer(dataOffer: any){
     this.dataOffer = dataOffer;
   }

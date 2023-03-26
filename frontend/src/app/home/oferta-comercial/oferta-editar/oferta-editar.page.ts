@@ -5,6 +5,7 @@ import { CrearOfertaService } from './../crear-oferta/crear-oferta.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 
@@ -14,9 +15,6 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./oferta-editar.page.scss'],
 })
 export class OfertaEditarPage implements OnInit {
-  tipoContratacion = '';
-  tipoServicio = '';
-  sectorProductivo = '';
 
 
     nextSequentialNumber: number = 0;
@@ -24,6 +22,8 @@ export class OfertaEditarPage implements OnInit {
     registeredSuccessfully: boolean = false;
 
     usersListResponsable: any = [];
+
+    idOffer: number | null = null;
 
     offersForm: any = new FormGroup({
     sequential_number: new FormControl('', [Validators.required]),
@@ -34,22 +34,27 @@ export class OfertaEditarPage implements OnInit {
     razon_comercial: new FormControl('', [Validators.required]),
     responsable_id: new FormControl('', [Validators.required]),
     contract_type: new FormControl(''),
+    contract_type_other: new FormControl(''),
     service_type: new FormControl('', [Validators.required]),
+    service_type_other: new FormControl(''),
     sector_productivo: new FormControl('', [Validators.required]),
+    sector_productivo_other: new FormControl(''),
     object_description: new FormControl('',[Validators.required]),
     numero: new FormControl('',[Validators.required]),
     cuantia: new FormControl('',),
     location: new FormControl('',),
     release_date: new FormControl('',),
     delivery_date: new FormControl('',),
-    visit_date: new FormControl('',),
     observations: new FormControl('',),
-
-
-
+    
     anexos_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
     anexos: new FormControl('',),
-
+    
+    //MODAL VISIT
+    visit_date: new FormControl('',),
+    visit_place: new FormControl('',),
+    person_attending: new FormControl('',),
+    phone_number_person_attending: new FormControl('',),
 
   });
 
@@ -60,18 +65,46 @@ export class OfertaEditarPage implements OnInit {
   get surname () { return this.offersForm.get('surname') }
   get razon_comercial () { return this.offersForm.get('razon_comercial') }
 
+  get contract_type () {return this.offersForm.get('contract_type')}
+  get service_type () {return this.offersForm.get('service_type')}
+  get sector_productivo () {return this.offersForm.get('sector_productivo')}
 
   constructor(
     private crearOfertaService:CrearOfertaService,
-    private ofertaEditarService: OfertaEditarService
+    private ofertaEditarService: OfertaEditarService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.getSequentialNumber();
-    this.searchIdentificationActions();
     this.getUsers();
+    this.offersForm.controls['customer_identification'].disable();
+    this.offersForm.controls['sequential_number'].disable();
+    this.offersForm.controls['name'].disable();
+    this.offersForm.controls['surname'].disable();
+    this.offersForm.controls['razon_comercial'].disable();
 
-    console.log(this.ofertaEditarService.getDataOffer())    
+    console.log(this.ofertaEditarService.getDataOffer())  
+    let editData = this.ofertaEditarService.getDataOffer();
+    if(editData){
+      delete editData?.anexos;
+      this.idOffer = editData.id;
+      this.offersForm.patchValue({
+        ...editData,
+        customer_identification: editData.customer.identification,
+        name: editData.customer.name,
+        surname: editData.customer.surname,
+        razon_comercial: editData.customer.razon_comercial,
+        responsable_id: editData?.responsable_rel?.id,
+        release_date: this.formatDate(editData.release_date),
+        delivery_date: this.formatDate(editData.delivery_date),
+        visit_date: this.formatDate(editData?.comercial_offer_visit?.visit_date),
+        visit_place: editData?.comercial_offer_visit?.visit_place,
+        person_attending: editData?.comercial_offer_visit?.person_attending,
+        phone_number_person_attending: editData?.comercial_offer_visit?.phone_number_person_attending,
+      })  
+    }else{
+      this.router.navigate(['home/oferta-comercial/ofertas']);
+    }
 
   }
 
@@ -86,8 +119,11 @@ export class OfertaEditarPage implements OnInit {
     formData.append('assignment_date', this.offersForm.get('assignment_date').value);
     formData.append('razon_comercial', this.offersForm.get('razon_comercial').value);
     formData.append('contract_type', this.offersForm.get('contract_type').value);
+    formData.append('contract_type_other', this.offersForm.get('contract_type_other').value);
     formData.append('service_type', this.offersForm.get('service_type').value);
+    formData.append('service_type_other', this.offersForm.get('service_type_other').value);
     formData.append('sector_productivo', this.offersForm.get('sector_productivo').value);
+    formData.append('sector_productivo_other', this.offersForm.get('sector_productivo_other').value);
     formData.append('object_description', this.offersForm.get('object_description').value);
     formData.append('numero', this.offersForm.get('numero').value);
     formData.append('cuantia', this.offersForm.get('cuantia').value);
@@ -96,11 +132,18 @@ export class OfertaEditarPage implements OnInit {
     formData.append('delivery_date', this.offersForm.get('delivery_date').value);
     formData.append('visit_date', this.offersForm.get('visit_date').value);
     formData.append('observations', this.offersForm.get('observations').value);
-    formData.append('anexos', this.offersForm.get('anexos').value);
+    formData.append('anexos', this.offersForm.get('anexos').value ? this.offersForm.get('anexos').value: '');
 
     formData.append('file', this.offersForm.get('anexos').value);
 
-    this.crearOfertaService.saveOffer(formData).subscribe((res: any) => {
+    //MODAL DATA
+    formData.append('visit_date', this.offersForm.get('visit_date').value);
+    formData.append('visit_place', this.offersForm.get('visit_place').value);
+    formData.append('person_attending', this.offersForm.get('person_attending').value);
+    formData.append('phone_number_person_attending', this.offersForm.get('phone_number_person_attending').value);
+
+        
+    this.ofertaEditarService.editOffer(formData, this.idOffer ).subscribe((res: any) => {
         console.log(res);
         this.registeredSuccessfully = true;
     },err => {
@@ -108,12 +151,6 @@ export class OfertaEditarPage implements OnInit {
     });
   }
 
-  getSequentialNumber(){
-    this.crearOfertaService.getSequentialNumber().subscribe((res: any) => {
-      this.nextSequentialNumber = res.data;
-      this.sequential_number.setValue(this.nextSequentialNumber);
-    })
-  }
 
   searchIdentificationActions(){
     this.customer_identification.valueChanges.pipe(
@@ -157,6 +194,16 @@ export class OfertaEditarPage implements OnInit {
         });
       }
     }
+  }
+
+  private formatDate(date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    return [year, month, day].join('-');
   }
 
 }
