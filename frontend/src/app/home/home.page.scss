@@ -1,115 +1,57 @@
-/* ion-menu::part(backdrop) {
-  background-color: rgb(46, 166, 251);
-}
 
-ion-menu::part(container) {
-  border-radius: 0 20px 20px 0;
-
-  box-shadow: 4px 0px 16px rgb(46, 166, 251);
-}*/
  nav{
  background-color: #33c3cc;
  color: rgb(17, 16, 16);
+ height: 60px; /* reducir la altura del menú */
 
 }
 
 .is-active{
   color: #33c3cc;
+  height: 60px; /* reducir la altura del menú */
 }
 
 
-.mi-boton {
-  background-color: #1c3bad; /* Color de fondo */
-  border: none; /* Borde sin estilo */
-  color: white; /* Color de texto */
-  padding: 15px 32px; /* Espacio interior */
-  text-align: center; /* Alineación de texto */
-  text-decoration: none; /* Sin subrayado */
-  display: inline-block; /* Mostrar como bloque */
-  font-size: 16px; /* Tamaño de fuente */
-  margin: 4px 2px; /* Espacio exterior */
-  cursor: pointer; /* Tipo de cursor */
-  border-radius: 8px; /* Borde redondeado */
-  width: 200px; /* Ancho del botón */
-
-}
-
-.mi-input {
-  background-color: #F5F5F5; /* Color de fondo */
-  border: 2px solid #D3D3D3; /* Borde sólido */
-  color: #555; /* Color de texto */
-  padding: 8px 16px; /* Espacio interior */
-  font-size: 16px; /* Tamaño de fuente */
-  width: 200px; /* Ancho del campo de entrada */
-  border-radius: 8px; /* Borde redondeado */
-}
-
-.mi-input:focus {
-  outline: none; /* Eliminar el contorno al enfocar */
-  border-color: #6D9EED; /* Cambiar el color del borde al enfocar */
-}
-
-.mi-formulario {
-  background-color: #f2f2f2; /* Color de fondo */
-  border: 1px solid #ccc; /* Borde */
-  color: black; /* Color de texto */
-  padding: 40px; /* Espacio interior */
-  font-size: 16px; /* Tamaño de fuente */
-  width: 400px; /* Ancho del formulario */
-  margin: 0 auto; /* Centrado horizontal */
-  display: block; /* Mostrar como bloque */
-  border-radius: 8px; /* Borde redondeado */
-  box-shadow: 0px 0px 5px rgba(0,0,0,0.1); /* Sombra */
-}
-
-.mi-formulario label {
-  display: block; /* Mostrar etiquetas en línea */
-  margin-bottom: 10px; /* Espacio inferior */
-}
-
-.mi-formulario input[type="text"],
-.mi-formulario input[type="email"],
-.mi-formulario textarea {
-  width: 100%; /* Ancho completo */
-  padding: 10px; /* Espacio interior */
-  margin-bottom: 20px; /* Espacio inferior */
-  border-radius: 4px; /* Borde redondeado */
-  border: none; /* Borde sin estilo */
-  box-shadow: 0px 0px 5px rgba(0,0,0,0.1); /* Sombra */
-}
-
-.mi-formulario input[type="submit"] {
-  background-color: #4CAF50; /* Color de fondo */
-  border: none; /* Borde sin estilo */
-  color: white; /* Color de texto */
-  padding: 10px 20px; /* Espacio interior */
-  font-size: 16px; /* Tamaño de fuente */
-  border-radius: 4px; /* Borde redondeado */
-  cursor: pointer; /* Tipo de cursor */
-  box-shadow: 0px 0px 5px rgba(0,0,0,0.1); /* Sombra */
-}
-
-
-
-.logo{
-  width: 40rem;
-  height: 25rem;
-
-}
-.logo-cubikar-background {
-  position: fixed;
-  width: 100%;
-  height: -0rem;
-  margin-top: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-
+/* Estilo para el menú de navegación */
 .my-navbar {
-  background-color: #2361ff;
-  color: hwb(0 5% 95%);
+  background: linear-gradient(to right, #6fd5ea, #2C99CA);
+  // background-color: #37ADC6; /* color de fondo azul */
+  color: rgb(18, 13, 13); /* color del texto */
+
+  justify-content: space-between; /* alinear los elementos a los extremos del menú */
+  position: relative;
+  z-index: 1000; /* valor alto para que el navbar aparezca encima del logo de fondo */
+}
+
+/* Estilos para el logo en el extremo izquierdo del menú */
+.my-logo {
+  display: flex;
+  align-items: center;
+  margin-right: 50px; /* espacio entre el logo y los elementos del menú */
 
 }
+
+/* Estilos para el botón de cerrar sesión en el extremo derecho del menú */
+.my-logout-btn {
+  width: 40px; /* ancho del botón */
+  height: 40px; /* alto del botón */
+  border-radius: 50%; /* convierte el botón en un círculo */
+}
+
+/* Estilos para el fondo con el logo */
+.logo-cubikar-background {
+  background-image: url('../../assets/icon/Logo_Cubikar_5.png'); /* ruta del logo */
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: fixed;
+  bottom: 50%;
+  right: 50%;
+  transform: translate(50%, 50%);
+  height: 400px;
+  width: 400px;
+  opacity: 0.6; /* opacidad del fondo */
+
+
+}
+
 
