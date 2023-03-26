@@ -194,6 +194,7 @@ class AuthController extends Controller
     }
 
     public function test(){
+        return ["hello" => "world"];
         Permission::create([
             'name' => 'admin.commercialOffers.update',
             'description' => 'Actualizar ofertas'

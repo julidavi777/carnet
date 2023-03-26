@@ -26,6 +26,9 @@ export class AdminOportunidadPage implements OnInit {
  val = '';
  uploadedFiles: { name: string, size: number, type: string }[] = [];
   selectedFile!: string | Blob;
+  files = [
+    {name: "hello.jpg", status: true}
+  ]
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -33,6 +36,7 @@ export class AdminOportunidadPage implements OnInit {
       nombre: file.name,
       tamaño: file.size
     });
+    console.log(this.documentos);
   }
 
 
@@ -84,6 +88,10 @@ onUpload() {
   onSubmit(){
     console.log("valores")
     console.log(this.formGroup.value)
+  }
+
+  deleteFile(file){
+    console.log("file");
   }
 
 }
