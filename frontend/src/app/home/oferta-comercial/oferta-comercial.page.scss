@@ -3,4 +3,9 @@
 
 }
 
+.formu{
+  position:sticky;
+  z-index: 200; /* valor alto para que el formulario aparezca encima del logo de fondo */
+}
+
 

@@ -1,16 +1,19 @@
-<p-menubar [model]="items" class="p-menubar my-navbar">
+
+<p-menubar [model]="items" class="p-menubar my-navbar" >
   <ng-template pTemplate="start">
+    <div class="my-logo">
       <img src="../../assets/icon/Logo_Cbk_1.png" height="50" class="mr-2">
+    </div>
   </ng-template>
   <ng-template pTemplate="end" >
-    <button (click)="logout()" pButton icon="pi pi-power-off" pTooltip="Cerrar sesión" tooltipPosition="bottom" ></button>
+    <button (click)="logout()" pButton icon="pi pi-power-off" pTooltip="Cerrar sesión" tooltipPosition="bottom" class="my-logout-btn"></button>
   </ng-template>
 </p-menubar>
 
 <router-outlet></router-outlet>
 
 <div class="logo-cubikar-background" >
-  <img class="logo " src="../../assets/icon/Logo_Cubikar_2.png" >
+  <img class="logo " src="../../assets/icon/Logo_Cubikar_4.png" >
 </div>
 
 

@@ -6,9 +6,84 @@ img {
   height: auto;
 }
 
+// .formu {
+//   background-color: rgba(65, 69, 110, 0.093);
+//   padding: 20px;
+//   border-radius: 5px;
+//   color: rgb(0, 0, 0); /* Color de texto */
+// }
 .formu {
-  background-color: rgba(65, 69, 110, 0.093);
-  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 200; /* valor alto para que el formulario aparezca encima del logo de fondo */
+
+
+}
+
+.formu {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+.formu {
+  border: 2px solid #fff;
+  background: linear-gradient(to right, #f4e5e5ba, #f4e5e5ba);
+  background-clip: padding-box;
+}
+
+.formu {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  font-weight: bold; /* Fuente en negrita */
+}
+.formu input, .formu label, .formu button {
+  transition: all 0.2s ease-in-out;
+}
+.formu input {
+  padding: 10px 15px; /* Relleno vertical de 10px y relleno horizontal de 15px */
+  border: none;
+  border-bottom: 2px solid #ccc;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.formu input:focus, .formu input:valid {
+  border-bottom-color: #3cadf3;
+}
+
+.formu label {
+  color: #120d0d;
+}
+
+.formu input:focus ~ label, .formu input:valid ~ label {
+  color: #3cadf3;
+}
+.formu {
+  background-color: #ffffff70;
+
+}
+.formu {
+  background-color: hsla(210, 1%, 48%, 0.496);
+  padding: 20px; /* Relleno del contenedor principal */
   border-radius: 5px;
-  color: rgb(0, 0, 0); /* Color de texto */
+  color: #333;
+}
+
+.formu input {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 10px 15px; /* Relleno vertical de 10px y relleno horizontal de 15px */
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.formu button {
+  background-color: #3cadf3;
+  color: #fff;
+  border: none;
+  padding: 10px 20px; /* Relleno vertical de 10px y relleno horizontal de 20px */
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
 }
