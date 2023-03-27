@@ -41,39 +41,67 @@
         <option value="1">Si</option>
         <option value="2">No</option>
       </select>
-      <br>
-      <input  class="form-control" *ngIf="showSelectFileVerificacion" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" >
-      <br>
-      <p-button *ngIf="determinacionRequisitos === 'si'" label="Guardar" ></p-button>
+
+     
+
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <input  class="form-control" *ngIf="showSelectFileVerificacion" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" >
+      </div>
+      <div class="col-md-6">
+        <p-button label="Small" styleClass="p-button-sm" *ngIf="showSelectFileVerificacion" label="Agregar archivo" ></p-button>
+      </div>
     </div>
   
   
-  
-    <div class="form-group col-md-6" (change)="onFileSelected($event)">
-  
-  
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Tamaño</th>
-            <th>Tipo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let file of uploadedFiles">
-            <td>archivo</td>
-            <td>archivo</td>
-            <td>archivo</td>
-            <td>{{ file.name }}</td>
-            <td>{{ file.size }}</td>
-            <td>{{ file.type }}</td>
-          </tr>
-        </tbody>
-      </table>
-  
-  </div>
-  
+    <ngx-datatable
+        class="material mt-2"
+
+        [rows]="files"
+        [headerHeight]="70"
+        [footerHeight]="70"
+        rowHeight="auto"
+        [limit]="10"
+        [scrollbarH]="true"
+        >
+        <ngx-datatable-column name="identification_type" [resizeable]="true"  [width]="300">
+          <ng-template ngx-datatable-header-template>
+            Nombre:
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.name }}
+          </ng-template>
+        </ngx-datatable-column>
+
+
+        <ngx-datatable-column name="identification" [resizeable]="true"  [width]="300">
+          <ng-template ngx-datatable-header-template>
+            Estado:
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.status}}
+          </ng-template>
+        </ngx-datatable-column>
+
+
+        <ngx-datatable-column  name="acciones" [resizeable]="false"  [width]="200">
+          <ng-template ngx-datatable-header-template>
+            Acciones:
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <ion-buttons class="grid-container" style="margin-left: 10px;" >
+              <!-- (click)="editCustomer(row)"  -->
+              <ion-button  (click)="deleteFile(row)"  style="color: #ff0707" data-tooltip="Eliminar" data-tooltip-conf="right">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+
+            </ion-buttons>
+          </ng-template>
+        </ngx-datatable-column>
+
+        </ngx-datatable>
+        <p-button label="Guardar" class="mt-4" ></p-button>
   </div>
 </form>
 
