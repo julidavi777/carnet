@@ -1,4 +1,6 @@
-@props(['color'])
+@props([
+    'color' => 'lime'
+])
 
 <div {{ $attributes->merge(['class' => 'p-4 w-3/5 rounded-lg bg-'. $color.'-400']) }}>
 
