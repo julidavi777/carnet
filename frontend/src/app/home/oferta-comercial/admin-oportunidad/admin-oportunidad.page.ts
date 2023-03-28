@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
+import { AdminOportunidadService } from './admin-oportunidad.service';
+import { CommercialOffer } from './interfaces/CommercialOffer.interface';
 @Component({
   selector: 'app-admin-oportunidad',
   templateUrl: './admin-oportunidad.page.html',
@@ -8,11 +10,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 })
 export class AdminOportunidadPage implements OnInit {
+  filesFromDatabase: boolean = false;
+  files = [];
+  @ViewChild('myInput') myInputVariable: ElementRef;
+
+  dataCommercialOffer: CommercialOffer | null = null;
 
   formGroup: any = new FormGroup({
-    determRequisitos: new FormControl(''),
-    estadoActualProceso: new FormControl(''),
-    verificacionRequisitos: new FormControl(''),
+    requirements_determination: new FormControl(''),
+    current_status: new FormControl(''),
+    requirements_verification: new FormControl(''),
   });
 
   isEnabledVerificacionRequisitos: boolean = true;
@@ -21,34 +28,66 @@ export class AdminOportunidadPage implements OnInit {
   checked: boolean | undefined;
   determinacionRequisitos = '';
   determinacionRequisitos1 = '';
- documentos: any[] = [];
- archivos = '';
- val = '';
- uploadedFiles: { name: string, size: number, type: string }[] = [];
+  documentos: any[] = [];
+  archivos = '';
+  val = '';
+  uploadedFiles: { name: string, size: number, type: string }[] = [];
   selectedFile!: string | Blob;
-  files = [
-    {name: "hello.jpg", status: true}
-  ]
+  
+  constructor(
+    private adminOportunidadService: AdminOportunidadService,
+    private router: Router
+    ) { }
+    
+  ngOnInit() {
+    this.dataCommercialOffer = this.adminOportunidadService.dataCommercialOffer;
+    console.log(this.dataCommercialOffer);
+    this.valueChangesSelects();
+    if(!this.dataCommercialOffer){
+      this.router.navigate(['home/oferta-comercial/ofertas']);
+    }
 
+    if(this.dataCommercialOffer?.commercial_offers_management){
+      this.formGroup.patchValue(this.dataCommercialOffer?.commercial_offers_management)
+    }
+
+    if(this.dataCommercialOffer?.commercial_offers_management?.commercial_offers_management_files){
+      this.files = this.dataCommercialOffer?.commercial_offers_management?.commercial_offers_management_files;
+    } 
+  }
+
+
+  actualFileSelected = null;
+  countFile = 0;
   onFileSelected(event: any) {
     const file = event.target.files[0];
-    this.documentos.push({
+    this.actualFileSelected = {
+      name: file.name,
+      size: file.size,
+      file: file
+    };
+    
+  }
+
+  addFile(){
+    this.countFile = this.countFile+1;
+    this.files.push({...this.actualFileSelected, id: this.countFile});
+    this.actualFileSelected = null;
+    this.myInputVariable.nativeElement.value = "";
+    /* this.documentos.push({
       nombre: file.name,
       tamaño: file.size
     });
-    console.log(this.documentos);
+    console.log(this.documentos); */
+    console.log(this.files);
+    this.files = [...this.files];
   }
 
 
-  constructor() { }
 
-  ngOnInit() {
-    this.valueChangesSelects();
-
-  }
 
   valueChangesSelects(){
-    this.formGroup.get('determRequisitos').valueChanges.subscribe((value) => {
+    this.formGroup.get('requirements_determination').valueChanges.subscribe((value) => {
       const NOT = "2";
       if(value == NOT){
         this.isEnabledVerificacionRequisitos = false;
@@ -58,7 +97,7 @@ export class AdminOportunidadPage implements OnInit {
       }
     });
 
-    this.formGroup.get('verificacionRequisitos').valueChanges.subscribe((value) => {
+    this.formGroup.get('requirements_verification').valueChanges.subscribe((value) => {
       const YES = "1";
       if(value == YES){
         this.showSelectFileVerificacion = true;
@@ -73,25 +112,42 @@ export class AdminOportunidadPage implements OnInit {
     var isChecked = e.checked;
 }
 
-onUpload() {
-  const formData = new FormData();
-  formData.append('file', this.selectedFile);
-
-
-  // this.uploadedFiles.push({
-  //   name: this.selectedFile.name,
-  //   size: this.selectedFile.size,
-  //   type: this.selectedFile.type
-  // });
-}
 
   onSubmit(){
     console.log("valores")
     console.log(this.formGroup.value)
+    let formData = new FormData();
+    formData.append('requirements_determination', this.formGroup.value['requirements_determination']);
+    formData.append('current_status', this.formGroup.value['current_status']);
+    formData.append('requirements_verification', this.formGroup.value['requirements_verification']);
+    formData.append('commercial_offer_id', this.dataCommercialOffer.id.toString());
+    
+   
+   /*  this.files.forEach((e) => {
+      formData.append('arrayFiles', e.file, e.file.name);
+    }); */
+
+    this.adminOportunidadService.storeOpportunity(formData).subscribe((e: any) => {
+      let files = this.files.map(e => e.file);
+
+      files.forEach(element => {
+        const formData = new FormData();
+        formData.append('commercial_offers_management_id', e.data.id);
+        formData.append('file',element);
+        this.adminOportunidadService.saveManagementFile(formData).subscribe(e => {
+          console.log(e)
+        })
+      });
+
+      alert("datos registrados")
+    },err => {
+      alert("Error");
+    });
   }
 
-  deleteFile(file){
-    console.log("file");
+  deleteFile(id){
+    this.files = [...this.files.filter(f => f.id !== id)];
+    console.log(id);
   }
 
 }

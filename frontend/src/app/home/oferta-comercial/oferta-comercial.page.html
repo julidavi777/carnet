@@ -212,7 +212,7 @@
           </ion-buttons>
 
           <ion-buttons class="grid-container" style="margin-left: 10px;" >
-          <ion-button  routerLink="./admin-oportunidad" style="color: #59dc35" data-tooltip="Gestionar" data-tooltip-conf="up" >
+          <ion-button  (click)="openAdminOportunidad(row)" style="color: #59dc35" data-tooltip="Gestionar" data-tooltip-conf="up" >
             <ion-icon name="document-attach-outline"></ion-icon>
           </ion-button>
         </ion-buttons>

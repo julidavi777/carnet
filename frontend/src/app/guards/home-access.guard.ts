@@ -10,7 +10,7 @@ export class HomeAccessGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+
       if(localStorage.getItem('auth_token')){
       return true;
     }

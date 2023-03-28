@@ -32,7 +32,7 @@ class CommercialOffersManagementController extends Controller
         $validator = Validator::make($data, [
             'requirements_determination' => 'required|string',
             'current_status' => 'required|string',
-            'requirements_verification' => 'required|string',
+            'requirements_verification' => 'nullable|string',
             'commercial_offer_id' => 'required|exists:commercial_offers,id',
         ]);
 
@@ -52,7 +52,8 @@ class CommercialOffersManagementController extends Controller
         if($created){
             return response()->json([
                 "status" => true,
-                "message" => "created sucessfully"
+                "message" => "created sucessfully",
+                "data" => $created
             ],201);
         }else{
             return response()->json([

@@ -12,6 +12,8 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
 import {ButtonModule} from 'primeng/button';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { PipesModule } from 'src/app/pipes/pipes.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     ButtonModule,
     SelectButtonModule,
     ReactiveFormsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    PipesModule
   ],
   declarations: [AdminOportunidadPage]
 })

@@ -13,9 +13,14 @@ class CommercialOffersManagementFileController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $files = CommercialOffersManagementFile::get();
+        $id_commercial_offer_management = $request->query('commercial_offer_management_id');
+        if(!is_null($id_commercial_offer_management)){
+            $files = CommercialOffersManagementFile::where('commercial_offers_management_id', $id_commercial_offer_management)->get();
+        }else{
+            $files = CommercialOffersManagementFile::get();
+        }
         return $this->showAll($files);
     }
 

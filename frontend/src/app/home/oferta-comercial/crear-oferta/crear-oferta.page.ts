@@ -71,10 +71,16 @@ export class CrearOfertaPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.offersForm.controls['customer_identification'].disable();
+    this.offersForm.controls['sequential_number'].disable();
+    this.offersForm.controls['name'].disable();
+    this.offersForm.controls['surname'].disable();
+    this.offersForm.controls['razon_comercial'].disable();
+    
     this.getSequentialNumber();
     this.searchIdentificationActions();
     this.getUsers();
-
+    
   }
 
   onSubmit(){

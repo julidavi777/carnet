@@ -8,7 +8,7 @@
     <div class="row">
       <div class="form-group col-md-6">
         <label for="validation09">Determinación de requisitos</label>
-        <select class="form-select" formControlName="determRequisitos" >
+        <select class="form-select" formControlName="requirements_determination" >
           <option value="1">Si</option>
           <option value="2">No</option>
          </select>
@@ -19,7 +19,7 @@
   
     <div class="form-group col-md-6">
         <label for="validation09">Estado actual del proceso</label>
-        <select class="form-select"  formControlName="estadoActualProceso" >
+        <select class="form-select"  formControlName="current_status" >
           <option selected>Seleccione</option>
           <option value="1">Descartada</option>
           <option value="2">En revisión</option>
@@ -37,7 +37,7 @@
   
      <div class="mb-3 form-group col-md-6" *ngIf="isEnabledVerificacionRequisitos">
       <label class="form-label" for="validation01">Verificación de Requisitos</label>
-      <select  formControlName="verificacionRequisitos" class="form-select" >
+      <select  formControlName="requirements_verification" class="form-select" >
         <option value="1">Si</option>
         <option value="2">No</option>
       </select>
@@ -47,11 +47,13 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <input  class="form-control" *ngIf="showSelectFileVerificacion" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" >
+        <!-- <input  class="form-control" *ngIf="showSelectFileVerificacion" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" > -->
+        <input #myInput class="form-control" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" accept=".doc,.docx,image/jpeg,image/png,application/pdf">
       </div>
       <div class="col-md-6">
-        <p-button label="Small" styleClass="p-button-sm" *ngIf="showSelectFileVerificacion" label="Agregar archivo" ></p-button>
-      </div>
+        <p-button (click)="addFile()" [disabled]="actualFileSelected === null" label="Small" styleClass="p-button-sm"  label="Agregar archivo" ></p-button>
+<!--         <p-button label="Small" styleClass="p-button-sm" *ngIf="showSelectFileVerificacion" label="Agregar archivo" ></p-button>
+ -->      </div>
     </div>
   
   
@@ -77,6 +79,15 @@
 
         <ngx-datatable-column name="identification" [resizeable]="true"  [width]="300">
           <ng-template ngx-datatable-header-template>
+            Peso:
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.size | formatFileSize}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column *ngIf="filesFromDatabase" name="identification" [resizeable]="true"  [width]="300">
+          <ng-template ngx-datatable-header-template>
             Estado:
           </ng-template>
           <ng-template let-row="row" ngx-datatable-cell-template>
@@ -92,7 +103,7 @@
           <ng-template let-row="row" ngx-datatable-cell-template>
             <ion-buttons class="grid-container" style="margin-left: 10px;" >
               <!-- (click)="editCustomer(row)"  -->
-              <ion-button  (click)="deleteFile(row)"  style="color: #ff0707" data-tooltip="Eliminar" data-tooltip-conf="right">
+              <ion-button  (click)="deleteFile(row.id)"  style="color: #ff0707" data-tooltip="Eliminar" data-tooltip-conf="right">
                 <ion-icon name="trash"></ion-icon>
               </ion-button>
 
@@ -101,7 +112,7 @@
         </ngx-datatable-column>
 
         </ngx-datatable>
-        <p-button label="Guardar" class="mt-4" ></p-button>
+        <p-button  type="submit" label="Guardar" class="mt-4" ></p-button>
   </div>
 </form>
 
