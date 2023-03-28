@@ -15,6 +15,9 @@
                     <x-cabeceras.form-tabla-cuadro :accion="route('cuadros.principales')" />
                 </div>
                 <div class="grid grid-cols-4 p-6">
+                    @if(!empty($filas))
+                        @dd($filas, $datos)
+                    @endif
                     <div class="columna-1 grid gap-4 h-auto content-center justify-items-center">
 
                         <x-cuadros.cuadro class="cuadro-1" color="amber">

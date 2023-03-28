@@ -5,14 +5,14 @@ use Illuminate\Support\Facades\DB;
 
 class CuadrosPrincipalesService
 {
-    public static function getCuadrosPrincipales()
+    public static function getCuadrosPrincipales($torneo, $categoria, $genero, $modalidad, $cuadro, $controller = false)
     {
-        $query = DB::select("SELECT * FROM public.fnc_consultar_cuadro_torneo(12, 1, 'T', 'I', 'A')");
+        $query = DB::select("SELECT * FROM public.fnc_consultar_cuadro_torneo($torneo, $categoria, '$genero', '$modalidad', '$cuadro')");
         $total_query = count($query);
         $datos = [];
         $total_impares = 0;
 
-        if(empty($total_query)) return;
+        if(empty($total_query)) return 0;
 
         for($i = 0; $i <= $total_query - 1; $i++)
         {
@@ -74,6 +74,9 @@ class CuadrosPrincipalesService
             }
         }
 
-        return $cuadro_datos;
+        if($controller)
+            return count($cuadro_datos);
+        else
+            return $cuadro_datos;
     }
 }
