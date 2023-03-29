@@ -49,9 +49,6 @@ class CuadrosPrincipalesService
         {
             for($n = 0; $n <= count($cuadro_datos[$m]) - 1; $n++)
             {
-                if($cuadro_datos[$m][$n] === 'bye')
-                    $cuadro_datos[$m][$n] = $cuadro_datos[$m][$n]. ':amber';
-
                 if(is_numeric($cuadro_datos[$m][$n][0]))
                 {
                     $cuadro_datos[$m][$n - 1] = $cuadro_datos[$m][$n - 1]. ':'. $cuadro_datos[$m][$n];
