@@ -1,5 +1,5 @@
-<div wire:poll.300s="getTablaRoundRobin">
-    {{-- <div wire:poll.300s> 5 min --}}
+<div wire:poll.60s="getTablaRoundRobin">
+    {{-- <div wire:poll.60s> 1 min --}}
     <table>
         <thead>
             <tr>
