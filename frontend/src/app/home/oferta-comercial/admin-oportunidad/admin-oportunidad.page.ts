@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminOportunidadService } from './admin-oportunidad.service';
 import { CommercialOffer } from './interfaces/CommercialOffer.interface';
+
 @Component({
   selector: 'app-admin-oportunidad',
   templateUrl: './admin-oportunidad.page.html',
@@ -10,7 +11,9 @@ import { CommercialOffer } from './interfaces/CommercialOffer.interface';
 
 })
 export class AdminOportunidadPage implements OnInit {
-  filesFromDatabase: boolean = false;
+
+
+  isBringingDataFromDatabase: boolean = false;
   files = [];
   @ViewChild('myInput') myInputVariable: ElementRef;
 
@@ -34,26 +37,43 @@ export class AdminOportunidadPage implements OnInit {
   uploadedFiles: { name: string, size: number, type: string }[] = [];
   selectedFile!: string | Blob;
   
+  idOfferManagement: number | null = null;
+
   constructor(
     private adminOportunidadService: AdminOportunidadService,
     private router: Router
     ) { }
-    
   ngOnInit() {
     this.dataCommercialOffer = this.adminOportunidadService.dataCommercialOffer;
     console.log(this.dataCommercialOffer);
+
+
     this.valueChangesSelects();
-    if(!this.dataCommercialOffer){
+
+    if(this.dataCommercialOffer){
+
+      this.idOfferManagement = this.dataCommercialOffer.commercial_offers_management.id;
+
+      this.isBringingDataFromDatabase = true;
+      this.formGroup.controls['requirements_determination'].disable();
+      this.formGroup.controls['requirements_verification'].disable();
+      if(this.dataCommercialOffer?.commercial_offers_management){
+        this.formGroup.patchValue(this.dataCommercialOffer?.commercial_offers_management)
+      }
+  
+      if(this.dataCommercialOffer?.commercial_offers_management?.commercial_offers_management_files){
+        this.files = this.dataCommercialOffer?.commercial_offers_management?.commercial_offers_management_files;
+      } 
+    }
+
+  
+/*     if(!this.dataCommercialOffer){
       this.router.navigate(['home/oferta-comercial/ofertas']);
-    }
+    } */
+    
+    
 
-    if(this.dataCommercialOffer?.commercial_offers_management){
-      this.formGroup.patchValue(this.dataCommercialOffer?.commercial_offers_management)
-    }
-
-    if(this.dataCommercialOffer?.commercial_offers_management?.commercial_offers_management_files){
-      this.files = this.dataCommercialOffer?.commercial_offers_management?.commercial_offers_management_files;
-    } 
+   
   }
 
 
@@ -114,6 +134,15 @@ export class AdminOportunidadPage implements OnInit {
 
 
   onSubmit(){
+    if(this.isBringingDataFromDatabase){
+      let data = this.formGroup.value;
+      this.adminOportunidadService.updateCommercialOfferManagement(data, this.idOfferManagement).subscribe(e => {
+        alert("Actualizado");
+      },e => {
+        alert("Error al actualizar");
+      });
+      return;
+    }
     console.log("valores")
     console.log(this.formGroup.value)
     let formData = new FormData();

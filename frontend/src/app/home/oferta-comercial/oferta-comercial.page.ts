@@ -63,7 +63,6 @@ export class OfertaComercialPage implements OnInit {
   }
   
   openAdminOportunidad(data){
-    console.log(data)
     this.adminOportunidadService.dataCommercialOffer = data;
     this.router.navigate(['home/oferta-comercial/ofertas/admin-oportunidad']);
   }

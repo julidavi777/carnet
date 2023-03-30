@@ -30,4 +30,8 @@ export class AdminOportunidadService {
   get dataCommercialOffer(){
     return this._dataCommercialOffer;
   }
+
+  updateCommercialOfferManagement(data, id){
+    return this.http.post(this.API_URL+"commercialOffersManagement/"+id, data);
+  }
 }

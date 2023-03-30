@@ -27,6 +27,8 @@ class CommercialOfferController extends ApiController
             $e->responsableRel;
             $e->comercial_offer_visit;
             $e->user;
+            $e->commercial_offers_management;
+            $e->commercial_offers_management->commercial_offers_management_files;
             return $e;
         });
 

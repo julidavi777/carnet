@@ -20,7 +20,6 @@
     <div class="form-group col-md-6">
         <label for="validation09">Estado actual del proceso</label>
         <select class="form-select"  formControlName="current_status" >
-          <option selected>Seleccione</option>
           <option value="1">Descartada</option>
           <option value="2">En revisión</option>
           <option value="3">MP- En espera de sorteo</option>
@@ -37,7 +36,7 @@
   
      <div class="mb-3 form-group col-md-6" *ngIf="isEnabledVerificacionRequisitos">
       <label class="form-label" for="validation01">Verificación de Requisitos</label>
-      <select  formControlName="requirements_verification" class="form-select" >
+      <select formControlName="requirements_verification" class="form-select" >
         <option value="1">Si</option>
         <option value="2">No</option>
       </select>
@@ -45,7 +44,7 @@
      
 
     </div>
-    <div class="row">
+    <div class="row" *ngIf="!isBringingDataFromDatabase && showSelectFileVerificacion">
       <div class="col-md-6">
         <!-- <input  class="form-control" *ngIf="showSelectFileVerificacion" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" > -->
         <input #myInput class="form-control" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" accept=".doc,.docx,image/jpeg,image/png,application/pdf">
@@ -59,7 +58,7 @@
   
     <ngx-datatable
         class="material mt-2"
-
+        *ngIf="showSelectFileVerificacion"
         [rows]="files"
         [headerHeight]="70"
         [footerHeight]="70"
@@ -67,17 +66,23 @@
         [limit]="10"
         [scrollbarH]="true"
         >
-        <ngx-datatable-column name="identification_type" [resizeable]="true"  [width]="300">
+        <ngx-datatable-column name="identification_type" [resizeable]="true"  [width]="400">
           <ng-template ngx-datatable-header-template>
             Nombre:
           </ng-template>
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.name }}
+            <div *ngIf="row?.name;else templateName">
+              {{row?.name}}
+
+            </div>
+            <ng-template #templateName>
+              <p ><a class="link-opacity-75" [href]="row?.file?.server_hash_name | formatUrl" target="_blank">{{row?.file?.original_name}}</a></p>
+            </ng-template>
           </ng-template>
         </ngx-datatable-column>
 
 
-        <ngx-datatable-column name="identification" [resizeable]="true"  [width]="300">
+        <ngx-datatable-column *ngIf="!isBringingDataFromDatabase" name="identification" [resizeable]="true"  [width]="300">
           <ng-template ngx-datatable-header-template>
             Peso:
           </ng-template>
@@ -86,7 +91,7 @@
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column *ngIf="filesFromDatabase" name="identification" [resizeable]="true"  [width]="300">
+        <ngx-datatable-column *ngIf="isBringingDataFromDatabase" name="identification" [resizeable]="true"  [width]="300">
           <ng-template ngx-datatable-header-template>
             Estado:
           </ng-template>
@@ -103,7 +108,7 @@
           <ng-template let-row="row" ngx-datatable-cell-template>
             <ion-buttons class="grid-container" style="margin-left: 10px;" >
               <!-- (click)="editCustomer(row)"  -->
-              <ion-button  (click)="deleteFile(row.id)"  style="color: #ff0707" data-tooltip="Eliminar" data-tooltip-conf="right">
+              <ion-button  *ngIf="!isBringingDataFromDatabase" (click)="deleteFile(row.id)"  style="color: #ff0707" data-tooltip="Eliminar" data-tooltip-conf="right">
                 <ion-icon name="trash"></ion-icon>
               </ion-button>
 
@@ -112,7 +117,7 @@
         </ngx-datatable-column>
 
         </ngx-datatable>
-        <p-button  type="submit" label="Guardar" class="mt-4" ></p-button>
+        <p-button  type="submit" [label]="isBringingDataFromDatabase ? 'Actualizar' : 'Guardar'" class="mt-4" ></p-button>
   </div>
 </form>
 

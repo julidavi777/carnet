@@ -81,9 +81,39 @@ class CommercialOffersManagementController extends Controller
      * @param  \App\Models\CommercialOffersManagement  $CommercialOffersManagement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CommercialOffersManagement $CommercialOffersManagement)
+    public function update(Request $request, $CommercialOffersManagement)
     {
-        //
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            //'requirements_determination' => 'required|string',
+            'current_status' => 'nullable|string',
+            //'requirements_verification' => 'nullable|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+
+        $updated = CommercialOffersManagement::where('id', $CommercialOffersManagement)->update([
+            //'requirements_determination' => $request->post('requirements_determination'),
+            'current_status' => $request->post('current_status'),
+            //'requirements_verification' => $request->post('requirements_verification'),
+            //'commercial_offer_id' => $request->post('commercial_offer_id')
+        ]);
+
+        if($updated){
+            return response()->json([
+                "status" => true,
+                "message" => "update sucessfully",
+            ],201);
+        }else{
+            return response()->json([
+                "status" => false,
+                "message" => "cannot update"
+            ],400);
+        }
     }
 
     /**

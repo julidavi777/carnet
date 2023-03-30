@@ -56,6 +56,7 @@ Route::get('commercialOffers/others/getNextValue',  [CommercialOfferController::
 
 //COMMERCIAL OFFERS MANAGEMENT
 Route::post('commercialOffersManagement',  [CommercialOffersManagementController::class,'store']);
+Route::post('commercialOffersManagement/{CommercialOffersManagement}',  [CommercialOffersManagementController::class,'update']);
 Route::get('commercialOffersManagement/{id_commercial_offer}/commercialOffersManagementFiles',  [CommercialOffersManagementController::class,'showByIdCommercialOffer']);
 
 //COMMERCIAL OffersManagementFile
