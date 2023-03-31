@@ -63,7 +63,7 @@
         </div> <br>
 
         <div class="col-md-3">
-          <button type="button" for="" data-bs-toggle="modal" data-bs-target="#contacto2">
+          <button type="button" for="contacto2" data-bs-toggle="modal" data-bs-target="#contacto2">
             Contacto comercial 2 </button>
           </div><br>
 
@@ -131,218 +131,283 @@
     </div>
   </form>
 
-<!-- Modal -->
-<div
-class="modal fade modal_stilos" id="contacto1" tabindex="10" aria-labelledby="contacto1" aria-hidden="true">
-<div class="modal-dialog modal-lg">
-  <div class="modal-content ">
-    <div class="modal-header">
-      <h1 class="modal-title fs-5" id="contacto1">
-        Datos contacto comercial
-      </h1>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      ></button>
+
+    <!-- Modal contacto 1 -->
+    <div class="modal fade modal_stilos" id="contacto1" tabindex="-1" aria-labelledby="contacto1" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Registre datos
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-10">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Nombre</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Celular</label>
+                  <input type="number" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Telefono</label>
+                  <input type="number" class="form-control" required />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">EXT</label>
+                  <input type="number" class="form-control" required />
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Correo</label>
+                  <input type="email" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Ciudad</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cerrar
+            </button>
+            <!-- <button type="button" class="btn btn-primary">Guardar Visita</button> -->
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="modal-body">
-      <div class="mb-3 form-group col-md-8">
-        <label class="form-label" for="validation01">Nombre</label>
-        <input
-          type="text"
-          class="form-control"
 
-        />
+    <!-- Modal contacto 2 -->
+    <div class="modal fade modal_stilos" id="contacto2" tabindex="-1" aria-labelledby="contacto2" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="contacto2">
+              Registre datos
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-10">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Nombre</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Celular</label>
+                  <input type="number" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Telefono</label>
+                  <input type="number" class="form-control" required />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">EXT</label>
+                  <input type="number" class="form-control" required />
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Correo</label>
+                  <input type="email" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Ciudad</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cerrar
+            </button>
+            <!-- <button type="button" class="btn btn-primary">Guardar Visita</button> -->
+          </div>
+        </div>
       </div>
-
-      <div class="mb-3 form-group col-md-4">
-        <label class="form-label" for="validation09"
-          >Telefono
-        </label>
-        <input
-          type="number"
-          class="form-control"
-
-          id="validation09"
-
-          required
-        />
-      </div>
-
-      <div class="mb-3 form-group col-md-4">
-        <label class="form-label" for="validation09"
-          >EXT
-        </label>
-        <input
-          type="number"
-          class="form-control"
-
-          id="validation09"
-
-          required
-        />
-      </div>
-
-      <div class="mb-3 form-group col-md-8">
-        <label class="form-label" for="validation01"
-          >Celular</label
-        >
-        <input
-          type="number"
-          class="form-control"
-
-        />
-      </div>
-
-      <div class="mb-3 form-group col-md-8">
-        <label class="form-label" for="validation01"
-          >Correo</label
-        >
-        <input
-          type="email"
-          class="form-control"
-
-        />
-      </div>
-
-      <div class="mb-3 form-group col-md-8">
-        <label class="form-label" for="validation01"
-          >Ciudad</label
-        >
-        <input
-          type="text"
-          class="form-control"
-
-        />
-      </div>
-
     </div>
-    <div class="modal-footer">
-      <button
-        type="button"
-        class="btn btn-secondary"
-        data-bs-dismiss="modal"
-      >
-        Cerrar
-      </button>
 
+    <!-- Modal facturacion3  -->
+    <div class="modal fade modal_stilos" id="contacto3" tabindex="-1" aria-labelledby="contacto3" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="contacto3">
+              Registre datos
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-10">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Nombre</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Celular</label>
+                  <input type="number" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Telefono</label>
+                  <input type="number" class="form-control" required />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">EXT</label>
+                  <input type="number" class="form-control" required />
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Correo</label>
+                  <input type="email" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Ciudad</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cerrar
+            </button>
+            <!-- <button type="button" class="btn btn-primary">Guardar Visita</button> -->
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-</div>
-
-<!-- Modal -->
-<!-- Button trigger modal -->
 
 
-<!-- Modal -->
-<div
-class="modal fade modal_stilos"
-id="exampleModal"
-tabindex="-1"
-aria-labelledby="exampleModalLabel"
-aria-hidden="true"
->
-<div class="modal-dialog modal-lg">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h1 class="modal-title fs-5" id="exampleModalLabel">
-        Registre datos
-      </h1>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      ></button>
+     <!-- Modal pagos/tesoreria  -->
+     <div class="modal fade modal_stilos" id="contacto4" tabindex="-1" aria-labelledby="contacto4" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="contacto4">
+              Registre datos
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-10">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Nombre</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Celular</label>
+                  <input type="number" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Telefono</label>
+                  <input type="number" class="form-control" required />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">EXT</label>
+                  <input type="number" class="form-control" required />
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Correo</label>
+                  <input type="email" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="mb-3 form-group">
+                  <label class="form-label" for="">Ciudad</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cerrar
+            </button>
+            <!-- <button type="button" class="btn btn-primary">Guardar Visita</button> -->
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="modal-body">
-      <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation01">Nombre</label>
-        <input
-          type="text"
-          class="form-control"
-
-        />
-      </div>
-
-      <div class="mb-3 form-group col-md-4">
-        <label class="form-label" for="validation09"
-          >Telefono
-        </label>
-        <input
-          type="number"
-          class="form-control"
-          formControlName="visit_date"
-          id="validation09"
-
-          required
-        />
-      </div>
-
-      <div class="mb-3 form-group col-md-4">
-        <label class="form-label" for="validation09"
-          >EXT
-        </label>
-        <input
-          type="number"
-          class="form-control"
-          formControlName="visit_date"
-          id="validation09"
-
-          required
-        />
-      </div>
-
-      <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation01"
-          >Celular</label
-        >
-        <input
-          type="number"
-          class="form-control"
-          formControlName="person_attending"
-        />
-      </div>
-
-      <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation01"
-          >Correo</label
-        >
-        <input
-          type="email"
-          class="form-control"
-          formControlName="phone_number_person_attending"
-        />
-      </div>
-
-      <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation01"
-          >Ciudad</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          formControlName="phone_number_person_attending"
-        />
-      </div>
-
-    </div>
-    <div class="modal-footer">
-      <button
-        type="button"
-        class="btn btn-secondary"
-        data-bs-dismiss="modal"
-      >
-        Cerrar
-      </button>
-      <!-- <button type="button" class="btn btn-primary">Guardar Visita</button> -->
-    </div>
-  </div>
-</div>
-</div>
 
 
 </div>
