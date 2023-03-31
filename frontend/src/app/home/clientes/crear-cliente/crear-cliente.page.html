@@ -50,259 +50,36 @@
         <input type="text" class="form-control" formControlName="address"  id="validation04" placeholder="Direccion" required>
       </div>
 
-      <div class="mb-3 form-group col-md-6">
+      <div class="mb-3 form-group col-md-10">
         <label for="validation04" class="form-label">Correo electrónico *</label>
         <input type="email" class="form-control" formControlName="email"  id="validation04" placeholder="ejemplo@gmail.com" required>
       </div>
 
 
-
-  <button type="button"  class="btn btn-primary btn-sm" for="validation09" data-bs-toggle="modal" data-bs-target="#contacto1">
-    Contacto comercial 1 </button>
-  <!-- Modal -->
-  <div
-    class="modal  fade" id="contacto1" tabindex="-1" aria-labelledby="contacto1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content ">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="contacto1">
-            Datos contacto comercial
-          </h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3 form-group col-md-8">
-            <label class="form-label" for="validation01">Nombre</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="visit_place"
-            />
-          </div>
-
-          <div class="mb-3 form-group col-md-4">
-            <label class="form-label" for="validation09"
-              >Telefono
-            </label>
-            <input
-              type="number"
-              class="form-control"
-              formControlName="visit_date"
-              id="validation09"
-
-              required
-            />
-          </div>
-
-          <div class="mb-3 form-group col-md-4">
-            <label class="form-label" for="validation09"
-              >EXT
-            </label>
-            <input
-              type="number"
-              class="form-control"
-              formControlName="visit_date"
-              id="validation09"
-
-              required
-            />
-          </div>
-
-          <div class="mb-3 form-group col-md-8">
-            <label class="form-label" for="validation01"
-              >Celular</label
-            >
-            <input
-              type="number"
-              class="form-control"
-              formControlName="person_attending"
-            />
-          </div>
-
-          <div class="mb-3 form-group col-md-8">
-            <label class="form-label" for="validation01"
-              >Correo</label
-            >
-            <input
-              type="email"
-              class="form-control"
-              formControlName="phone_number_person_attending"
-            />
-          </div>
-
-          <div class="mb-3 form-group col-md-8">
-            <label class="form-label" for="validation01"
-              >Ciudad</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="phone_number_person_attending"
-            />
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Cerrar
+        <div class="col-md-3">
+          <button type="button"  for="contacto1" data-bs-toggle="modal" data-bs-target="#contacto1">
+            Contacto comercial 1
           </button>
+        </div> <br>
 
-        </div>
-      </div>
-    </div>
-  </div>
+        <div class="col-md-3">
+          <button type="button" for="" data-bs-toggle="modal" data-bs-target="#contacto2">
+            Contacto comercial 2 </button>
+          </div><br>
 
-    <!-- Modal -->
-    <!-- Button trigger modal -->
-    <button
-    type="button"
-    class="btn btn-primary"
-    for="validation09"
-    data-bs-toggle="modal"
-    data-bs-target="#exampleModal"
-  >
-    Contacto Tesoreria
-  </button>
-  <br />
+          <div class="col-md-3">
+            <button type="button" for="" data-bs-toggle="modal" data-bs-target="#contacto3">
+              Contacto Facturación</button>
+            </div><br>
 
-  <!-- Modal -->
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">
-            Registre datos
-          </h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3 form-group col-md-6">
-            <label class="form-label" for="validation01">Nombre</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="visit_place"
-            />
-          </div>
+            <div class="col-md-3">
+              <button type="button" for="" data-bs-toggle="modal" data-bs-target="#contacto4">
+                Contacto Pagos / Tesoreria</button>
+              </div><br>
 
-          <div class="mb-3 form-group col-md-4">
-            <label class="form-label" for="validation09"
-              >Telefono
-            </label>
-            <input
-              type="number"
-              class="form-control"
-              formControlName="visit_date"
-              id="validation09"
-
-              required
-            />
-          </div>
-
-          <div class="mb-3 form-group col-md-4">
-            <label class="form-label" for="validation09"
-              >EXT
-            </label>
-            <input
-              type="number"
-              class="form-control"
-              formControlName="visit_date"
-              id="validation09"
-
-              required
-            />
-          </div>
-
-          <div class="mb-3 form-group col-md-6">
-            <label class="form-label" for="validation01"
-              >Celular</label
-            >
-            <input
-              type="number"
-              class="form-control"
-              formControlName="person_attending"
-            />
-          </div>
-
-          <div class="mb-3 form-group col-md-6">
-            <label class="form-label" for="validation01"
-              >Correo</label
-            >
-            <input
-              type="email"
-              class="form-control"
-              formControlName="phone_number_person_attending"
-            />
-          </div>
-
-          <div class="mb-3 form-group col-md-6">
-            <label class="form-label" for="validation01"
-              >Ciudad</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="phone_number_person_attending"
-            />
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Cerrar
-          </button>
-          <!-- <button type="button" class="btn btn-primary">Guardar Visita</button> -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-      <!-- <div class="mb-3 form-group col-md-6">
-        <label for="validation04" class="form-label">Nombre contacto comercial * </label>
-        <input type="text" class="form-control" formControlName="nombre_contacto_comercial"  id="validation04" placeholder="Nombres" required>
-      </div>
-
-
-      <div class="mb-3 form-group col-md-6">
-        <label for="validation05" class="form-label">Contacto comercial #1 *</label>
-        <input type="text"  class="form-control" formControlName="commercial_contact_1" id="validation05" placeholder=" Número Telefono" required textarea>
-      </div>
-
-      <div class="mb-3 form-group col-md-6">
-        <label for="validation05" class="form-label">Contacto comercial #2</label>
-        <input type="text"  class="form-control" formControlName="commercial_contact_2" id="validation05" placeholder=" Número Telefono" required textarea>
-      </div>
-
-      <div class="mb-3 form-group col-md-6">
-        <label for="validation05" class="form-label">Contacto comercial #3</label>
-        <input type="text"  class="form-control" formControlName="commercial_contact_3" id="validation05" placeholder=" Número Telefono" required textarea>
-      </div> -->
-
+              <br>
+              <br>
+              <br>
 
       <div class="mb-3 form-group col-md-6">
         <label for="validation06" class="form-label">Razón social *</label>
@@ -353,4 +130,219 @@
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   </form>
+
+<!-- Modal -->
+<div
+class="modal fade modal_stilos" id="contacto1" tabindex="10" aria-labelledby="contacto1" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content ">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="contacto1">
+        Datos contacto comercial
+      </h1>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <div class="mb-3 form-group col-md-8">
+        <label class="form-label" for="validation01">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+
+        />
+      </div>
+
+      <div class="mb-3 form-group col-md-4">
+        <label class="form-label" for="validation09"
+          >Telefono
+        </label>
+        <input
+          type="number"
+          class="form-control"
+
+          id="validation09"
+
+          required
+        />
+      </div>
+
+      <div class="mb-3 form-group col-md-4">
+        <label class="form-label" for="validation09"
+          >EXT
+        </label>
+        <input
+          type="number"
+          class="form-control"
+
+          id="validation09"
+
+          required
+        />
+      </div>
+
+      <div class="mb-3 form-group col-md-8">
+        <label class="form-label" for="validation01"
+          >Celular</label
+        >
+        <input
+          type="number"
+          class="form-control"
+
+        />
+      </div>
+
+      <div class="mb-3 form-group col-md-8">
+        <label class="form-label" for="validation01"
+          >Correo</label
+        >
+        <input
+          type="email"
+          class="form-control"
+
+        />
+      </div>
+
+      <div class="mb-3 form-group col-md-8">
+        <label class="form-label" for="validation01"
+          >Ciudad</label
+        >
+        <input
+          type="text"
+          class="form-control"
+
+        />
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-bs-dismiss="modal"
+      >
+        Cerrar
+      </button>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Modal -->
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div
+class="modal fade modal_stilos"
+id="exampleModal"
+tabindex="-1"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="exampleModalLabel">
+        Registre datos
+      </h1>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation01">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+
+        />
+      </div>
+
+      <div class="mb-3 form-group col-md-4">
+        <label class="form-label" for="validation09"
+          >Telefono
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="visit_date"
+          id="validation09"
+
+          required
+        />
+      </div>
+
+      <div class="mb-3 form-group col-md-4">
+        <label class="form-label" for="validation09"
+          >EXT
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="visit_date"
+          id="validation09"
+
+          required
+        />
+      </div>
+
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation01"
+          >Celular</label
+        >
+        <input
+          type="number"
+          class="form-control"
+          formControlName="person_attending"
+        />
+      </div>
+
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation01"
+          >Correo</label
+        >
+        <input
+          type="email"
+          class="form-control"
+          formControlName="phone_number_person_attending"
+        />
+      </div>
+
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation01"
+          >Ciudad</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          formControlName="phone_number_person_attending"
+        />
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-bs-dismiss="modal"
+      >
+        Cerrar
+      </button>
+      <!-- <button type="button" class="btn btn-primary">Guardar Visita</button> -->
+    </div>
+  </div>
+</div>
+</div>
+
+
 </div>
