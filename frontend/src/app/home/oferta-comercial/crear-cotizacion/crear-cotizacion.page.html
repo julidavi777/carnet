@@ -1,114 +1,153 @@
 
 <div class="container">
   <p class="h2 my-3">Nueva cotización</p>
- 
-  <form>
+
+  <form class="formu">
     <div class="row">
-      <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation01">Cliente</label>
-        <input type="number" class="form-control is-valid" id="validationServer01" value="Otto" required placeholder="#" value="#" required>
-      </div>
-      <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation03">Fecha elaboración</label>
-        <input type="date" class="form-control" id="validation03" placeholder="" required>
-      </div>
-      <br>
 
       <div class="mb-3 form-group col-md-12">
-          <ion-label>I. Datos del proyecto</ion-label>
-        </div>
-
-      <div class="mb-3 form-group col-md-3">
-        <br>
-        <input type="text" size="40" class="form-control" id="validation09" placeholder="Clase del presupuesto" required>
+        <ion-label>DATOS CLIENTE</ion-label>
       </div>
 
-      <div class="mb-3 form-group col-md-3">
-        <br>
-        <input type="text" size="40" class="form-control" id="validation09" placeholder="Tipo de proyecto" required>
+      <div class="mb-3 form-group col-md-2">
+        <label class="form-label" for="">Sede:</label>
+        <select class="form-select" aria-label="Default select example">
+          <option value="1">BOG</option>
+          <option value="2">MED</option>
+          <option value="3">PER</option>
+        </select>
       </div>
 
-      <div class="mb-3 form-group col-md-3">
-        <br>
-        <input type="text" size="40" class="form-control" id="validation09" placeholder="Uso del proyecto" required>
+      <div class="mb-3 form-group col-md-2">
+        <label class="form-label" for="validation01"># Consecutivo:</label>
+        <input type="text" [readonly]="true" class="form-control is-valid" id="validationServer01" placeholder="#" />
       </div>
-
-      <div class="mb-3 form-group col-md-3">
-        <br>
-        <input type="text" size="40" class="form-control" id="validation09" placeholder="Número del proyecto" required>
-      </div>
-
-      <div class="mb-3 form-group col-md-12">
-        <ion-label>II. DATOS DEL CLIENTE, PREDIO Y/O LOTE</ion-label>
-      </div>
-
-    <div class="mb-3 form-group col-md-3">
-      <br>
-      <input type="text" size="40" class="form-control" id="validation09" placeholder="Nombre del cliente" required>
-    </div>
-
-    <div class="mb-3 form-group col-md-3">
-      <br>
-      <input type="text" size="40" class="form-control" id="validation09" placeholder="Dirección predio" required>
-    </div>
-
-    <div class="mb-3 form-group col-md-3">
-      <br>
-      <input type="text" size="40" class="form-control" id="validation09" placeholder="Area del lote" required>
-    </div>
-
-    <div class="mb-3 form-group col-md-3">
-      <br>
-      <input type="text" size="40" class="form-control" id="validation09" placeholder="Area a intervenir" required>
-    </div>
-
-    <div class="mb-3 form-group col-md-12">
-      <ion-label>III. DATOS DEL PRESUPUESTO</ion-label>
-    </div>
-
-  <div class="mb-3 form-group col-md-3">
-    <br>
-    <input type="text" class="form-control" id="validation09" placeholder="Clase del presupuesto" required>
-  </div>
-
-  <div class="mb-3 form-group col-md-2">
-    <br>
-    <input type="text" class="form-control" id="validation09" placeholder="Versión" required>
-  </div>
-
-  <div class="mb-3 form-group col-md-2">
-    <br>
-    <input type="text" class="form-control" id="validation09" placeholder="Costo directo" required>
-  </div>
-
-  <div class="mb-3 form-group col-md-2">
-    <br>
-    <input type="text" class="form-control" id="validation09" placeholder="Costo indirecto" required>
-  </div>
-
-  <div class="mb-3 form-group col-md-2">
-    <br>
-    <input type="text" class="form-control" id="validation09" placeholder="Costo total" required>
-  </div>
-
 
       <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation06">Clasificación</label>
-        <input type="text" class="form-control" id="validation06" placeholder="" required>
+        <label class="form-label" for="validation03">Identificación:</label>
+        <input type="number" class="form-control" id="validation03" placeholder="" required>
       </div>
+
       <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation09">Contacto</label>
-        <input type="number" class="form-control" id="validation09" placeholder="#" required>
+        <label class="form-label" for="validation03">Razón social</label>
+        <input type="text" class="form-control" id="validation03" placeholder="" required>
       </div>
+      <br>
+
       <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation08">Objeto de la cotización</label>
-        <input type="text" class="form-control" id="validation08" placeholder="" required>
+        <label class="form-label" for="validation03">Razón Comercial</label>
+        <input type="text" class="form-control" id="validation03" placeholder="" required>
       </div>
+
+
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Valor cotizado</label>
         <input type="text" class="form-control" id="validation09" placeholder="$" required>
       </div>
+
       <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation09">Observaciones</label>
+        <input type="text" class="form-control" id="validation09" placeholder="" required>
+      </div>
+
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation09">Adjuntar Cotización</label>
+        <input type="file" class="form-control" id="validation09" placeholder="" required>
+      </div>
+      <br>
+
+    </div>
+
+
+
+    <div class="d-flex justify-content-end col-md-12">
+      <button type="submit" class="btn btn-primary">Crear Cotización</button>
+    </div>
+
+  </form>
+</div>
+
+
+
+
+<!-- <div class="mb-3 form-group col-md-12">
+  <ion-label>I. Datos del proyecto</ion-label>
+</div>
+
+<div class="mb-3 form-group col-md-3">
+<br>
+<input type="text" size="40" class="form-control" id="validation09" placeholder="Clase del presupuesto" required>
+</div>
+
+<div class="mb-3 form-group col-md-3">
+<br>
+<input type="text" size="40" class="form-control" id="validation09" placeholder="Tipo de proyecto" required>
+</div>
+
+<div class="mb-3 form-group col-md-3">
+<br>
+<input type="text" size="40" class="form-control" id="validation09" placeholder="Uso del proyecto" required>
+</div>
+
+<div class="mb-3 form-group col-md-3">
+<br>
+<input type="text" size="40" class="form-control" id="validation09" placeholder="Número del proyecto" required>
+</div>
+
+<div class="mb-3 form-group col-md-12">
+<ion-label>II. DATOS DEL CLIENTE, PREDIO Y/O LOTE</ion-label>
+</div>
+
+<div class="mb-3 form-group col-md-3">
+<br>
+<input type="text" size="40" class="form-control" id="validation09" placeholder="Nombre del cliente" required>
+</div>
+
+<div class="mb-3 form-group col-md-3">
+<br>
+<input type="text" size="40" class="form-control" id="validation09" placeholder="Dirección predio" required>
+</div>
+
+<div class="mb-3 form-group col-md-3">
+<br>
+<input type="text" size="40" class="form-control" id="validation09" placeholder="Area del lote" required>
+</div>
+
+<div class="mb-3 form-group col-md-3">
+<br>
+<input type="text" size="40" class="form-control" id="validation09" placeholder="Area a intervenir" required>
+</div>
+
+<div class="mb-3 form-group col-md-12">
+<ion-label>III. DATOS DEL PRESUPUESTO</ion-label>
+</div>
+
+<div class="mb-3 form-group col-md-3">
+<br>
+<input type="text" class="form-control" id="validation09" placeholder="Clase del presupuesto" required>
+</div>
+
+<div class="mb-3 form-group col-md-2">
+<br>
+<input type="text" class="form-control" id="validation09" placeholder="Versión" required>
+</div>
+
+<div class="mb-3 form-group col-md-2">
+<br>
+<input type="text" class="form-control" id="validation09" placeholder="Costo directo" required>
+</div>
+
+<div class="mb-3 form-group col-md-2">
+<br>
+<input type="text" class="form-control" id="validation09" placeholder="Costo indirecto" required>
+</div>
+
+<div class="mb-3 form-group col-md-2">
+<br>
+<input type="text" class="form-control" id="validation09" placeholder="Costo total" required>
+</div>
+
+<div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Estado</label>
        <select class="form-select" aria-label="Default select example">
           <option selected>Seleccione</option>
@@ -121,27 +160,20 @@
           <option value="3">Suspendido o aplazado</option>
          </select>
       </div>
-      <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation09">Observaciones</label>
-        <input type="text" class="form-control" id="validation09" placeholder="" required>
-      </div>
 
-      <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation09">Importar Items</label>
-        <input type="file" class="form-control" id="validation09" placeholder="" required>
-      </div>
-      <br>
 
-    </div>
-
-    
-
-    <div class="d-flex justify-content-end col-md-12">
-      <button type="submit" class="btn btn-primary">Crear Cotización</button>
-    </div>
-
-  </form>
+<div class="mb-3 form-group col-md-6">
+<label class="form-label" for="validation06">Clasificación</label>
+<input type="text" class="form-control" id="validation06" placeholder="" required>
 </div>
+<div class="mb-3 form-group col-md-6">
+<label class="form-label" for="validation09">Contacto</label>
+<input type="number" class="form-control" id="validation09" placeholder="#" required>
+</div>
+<div class="mb-3 form-group col-md-6">
+<label class="form-label" for="validation08">Objeto de la cotización</label>
+<input type="text" class="form-control" id="validation08" placeholder="" required>
+</div> -->
 
 
 
