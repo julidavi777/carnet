@@ -37,17 +37,8 @@
       </div>
 
       <div class="mb-3 form-group col-md-10">
-        <label class="form-label" for="validation03"
-          >Número identificación cliente *</label
-        >
-        <input
-          type="number"
-          class="form-control"
-          [ngClass]="isCustomerFound === null ? '' : isCustomerFound ? 'is-valid' : 'is-invalid'"
-          formControlName="customer_identification"
-          id="validation03"
-          placeholder=""
-        />
+        <label class="form-label" for="validation03">Número identificación cliente *</label>
+        <input type="number" class="form-control" [ngClass]="isCustomerFound === null ? '' : isCustomerFound ? 'is-valid' : 'is-invalid'" formControlName="customer_identification" id="validation03" placeholder=""/>
         <div class="valid-feedback">Cliente encontrado</div>
         <div class="invalid-feedback">
           Cliente no encontrado por favor digite un numero correcto.
