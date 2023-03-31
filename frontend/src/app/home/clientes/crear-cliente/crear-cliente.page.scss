@@ -6,17 +6,11 @@ img {
   height: auto;
 }
 
-// .formu {
-//   background-color: rgba(65, 69, 110, 0.093);
-//   padding: 20px;
-//   border-radius: 5px;
-//   color: rgb(0, 0, 0); /* Color de texto */
-// }
+
 .formu {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   position: relative;
-  z-index: 200; /* valor alto para que el formulario aparezca encima del logo de fondo */
-
+  z-index: 200;
 
 }
 
@@ -64,7 +58,7 @@ img {
 }
 .formu {
   background-color: hsla(210, 1%, 48%, 0.496);
-  padding: 20px; /* Relleno del contenedor principal */
+  padding: 20px;
   border-radius: 5px;
   color: #333;
 }
@@ -72,12 +66,30 @@ img {
 .formu input {
   border: none;
   border-bottom: 2px solid #ccc;
-  padding: 10px 15px; /* Relleno vertical de 10px y relleno horizontal de 15px */
+  padding: 10px 15px;
   font-size: 16px;
   transition: border-color 0.3s ease;
 }
 
 .formu button {
+  background-color: #3cadf3;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+
+
+.modal_stilos {
+  position: relative;
+  z-index: 400;
+}
+
+.modal_stilos button {
   background-color: #3cadf3;
   color: #fff;
   border: none;
@@ -87,3 +99,27 @@ img {
   margin-top: 20px;
   transition: all 0.3s ease;
 }
+
+.modal_stilos label {
+  color: #120d0d;
+}
+
+.modal_stilos {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  font-weight: bold; /* Fuente en negrita */
+}
+
+.modal_stilos input, .formu label, .formu button {
+  transition: all 0.2s ease-in-out;
+}
+
+.modal_stilos input {
+  padding: 10px 15px; /* Relleno vertical de 10px y relleno horizontal de 15px */
+  border: none;
+  border-bottom: 2px solid #ccc;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
