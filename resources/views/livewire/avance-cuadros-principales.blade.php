@@ -13,7 +13,7 @@
                             $nombre_uno = explode(':', $cuadros_principales[$i][$j][0]);
                             $nombre_dos = explode(':', $cuadros_principales[$i][$j][1]);
 
-                            if($nombre_dos[0] === 'bye'){
+                            if((is_numeric($nombre_uno[0]) && is_numeric($nombre_dos[0])) || $nombre_dos[0] === 'bye'){
                                 $color = 'amber';
                             }else{
                                 $color = 'lime';
@@ -28,9 +28,15 @@
                         </x-cuadros.cuadro>
                     @else
                         @php
-                            $nombre = explode(':', $cuadros_principales[$i][$j])
+                            $nombre = explode(':', $cuadros_principales[$i][$j]);
+
+                            if(is_numeric($nombre[0])){
+                                $color = 'amber';
+                            }else{
+                                $color = 'lime';
+                            }
                         @endphp
-                        <x-cuadros.cuadro class="cuadro-{{$j + 1}}">
+                        <x-cuadros.cuadro class="cuadro-{{$j + 1}}" color="{{ $color }}">
                             <x-slot name="jugador1">{{ $nombre[0] }}</x-slot>
                             <x-slot name="puntaje1">{{ $nombre[1] ?? '' }}</x-slot>
                             <x-slot name="jugador2"></x-slot>

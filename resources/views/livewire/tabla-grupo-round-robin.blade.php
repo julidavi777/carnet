@@ -21,9 +21,25 @@
         </thead>
         <tbody>
             @foreach ($datos_grupo as $dato_grupo)
+                @php
+                    $count = 0;
+                @endphp
                 <tr>
                     @for ($j = 0; $j <= count($dato_grupo) - 1; $j++)
-
+                        @php
+                            /*
+                            if(empty($dato_grupo[$j]))
+                            {
+                                $count = $j;
+                                
+                                for($k = 1; $k <= 4; $k++)
+                                {
+                                    dd($j, $count);
+                                    $count += $k;
+                                }
+                            }
+                            */
+                        @endphp
                         <td class="">{{ $dato_grupo[$j] }}</td>
 
                     @endfor

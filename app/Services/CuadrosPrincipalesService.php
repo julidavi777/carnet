@@ -49,7 +49,7 @@ class CuadrosPrincipalesService
         {
             for($n = 0; $n <= count($cuadro_datos[$m]) - 1; $n++)
             {
-                if(is_numeric($cuadro_datos[$m][$n][0]))
+                if(!empty(strpos($cuadro_datos[$m][$n], '/')))
                 {
                     $cuadro_datos[$m][$n - 1] = $cuadro_datos[$m][$n - 1]. ':'. $cuadro_datos[$m][$n];
                     unset($cuadro_datos[$m][$n]);
