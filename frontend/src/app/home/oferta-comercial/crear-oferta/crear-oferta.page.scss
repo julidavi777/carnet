@@ -77,6 +77,46 @@
   margin-top: 20px;
   transition: all 0.3s ease;
 }
+.modal_stilos input {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 10px 15px; /* Relleno vertical de 10px y relleno horizontal de 15px */
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
 
+.modal_stilos button {
+  background-color: #3cadf3;
+  color: #fff;
+  border: none;
+  padding: 10px 20px; /* Relleno vertical de 10px y relleno horizontal de 20px */
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.modal_stilos label {
+  color: #120d0d;
+}
+
+.modal_stilos {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  font-weight: bold; /* Fuente en negrita */
+}
+
+.modal_stilos input, .formu label, .formu button {
+  transition: all 0.2s ease-in-out;
+}
+
+.modal_stilos input {
+  padding: 10px 15px; /* Relleno vertical de 10px y relleno horizontal de 15px */
+  border: none;
+  border-bottom: 2px solid #ccc;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
 
 
