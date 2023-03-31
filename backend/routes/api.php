@@ -7,6 +7,9 @@ use App\Http\Controllers\CommercialOfferController;
 use App\Http\Controllers\CommercialOffersManagementController;
 use App\Http\Controllers\CommercialOffersManagementFileController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DepartamentoController;
+use App\Http\Controllers\DepartamentoMunicipioController;
+use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -64,7 +67,10 @@ Route::get('commercialOffersManagement/{id_commercial_offer}/commercialOffersMan
 Route::post('commercialOffersManagementFile',  [CommercialOffersManagementFileController::class,'store']);
 Route::get('commercialOffersManagementFile',  [CommercialOffersManagementFileController::class, 'index']);
 
+Route::apiResource('municipios', MunicipioController::class)->only(['index']);
 
+Route::apiResource('departamentos', DepartamentoController::class)->only(['index']);
+Route::apiResource('departamentos.municipios', DepartamentoMunicipioController::class)->only(['index']);
 
 Route::group([
 

@@ -143,27 +143,52 @@ export class HomePage {
     ];
 
     var permissions = this.localStorageEncryptService.getJsonValue('permissions');
+    /* var permissions = [
+        'admin.home'
+        , 'admin.customers.index'
+        , 'admin.customers.store'
+        , 'admin.customers.update'
+        , 'admin.customers.watchDocuments'
+        , 'admin.commercialOffers.index'
+        , 'admin.commercialOffers.store'
+        , 'admin.commercialOffers.update'
+        , 'admin'
+    ] */
+
     this.permissionsService.loadPermissions(permissions);
    console.log(permissions)
 
-   if(!permissions.includes('admin')){
-        this.deleteItemMenu('Administración') 
+    /* ADMIN */
+    if(!permissions.includes('admin')){
+            this.deleteItemMenu('Administración') 
     }
 
+    /* CUSTOMERS */
+    //sub_items
     if(!permissions.includes('admin.customers.index')){
-        this.deleteItemMenu('Clientes', true, 'Clientes') 
+        this.deleteItemMenu('Clientes'
+        , true, 'Clientes') 
     }
     if(!permissions.includes('admin.customers.store')){
         this.deleteItemMenu('Clientes', true, 'Crear cliente') 
     }
+    //main
+    if(!permissions.includes('admin.customers.store') && !permissions.includes('admin.customers.index')){
+        this.deleteItemMenu('Clientes') 
+    }
 
+     /* COMMERCIAL_OFFERS */
+    //sub_items
     if(!permissions.includes('admin.commercialOffers.index')){
         this.deleteItemMenu('Oportunidad Comercial', true, 'Oportunidades comerciales') 
     }
     if(!permissions.includes('admin.commercialOffers.store')){
         this.deleteItemMenu('Oportunidad Comercial', true, 'Crear oportunidad comercial') 
     }
-
+    //main
+    /* if(!permissions.includes('admin.commercialOffers.index') && !permissions.includes('admin.commercialOffers.store')){
+        this.deleteItemMenu('Clientes') 
+    } */
 
    
   }
