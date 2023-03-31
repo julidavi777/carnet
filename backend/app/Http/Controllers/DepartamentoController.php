@@ -14,7 +14,7 @@ class DepartamentoController extends ApiController
      */
     public function index()
     {
-        $departamentos = Departamento::get();
+        $departamentos = Departamento::orderBy('name')->get();
         return $this->showAll($departamentos);
     }
 
