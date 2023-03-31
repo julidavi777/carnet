@@ -15,9 +15,11 @@ class DepartamentoMunicipioController extends ApiController
     public function index(Departamento $departamento)
     {
         $departamentos = $departamento->municipios()
-                          ->get();
-                         /*  ->pluck('buyer')
+                          ->get()
                           ->sortBy('name')
+                          ->values();
+                         /*  ->pluck('buyer')
+                           ->sortBy('name')
                           ->unique('id')
                           ->values(); */
 
