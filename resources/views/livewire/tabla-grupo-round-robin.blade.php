@@ -21,26 +21,55 @@
         </thead>
         <tbody>
             @foreach ($datos_grupo as $dato_grupo)
-                @php
-                    $count = 0;
-                @endphp
                 <tr>
                     @for ($j = 0; $j <= count($dato_grupo) - 1; $j++)
                         @php
-                            /*
+                            $count = 0;
+                            $posicion = $j;
+
                             if(empty($dato_grupo[$j]))
                             {
-                                $count = $j;
-                                
-                                for($k = 1; $k <= 4; $k++)
+                                $a = 0;
+
+                                while ($a < 4) 
                                 {
-                                    dd($j, $count);
-                                    $count += $k;
+                                    if(empty($dato_grupo[$posicion + $a]))
+                                        $count++;
+                                    $a++;
                                 }
                             }
-                            */
                         @endphp
-                        <td class="">{{ $dato_grupo[$j] }}</td>
+
+                        @if($count == 4)
+                            @php
+                                $color = '';
+
+                                switch ($datos[1]) {
+                                    case 1:
+                                        $color = 'bg-red-600';
+                                        break;
+                                    case 2:
+                                        $color = 'bg-orange-500';
+                                        break;
+                                    case 3:
+                                        $color = 'bg-yellow-300';
+                                        break;
+                                    case 4:
+                                        $color = 'bg-lime-400';
+                                        break;
+                                }
+                            @endphp
+
+                            @for ($k = 0; $k <= $count - 1; $k++)
+                                <td class="{{ $color }} border-transparent">{{ $dato_grupo[$posicion] }}</td>
+
+                                @php $posicion++ @endphp
+                            @endfor
+
+                            @php $j = $posicion - 1 @endphp
+                        @else
+                            <td class="">{{ $dato_grupo[$j] }}</td>
+                        @endif
 
                     @endfor
                 </tr>

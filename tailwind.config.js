@@ -21,7 +21,10 @@ module.exports = {
         'grid-cols-11',
         'grid-cols-12',
         'bg-amber-400',
-        'bg-lime-400'
+        'bg-lime-400',
+        'bg-red-600',
+        'bg-orange-500',
+        'bg-yellow-300'
     ],
 
     theme: {
