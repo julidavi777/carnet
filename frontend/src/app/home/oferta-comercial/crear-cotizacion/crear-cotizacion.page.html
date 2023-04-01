@@ -2,7 +2,7 @@
 <div class="container">
   <p class="h2 my-3">Nueva cotización</p>
 
-  <form class="formu">
+  <form class="formu" [formGroup]="cotizacionForm" (ngSubmit)="onSubmit()">
     <div class="row">
 
       <div class="mb-3 form-group col-md-12">
@@ -11,7 +11,7 @@
 
       <div class="mb-3 form-group col-md-2">
         <label class="form-label" for="">Sede:</label>
-        <select class="form-select" aria-label="Default select example">
+        <select class="form-select" formControlName="sede" aria-label="Default select example">
           <option value="1">BOG</option>
           <option value="2">MED</option>
           <option value="3">PER</option>
@@ -19,40 +19,40 @@
       </div>
 
       <div class="mb-3 form-group col-md-2">
-        <label class="form-label" for="validation01"># Consecutivo:</label>
-        <input type="text" [readonly]="true" class="form-control is-valid" id="validationServer01" placeholder="#" />
+        <label class="form-label" for=""># Consecutivo:</label>
+        <input type="text" [readonly]="true" class="form-control is-valid" formControlName="consecutivo" id="validationServer01" placeholder="#" />
       </div>
 
       <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation03">Identificación:</label>
-        <input type="number" class="form-control" id="validation03" placeholder="" required>
+        <label class="form-label" for="">Identificación:</label>
+        <input type="number" class="form-control" formControlName="identification_type" id="" placeholder="" required>
       </div>
 
       <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation03">Razón social</label>
-        <input type="text" class="form-control" id="validation03" placeholder="" required>
+        <label class="form-label" for="">Razón social</label>
+        <input type="text" class="form-control" formControlName="razon_social" id="" placeholder="" required>
       </div>
       <br>
 
       <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation03">Razón Comercial</label>
-        <input type="text" class="form-control" id="validation03" placeholder="" required>
+        <label class="form-label" for="">Razón Comercial</label>
+        <input type="text" class="form-control"  formControlName="razon_comercial" id="" placeholder="" required>
       </div>
 
 
       <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation09">Valor cotizado</label>
-        <input type="text" class="form-control" id="validation09" placeholder="$" required>
+        <label class="form-label" for="">Valor cotizado</label>
+        <input type="text" class="form-control"  formControlName="valor_cotizado"id="" placeholder="$" required>
       </div>
 
       <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation09">Observaciones</label>
-        <input type="text" class="form-control" id="validation09" placeholder="" required>
+        <label class="form-label" for="">Observaciones</label>
+        <input type="text" class="form-control" id=""  formControlName="observaciones" placeholder="" required>
       </div>
 
       <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation09">Adjuntar Cotización</label>
-        <input type="file" class="form-control" id="validation09" placeholder="" required>
+        <label class="form-label" for="">Adjuntar Cotización</label>
+        <input type="file" class="form-control" id=""  formControlName="cotizacion_file" placeholder="" required>
       </div>
       <br>
 
