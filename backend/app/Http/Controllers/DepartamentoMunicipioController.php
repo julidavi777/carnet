@@ -12,8 +12,20 @@ class DepartamentoMunicipioController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Departamento $departamento)
+    public function index(Request $request, Departamento $departamento)
     {
+        $name_municipio = $request->query('name_municipio');
+        
+        if(!is_null($name_municipio)){
+
+            $departamentos = $departamento->municipios()->whereRaw("lower(unaccent(name)) ilike '%$name_municipio%'")
+                                            ->orderBy('name')
+                                            ->limit(10)
+                                            ->get();
+
+            return $this->showAll($departamentos);
+        }
+
         $departamentos = $departamento->municipios()
                           ->get()
                           ->sortBy('name')

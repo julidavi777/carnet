@@ -12,8 +12,20 @@ class DepartamentoController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $name_departamento = $request->query('name_departamento');
+        
+        if(!is_null($name_departamento)){
+
+            $departamentos = Departamento::whereRaw("lower(unaccent(name)) ilike '%$name_departamento%'")
+                                            ->orderBy('name')
+                                            ->limit(10)
+                                            ->get();
+
+            return $this->showAll($departamentos);
+        }
+
         $departamentos = Departamento::orderBy('name')->get();
         return $this->showAll($departamentos);
     }

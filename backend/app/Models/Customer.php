@@ -44,4 +44,16 @@ class Customer extends Model
     {
         return $this->hasMany(CommercialOffer::class);
     }
+
+    public function departamento()
+    {
+        return $this->belongsTo(Departamento::class);
+    }
+
+    public function municipio()
+    {
+        return $this->belongsTo(Municipio::class);
+    }
+
+
 }

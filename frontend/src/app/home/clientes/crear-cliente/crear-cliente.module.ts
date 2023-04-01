@@ -9,13 +9,16 @@ import { CrearClientePageRoutingModule } from './crear-cliente-routing.module';
 import { CrearClientePage } from './crear-cliente.page';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { IonicSelectableModule } from 'ionic-selectable';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     CrearClientePageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    IonicSelectableModule
   ],
   declarations: [CrearClientePage]
 })

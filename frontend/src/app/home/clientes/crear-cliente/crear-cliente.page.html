@@ -36,21 +36,47 @@
       </div>
 
       <div class="mb-3 form-group col-md-4">
+        <label for="phone_number" class="form-label">Departamento * </label>
+        <ion-item>
+          <!-- <ion-label >Port</ion-label> -->
+          <ionic-selectable
+            [items]="departamentos"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            formControlName="departamento"
+            (onChange)="departamentoChange($event)"
+            >
+          </ionic-selectable>
+        </ion-item>
+        <!-- <label for="validation04" class="form-label">Departamento *</label>
+        <input type="text" class="form-control" formControlName="departamento"  id="validation04" placeholder="Direccion" required> -->
+      </div>
+      
+      <div class="mb-3 form-group col-md-4">
+        <label for="phone_number" class="form-label">Municipio * </label>
+        <ion-item>
+          <!-- <ion-label >Port</ion-label> -->
+          <ionic-selectable
+            [items]="municipios"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            formControlName="municipio"
+           
+            >
+          </ionic-selectable>
+        </ion-item> 
+      </div>
+
+
+      <div class="mb-3 form-group col-md-4">
         <label for="validation04" class="form-label">Dirección *</label>
         <input type="text" class="form-control" formControlName="address"  id="validation04" placeholder="Direccion" required>
       </div>
 
-      <div class="mb-3 form-group col-md-4">
-        <label for="validation04" class="form-label">Ciudad *</label>
-        <input type="text" class="form-control" formControlName="address"  id="validation04" placeholder="Direccion" required>
-      </div>
 
-      <div class="mb-3 form-group col-md-4">
-        <label for="validation04" class="form-label">Departamento *</label>
-        <input type="text" class="form-control" formControlName="address"  id="validation04" placeholder="Direccion" required>
-      </div>
-
-      <div class="mb-3 form-group col-md-10">
+      <div class="mb-3 form-group col-md-12">
         <label for="validation04" class="form-label">Correo electrónico *</label>
         <input type="email" class="form-control" formControlName="email"  id="validation04" placeholder="ejemplo@gmail.com" required>
       </div>

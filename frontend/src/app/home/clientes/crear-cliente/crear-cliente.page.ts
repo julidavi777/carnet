@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { read } from 'fs';
 import { CrearClienteService } from './crear-cliente.service';
+import { CommonService } from 'src/app/services/common.service';
 
 interface HtlmInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
@@ -17,6 +18,10 @@ export class CrearClientePage implements OnInit {
   registeredSuccessfully:boolean = false;
   expandAllClass: boolean = true;
   showDigitV: boolean = false;
+  keyword = 'name';
+  
+  departamentos = [];
+  municipios = [];
 
 
 
@@ -33,6 +38,8 @@ export class CrearClientePage implements OnInit {
     surname: new FormControl('', [Validators.required]),
     phone_number: new FormControl(''),
     address: new FormControl('', [Validators.required]),
+    departamento: new FormControl('', [Validators.required]),
+    municipio: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     nombre_contacto_comercial: new FormControl('',),
     commercial_contact_1: new FormControl('', [Validators.required]),
@@ -58,15 +65,26 @@ export class CrearClientePage implements OnInit {
     cliente_logo: new FormControl('',),
   });
 
-  constructor(
+  get municipio () { return this.customerForm.get('municipio') }
 
+  constructor(
     private crearClienteService: CrearClienteService,
+    private commonService: CommonService
   ) { }
 
   ngOnInit() {
+    this.customerForm.controls['municipio'].disable();
+    this.getDepartamentos();
+  }
+
+  getDepartamentos(){
+    this.commonService.getDepartamentos().subscribe((res:any) => {
+      this.departamentos = res.data;
+    })
   }
 
   onSubmit(){
+   
     this.registeredSuccessfully = false;
 
     console.log(this.customerForm.value)
@@ -80,6 +98,8 @@ export class CrearClientePage implements OnInit {
     formData.append('surname', this.customerForm.get('surname').value);
     formData.append('phone_number', this.customerForm.get('phone_number').value);
     formData.append('address', this.customerForm.get('address').value);
+    formData.append('departamento_id', this.customerForm.get('departamento').value.id);
+    formData.append('municipio_id', this.customerForm.get('municipio').value.id);
     formData.append('email', this.customerForm.get('email').value);
     formData.append('nombre_contacto_comercial', this.customerForm.get('nombre_contacto_comercial').value);
     formData.append('commercial_contact_1', this.customerForm.get('commercial_contact_1').value);
@@ -187,5 +207,25 @@ export class CrearClientePage implements OnInit {
   }
 
 
+  text: string;
 
+  results: string[];
+
+  departamentoChange(event) {
+    let municipio_id = event.value.id;
+    this.customerForm.controls['municipio'].reset()
+    this.customerForm.controls['municipio'].disable();
+    
+    /* this.mylookupservice.getResults(event.query).then(data => {
+        this.results = data;
+    }); */
+    this.commonService.getDepartamentosMunicipios(municipio_id).subscribe((res: any) => {
+      this.customerForm.controls['municipio'].enable();
+      this.municipios = res.data;
+    });
+  }
+
+  
+
+  
 }

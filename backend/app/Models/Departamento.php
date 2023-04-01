@@ -13,4 +13,9 @@ class Departamento extends Model
     {
         return $this->hasMany(Municipio::class);
     }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
 }

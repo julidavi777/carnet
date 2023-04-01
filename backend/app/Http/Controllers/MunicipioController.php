@@ -12,8 +12,20 @@ class MunicipioController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $name_municipio = $request->query('name_municipio');
+        
+        if(!is_null($name_municipio)){
+
+            $municipios = Municipio::whereRaw("lower(unaccent(name)) ilike '%$name_municipio%'")
+                                            ->orderBy('name')
+                                            ->limit(10)
+                                            ->get();
+
+            return $this->showAll($municipios);
+        }
+
         $municipios = Municipio::get();
         return $this->showAll($municipios);
     }

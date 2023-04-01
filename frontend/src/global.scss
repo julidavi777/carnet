@@ -34,4 +34,7 @@
 @import 'theme/tooltipDefect.scss';
 
 
-
+.form-control:disabled {
+    background-color: #a7aeb6 !important;
+    opacity: 1;
+}
