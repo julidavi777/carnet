@@ -31,26 +31,26 @@ export class HomePage {
             items:[
                 {
                     label:'Usuarios',
-  
+
                     icon:'pi pi-fw pi-users',
-  
-  
+
+
                     routerLink: ['users']
-  
+
                 },
                 {
                   separator:true
                 },
                 {
                     label:'Roles',
-  
+
                     icon:'pi pi-fw pi-id-card',
-  
-  
+
+
                     routerLink: ['roles']
-  
+
                 },
-  
+
             ]
         },
 
@@ -90,21 +90,21 @@ export class HomePage {
                 separator:true
               },
               {
-                label:'Nueva cotizacion',
-                icon:'pi pi-fw pi-dollar',
-                routerLink: ['oferta-comercial/cotizaciones']
-             },
-              {
-                  label:'Cotizaciones',
+                  label:'Crear Cotización',
                   icon:'pi pi-fw pi-money-bill',
                   routerLink: ['oferta-comercial/crear-cotizacion']
               },
+              {
+                label:'Listado de Cotizaciones',
+                icon:'pi pi-fw pi-dollar',
+                routerLink: ['oferta-comercial/cotizaciones']
+             },
 
           ]
       },
 
       {
-        label:'Indicadores',
+        label:'Seguimientos',
         icon:'pi pi-fw pi-chart-bar',
         items:[
             {
@@ -123,7 +123,7 @@ export class HomePage {
       },
 
     {
-      label:'Informes',
+      label:'Informes / Indicadores',
       icon:'pi pi-fw pi-file',
       items:[
           // {
@@ -160,37 +160,37 @@ export class HomePage {
 
     /* ADMIN */
     if(!permissions.includes('admin')){
-            this.deleteItemMenu('Administración') 
+            this.deleteItemMenu('Administración')
     }
 
     /* CUSTOMERS */
     //sub_items
     if(!permissions.includes('admin.customers.index')){
         this.deleteItemMenu('Clientes'
-        , true, 'Clientes') 
+        , true, 'Clientes')
     }
     if(!permissions.includes('admin.customers.store')){
-        this.deleteItemMenu('Clientes', true, 'Crear cliente') 
+        this.deleteItemMenu('Clientes', true, 'Crear cliente')
     }
     //main
     if(!permissions.includes('admin.customers.store') && !permissions.includes('admin.customers.index')){
-        this.deleteItemMenu('Clientes') 
+        this.deleteItemMenu('Clientes')
     }
 
      /* COMMERCIAL_OFFERS */
     //sub_items
     if(!permissions.includes('admin.commercialOffers.index')){
-        this.deleteItemMenu('Oportunidad Comercial', true, 'Oportunidades comerciales') 
+        this.deleteItemMenu('Oportunidad Comercial', true, 'Oportunidades comerciales')
     }
     if(!permissions.includes('admin.commercialOffers.store')){
-        this.deleteItemMenu('Oportunidad Comercial', true, 'Crear oportunidad comercial') 
+        this.deleteItemMenu('Oportunidad Comercial', true, 'Crear oportunidad comercial')
     }
     //main
     /* if(!permissions.includes('admin.commercialOffers.index') && !permissions.includes('admin.commercialOffers.store')){
-        this.deleteItemMenu('Clientes') 
+        this.deleteItemMenu('Clientes')
     } */
 
-   
+
   }
   logout(){
     this.homeService.logout().subscribe((res: any) => {
@@ -214,7 +214,7 @@ export class HomePage {
         this.items[index].items.splice(indexChildren, 1);
         return;
     }
-    
+
     this.items.splice(index, 1);
   }
 
