@@ -3,7 +3,7 @@
   <form [formGroup]="offersForm" (ngSubmit)="onSubmit()" class="formu">
     <div class="row">
       <div class="mb-3 form-group col-md-2">
-        <label class="form-label" for="validation09">Sede:</label>
+        <label class="form-label" for="">Sede:</label>
         <select
           [(ngModel)]="tipoContratacion"
           class="form-select"
@@ -192,6 +192,8 @@
           formControlName="object_description"
           id="validation09"
           placeholder="Objeto"
+          rows="4"
+          cols="50"
           required
         ></textarea>
       </div>
@@ -285,6 +287,8 @@
         class="form-control"
         formControlName="observations"
         id="validation09"
+        rows="4"
+        cols="50"
         placeholder=""
       ></textarea>
     </div>

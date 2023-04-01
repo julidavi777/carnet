@@ -1,95 +1,86 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Cotizaciones</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-title>Listado de Cotizaciones</ion-title>
 
 
-  <div class="content">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Consecutivo</th>
-          <th scope="col">Cantidad</th>
-          <th scope="col">No. de cotización</th>
-          <th scope="col">Fecha de cotización</th>
-          <th scope="col">Sector</th>
-          <th scope="col">Clasificación</th>
-          <th scope="col">Contacto</th>
-          <th scope="col">Objeto de la cotización</th>
-          <th scope="col">Valor cotizado</th>
-          <th scope="col">Estado</th>
-          <th scope="col">Observaciones</th>
+<div class="row formu">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <div >
+      <ngx-datatable
+      class="material"
+      [rows]="rows"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      rowHeight="auto"
+      [limit]="10"
+      [scrollbarH]="true"
+      >
+      <ngx-datatable-column [resizeable]="true" [width]="200">
+        <ng-template ngx-datatable-header-template>
+          Sede:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.sede}}
+        </ng-template>
+      </ngx-datatable-column>
 
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>5</td>
-          <td>0001-2023</td>
-          <td>01/02/2023</td>
-          <td>INDEPENDITE</td>
-          <td>Salud</td>
-          <td>Apolo</td>
-          <td>Desarrollo de sistema de información</td>
-          <td>10.000.000</td>
-          <td>Adjudicada a CBK</td>
-          <td>Para dar inicio con prontitud</td>
-          </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>5</td>
-          <td>0001-2023</td>
-          <td>01/02/2023</td>
-          <td>INDEPENDITE</td>
-          <td>Salud</td>
-          <td>Apolo</td>
-          <td>Desarrollo de sistema de información</td>
-          <td>10.000.000</td>
-          <td>Adjudicada a CBK</td>
-          <td>Para dar inicio con prontitud</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>5</td>
-          <td>0001-2023</td>
-          <td>01/02/2023</td>
-          <td>INDEPENDITE</td>
-          <td>Salud</td>
-          <td>Apolo</td>
-          <td>Desarrollo de sistema de información</td>
-          <td>10.000.000</td>
-          <td>Adjudicada a CBK</td>
-          <td>Para dar inicio con prontitud</td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>5</td>
-          <td>0001-2023</td>
-          <td>01/02/2023</td>
-          <td>INDEPENDITE</td>
-          <td>Salud</td>
-          <td>Apolo</td>
-          <td>Desarrollo de sistema de información</td>
-          <td>10.000.000</td>
-          <td>Adjudicada a CBK</td>
-          <td>Para dar inicio con prontitud</td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>5</td>
-          <td>0001-2023</td>
-          <td>01/02/2023</td>
-          <td>INDEPENDITE</td>
-          <td>Salud</td>
-          <td>Apolo</td>
-          <td>Desarrollo de sistema de información</td>
-          <td>10.000.000</td>
-          <td>Adjudicada a CBK</td>
-          <td>Para dar inicio con prontitud</td>
-        </tr>
-      </tbody>
-    </table>
+      <ngx-datatable-column [resizeable]="true" [width]="200">
+        <ng-template ngx-datatable-header-template>
+          Consecutivo:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.Consecutivo}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="200">
+        <ng-template ngx-datatable-header-template>
+          Identificación:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.identification}}
+        </ng-template>
+      </ngx-datatable-column>
+
+
+      <ngx-datatable-column [resizeable]="true" [width]="200">
+        <ng-template ngx-datatable-header-template>
+          Razon social
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.razon_social}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="200">
+        <ng-template ngx-datatable-header-template>
+          Razon comercial
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.razon_comercial}}
+        </ng-template>
+      </ngx-datatable-column>
+
+
+
+
+
+      <ngx-datatable-column [resizeable]="true" [width]="200">
+        <ng-template ngx-datatable-header-template>
+          Cotizacion Adjunta:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+        <!--  {{row.income_statement_file}} -->
+          <ion-button (click)="watchDocument(row.cotizacion_file_fieled)">
+            <ion-icon  slot="icon-only" name="document-sharp"></ion-icon>
+          </ion-button>
+
+        </ng-template>
+      </ngx-datatable-column>
+
+
+      </ngx-datatable>
+</div>
   </div>
+  <div class="col-1"></div>
 
+</div>
