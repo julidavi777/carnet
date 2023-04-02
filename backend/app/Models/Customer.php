@@ -17,6 +17,8 @@ class Customer extends Model
         'surname',
         'phone_number',
         'address',
+        'municipio_id',
+        'departamento_id',
         'email',
         'nombre_contacto_comercial',
         'commercial_contact_1',

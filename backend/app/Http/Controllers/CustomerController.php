@@ -152,11 +152,11 @@ class CustomerController extends ApiController
                 "message" => "created sucessfully"
             ],201);
         }else{
+            DB::rollback();
             return response()->json([
                 "status" => false,
                 "message" => "cannot create"
             ],400);
-            DB::rollback();
         }
         } catch (\Exception $ex) {
         DB::rollback();
@@ -221,8 +221,9 @@ class CustomerController extends ApiController
             return response()->json($validator->errors(), 400);
         }
 
-        return $data;
 
+        return DB::transaction(function() use ($request, $customer) {
+            try{
         //SAVING FILES
 
         $rut_file_json_urls = $customer->rut_file;
@@ -301,17 +302,74 @@ class CustomerController extends ApiController
             'cliente_logo' => $cliente_logo_file_json_urls,
         ]);
 
+        if(!is_null($request->post("form_contacto1"))){
+            $data = json_decode($request->post("form_contacto1"));
+            //$data->customer_id = $customer_created->id;
+            //CustomersContact::insert((array) $data);
+            //dd($data);
+            $recordFound = CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 1)->first();
+    
+            if(!is_null($recordFound)){
+                $recordFound->update((array) $data);
+            }else{
+                $data->customer_id = $customer->id;
+                CustomersContact::insert((array) $data);
+            }
+        }
+        if(!is_null($request->post("form_contacto2"))){
+            $data = json_decode($request->post("form_contacto2"));
+            
+            $recordFound = CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 2)->first();
+            if(!is_null($recordFound)){
+                $recordFound->update((array) $data);
+            }else{
+                $data->customer_id = $customer->id;
+                CustomersContact::insert((array) $data);
+            }
+        }
+        if(!is_null($request->post("form_contacto_facturacion"))){
+            $data = json_decode($request->post("form_contacto_facturacion"));
+            
+            $recordFound = CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 3)->first();
+            if(!is_null($recordFound)){
+                $recordFound->update((array) $data);
+            }else{
+                $data->customer_id = $customer->id;
+                CustomersContact::insert((array) $data);
+            }
+        }
+        if(!is_null($request->post("form_contacto_pagos"))){
+            $data = json_decode($request->post("form_contacto_pagos"));
+            
+            $recordFound = CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 4)->first();
+            if(!is_null($recordFound)){
+                $recordFound->update((array) $data);
+            }else{
+                $data->customer_id = $customer->id;
+                CustomersContact::insert((array) $data);
+            }
+        }
+
         if ($updated) {
             return response()->json([
                 "status" => true,
                 "message" => "edited sucessfully"
             ], 200);
         } else {
+            DB::rollback();
             return response()->json([
                 "status" => false,
                 "message" => "cannot edit"
+                
             ], 400);
+            
         }
+        } catch (\Exception $ex) {
+        DB::rollback();
+        // throw $ex;
+        return response()->json(['status' => false, 'message' => 'something went wrong registro dog o usuario'.$ex], 400);
+        }
+      });
     }
 
     /**

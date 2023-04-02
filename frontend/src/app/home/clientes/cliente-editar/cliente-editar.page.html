@@ -12,7 +12,7 @@
         </select>
       </div>
       <div class="mb-3 form-group " [ngClass]="expandAllClass === true ? 'col-md-8' : 'col-md-6'">
-        <label for="identification" class="form-label">Numero identificacion *</label>
+        <label for="identification" class="form-label">Número identificación *</label>
         <input type="number" class="form-control" formControlName="identification" id="identification" placeholder="" required>
       </div>
       <div *ngIf="showDigitV" class="mb-3 form-group col-md-2">
@@ -30,328 +30,83 @@
 
 
 
-      <div class="mb-3 form-group col-md-6">
+      <div class="mb-3 form-group col-md-12">
         <label for="phone_number" class="form-label">Número telefónico * </label>
         <input type="number" class="form-control" formControlName="phone_number" id="phone_number" placeholder=" # Telefono" required>
       </div>
 
-      <div class="mb-3 form-group col-md-6">
+      <div class="mb-3 form-group col-md-4">
+        <label for="phone_number" class="form-label">Departamento * </label>
+        <ion-item>
+          <!-- <ion-label >Port</ion-label> -->
+          <ionic-selectable
+            [items]="departamentos"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            formControlName="departamento"
+            (onChange)="departamentoChange($event)"
+            >
+          </ionic-selectable>
+        </ion-item>
+        <!-- <label for="validation04" class="form-label">Departamento *</label>
+        <input type="text" class="form-control" formControlName="departamento"  id="validation04" placeholder="Direccion" required> -->
+      </div>
+      
+      <div class="mb-3 form-group col-md-4">
+        <label for="phone_number" class="form-label">Municipio * </label>
+        <ion-item>
+          <!-- <ion-label >Port</ion-label> -->
+          <ionic-selectable
+            [items]="municipios"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            formControlName="municipio"
+           
+            >
+          </ionic-selectable>
+        </ion-item> 
+      </div>
+
+
+      <div class="mb-3 form-group col-md-4">
         <label for="validation04" class="form-label">Dirección *</label>
         <input type="text" class="form-control" formControlName="address"  id="validation04" placeholder="Direccion" required>
       </div>
+
 
       <div class="mb-3 form-group col-md-12">
         <label for="validation04" class="form-label">Correo electrónico *</label>
         <input type="email" class="form-control" formControlName="email"  id="validation04" placeholder="ejemplo@gmail.com" required>
       </div>
 
-      <div class="col-md-3">
-        <button type="button"  for="contacto1" data-bs-toggle="modal" data-bs-target="#contacto1">
-          Contacto comercial 1
-        </button>
-      </div> <br>
 
-      <div class="col-md-3">
-        <button type="button" for="contacto2" data-bs-toggle="modal" data-bs-target="#contacto2">
-          Contacto comercial 2 </button>
-        </div><br>
+        <div class="col-md-3">
+          <button type="button"  for="contacto1" data-bs-toggle="modal" data-bs-target="#contacto1">
+            Contacto comercial 1
+          </button>
+        </div> <br>
 
-      <div class="col-md-3">
-        <button type="button" for="" data-bs-toggle="modal" data-bs-target="#contacto3">
-          Contacto Facturación</button>
-        </div><br>
+        <div class="col-md-3">
+          <button type="button" for="contacto2" data-bs-toggle="modal" data-bs-target="#contacto2">
+            Contacto comercial 2 </button>
+          </div><br>
 
-      <div class="col-md-3">
-      <button type="button" for="" data-bs-toggle="modal" data-bs-target="#contacto4">
-        Contacto Pagos / Tesoreria</button>
-      </div><br>
-      <br>
-      <br>
-      <br>
-      <!-- *****************************MODALES CODE***************************** -->
-        <!-- Modal contacto 1 -->
-        <div class="modal fade modal_stilos" id="contacto1" tabindex="-1" aria-labelledby="contacto1" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">
-                  Registre Contacto Comercial
-                </h1>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-10">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Nombre</label>
-                      <input type="text" class="form-control" />
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Celular</label>
-                      <input type="number" class="form-control" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Telefono</label>
-                      <input type="number" class="form-control" required />
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">EXT</label>
-                      <input type="number" class="form-control" required />
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Correo</label>
-                      <input type="email" class="form-control" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-8">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Ciudad</label>
-                      <input type="text" class="form-control" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                  Cerrar
-                </button>
-                <!-- <button type="button" class="btn btn-primary">Guardar Visita</button> -->
-              </div>
-            </div>
-          </div>
-        </div>
+          <div class="col-md-3">
+            <button type="button" for="" data-bs-toggle="modal" data-bs-target="#contacto3">
+              Contacto Facturación</button>
+            </div><br>
 
-        <!-- Modal contacto 2 -->
-        <div class="modal fade modal_stilos" id="contacto2" tabindex="-1" aria-labelledby="contacto2" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="contacto2">
-                  Registre Contacto Comercial
-                </h1>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-10">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Nombre</label>
-                      <input type="text" class="form-control" />
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Celular</label>
-                      <input type="number" class="form-control" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Telefono</label>
-                      <input type="number" class="form-control" required />
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">EXT</label>
-                      <input type="number" class="form-control" required />
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Correo</label>
-                      <input type="email" class="form-control" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-8">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Ciudad</label>
-                      <input type="text" class="form-control" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                  Cerrar
-                </button>
-                <!-- <button type="button" class="btn btn-primary">Guardar Visita</button> -->
-              </div>
-            </div>
-          </div>
-        </div>
+            <div class="col-md-3">
+              <button type="button" for="" data-bs-toggle="modal" data-bs-target="#contacto4">
+                Contacto Pagos / Tesoreria</button>
+              </div><br>
 
-        <!-- Modal facturacion3  -->
-        <div class="modal fade modal_stilos" id="contacto3" tabindex="-1" aria-labelledby="contacto3" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="contacto3">
-                  Registre Contacto Facturación
-                </h1>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-10">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Nombre</label>
-                      <input type="text" class="form-control" />
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Celular</label>
-                      <input type="number" class="form-control" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Telefono</label>
-                      <input type="number" class="form-control" required />
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">EXT</label>
-                      <input type="number" class="form-control" required />
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Correo</label>
-                      <input type="email" class="form-control" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-8">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Ciudad</label>
-                      <input type="text" class="form-control" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                  Cerrar
-                </button>
-                <!-- <button type="button" class="btn btn-primary">Guardar Visita</button> -->
-              </div>
-            </div>
-          </div>
-        </div>
+              <br>
+              <br>
+              <br>
 
-
-        <!-- Modal pagos/tesoreria  -->
-        <div class="modal fade modal_stilos" id="contacto4" tabindex="-1" aria-labelledby="contacto4" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="contacto4">
-                  Registre Contacto Pagos/Tesoreria
-                </h1>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-10">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Nombre</label>
-                      <input type="text" class="form-control" />
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Celular</label>
-                      <input type="number" class="form-control" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Telefono</label>
-                      <input type="number" class="form-control" required />
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">EXT</label>
-                      <input type="number" class="form-control" required />
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Correo</label>
-                      <input type="email" class="form-control" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-8">
-                    <div class="mb-3 form-group">
-                      <label class="form-label" for="">Ciudad</label>
-                      <input type="text" class="form-control" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                  Cerrar
-                </button>
-                <!-- <button type="button" class="btn btn-primary">Guardar Visita</button> -->
-              </div>
-            </div>
-          </div>
-        </div>
-
-      <!-- *****************************MODALES CODE END*****************************-->
-
-
-
-
-    
       <div class="mb-3 form-group col-md-6">
         <label for="validation06" class="form-label">Razón social *</label>
         <input type="text" class="form-control" formControlName="razon_social" id="validation06" placeholder="" required>
@@ -368,12 +123,12 @@
       </div>
 
       <div class="mb-3 form-group col-md-6">
-        <label for="validation08" class="form-label">Camara de comercio</label>
+        <label for="validation08" class="form-label">Cámara de comercio</label>
         <input type="file" class="form-control" formControlName="camara_commerce_file_field" (change)="onFileChange($event, 'camara_commerce_file_field')" id="validation08" placeholder="Cargue archivo" required>
       </div>
 
       <div class="mb-3 form-group col-md-6">
-        <label for="validation09" class="form-label">Declaracion de renta</label>
+        <label for="validation09" class="form-label">Declaración de renta</label>
         <input type="file" class="form-control" formControlName="income_statement_file_field" (change)="onFileChange($event, 'income_statement_file_field')" id="validation09" placeholder="Cargue archivo" required>
       </div>
 
@@ -394,10 +149,410 @@
     </div>
 
     <div *ngIf="registeredSuccessfully" class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-      <strong>Mensaje</strong> Cliente Actualizado exitosamente
+      <strong>Mensaje</strong> Cliente creado exitosamente
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   </form>
+        <!-- *****************************MODALES CODE***************************** -->
+        <!-- Modal contacto 1 -->
+        
+        <div class="modal fade modal_stilos" id="contacto1" tabindex="-1" aria-labelledby="contacto1" aria-hidden="true">
+          <form [formGroup]="formContacto1">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Registre Contacto Comercial
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-10">
+                    <div class="mb-3 form-group">
+                      <label class="form-label" for="">Nombre</label>
+                      <input type="text" formControlName="name" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="mb-3 form-group">
+                      <label class="form-label" for="">Celular</label>
+                      <input type="number" formControlName="phone_number" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="mb-3 form-group">
+                      <label class="form-label" for="">Telefono</label>
+                      <input type="number" formControlName="telephone_number" class="form-control" required />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3 form-group">
+                      <label class="form-label" for="">EXT</label>
+                      <input type="number" formControlName="telephone_number_ext" class="form-control" required />
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="mb-3 form-group">
+                      <label class="form-label" for="">Correo</label>
+                      <input type="email" formControlName="email" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3 form-group col-md-6">
+                    <label for="phone_number" class="form-label">Departamento * </label>
+                    <ion-item>
+                      <!-- <ion-label >Port</ion-label> -->
+                      <ionic-selectable
+                        [items]="departamentos"
+                        itemValueField="id"
+                        itemTextField="name"
+                        [canSearch]="true"
+                        formControlName="departamento_id"
+                        (onChange)="departamentoChange($event, 1)"
+                        >
+                      </ionic-selectable>
+                    </ion-item>
+                    <!-- <label for="validation04" class="form-label">Departamento *</label>
+                    <input type="text" class="form-control" formControlName="departamento"  id="validation04" placeholder="Direccion" required> -->
+                  </div>
+                  
+                  <div class="mb-3 form-group col-md-6">
+                    <label for="phone_number" class="form-label">Municipio * </label>
+                    <ion-item>
+                      <!-- <ion-label >Port</ion-label> -->
+                      <ionic-selectable
+                        [items]="formContacto1Municipios"
+                        itemValueField="id"
+                        itemTextField="name"
+                        [canSearch]="true"
+                        formControlName="municipio_id"
+                       
+                        >
+                      </ionic-selectable>
+                    </ion-item> 
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Cancelar
+                </button>
+                <button type="button" (click)="printData()" data-bs-dismiss="modal" class="btn btn-primary">OK</button>
+              </div>
+            </div>
+          </div>
+        
+          </form>
+        </div>
+
+        <!-- Modal contacto 2 -->
+        <div class="modal fade modal_stilos" id="contacto2" tabindex="-1" aria-labelledby="contacto2" aria-hidden="true">
+          <form [formGroup]="formContacto2">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Registre Contacto Comercial
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-10">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">Nombre</label>
+                        <input type="text" formControlName="name" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">Celular</label>
+                        <input type="number" formControlName="phone_number" class="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">Telefono</label>
+                        <input type="number" formControlName="telephone_number" class="form-control" required />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">EXT</label>
+                        <input type="number" formControlName="telephone_number_ext" class="form-control" required />
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">Correo</label>
+                        <input type="email" formControlName="email" class="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 form-group col-md-6">
+                      <label for="phone_number" class="form-label">Departamento * </label>
+                      <ion-item>
+                        <!-- <ion-label >Port</ion-label> -->
+                        <ionic-selectable
+                          [items]="departamentos"
+                          itemValueField="id"
+                          itemTextField="name"
+                          [canSearch]="true"
+                          formControlName="departamento_id"
+                          (onChange)="departamentoChange($event,2)"
+                          >
+                        </ionic-selectable>
+                      </ion-item>
+                      <!-- <label for="validation04" class="form-label">Departamento *</label>
+                      <input type="text" class="form-control" formControlName="departamento"  id="validation04" placeholder="Direccion" required> -->
+                    </div>
+                    
+                    <div class="mb-3 form-group col-md-6">
+                      <label for="phone_number" class="form-label">Municipio * </label>
+                      <ion-item>
+                        <!-- <ion-label >Port</ion-label> -->
+                        <ionic-selectable
+                          [items]="formContacto2Municipios"
+                          itemValueField="id"
+                          itemTextField="name"
+                          [canSearch]="true"
+                          formControlName="municipio_id"
+                         
+                          >
+                        </ionic-selectable>
+                      </ion-item> 
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                  </button>
+                  <button type="button" (click)="printData()" data-bs-dismiss="modal" class="btn btn-primary">OK</button>
+                </div>
+              </div>
+            </div>
+          
+            </form>
+        </div>
+
+        <!-- Modal facturacion3  -->
+        <div class="modal fade modal_stilos" id="contacto3" tabindex="-1" aria-labelledby="contacto3" aria-hidden="true">
+          <form [formGroup]="formContactoFacturacion">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Registre Contacto Comercial
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-10">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">Nombre</label>
+                        <input type="text" formControlName="name" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">Celular</label>
+                        <input type="number" formControlName="phone_number" class="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">Telefono</label>
+                        <input type="number" formControlName="telephone_number" class="form-control" required />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">EXT</label>
+                        <input type="number" formControlName="telephone_number_ext" class="form-control" required />
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">Correo</label>
+                        <input type="email" formControlName="email" class="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 form-group col-md-6">
+                      <label for="phone_number" class="form-label">Departamento * </label>
+                      <ion-item>
+                        <!-- <ion-label >Port</ion-label> -->
+                        <ionic-selectable
+                          [items]="departamentos"
+                          itemValueField="id"
+                          itemTextField="name"
+                          [canSearch]="true"
+                          formControlName="departamento_id"
+                          (onChange)="departamentoChange($event, 3)"
+                          >
+                        </ionic-selectable>
+                      </ion-item>
+                      <!-- <label for="validation04" class="form-label">Departamento *</label>
+                      <input type="text" class="form-control" formControlName="departamento"  id="validation04" placeholder="Direccion" required> -->
+                    </div>
+                    
+                    <div class="mb-3 form-group col-md-6">
+                      <label for="phone_number" class="form-label">Municipio * </label>
+                      <ion-item>
+                        <!-- <ion-label >Port</ion-label> -->
+                        <ionic-selectable
+                          [items]="formContactoFacturacionMunicipios"
+                          itemValueField="id"
+                          itemTextField="name"
+                          [canSearch]="true"
+                          formControlName="municipio_id"
+                         
+                          >
+                        </ionic-selectable>
+                      </ion-item> 
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                  </button>
+                  <button type="button" (click)="printData()" data-bs-dismiss="modal" class="btn btn-primary">OK</button>
+                </div>
+              </div>
+            </div>
+          
+            </form>
+        </div>
+
+
+        <!-- Modal pagos/tesoreria  -->
+        <div class="modal fade modal_stilos" id="contacto4" tabindex="-1" aria-labelledby="contacto4" aria-hidden="true">
+          <form [formGroup]="formContactoPagos">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Registre Contacto Comercial
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-10">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">Nombre</label>
+                        <input type="text" formControlName="name" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">Celular</label>
+                        <input type="number" formControlName="phone_number" class="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">Telefono</label>
+                        <input type="number" formControlName="telephone_number" class="form-control" required />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">EXT</label>
+                        <input type="number" formControlName="telephone_number_ext" class="form-control" required />
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="mb-3 form-group">
+                        <label class="form-label" for="">Correo</label>
+                        <input type="email" formControlName="email" class="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 form-group col-md-6">
+                      <label for="phone_number" class="form-label">Departamento * </label>
+                      <ion-item>
+                        <!-- <ion-label >Port</ion-label> -->
+                        <ionic-selectable
+                          [items]="departamentos"
+                          itemValueField="id"
+                          itemTextField="name"
+                          [canSearch]="true"
+                          formControlName="departamento_id"
+                          (onChange)="departamentoChange($event, 4)"
+                          >
+                        </ionic-selectable>
+                      </ion-item>
+                      <!-- <label for="validation04" class="form-label">Departamento *</label>
+                      <input type="text" class="form-control" formControlName="departamento"  id="validation04" placeholder="Direccion" required> -->
+                    </div>
+                    
+                    <div class="mb-3 form-group col-md-6">
+                      <label for="phone_number" class="form-label">Municipio * </label>
+                      <ion-item>
+                        <!-- <ion-label >Port</ion-label> -->
+                        <ionic-selectable
+                          [items]="formContactoPagosMunicipios"
+                          itemValueField="id"
+                          itemTextField="name"
+                          [canSearch]="true"
+                          formControlName="municipio_id"
+                         
+                          >
+                        </ionic-selectable>
+                      </ion-item> 
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                  </button>
+                  <button type="button" (click)="printData()" data-bs-dismiss="modal" class="btn btn-primary">OK</button>
+                </div>
+              </div>
+            </div>
+          
+            </form>
+        </div>
+
+      <!-- *****************************MODALES CODE END*****************************-->
 
   
 </div>
