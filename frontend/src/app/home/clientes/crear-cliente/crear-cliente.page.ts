@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { read } from 'fs';
 import { CrearClienteService } from './crear-cliente.service';
 import { CommonService } from 'src/app/services/common.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 interface HtlmInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
@@ -32,9 +33,9 @@ export class CrearClientePage implements OnInit {
 
 
   formContacto1: any = new FormGroup({
-     name: new FormControl(''),
-    phone_number: new FormControl(''),
-    telephone_number: new FormControl(''),
+     name: new FormControl('', [Validators.required]),
+    phone_number: new FormControl('', [Validators.required]),
+    telephone_number: new FormControl('', [Validators.required]),
     telephone_number_ext: new FormControl(''),
     email: new FormControl(''),
     departamento_id: new FormControl(''),
@@ -79,8 +80,8 @@ export class CrearClientePage implements OnInit {
     identification_type: new FormControl('', [Validators.required]),
     identification: new FormControl('', [Validators.required]),
     digit_v: new FormControl(''),
-    name: new FormControl('', [Validators.required]),
-    surname: new FormControl('', [Validators.required]),
+    name: new FormControl('',),
+    surname: new FormControl('',),
     phone_number: new FormControl(''),
     address: new FormControl('', [Validators.required]),
     departamento: new FormControl('', [Validators.required]),
@@ -114,7 +115,8 @@ export class CrearClientePage implements OnInit {
 
   constructor(
     private crearClienteService: CrearClienteService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -219,7 +221,7 @@ export class CrearClientePage implements OnInit {
     );
   }
 
-  changeSelect(event: any ){
+  changeSelectTipoDoc(event: any ){
     console.log(event.target.value)
     if(event.target.value === "2"){
       this.expandAllClass = false;
@@ -380,6 +382,38 @@ export class CrearClientePage implements OnInit {
     })
 
     return hasValue
+  }
+
+
+  getNamesCustomerHtml(showDigitV){
+    
+    let namesAndSurnamesHtml = `
+    <div class="mb-3 form-group col-md-6">
+      <label for="name" class="form-label">Nombres *</label>
+      <input type="text" class="form-control" formControlName="name" id="name" placeholder="Nombres" >
+    </div>
+    <div class="mb-3 form-group col-md-6">
+      <label for="surname" class="form-label">Apellidos *</label>
+      <input type="text" class="form-control"  formControlName="surname" id="surname" placeholder="Apellidos" >
+    </div>
+    `
+
+    let razonSocialRazonComercialHtml = `
+    <div class="mb-3 form-group col-md-6">
+      <label for="validation06" class="form-label">Razón social *</label>
+      <input type="text" class="form-control" formControlName="razon_social" id="validation06" placeholder="" required>
+    </div>
+
+      <div class="mb-3 form-group col-md-6">
+        <label for="validation06" class="form-label">Razón comercial *</label>
+        <input type="text" class="form-control" formControlName="razon_comercial" id="validation06" placeholder="" required>
+      </div>
+    `;
+
+    if(showDigitV){
+      return this.sanitizer.bypassSecurityTrustHtml(razonSocialRazonComercialHtml)
+    }
+    return this.sanitizer.bypassSecurityTrustHtml(namesAndSurnamesHtml);
   }
 
   
