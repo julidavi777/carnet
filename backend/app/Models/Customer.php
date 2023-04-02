@@ -56,4 +56,9 @@ class Customer extends Model
     }
 
 
+    public function customersContacts()
+    {
+        return $this->hasMany(CustomersContact::class);
+    }
+
 }

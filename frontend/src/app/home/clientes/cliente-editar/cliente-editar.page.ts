@@ -30,10 +30,10 @@ export class ClienteEditarPage implements OnInit {
     phone_number: new FormControl(''),
     address: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    nombre_contacto_comercial: new FormControl('',),
+   /*  nombre_contacto_comercial: new FormControl('',),
     commercial_contact_1: new FormControl('', [Validators.required]),
     commercial_contact_2: new FormControl('',),
-    commercial_contact_3: new FormControl('',),
+    commercial_contact_3: new FormControl('',), */
     razon_social: new FormControl('',),
     razon_comercial: new FormControl('',),
 
@@ -102,10 +102,10 @@ export class ClienteEditarPage implements OnInit {
     formData.append('phone_number', this.customerForm.get('phone_number').value);
     formData.append('address', this.customerForm.get('address').value);
     formData.append('email', this.customerForm.get('email').value);
-    formData.append('nombre_contacto_comercial', this.customerForm.get('nombre_contacto_comercial').value);
+    /* formData.append('nombre_contacto_comercial', this.customerForm.get('nombre_contacto_comercial').value);
     formData.append('commercial_contact_1', this.customerForm.get('commercial_contact_1').value);
     formData.append('commercial_contact_2', this.customerForm.get('commercial_contact_2').value);
-    formData.append('commercial_contact_3', this.customerForm.get('commercial_contact_3').value);
+    formData.append('commercial_contact_3', this.customerForm.get('commercial_contact_3').value); */
     formData.append('razon_social', this.customerForm.get('razon_social').value);
     formData.append('razon_comercial', this.customerForm.get('razon_comercial').value);
 

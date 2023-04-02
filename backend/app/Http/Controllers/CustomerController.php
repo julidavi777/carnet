@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\CustomersContact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends ApiController
 {
@@ -17,6 +19,10 @@ class CustomerController extends ApiController
     public function index()
     {
         $customers = Customer::get();
+        $customers = $customers->map(function ($customer){
+            $customer->customersContacts;
+            return $customer;
+        });
         return $this->showAll($customers);
     }
 
@@ -41,10 +47,14 @@ class CustomerController extends ApiController
             'municipio_id' => 'required|integer|exists:municipios,id',
             'departamento_id' => 'required|integer|exists:departamentos,id',
             'email' => 'required|string',
-            'nombre_contacto_comercial' => 'required|string',
+            /* 'nombre_contacto_comercial' => 'required|string',
             'commercial_contact_1' => 'required|integer',
             'commercial_contact_2' => 'nullable|integer',
-            'commercial_contact_3' => 'nullable|integer',
+            'commercial_contact_3' => 'nullable|integer', */
+            'form_contacto1' => 'nullable|json',
+            'form_contacto2' => 'nullable|json',
+            'form_contacto_facturacion' => 'nullable|json',
+            'form_contacto_pagos' => 'nullable|json',
             'razon_social' => 'required|string|max:50',
             'razon_comercial' => 'required|string|max:50',
             'rut_file' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
@@ -56,6 +66,9 @@ class CustomerController extends ApiController
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
+        
+        return DB::transaction(function() use ($request) {
+            try{
 
         //SAVING FILES
 
@@ -88,7 +101,7 @@ class CustomerController extends ApiController
         }
 
 
-        $created = Customer::create([
+        $customer_created = Customer::create([
             'identification_type' => $request->post('identification_type'),
             'identification' => $request->post('identification'),
             'digit_v' => $request->post('digit_v'),
@@ -99,10 +112,10 @@ class CustomerController extends ApiController
             'municipio_id' => $request->post('municipio_id'),
             'departamento_id' => $request->post('departamento_id'),
             'email' => $request->post('email'),
-            'nombre_contacto_comercial' => $request->post('nombre_contacto_comercial'),
+            /* 'nombre_contacto_comercial' => $request->post('nombre_contacto_comercial'),
             'commercial_contact_1' => $request->post('commercial_contact_1'),
             'commercial_contact_2' => $request->post('commercial_contact_2'),
-            'commercial_contact_3' => $request->post('commercial_contact_3'),
+            'commercial_contact_3' => $request->post('commercial_contact_3'), */
             'razon_social' => $request->post('razon_social'),
             'razon_comercial' => $request->post('razon_comercial'),
             'rut_file' => $rut_file_json_urls,
@@ -111,7 +124,29 @@ class CustomerController extends ApiController
             'cliente_logo' => $cliente_logo_file_json_urls,
         ]);
 
-        if($created){
+        if(!is_null($request->post("form_contacto1"))){
+            $data = json_decode($request->post("form_contacto1"));
+            $data->customer_id = $customer_created->id;
+            //dd($data);
+            CustomersContact::insert((array) $data);
+        }
+        if(!is_null($request->post("form_contacto2"))){
+            $data = json_decode($request->post("form_contacto2"));
+            $data->customer_id = $customer_created->id;
+            CustomersContact::insert((array) $data);
+        }
+        if(!is_null($request->post("form_contacto_facturacion"))){
+            $data = json_decode($request->post("form_contacto_facturacion"));
+            $data->customer_id = $customer_created->id;
+            CustomersContact::insert((array) $data);
+        }
+        if(!is_null($request->post("form_contacto_pagos"))){
+            $data = json_decode($request->post("form_contacto_pagos"));
+            $data->customer_id = $customer_created->id;
+            CustomersContact::insert((array) $data);
+        }
+
+        if($customer_created){
             return response()->json([
                 "status" => true,
                 "message" => "created sucessfully"
@@ -121,8 +156,14 @@ class CustomerController extends ApiController
                 "status" => false,
                 "message" => "cannot create"
             ],400);
+            DB::rollback();
         }
-        
+        } catch (\Exception $ex) {
+        DB::rollback();
+        // throw $ex;
+        return response()->json(['status' => false, 'message' => 'something went wrong registro dog o usuario'.$ex], 400);
+        }
+      });
     }
 
     /**
@@ -160,10 +201,14 @@ class CustomerController extends ApiController
             'municipio_id' => 'nullable|integer|exists:municipios,id',
             'departamento_id' => 'nullable|integer|exists:departamentos,id',
             'email' => 'nullable|string',
-            'nombre_contacto_comercial' => 'nullable|string',
+            'form_contacto1' => 'nullable|json',
+            'form_contacto2' => 'nullable|json',
+            'form_contacto_facturacion' => 'nullable|json',
+            'form_contacto_pagos' => 'nullable|json',
+           /*  'nombre_contacto_comercial' => 'nullable|string',
             'commercial_contact_1' => 'nullable|integer',
             'commercial_contact_2' => 'nullable|integer',
-            'commercial_contact_3' => 'nullable|integer',
+            'commercial_contact_3' => 'nullable|integer', */
             'razon_social' => 'nullable|string|max:50',
             'razon_comercial' => 'nullable|string|max:50',
             'rut_file' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
@@ -175,6 +220,8 @@ class CustomerController extends ApiController
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
+
+        return $data;
 
         //SAVING FILES
 
@@ -242,10 +289,10 @@ class CustomerController extends ApiController
             'municipio_id' => $request->post('municipio_id'),
             'departamento_id' => $request->post('departamento_id'),
             'email' => $request->post('email'),
-            'nombre_contacto_comercial' => $request->post('nombre_contacto_comercial'),
+           /*  'nombre_contacto_comercial' => $request->post('nombre_contacto_comercial'),
             'commercial_contact_1' => $request->post('commercial_contact_1'),
             'commercial_contact_2' => $request->post('commercial_contact_2'),
-            'commercial_contact_3' => $request->post('commercial_contact_3'),
+            'commercial_contact_3' => $request->post('commercial_contact_3'), */
             'razon_social' => $request->post('razon_social'),
             'razon_comercial' => $request->post('razon_comercial'),
             'rut_file' => $rut_file_json_urls,

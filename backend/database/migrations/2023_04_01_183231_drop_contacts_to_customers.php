@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMunicipioDepartamentoToCustomers extends Migration
+class DropContactsToCustomers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,16 +14,10 @@ class AddMunicipioDepartamentoToCustomers extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            //Add
-            $table->unsignedBigInteger('departamento_id')->nullable();
-            $table->foreign('departamento_id')
-                 ->references('id')->on('departamentos')
-                 ->onUpdate('cascade');
-            
-            $table->unsignedBigInteger('municipio_id')->nullable();
-            $table->foreign('municipio_id')
-                 ->references('id')->on('municipios')
-                 ->onUpdate('cascade');
+            $table->dropColumn('nombre_contacto_comercial');
+            $table->dropColumn('commercial_contact_1');
+            $table->dropColumn('commercial_contact_2');
+            $table->dropColumn('commercial_contact_3');
         });
     }
 
