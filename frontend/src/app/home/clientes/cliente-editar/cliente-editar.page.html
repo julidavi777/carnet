@@ -235,7 +235,7 @@
                         itemTextField="name"
                         [canSearch]="true"
                         formControlName="municipio_id"
-                       
+                        [disabled]="formContacto1Municipios?.length === 0"
                         >
                       </ionic-selectable>
                     </ion-item> 

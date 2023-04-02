@@ -221,7 +221,7 @@ class CustomerController extends ApiController
             return response()->json($validator->errors(), 400);
         }
 
-
+        //return $data;
         return DB::transaction(function() use ($request, $customer) {
             try{
         //SAVING FILES
@@ -308,11 +308,12 @@ class CustomerController extends ApiController
             //CustomersContact::insert((array) $data);
             //dd($data);
             $recordFound = CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 1)->first();
-    
+
             if(!is_null($recordFound)){
-                $recordFound->update((array) $data);
+                CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 1)->update((array) $data);
             }else{
                 $data->customer_id = $customer->id;
+                $data->created_at = now();
                 CustomersContact::insert((array) $data);
             }
         }
@@ -321,9 +322,10 @@ class CustomerController extends ApiController
             
             $recordFound = CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 2)->first();
             if(!is_null($recordFound)){
-                $recordFound->update((array) $data);
+                CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 2)->update((array) $data);
             }else{
                 $data->customer_id = $customer->id;
+                $data->created_at = now();
                 CustomersContact::insert((array) $data);
             }
         }
@@ -332,9 +334,10 @@ class CustomerController extends ApiController
             
             $recordFound = CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 3)->first();
             if(!is_null($recordFound)){
-                $recordFound->update((array) $data);
+                CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 3)->update((array) $data);
             }else{
                 $data->customer_id = $customer->id;
+                $data->created_at = now();
                 CustomersContact::insert((array) $data);
             }
         }
@@ -343,9 +346,10 @@ class CustomerController extends ApiController
             
             $recordFound = CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 4)->first();
             if(!is_null($recordFound)){
-                $recordFound->update((array) $data);
+                CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 4)->update((array) $data);
             }else{
                 $data->customer_id = $customer->id;
+                $data->created_at = now();
                 CustomersContact::insert((array) $data);
             }
         }

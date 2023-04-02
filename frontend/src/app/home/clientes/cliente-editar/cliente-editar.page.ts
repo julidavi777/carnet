@@ -117,6 +117,14 @@ export class ClienteEditarPage implements OnInit {
   ) { }
 
   async ngOnInit() {
+
+    this.customerForm.controls['municipio'].disable();
+
+    this.formContacto1.controls['municipio_id'].disable();
+    this.formContacto2.controls['municipio_id'].disable();
+    this.formContactoFacturacion.controls['municipio_id'].disable();
+    this.formContactoPagos.controls['municipio_id'].disable();
+
     let dataCliente = this.clienteEditarService.getDataCliente();
     if (!dataCliente) {
       this.router.navigate(['home/clientes/clientes-list']);
@@ -140,6 +148,9 @@ export class ClienteEditarPage implements OnInit {
       departamento: departamentos.data.filter(d => d.id === dataCliente.departamento_id)[0],
       municipio: municipios.data.filter(m => m.id === dataCliente.municipio_id)[0],
     }
+    if(dataCliente?.municipio_id){
+      this.customerForm.controls['municipio'].enable();
+    }
 
     this.customerForm.patchValue(patchData)
 
@@ -156,12 +167,7 @@ export class ClienteEditarPage implements OnInit {
       cliente_logo: null
     })
 
-    this.customerForm.controls['municipio'].disable();
-
-    this.formContacto1.controls['municipio_id'].disable();
-    this.formContacto2.controls['municipio_id'].disable();
-    this.formContactoFacturacion.controls['municipio_id'].disable();
-    this.formContactoPagos.controls['municipio_id'].disable();
+    
 
     this.getDepartamentos();
    
@@ -272,6 +278,10 @@ export class ClienteEditarPage implements OnInit {
         municipio_id: municipios.data.filter(m => m.id === contact1.municipio_id)[0],
       }
       this.formContacto1.patchValue(patchData)
+      if(contact1.municipio_id){
+        
+        this.formContacto1.controls['municipio_id'].enable();
+      }
     }
     //formContacto2
     let contact2 = dataCliente?.customers_contacts.find(e => e.customers_contact_type_id == 2);
@@ -283,6 +293,11 @@ export class ClienteEditarPage implements OnInit {
         municipio_id: municipios.data.filter(m => m.id === contact2.municipio_id)[0],
       }
       this.formContacto2.patchValue(patchData)
+      if(contact2.municipio_id){
+        
+        this.formContacto2.controls['municipio_id'].enable();
+      }
+
     }
     //formContactoFacturacion
     let formContactoFacturacionData = dataCliente?.customers_contacts.find(e => e.customers_contact_type_id == 3);
@@ -293,18 +308,30 @@ export class ClienteEditarPage implements OnInit {
         departamento_id: departamentos.data.filter(d => d.id === formContactoFacturacionData.departamento_id)[0],
         municipio_id: municipios.data.filter(m => m.id === formContactoFacturacionData.municipio_id)[0],
       }
+
       this.formContactoFacturacion.patchValue(patchData)
+      if(formContactoFacturacionData.municipio_id){
+        
+        this.formContactoFacturacion.controls['municipio_id'].enable();
+      }
+
     }
     //formContactoFacturacion
     let formContactoPagosData = dataCliente?.customers_contacts.find(e => e.customers_contact_type_id == 4);
-    if(formContactoFacturacionData){
+    if(formContactoPagosData){
+
       let municipios: any = await this.commonService.getDepartamentosMunicipios(formContactoPagosData.departamento_id).toPromise();
+      
       let patchData = {
         ...formContactoPagosData,
         departamento_id: departamentos.data.filter(d => d.id === formContactoPagosData.departamento_id)[0],
         municipio_id: municipios.data.filter(m => m.id === formContactoPagosData.municipio_id)[0],
       }
       this.formContactoPagos.patchValue(patchData)
+      if(formContactoPagosData.municipio_id){
+        this.formContactoPagos.controls['municipio_id'].enable();
+      }
+
     }
   }
 
