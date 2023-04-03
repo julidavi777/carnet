@@ -22,7 +22,7 @@ class CustomerController extends ApiController
         $customers = $customers->map(function ($customer){
             $customer->customersContacts;
             return $customer;
-        });
+        })->sortBy('id')->values();
         return $this->showAll($customers);
     }
 

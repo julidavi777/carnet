@@ -154,8 +154,10 @@ export class ClienteEditarPage implements OnInit {
 
     this.customerForm.patchValue(patchData)
 
-    if(dataCliente?.customers_contacts.length > 0){
-      await this.patchValuesModals(dataCliente, departamentos)
+    if(dataCliente?.customers_contacts){
+      if(dataCliente?.customers_contacts.length > 0){
+        await this.patchValuesModals(dataCliente, departamentos)
+      }
     }
 
 

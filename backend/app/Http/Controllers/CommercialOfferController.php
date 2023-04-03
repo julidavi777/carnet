@@ -28,9 +28,11 @@ class CommercialOfferController extends ApiController
             $e->comercial_offer_visit;
             $e->user;
             $e->commercial_offers_management;
-            $e->commercial_offers_management->commercial_offers_management_files;
+            if(isset($e->commercial_offers_management)){
+                $e->commercial_offers_management->commercial_offers_management_files;
+            }
             return $e;
-        });
+        })->sortBy('id')->values();
 
         return $this->showAll($commercialOffers);
     }
@@ -46,6 +48,7 @@ class CommercialOfferController extends ApiController
         $data = $request->all();
 
         $validator = Validator::make($data, [
+            'sede' => 'required|string',
             'customer_identification' => 'required|integer|exists:customers,identification',
             'sequential_number' => 'required|string|unique:commercial_offers',
             'contract_type' => 'required|string|max:50',
@@ -64,6 +67,7 @@ class CommercialOfferController extends ApiController
             'observations' => 'nullable|string',
             'anexos' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
             'responsable_id' => 'required|integer|exists:users,id',
+            'responsable_operativo_id' => 'required|integer|exists:users,id',
 
             'visit_date' => 'nullable|date',
             'visit_place' => 'nullable|string',
@@ -89,6 +93,7 @@ class CommercialOfferController extends ApiController
                 $customer = Customer::where('identification', $request->post('customer_identification'))->first();
 
                 $createdCommercialOffer = CommercialOffer::create([
+                    'sede'  => $request->post('sede') ,
                     'sequential_number'  => strval($request->post('sequential_number')) ,
                     'contract_type'  => $request->post('contract_type'),
                     'contract_type_other'  => $request->post('contract_type_other'),
@@ -107,6 +112,7 @@ class CommercialOfferController extends ApiController
                     'anexos'  => $anexos_json_urls,
                     'customer_id'  => $customer->id,
                     'responsable_id'  => $request->post('responsable_id'),
+                    'responsable_operativo_id'  => $request->post('responsable_operativo_id'),
                     
                 
                 ]);
@@ -171,6 +177,7 @@ class CommercialOfferController extends ApiController
 
         $validator = Validator::make($data, [
             //'customer_identification' => 'nullable|integer|exists:customers,identification',
+            'sede' => 'required|string',
             'contract_type' => 'nullable|string|max:50',
             'contract_type_other' => 'nullable|string|max:50',
             'service_type' => 'nullable|string|max:50',
@@ -186,7 +193,8 @@ class CommercialOfferController extends ApiController
             //'visit_date' => 'nullable|date',
             'observations' => 'nullable|string',
             'anexos' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
-            'responsable_id' => 'nullable|integer|exists:users,id'
+            'responsable_id' => 'nullable|integer|exists:users,id',
+            'responsable_operativo_id' => 'nullable|integer|exists:users,id'
         ]);
 
         if ($validator->fails()) {
@@ -216,6 +224,7 @@ class CommercialOfferController extends ApiController
     
     
             $updated = CommercialOffer::where('id', $commercialOffer->id)->update([    
+                'sede'  => $request->post('sede'),
                 'contract_type'  => $request->post('contract_type'),
                 'contract_type_other'  => $request->post('contract_type_other'),
                 'service_type'  => $request->post('service_type'),
@@ -232,7 +241,8 @@ class CommercialOfferController extends ApiController
                 'observations'  => $request->post('observations'),
                 'anexos'  => $anexos_json_urls,
                 //'customer_id'  => $customer->id,
-                'responsable_id'  => $request->post('responsable_id')
+                'responsable_id'  => $request->post('responsable_id'),
+                'responsable_operativo_id'  => $request->post('responsable_operativo_id')
             ]);
 
             if(
@@ -241,8 +251,7 @@ class CommercialOfferController extends ApiController
                 !is_null($request->post('person_attending')) ||
                 !is_null($request->post('phone_number_person_attending'))
             ){
-      
-                if($commercialOffer->comercial_offer_visit()->first()->count() > 0){
+                if(!is_null($commercialOffer->comercial_offer_visit()->first())){
                     CommercialOffersVisit::where('id', $commercialOffer->comercial_offer_visit()->first()['id'])->update([
                         'visit_date'  => $request->post('visit_date'),
                         'visit_place' => $request->post('visit_place'),

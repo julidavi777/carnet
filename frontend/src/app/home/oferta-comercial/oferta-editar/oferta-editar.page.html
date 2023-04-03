@@ -4,6 +4,26 @@
   <form  [formGroup]="offersForm" (ngSubmit)="onSubmit()" class="formu">
 
     <div class="row">
+      <div class="mb-3 form-group col-md-2">
+        <label class="form-label" for="">Sede:</label>
+        <select
+          class="form-select"
+          formControlName="sede"
+          aria-label="Default select example"
+        >
+          <option value="1">BOG</option>
+          <option value="2">MED</option>
+          <option value="3">PER</option>
+        </select>
+        <br />
+       <!--  <input
+          class="form-control"
+          *ngIf="tipoContratacion === '4'"
+          type="text"
+          formControlName="contract_type_other"
+          placeholder="Ingrese el tipo de contratación"
+        /> -->
+      </div>
 
       <div class="mb-3 form-group col-md-2">
         <label class="form-label" for="validation01"># Consecutivo</label>
@@ -16,7 +36,7 @@
       </div> -->
 
       <div class="mb-3 form-group col-md-10">
-        <label class="form-label" for="validation03">Número identificación cliente *</label>
+        <label class="form-label" for="validation03">Número identificación cliente *  {{identification_type}}</label>
         <input type="number" class="form-control" [ngClass]="isCustomerFound === null ? '' : isCustomerFound ? 'is-valid' : 'is-invalid'" formControlName="customer_identification" id="validation03" placeholder="" >
         <div class="valid-feedback">
           Cliente encontrado
@@ -26,18 +46,106 @@
         </div>
       </div>
 
-      <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation01">Nombres *</label>
-        <input type="text" class="form-control" formControlName="name" [readonly]="true" id="validation01"  >
+      <div *ngIf="identification_type !== 'NIT';else elseCondition" class="row">
+        <div class="mb-3 form-group col-md-6">
+          <label class="form-label" for="validation01">Nombres *</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="name"
+            [readonly]="true"
+            id="validation01"
+          />
+        </div>
+        <div class="mb-3 form-group col-md-6">
+          <label class="form-label" for="validation01">Apellidos *</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="surname"
+            [readonly]="true"
+            id="validation01"
+          />
+        </div>
+  
+        <div class="mb-3 form-group col-md-6">
+          <label class="form-label" for="validation06">Razón Social *</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="razon_social"
+            [readonly]="true"
+            id="validation06"
+            placeholder=""
+            required
+          />
+        </div>
+  
+        <div class="mb-3 form-group col-md-6">
+          <label class="form-label" for="validation06">Razón comercial *</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="razon_comercial"
+            [readonly]="true"
+            id="validation06"
+            placeholder=""
+            required
+          />
+        </div>
       </div>
-      <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation01">Apellidos *</label>
-        <input type="text" class="form-control"  formControlName="surname" [readonly]="true" id="validation01"  >
-      </div>
-      <div class="mb-3 form-group col-md-12">
-        <label class="form-label" for="validation06">Razón comercial *</label>
-        <input type="text" class="form-control" formControlName="razon_comercial" [readonly]="true" id="validation06" placeholder="" required>
-      </div>
+      <ng-template #elseCondition>
+        <div class="row">
+          <div class="mb-3 form-group col-md-6">
+            <label class="form-label" for="validation06">Razón Social *</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="razon_social"
+              [readonly]="true"
+              id="validation06"
+              placeholder=""
+              required
+            />
+          </div>
+    
+          <div class="mb-3 form-group col-md-6">
+            <label class="form-label" for="validation06">Razón comercial *</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="razon_comercial"
+              [readonly]="true"
+              id="validation06"
+              placeholder=""
+              required
+            />
+          </div>
+          
+          <div class="mb-3 form-group col-md-6">
+            <label class="form-label" for="validation01">Nombres *</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              [readonly]="true"
+              id="validation01"
+            />
+          </div>
+          <div class="mb-3 form-group col-md-6">
+            <label class="form-label" for="validation01">Apellidos *</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="surname"
+              [readonly]="true"
+              id="validation01"
+            />
+          </div>
+    
+         
+        </div>
+      </ng-template>
 
 
 
@@ -47,16 +155,29 @@
           <option *ngFor="let user of usersListResponsable" [value]="user.id">{{user.name}}</option>
         </select>
       </div>
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="validation09">Responsable Operativo*</label>
+        <select
+          class="form-select"
+          formControlName="responsable_operativo_id"
+          aria-label="Default select example"
+        >
+          <option *ngFor="let user of usersListResponsable" [value]="user.id">
+            {{user.name}}
+          </option>
+        </select>
+      </div>
 
 
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Tipo de contratación *</label>
         <select class="form-select"  formControlName="contract_type"aria-label="Default select example">
-          <option value="1">Precio global fijo</option>
-          <option value="2">Precio unitario fijo</option>
-          <option value="3">Administración delegada</option>
-          <option value="4">Otro</option>
+          >
+          <option value="1">PRECIO GLOBAL FIJO</option>
+          <option value="2">PRECIO UNITARIO FIJO</option>
+          <option value="3">ADMINISTRACIÓN DELEGADA</option>
+          <option value="4">OTRO</option>
         </select>
         <br>
         <input class="form-control" *ngIf="contract_type.value === '4'" type="text" formControlName="contract_type_other" placeholder="Ingrese el tipo de contratación">
@@ -68,30 +189,37 @@
 
 
       <div class="mb-3 form-group col-md-6">
-        <label  class="form-label" for="validation09">Tipo de servicio *</label>
+        <label  class="form-label" for="validation09">Unidad de negocio*</label>
         <select class="form-select"  formControlName="service_type"aria-label="Default select example">
-          <option value="1">Construcción</option>
-          <option value="2">Mantenimiento</option>
-          <option value="3">Consultoria</option>
-          <option value="4">Otro</option>
+          <option value="1">CONSULTORIAS E INTERVENTORIAS</option>
+          <option value="2">MANTENIMIENTOS</option>
+          <option value="3">OBRAS CIVILES</option>
+          <option value="4">REMODELACIONES Y ADECUACIONES</option>
+          <option value="5">OTRO</option>
         </select>
         <br>
-        <input class="form-control" *ngIf="service_type.value === '4'" type="text" formControlName="service_type_other" placeholder="Ingrese el tipo de servicio">
+        <input class="form-control" *ngIf="service_type.value === '5'" type="text" formControlName="service_type_other" placeholder="Ingrese el tipo de servicio">
 
       </div>
 
       <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="validation09">Sector productivo *</label>
+        <label class="form-label" for="validation09">Sector Economia *</label>
         <select class="form-select"  formControlName="sector_productivo"aria-label="Default select example">
-          <option value="1">Industrial</option>
-          <option value="2">Logistico</option>
-          <option value="3">Comercial</option>
-          <option value="4">Salud/Hospitalario</option>
-          <option value="5">Institucional</option>
-          <option value="6">Otro</option>
+          <option value="1">AGROPECUARIO - GANADERA</option>
+          <option value="2">COMERCIO - HOTELERIA Y RESTAURANTES</option>
+          <option value="3">COMUNICACIONES Y TECNOLOGIA DE INFORMACION</option>
+          <option value="4">CONSTRUCCIÓN</option>
+          <option value="5">EDUCACIÓN</option>
+          <option value="6">FINANCIERO</option>
+          <option value="7">INDUSTRIAL</option>
+          <option value="8">MINERO - ENERGETICO - GAS Y AGUA</option>
+          <option value="9">INDUSTRIA DE ALIMENTOS</option>
+          <option value="10">SERVICIOS</option>
+          <option value="11">TRANSPORTE</option>
+          <option value="12">OTRO</option>
         </select>
         <br>
-        <input class="form-control" *ngIf="sector_productivo.value === '6'" type="text" formControlName="sector_productivo_other" placeholder="Ingrese el sector productivo">
+        <input class="form-control" *ngIf="sector_productivo.value === '12'" type="text" formControlName="sector_productivo_other" placeholder="Ingrese el sector productivo">
 
       </div>
 
@@ -168,6 +296,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button"  data-bs-dismiss="modal" class="btn btn-primary">OK</button>
+
         <!-- <button type="button" class="btn btn-primary">Guardar Visita</button> -->
       </div>
     </div>

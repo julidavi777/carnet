@@ -22,6 +22,7 @@ export class CrearOfertaPage implements OnInit {
     usersListResponsable: any = [];
 
     offersForm: any = new FormGroup({
+    sede: new FormControl('', [Validators.required]),
     sequential_number: new FormControl(''),
     sequential_number_format: new FormControl('', [Validators.required]),
     customer_identification: new FormControl('',),
@@ -29,7 +30,9 @@ export class CrearOfertaPage implements OnInit {
     surname: new FormControl('',[Validators.required]),
     assignment_date: new FormControl('',[Validators.required]),
     razon_comercial: new FormControl('', [Validators.required]),
+    razon_social: new FormControl('', [Validators.required]),
     responsable_id: new FormControl('', [Validators.required]),
+    responsable_operativo_id: new FormControl('', [Validators.required]),
     contract_type: new FormControl(''),
     contract_type_other: new FormControl(''),
     service_type: new FormControl('', [Validators.required]),
@@ -63,6 +66,7 @@ export class CrearOfertaPage implements OnInit {
 
   get name () { return this.offersForm.get('name') }
   get surname () { return this.offersForm.get('surname') }
+  get razon_social () { return this.offersForm.get('razon_social') }
   get razon_comercial () { return this.offersForm.get('razon_comercial') }
 
 
@@ -71,10 +75,10 @@ export class CrearOfertaPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.offersForm.controls['customer_identification'].disable();
     this.offersForm.controls['sequential_number'].disable();
     this.offersForm.controls['name'].disable();
     this.offersForm.controls['surname'].disable();
+    this.offersForm.controls['razon_social'].disable();
     this.offersForm.controls['razon_comercial'].disable();
     
     this.getSequentialNumber();
@@ -88,12 +92,13 @@ export class CrearOfertaPage implements OnInit {
 
     const formData = new FormData();
 
+    formData.append('sede', this.offersForm.get('sede').value);
     formData.append('sequential_number', this.offersForm.get('sequential_number').value);
     formData.append('sequential_number_format', this.offersForm.get('sequential_number_format').value);
     formData.append('responsable_id', this.offersForm.get('responsable_id').value);
+    formData.append('responsable_operativo_id', this.offersForm.get('responsable_operativo_id').value);
     formData.append('customer_identification', this.offersForm.get('customer_identification').value);
     formData.append('assignment_date', this.offersForm.get('assignment_date').value);
-    formData.append('razon_comercial', this.offersForm.get('razon_comercial').value);
     formData.append('contract_type', this.offersForm.get('contract_type').value);
     formData.append('contract_type_other', this.offersForm.get('contract_type_other').value);
     formData.append('service_type', this.offersForm.get('service_type').value);
@@ -133,10 +138,15 @@ export class CrearOfertaPage implements OnInit {
     })
   }
 
+  identification_type = null;
   searchIdentificationActions(){
     this.customer_identification.valueChanges.pipe(
       debounceTime(370)
     ).subscribe((res: any) => {
+      this.name.reset()
+      this.surname.reset()
+      this.razon_social.reset()
+      this.razon_comercial.reset()
       this.isCustomerFound = null;
       console.log({res})
       /* if(res.length > 0){
@@ -151,7 +161,11 @@ export class CrearOfertaPage implements OnInit {
           this.isCustomerFound = true;
           this.name.setValue(resFilter.data.name);
           this.surname.setValue(resFilter.data.surname)
+          this.razon_social.setValue(resFilter.data.razon_social)
           this.razon_comercial.setValue(resFilter.data.razon_comercial)
+          let idsNames = ['CC', 'NIT', 'CE']
+          this.identification_type = idsNames[resFilter.data.identification_type-1] ;
+          
         }
         //this.rows = resFilter.data;
         //this.loadingIndicator = false;

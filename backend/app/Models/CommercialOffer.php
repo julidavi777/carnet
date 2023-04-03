@@ -10,6 +10,7 @@ class CommercialOffer extends Model
     use HasFactory;
 
     protected $fillable = [
+        'sede',
         'sequential_number',
         'sequential_number_format',
         'contract_type',
@@ -28,7 +29,8 @@ class CommercialOffer extends Model
         'observations',
         'anexos',
         'customer_id',
-        'responsable_id'
+        'responsable_id', 
+        'responsable_operativo_id'
     ];
 
     /**
