@@ -43,12 +43,12 @@ export class CrearOfertaPage implements OnInit {
     release_date: new FormControl('',),
     delivery_date: new FormControl('',),
     observations: new FormControl('',),
-    
-    
-    
+
+
+
     anexos_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
     anexos: new FormControl('',),
-    
+
     //MODAL VISIT
     visit_date: new FormControl('',),
     visit_place: new FormControl('',),
@@ -71,16 +71,15 @@ export class CrearOfertaPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.offersForm.controls['customer_identification'].disable();
     this.offersForm.controls['sequential_number'].disable();
     this.offersForm.controls['name'].disable();
     this.offersForm.controls['surname'].disable();
     this.offersForm.controls['razon_comercial'].disable();
-    
+
     this.getSequentialNumber();
     this.searchIdentificationActions();
     this.getUsers();
-    
+
   }
 
   onSubmit(){
@@ -108,7 +107,7 @@ export class CrearOfertaPage implements OnInit {
     formData.append('delivery_date', this.offersForm.get('delivery_date').value);
     formData.append('observations', this.offersForm.get('observations').value);
     formData.append('anexos', this.offersForm.get('anexos').value);
-    
+
     formData.append('file', this.offersForm.get('anexos').value);
 
     //MODAL DATA

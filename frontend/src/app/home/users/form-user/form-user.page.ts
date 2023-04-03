@@ -18,18 +18,18 @@ export class FormUserPage implements OnInit {
 
   rolesData: any = [];
 
-  userForm: FormGroup | any; 
+  userForm: FormGroup | any;
 
   constructor(
     private usersService: UsersService,
     private messageService: MessageService,
     private rolesService: RolesService,
-    private fb: FormBuilder) { 
-      
+    private fb: FormBuilder) {
+
     }
 
   ngOnInit() {
-    this.userForm = this.fb.group({ 
+    this.userForm = this.fb.group({
       name: new FormControl('', [Validators.required]),
       surname: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -45,25 +45,25 @@ export class FormUserPage implements OnInit {
       this.userForm.removeControl('password_confirmation')
       this.userForm.controls['email'].disable();
 
-      this.userForm.patchValue(this.usersService.dataUser)      
+      this.userForm.patchValue(this.usersService.dataUser)
     }
     this.getRoles();
   }
 
   onSubmit(){
     this.isSavingData = true;
-    if(!this.isEditingData){
+    if(this.isEditingData){
       this.registerUser();
       return;
     }
-    
+
     //UPDATING
     let data = {...this.userForm.value}
     if(typeof data['role_id'] == "object"){
        data['role_id'] = null;
     }
     this.updateUser(data);
-    
+
   }
 
   registerUser(): void{

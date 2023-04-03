@@ -4,6 +4,7 @@ import { read } from 'fs';
 import { CrearClienteService } from './crear-cliente.service';
 import { CommonService } from 'src/app/services/common.service';
 
+
 interface HtlmInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
 }
@@ -19,7 +20,7 @@ export class CrearClientePage implements OnInit {
   expandAllClass: boolean = true;
   showDigitV: boolean = false;
   keyword = 'name';
-  
+
   departamentos = [];
   municipios = [];
 
@@ -84,7 +85,7 @@ export class CrearClientePage implements OnInit {
   }
 
   onSubmit(){
-   
+
     this.registeredSuccessfully = false;
 
     console.log(this.customerForm.value)
@@ -215,7 +216,7 @@ export class CrearClientePage implements OnInit {
     let municipio_id = event.value.id;
     this.customerForm.controls['municipio'].reset()
     this.customerForm.controls['municipio'].disable();
-    
+
     /* this.mylookupservice.getResults(event.query).then(data => {
         this.results = data;
     }); */
@@ -225,7 +226,7 @@ export class CrearClientePage implements OnInit {
     });
   }
 
-  
 
-  
+
+
 }

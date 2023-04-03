@@ -6,7 +6,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)},
   {
-    path: 'home',  
+    path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
     canActivate: [HomeAccessGuard]
   },
@@ -19,6 +19,11 @@ const routes: Routes = [
     path: 'admin-oportunidad',
     loadChildren: () => import('./home/oferta-comercial/admin-oportunidad/admin-oportunidad.module').then( m => m.AdminOportunidadPageModule)
   },
+  // {
+  //   path: 'informes-indicadores',
+  //   loadChildren: () => import('./home/informes-indicadores/informes-indicadores.module').then( m => m.InformesIndicadoresPageModule)
+  // },
+
 
 
   /* {

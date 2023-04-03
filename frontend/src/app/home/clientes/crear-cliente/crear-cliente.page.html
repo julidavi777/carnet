@@ -37,36 +37,22 @@
 
       <div class="mb-3 form-group col-md-4">
         <label for="phone_number" class="form-label">Departamento * </label>
-        <ion-item>
+        <ion-item >
           <!-- <ion-label >Port</ion-label> -->
-          <ionic-selectable
-            [items]="departamentos"
-            itemValueField="id"
-            itemTextField="name"
-            [canSearch]="true"
-            formControlName="departamento"
-            (onChange)="departamentoChange($event)"
-            >
+          <ionic-selectable [items]="departamentos" itemValueField="id" itemTextField="name" [canSearch]="true" formControlName="departamento" (onChange)="departamentoChange($event)" >
           </ionic-selectable>
         </ion-item>
         <!-- <label for="validation04" class="form-label">Departamento *</label>
         <input type="text" class="form-control" formControlName="departamento"  id="validation04" placeholder="Direccion" required> -->
       </div>
-      
+
       <div class="mb-3 form-group col-md-4">
         <label for="phone_number" class="form-label">Municipio * </label>
-        <ion-item>
+        <ion-item >
           <!-- <ion-label >Port</ion-label> -->
-          <ionic-selectable
-            [items]="municipios"
-            itemValueField="id"
-            itemTextField="name"
-            [canSearch]="true"
-            formControlName="municipio"
-           
-            >
+          <ionic-selectable [items]="municipios" itemValueField="id" itemTextField="name" [canSearch]="true" formControlName="municipio">
           </ionic-selectable>
-        </ion-item> 
+        </ion-item>
       </div>
 
 
