@@ -18,4 +18,9 @@ class Departamento extends Model
     {
         return $this->hasMany(Customer::class);
     }
+
+    public function customersContacts()
+    {
+        return $this->hasMany(CustomersContact::class);
+    }
 }

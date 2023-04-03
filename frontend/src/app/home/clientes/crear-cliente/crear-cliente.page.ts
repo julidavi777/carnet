@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { read } from 'fs';
 import { CrearClienteService } from './crear-cliente.service';
 import { CommonService } from 'src/app/services/common.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 interface HtlmInputEvent extends Event {
@@ -23,29 +24,74 @@ export class CrearClientePage implements OnInit {
 
   departamentos = [];
   municipios = [];
-
-
-
-
+  formContacto1Municipios = [];
+  formContacto2Municipios = [];
+  formContactoFacturacionMunicipios = [];
+  formContactoPagosMunicipios = [];
 
   selectedFile: string = '';
 
+
+
+  formContacto1: any = new FormGroup({
+     name: new FormControl('', [Validators.required]),
+    phone_number: new FormControl('', [Validators.required]),
+    telephone_number: new FormControl('', [Validators.required]),
+    telephone_number_ext: new FormControl(''),
+    email: new FormControl(''),
+    departamento_id: new FormControl(''),
+    municipio_id: new FormControl(''),
+    customers_contact_type_id: new FormControl(1)
+  });
+
+  formContacto2: any = new FormGroup({
+     name: new FormControl(''),
+    phone_number: new FormControl(''),
+    telephone_number: new FormControl(''),
+    telephone_number_ext: new FormControl(''),
+    email: new FormControl(''),
+    departamento_id: new FormControl(''),
+    municipio_id: new FormControl(''),
+    customers_contact_type_id: new FormControl(2)
+  });
+
+  formContactoFacturacion: any = new FormGroup({
+     name: new FormControl(''),
+    phone_number: new FormControl(''),
+    telephone_number: new FormControl(''),
+    telephone_number_ext: new FormControl(''),
+    email: new FormControl(''),
+    departamento_id: new FormControl(''),
+    municipio_id: new FormControl(''),
+    customers_contact_type_id: new FormControl(3)
+  });
+
+  formContactoPagos: any = new FormGroup({
+    name: new FormControl(''),
+    phone_number: new FormControl(''),
+    telephone_number: new FormControl(''),
+    telephone_number_ext: new FormControl(''),
+    email: new FormControl(''),
+    departamento_id: new FormControl(''),
+    municipio_id: new FormControl(''),
+    customers_contact_type_id: new FormControl(4)
+  });
 
   customerForm: any = new FormGroup({
     identification_type: new FormControl('', [Validators.required]),
     identification: new FormControl('', [Validators.required]),
     digit_v: new FormControl(''),
-    name: new FormControl('', [Validators.required]),
-    surname: new FormControl('', [Validators.required]),
+    name: new FormControl('',),
+    surname: new FormControl('',),
     phone_number: new FormControl(''),
     address: new FormControl('', [Validators.required]),
     departamento: new FormControl('', [Validators.required]),
     municipio: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    nombre_contacto_comercial: new FormControl('',),
+    /* nombre_contacto_comercial: new FormControl('',),
     commercial_contact_1: new FormControl('', [Validators.required]),
     commercial_contact_2: new FormControl('',),
-    commercial_contact_3: new FormControl('',),
+    commercial_contact_3: new FormControl('',), */
     razon_social: new FormControl('',),
     razon_comercial: new FormControl('',),
 
@@ -70,11 +116,18 @@ export class CrearClientePage implements OnInit {
 
   constructor(
     private crearClienteService: CrearClienteService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
     this.customerForm.controls['municipio'].disable();
+
+    this.formContacto1.controls['municipio_id'].disable();
+    this.formContacto2.controls['municipio_id'].disable();
+    this.formContactoFacturacion.controls['municipio_id'].disable();
+    this.formContactoPagos.controls['municipio_id'].disable();
+
     this.getDepartamentos();
   }
 
@@ -83,6 +136,7 @@ export class CrearClientePage implements OnInit {
       this.departamentos = res.data;
     })
   }
+
 
   onSubmit(){
 
@@ -99,13 +153,13 @@ export class CrearClientePage implements OnInit {
     formData.append('surname', this.customerForm.get('surname').value);
     formData.append('phone_number', this.customerForm.get('phone_number').value);
     formData.append('address', this.customerForm.get('address').value);
-    formData.append('departamento_id', this.customerForm.get('departamento').value.id);
-    formData.append('municipio_id', this.customerForm.get('municipio').value.id);
+    formData.append('departamento_id', this.customerForm.get('departamento').value?.id);
+    formData.append('municipio_id', this.customerForm.get('municipio').value?.id);
     formData.append('email', this.customerForm.get('email').value);
-    formData.append('nombre_contacto_comercial', this.customerForm.get('nombre_contacto_comercial').value);
+    /* formData.append('nombre_contacto_comercial', this.customerForm.get('nombre_contacto_comercial').value);
     formData.append('commercial_contact_1', this.customerForm.get('commercial_contact_1').value);
     formData.append('commercial_contact_2', this.customerForm.get('commercial_contact_2').value);
-    formData.append('commercial_contact_3', this.customerForm.get('commercial_contact_3').value);
+    formData.append('commercial_contact_3', this.customerForm.get('commercial_contact_3').value); */
     formData.append('razon_social', this.customerForm.get('razon_social').value);
     formData.append('razon_comercial', this.customerForm.get('razon_comercial').value);
 
@@ -114,6 +168,46 @@ export class CrearClientePage implements OnInit {
     formData.append('camara_commerce_file', this.customerForm.get('camara_commerce_file').value);
     formData.append('income_statement_file', this.customerForm.get('income_statement_file').value);
     formData.append('cliente_logo', this.customerForm.get('cliente_logo').value);
+
+    //MODALS DATA
+    if(this.hasDefinedProp(this.formContacto1.value)){
+      formData.append('form_contacto1',JSON.stringify( {
+        ...this.formContacto1.value,
+        departamento_id: this.formContacto1.get('departamento_id').value?.id,
+        municipio_id:this.formContacto1.get('municipio_id').value?.id
+      }));
+    }else{
+      formData.append('form_contacto1', '')
+    }
+
+    if(this.hasDefinedProp(this.formContacto2.value)){
+      formData.append('form_contacto2',JSON.stringify( {
+        ...this.formContacto2.value,
+        departamento_id: this.formContacto2.get('departamento_id').value?.id,
+        municipio_id:this.formContacto2.get('municipio_id').value?.id
+      }));
+    }else{
+      formData.append('form_contacto2', '')
+    }
+
+    if(this.hasDefinedProp(this.formContactoFacturacion.value)){
+      formData.append('form_contacto_facturacion', JSON.stringify({
+        ...this.formContactoFacturacion.value,
+        departamento_id: this.formContactoFacturacion.get('departamento_id').value?.id,
+        municipio_id:this.formContactoFacturacion.get('municipio_id').value?.id
+      }));
+    }else{
+      formData.append('form_contacto_facturacion','')
+    }
+    if(this.hasDefinedProp(this.formContactoPagos.value)){
+      formData.append('form_contacto_pagos', JSON.stringify({
+        ...this.formContactoPagos.value,
+        departamento_id: this.formContactoPagos.get('departamento_id').value?.id,
+        municipio_id:this.formContactoPagos.get('municipio_id').value?.id
+      }));
+    }else{
+      formData.append('form_contacto_pagos','')
+    }
 
     this.crearClienteService.saveCustomer(formData).subscribe(res => {
         //alert('Uploaded Successfully.');
@@ -128,7 +222,7 @@ export class CrearClientePage implements OnInit {
     );
   }
 
-  changeSelect(event: any ){
+  changeSelectTipoDoc(event: any ){
     console.log(event.target.value)
     if(event.target.value === "2"){
       this.expandAllClass = false;
@@ -212,19 +306,122 @@ export class CrearClientePage implements OnInit {
 
   results: string[];
 
-  departamentoChange(event) {
+  departamentoChange(event, id_modal: number = 0) {
     let municipio_id = event.value.id;
     this.customerForm.controls['municipio'].reset()
     this.customerForm.controls['municipio'].disable();
+
+
+    if(id_modal === 0) {
+      this.customerForm.controls['municipio'].reset()
+      this.customerForm.controls['municipio'].disable();
+    }
+    if(id_modal === 1){
+      this.formContacto1.controls['municipio_id'].reset()
+      this.formContacto1.controls['municipio_id'].disable();
+    }
+    if(id_modal === 2){
+      this.formContacto2.controls['municipio_id'].reset()
+      this.formContacto2.controls['municipio_id'].disable();
+    }
+    if(id_modal === 3){
+      this.formContactoFacturacion.controls['municipio_id'].reset()
+      this.formContactoFacturacion.controls['municipio_id'].disable();
+    }
+    if(id_modal === 4){
+      this.formContactoPagos.controls['municipio_id'].reset()
+      this.formContactoPagos.controls['municipio_id'].disable();
+    }
 
     /* this.mylookupservice.getResults(event.query).then(data => {
         this.results = data;
     }); */
     this.commonService.getDepartamentosMunicipios(municipio_id).subscribe((res: any) => {
-      this.customerForm.controls['municipio'].enable();
-      this.municipios = res.data;
+      if(id_modal === 0) {
+        this.customerForm.controls['municipio'].enable();
+        this.municipios = res.data;
+      }
+      if(id_modal === 1){
+        this.formContacto1.controls['municipio_id'].enable();
+        this.formContacto1Municipios = res.data;
+      }
+      if(id_modal === 2){
+        this.formContacto2.controls['municipio_id'].enable();
+        this.formContacto2Municipios = res.data;
+      }
+      if(id_modal === 3){
+        this.formContactoFacturacion.controls['municipio_id'].enable();
+        this.formContactoFacturacionMunicipios = res.data;
+      }
+      if(id_modal === 4){
+        this.formContactoPagos.controls['municipio_id'].enable();
+        this.formContactoPagosMunicipios = res.data;
+      }
     });
   }
+
+
+  printData(){
+    console.log("this.formContacto1.value")
+    console.log(this.formContacto1.value)
+    console.log("this.formContacto2.value")
+    console.log(this.formContacto2.value)
+    console.log("this.formContactoFacturacion.value")
+    console.log(this.formContactoFacturacion.value)
+    console.log("this.formContactoPagos.value")
+    console.log(this.formContactoPagos.value)
+  }
+
+  hasDefinedProp(obj) {
+    let a = Object.keys(obj)
+    var hasValue = false;
+
+    a.forEach((key :any) => {
+
+      if(key !== "customers_contact_type_id"){
+        /* debugger */
+        if (/* obj[key] !== null || */ obj[key] !== "") {
+          hasValue =  true
+        }
+      }
+    })
+
+    return hasValue
+  }
+
+
+  getNamesCustomerHtml(showDigitV){
+
+    let namesAndSurnamesHtml = `
+    <div class="mb-3 form-group col-md-6">
+      <label for="name" class="form-label">Nombres *</label>
+      <input type="text" class="form-control" formControlName="name" id="name" placeholder="Nombres" >
+    </div>
+    <div class="mb-3 form-group col-md-6">
+      <label for="surname" class="form-label">Apellidos *</label>
+      <input type="text" class="form-control"  formControlName="surname" id="surname" placeholder="Apellidos" >
+    </div>
+    `
+
+    let razonSocialRazonComercialHtml = `
+    <div class="mb-3 form-group col-md-6">
+      <label for="validation06" class="form-label">Razón social *</label>
+      <input type="text" class="form-control" formControlName="razon_social" id="validation06" placeholder="" required>
+    </div>
+
+      <div class="mb-3 form-group col-md-6">
+        <label for="validation06" class="form-label">Razón comercial *</label>
+        <input type="text" class="form-control" formControlName="razon_comercial" id="validation06" placeholder="" required>
+      </div>
+    `;
+
+    if(showDigitV){
+      return this.sanitizer.bypassSecurityTrustHtml(razonSocialRazonComercialHtml)
+    }
+    return this.sanitizer.bypassSecurityTrustHtml(namesAndSurnamesHtml);
+  }
+
+
 
 
 

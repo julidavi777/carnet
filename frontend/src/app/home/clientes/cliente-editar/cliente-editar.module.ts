@@ -7,14 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ClienteEditarPageRoutingModule } from './cliente-editar-routing.module';
 
 import { ClienteEditarPage } from './cliente-editar.page';
-
+import { IonicSelectableModule } from 'ionic-selectable';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ClienteEditarPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    IonicSelectableModule
   ],
   declarations: [ClienteEditarPage]
 })
