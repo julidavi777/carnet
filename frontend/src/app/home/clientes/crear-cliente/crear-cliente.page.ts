@@ -5,6 +5,7 @@ import { CrearClienteService } from './crear-cliente.service';
 import { CommonService } from 'src/app/services/common.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
+
 interface HtlmInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
 }
@@ -20,7 +21,7 @@ export class CrearClientePage implements OnInit {
   expandAllClass: boolean = true;
   showDigitV: boolean = false;
   keyword = 'name';
-  
+
   departamentos = [];
   municipios = [];
   formContacto1Municipios = [];
@@ -138,7 +139,7 @@ export class CrearClientePage implements OnInit {
 
 
   onSubmit(){
-   
+
     this.registeredSuccessfully = false;
 
     console.log(this.customerForm.value)
@@ -207,7 +208,7 @@ export class CrearClientePage implements OnInit {
     }else{
       formData.append('form_contacto_pagos','')
     }
- 
+
     this.crearClienteService.saveCustomer(formData).subscribe(res => {
         //alert('Uploaded Successfully.');
         this.registeredSuccessfully = true;
@@ -307,8 +308,11 @@ export class CrearClientePage implements OnInit {
 
   departamentoChange(event, id_modal: number = 0) {
     let municipio_id = event.value.id;
+    this.customerForm.controls['municipio'].reset()
+    this.customerForm.controls['municipio'].disable();
 
-    if(id_modal === 0) {   
+
+    if(id_modal === 0) {
       this.customerForm.controls['municipio'].reset()
       this.customerForm.controls['municipio'].disable();
     }
@@ -328,7 +332,7 @@ export class CrearClientePage implements OnInit {
       this.formContactoPagos.controls['municipio_id'].reset()
       this.formContactoPagos.controls['municipio_id'].disable();
     }
-    
+
     /* this.mylookupservice.getResults(event.query).then(data => {
         this.results = data;
     }); */
@@ -355,6 +359,7 @@ export class CrearClientePage implements OnInit {
       }
     });
   }
+
 
   printData(){
     console.log("this.formContacto1.value")
@@ -386,7 +391,7 @@ export class CrearClientePage implements OnInit {
 
 
   getNamesCustomerHtml(showDigitV){
-    
+
     let namesAndSurnamesHtml = `
     <div class="mb-3 form-group col-md-6">
       <label for="name" class="form-label">Nombres *</label>
@@ -416,7 +421,9 @@ export class CrearClientePage implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(namesAndSurnamesHtml);
   }
 
-  
 
-  
+
+
+
+
 }

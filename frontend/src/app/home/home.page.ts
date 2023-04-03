@@ -124,14 +124,14 @@ export class HomePage {
 
     {
       label:'Informes / Indicadores',
-      icon:'pi pi-fw pi-file',
+      icon:'pi pi-fw pi-chart-line',
       items:[
-          // {
+          {
 
-          //     label:'Crear cliente',
-          //     icon:'pi pi-fw pi-user-plus',
-          //     routerLink: ['clientes/crear-cliente']
-          // },
+              label:'Historico de ventas',
+              icon:'pi pi-fw pi-shopping-cart',
+              routerLink: ['informes-indicadores']
+          },
           // {
           //     label:'Clientes',
           //     icon:'pi pi-fw pi-users',

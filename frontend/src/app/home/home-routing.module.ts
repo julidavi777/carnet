@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminAccessGuard } from '../guards/admin-access.guard';
@@ -18,6 +19,8 @@ const routes: Routes = [
         loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule),
         canActivate: [AdminAccessGuard]
       },
+
+
       {
         path: 'clientes',
         children: [
@@ -58,13 +61,25 @@ const routes: Routes = [
           {
             path: 'oferta-editar',
             loadChildren: () => import('./oferta-comercial/oferta-editar/oferta-editar.module').then( m => m.OfertaEditarPageModule)
+          },
+
+          {
+            path: 'informes-indicadores',
+            loadChildren: () => import('./informes-indicadores/informes-indicadores.module').then( m=> m.InformesIndicadoresPageModule)
           }
+
 
 
 
         ]
 
-      }
+      },
+      {
+        path: 'informes-indicadores',
+        loadChildren: () => import('./informes-indicadores/informes-indicadores.module').then(m => m.InformesIndicadoresPageModule)
+      },
+
+
     ]
   },
 

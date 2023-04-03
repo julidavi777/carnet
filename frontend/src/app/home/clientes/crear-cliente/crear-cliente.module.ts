@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicSelectableModule } from 'ionic-selectable';
 
+
 @NgModule({
   imports: [
     CommonModule,
