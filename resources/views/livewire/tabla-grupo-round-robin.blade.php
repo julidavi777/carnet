@@ -20,20 +20,23 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($datos_grupo as $dato_grupo)
+            @php $suma = 0 @endphp
+
+            @for ($k = 0; $k <= count($datos_grupo) - 1; $k++)
+                @php $suma += 4 @endphp
                 <tr>
-                    @for ($j = 0; $j <= count($dato_grupo) - 1; $j++)
+                    @for ($j = 0; $j <= count($datos_grupo[$k]) - 1; $j++)
                         @php
                             $count = 0;
                             $posicion = $j;
 
-                            if(empty($dato_grupo[$j]))
+                            if($suma === $j && empty($datos_grupo[$k][$j]))
                             {
                                 $a = 0;
 
                                 while ($a < 4) 
                                 {
-                                    if(empty($dato_grupo[$posicion + $a]))
+                                    if(empty($datos_grupo[$k][$posicion + $a]))
                                         $count++;
                                     $a++;
                                 }
@@ -60,20 +63,20 @@
                                 }
                             @endphp
 
-                            @for ($k = 0; $k <= $count - 1; $k++)
-                                <td class="{{ $color }} border-transparent">{{ $dato_grupo[$posicion] }}</td>
+                            @for ($l = 0; $l <= $count - 1; $l++)
+                                <td class="{{ $color }} border-transparent"></td>
 
                                 @php $posicion++ @endphp
                             @endfor
 
                             @php $j = $posicion - 1 @endphp
                         @else
-                            <td class="">{{ $dato_grupo[$j] }}</td>
+                            <td class="">{{ $datos_grupo[$k][$j] }}</td>
                         @endif
 
                     @endfor
                 </tr>
-            @endforeach
+            @endfor
         </tbody>
     </table>
 </div>
