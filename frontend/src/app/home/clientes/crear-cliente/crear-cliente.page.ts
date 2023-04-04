@@ -308,9 +308,6 @@ export class CrearClientePage implements OnInit {
 
   departamentoChange(event, id_modal: number = 0) {
     let municipio_id = event.value.id;
-    this.customerForm.controls['municipio'].reset()
-    this.customerForm.controls['municipio'].disable();
-
 
     if(id_modal === 0) {
       this.customerForm.controls['municipio'].reset()
