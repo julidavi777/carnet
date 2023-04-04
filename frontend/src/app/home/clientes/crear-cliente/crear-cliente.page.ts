@@ -387,38 +387,6 @@ export class CrearClientePage implements OnInit {
   }
 
 
-  getNamesCustomerHtml(showDigitV){
-
-    let namesAndSurnamesHtml = `
-    <div class="mb-3 form-group col-md-6">
-      <label for="name" class="form-label">Nombres *</label>
-      <input type="text" class="form-control" formControlName="name" id="name" placeholder="Nombres" >
-    </div>
-    <div class="mb-3 form-group col-md-6">
-      <label for="surname" class="form-label">Apellidos *</label>
-      <input type="text" class="form-control"  formControlName="surname" id="surname" placeholder="Apellidos" >
-    </div>
-    `
-
-    let razonSocialRazonComercialHtml = `
-    <div class="mb-3 form-group col-md-6">
-      <label for="validation06" class="form-label">Razón social *</label>
-      <input type="text" class="form-control" formControlName="razon_social" id="validation06" placeholder="" required>
-    </div>
-
-      <div class="mb-3 form-group col-md-6">
-        <label for="validation06" class="form-label">Razón comercial *</label>
-        <input type="text" class="form-control" formControlName="razon_comercial" id="validation06" placeholder="" required>
-      </div>
-    `;
-
-    if(showDigitV){
-      return this.sanitizer.bypassSecurityTrustHtml(razonSocialRazonComercialHtml)
-    }
-    return this.sanitizer.bypassSecurityTrustHtml(namesAndSurnamesHtml);
-  }
-
-
 
 
 

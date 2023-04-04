@@ -190,7 +190,7 @@
         <br />
         <input
           class="form-control"
-          *ngIf="tipoContratacion === '4'"
+          *ngIf="contract_type.value === '4'"
           type="text"
           formControlName="contract_type_other"
           placeholder="Ingrese el tipo de contratación"
@@ -213,7 +213,7 @@
         <br />
         <input
           class="form-control"
-          *ngIf="tipoServicio === '5'"
+          *ngIf="service_type.value === '5'"
           type="text"
           formControlName="service_type_other"
           placeholder="Ingrese la unidad de negocio"
@@ -243,7 +243,7 @@
         <br />
         <input
           class="form-control"
-          *ngIf="sectorProductivo === '12'"
+          *ngIf="sector_productivo.value === '12'"
           formControlName="sector_productivo_other"
           type="text"
           placeholder="Ingrese el sector economico"

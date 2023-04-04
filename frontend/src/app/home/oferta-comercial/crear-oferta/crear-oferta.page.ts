@@ -10,9 +10,6 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./crear-oferta.page.scss'],
 })
 export class CrearOfertaPage implements OnInit {
-  tipoContratacion = '';
-  tipoServicio = '';
-  sectorProductivo = '';
 
 
     nextSequentialNumber: number = 0;
@@ -69,6 +66,9 @@ export class CrearOfertaPage implements OnInit {
   get razon_social () { return this.offersForm.get('razon_social') }
   get razon_comercial () { return this.offersForm.get('razon_comercial') }
 
+  get contract_type () {return this.offersForm.get('contract_type')}
+  get service_type () {return this.offersForm.get('service_type')}
+  get sector_productivo () {return this.offersForm.get('sector_productivo')}
 
   constructor(
     private crearOfertaService: CrearOfertaService
