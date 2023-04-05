@@ -4,6 +4,8 @@ import { read } from 'fs';
 import { CrearClienteService } from './crear-cliente.service';
 import { CommonService } from 'src/app/services/common.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FormContactoComponent } from '../components/form-contacto/form-contacto.component';
+import { ModalController } from '@ionic/angular';
 
 
 interface HtlmInputEvent extends Event {
@@ -117,16 +119,16 @@ export class CrearClientePage implements OnInit {
   constructor(
     private crearClienteService: CrearClienteService,
     private commonService: CommonService,
-    private sanitizer: DomSanitizer
+    public modalController: ModalController
   ) { }
 
   ngOnInit() {
     this.customerForm.controls['municipio'].disable();
 
-    this.formContacto1.controls['municipio_id'].disable();
+/*     this.formContacto1.controls['municipio_id'].disable();
     this.formContacto2.controls['municipio_id'].disable();
     this.formContactoFacturacion.controls['municipio_id'].disable();
-    this.formContactoPagos.controls['municipio_id'].disable();
+    this.formContactoPagos.controls['municipio_id'].disable(); */
 
     this.getDepartamentos();
   }
@@ -313,7 +315,7 @@ export class CrearClientePage implements OnInit {
       this.customerForm.controls['municipio'].reset()
       this.customerForm.controls['municipio'].disable();
     }
-    if(id_modal === 1){
+    /* if(id_modal === 1){
       this.formContacto1.controls['municipio_id'].reset()
       this.formContacto1.controls['municipio_id'].disable();
     }
@@ -328,7 +330,7 @@ export class CrearClientePage implements OnInit {
     if(id_modal === 4){
       this.formContactoPagos.controls['municipio_id'].reset()
       this.formContactoPagos.controls['municipio_id'].disable();
-    }
+    } */
 
     /* this.mylookupservice.getResults(event.query).then(data => {
         this.results = data;
@@ -338,7 +340,7 @@ export class CrearClientePage implements OnInit {
         this.customerForm.controls['municipio'].enable();
         this.municipios = res.data;
       }
-      if(id_modal === 1){
+      /* if(id_modal === 1){
         this.formContacto1.controls['municipio_id'].enable();
         this.formContacto1Municipios = res.data;
       }
@@ -353,7 +355,7 @@ export class CrearClientePage implements OnInit {
       if(id_modal === 4){
         this.formContactoPagos.controls['municipio_id'].enable();
         this.formContactoPagosMunicipios = res.data;
-      }
+      } */
     });
   }
 
@@ -367,6 +369,60 @@ export class CrearClientePage implements OnInit {
     console.log(this.formContactoFacturacion.value)
     console.log("this.formContactoPagos.value")
     console.log(this.formContactoPagos.value)
+  }
+
+
+
+  async openContactModal(contact_type_id){
+    var patchData = null;
+    if(contact_type_id == 1){
+      if(this.hasDefinedProp(this.formContacto1.value)){
+        patchData = this.formContacto1.value;
+      }
+    }
+    if(contact_type_id == 2){
+      if(this.hasDefinedProp(this.formContacto2.value)){
+        patchData = this.formContacto2.value;
+      }
+    }
+    if(contact_type_id == 3){
+      if(this.hasDefinedProp(this.formContactoFacturacion.value)){
+        patchData = this.formContactoFacturacion.value;
+      }
+    }
+    if(contact_type_id == 4){
+      if(this.hasDefinedProp(this.formContactoPagos.value)){
+        patchData = this.formContactoPagos.value;
+      }
+    }
+    const modal = await this.modalController.create({
+      component: FormContactoComponent,
+      cssClass: 'my-custom-modal-css',
+      backdropDismiss: false,
+      componentProps: {
+        contact_type_id,
+        departamentos_param: this.departamentos,
+        patchData
+      }
+    });
+    modal.onDidDismiss()
+    .then((res) => {
+      if(res['data']['formValue']) {
+        if(contact_type_id == 1 && this.hasDefinedProp(res['data']['formValue'])){
+          this.formContacto1.patchValue(res['data']['formValue'])
+        }
+        if(contact_type_id == 2 && this.hasDefinedProp(res['data']['formValue'])){
+          this.formContacto2.patchValue(res['data']['formValue'])
+        }
+        if(contact_type_id == 3 && this.hasDefinedProp(res['data']['formValue'])){
+          this.formContactoFacturacion.patchValue(res['data']['formValue'])
+        }
+        if(contact_type_id == 4 && this.hasDefinedProp(res['data']['formValue'])){
+          this.formContactoPagos.patchValue(res['data']['formValue'])
+        }
+      }
+    });
+    return await modal.present();
   }
 
   hasDefinedProp(obj) {

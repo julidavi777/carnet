@@ -10,6 +10,7 @@ import { CrearClientePage } from './crear-cliente.page';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicSelectableModule } from 'ionic-selectable';
+import { FormContactoModule } from '../components/form-contacto/form-contacto.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { IonicSelectableModule } from 'ionic-selectable';
     IonicModule,
     CrearClientePageRoutingModule,
     ReactiveFormsModule,
-    IonicSelectableModule
+    IonicSelectableModule,
+    FormContactoModule
   ],
   declarations: [CrearClientePage]
 })
