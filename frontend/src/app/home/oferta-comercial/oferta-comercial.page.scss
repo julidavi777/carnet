@@ -8,4 +8,10 @@
   z-index: 200; /* valor alto para que el formulario aparezca encima del logo de fondo */
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+
+}
+
 

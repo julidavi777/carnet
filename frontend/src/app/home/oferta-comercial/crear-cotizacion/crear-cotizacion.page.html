@@ -20,12 +20,12 @@
 
       <div class="mb-3 form-group col-md-2">
         <label class="form-label" for=""># Consecutivo:</label>
-        <input type="text" [readonly]="true" class="form-control is-valid" formControlName="consecutivo" id="validationServer01" placeholder="#" />
+        <input type="text" class="form-control is-valid" formControlName="sequential_number" id="validationServer01" placeholder="#" />
       </div>
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="">Identificación:</label>
-        <input type="number" class="form-control" formControlName="identification_type" id="" placeholder="" required>
+        <input type="number" class="form-control" formControlName="identification" id="" placeholder="" required>
       </div>
 
       <div class="mb-3 form-group col-md-6">
@@ -47,12 +47,14 @@
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="">Observaciones</label>
-        <input type="text" class="form-control" id=""  formControlName="observaciones" placeholder="" required>
+        <textarea  formControlName="observaciones" class="form-control" rows="4" cols="50">
+
+        </textarea>
       </div>
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="">Adjuntar Cotización</label>
-        <input type="file" class="form-control" id=""  formControlName="cotizacion_file" placeholder="" required>
+        <input type="file" class="form-control" formControlName="cotizacion_file_field" (change)="onFileSelected($event)" placeholder="" required>
       </div>
       <br>
 

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommercialOfferController;
+use App\Http\Controllers\CommercialOffersCotizationController;
 use App\Http\Controllers\CommercialOffersManagementController;
 use App\Http\Controllers\CommercialOffersManagementFileController;
 use App\Http\Controllers\CustomerController;
@@ -71,6 +72,9 @@ Route::apiResource('municipios', MunicipioController::class)->only(['index']);
 
 Route::apiResource('departamentos', DepartamentoController::class)->only(['index']);
 Route::apiResource('departamentos.municipios', DepartamentoMunicipioController::class)->only(['index']);
+
+// CommercialOffersCotization
+Route::post('commercialOffersCotizations',  [CommercialOffersCotizationController::class,'store']);
 
 Route::group([
 

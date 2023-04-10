@@ -209,13 +209,17 @@
             <ion-button style="color: #dc3545" data-tooltip="Eliminar" data-tooltip-conf="right">
               <ion-icon name="trash"></ion-icon>
             </ion-button>
+            <ion-button  (click)="openAdminOportunidad(row)" style="color: #59dc35" data-tooltip="Gestionar" data-tooltip-conf="up" >
+              <ion-icon name="document-attach-outline"></ion-icon>
+            </ion-button>
+
+            <ion-button  (click)="openCotizacion(row)" style="color: #59dc35" data-tooltip="Contizacion" data-tooltip-conf="up" >
+              <ion-icon name="cash"></ion-icon>
+            </ion-button>
           </ion-buttons>
 
-          <ion-buttons class="grid-container" style="margin-left: 10px;" >
-          <ion-button  (click)="openAdminOportunidad(row)" style="color: #59dc35" data-tooltip="Gestionar" data-tooltip-conf="up" >
-            <ion-icon name="document-attach-outline"></ion-icon>
-          </ion-button>
-        </ion-buttons>
+          <!-- <ion-buttons class="grid-container" style="margin-left: 10px;" >
+        </ion-buttons> -->
 
         </ng-template>
 

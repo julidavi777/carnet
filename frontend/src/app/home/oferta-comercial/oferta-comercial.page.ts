@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { OfertaComercialService } from './oferta-comercial.service';
 import { AdminOportunidadService } from './admin-oportunidad/admin-oportunidad.service';
+import { CrearCotizacionService } from './crear-cotizacion/crear-cotizacion.service';
 
 @Component({
   selector: 'app-oferta-comercial',
@@ -23,7 +24,8 @@ export class OfertaComercialPage implements OnInit {
     private ofertaComercialService: OfertaComercialService,
     private router: Router,
     private OfertaEditarService:OfertaEditarService,
-    private adminOportunidadService: AdminOportunidadService
+    private adminOportunidadService: AdminOportunidadService,
+    private crearCotizacionService: CrearCotizacionService
 
   ) { }
 
@@ -65,6 +67,12 @@ export class OfertaComercialPage implements OnInit {
   openAdminOportunidad(data){
     this.adminOportunidadService.dataCommercialOffer = data;
     this.router.navigate(['home/oferta-comercial/ofertas/admin-oportunidad']);
+  }
+
+  openCotizacion(row){
+    //console.log(row);
+    this.crearCotizacionService.dataCommercialOffer = row;
+    this.router.navigate(['home/oferta-comercial/crear-cotizacion']);	
   }
 
 }

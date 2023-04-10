@@ -82,6 +82,12 @@ class CommercialOffer extends Model
         return $this->hasOne(CommercialOffersManagement::class);
     }
 
+
+    public function commercial_offers_contization()
+    {
+        return $this->hasOne(CommercialOffersCotization::class);
+    }
+
     /**
 
     * The attributes that should be mutated to dates.
