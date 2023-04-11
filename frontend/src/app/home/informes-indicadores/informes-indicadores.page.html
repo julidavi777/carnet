@@ -1,22 +1,103 @@
 
 <ion-header>
 
-  <ion-toolbar>
+  <!-- <ion-toolbar>
     <ion-title>informes_indicadores</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+
+<ion-grid>
+  <ion-row>
+    <ion-col size="3">
+      <div class="card">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>CANT. COTIZACION AÑO A AÑO
+          </ion-card-title>
+        </ion-card-header>
+        <h6>Situación Actual:
+          La tendencia de cotizaciones mensual en el 2022 fue de 36 cot por mes;
+          </h6>
+        <ion-card-content>
+          <canvas id="canvas"></canvas>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+      <div class="card">
+        <table style="font-size: 10px;">
+          <tr>
+            <th>AÑO</th>
+            <th >CANT. COTIZACIÓN</th>
+            <th>VALOR COTIZADO</th>
+            <th>VALOR VENDIDO</th>
+          </tr>
+          <tr>
+            <td>2013</td>
+            <td>159</td>
+            <td>$ 2.426.123.475</td>
+            <td>$ 338.451.794</td>
+          </tr>
+          <tr>
+            <td>2014</td>
+            <td>173</td>
+            <td>$ 5.532.506.160</td>
+            <td>$ 1.375.582.489</td>
+          </tr>
+          <tr>
+            <td>2015</td>
+            <td>328</td>
+            <td>$ 10.137.416.340</td>
+            <td>$ 2.301.445.604</td>
+          </tr>
+          <tr>
+            <td>2016</td>
+            <td>369</td>
+            <td>$ 14.933.353.838</td>
+            <td>$ 2.740.141.101</td>
+          </tr>
+          <tr>
+            <td>2017</td>
+            <td>400</td>
+            <td>$ 22.724.668.511</td>
+            <td>$ 4.468.492.271</td>
+          </tr>
+          <tr>
+            <td>2018</td>
+            <td>523</td>
+            <td>$ 31.826.497.443</td>
+            <td>$ 3.869.987.681</td>
+          </tr>
+          <tr>
+            <td>2019</td>
+            <td>551</td>
+            <td>$ 27.767.320.222</td>
+            <td>$ 4.764.715.525</td>
+          </tr>
+          <tr>
+            <td>2020</td>
+            <td>376</td>
+            <td>$ 17.616.276.341</td>
+            <td>$ 4.470.838.941</td>
+          </tr>
+          <tr>
+            <td>2021</td>
+            <td>495</td>
+            <td>$ 36.097.335.555</td>
+            <td>$ 5.182.437.244</td>
+          </tr>
+          <tr>
+            <td>2022</td>
+            <td>478</td>
+            <td>$ 33.270.877.386</td>
+            <td>$ 6.624.266.503</td>
+          </tr>
+        </table>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
 
 
-
-
-<div>
-  <div class="card">
-    <h5>Basic</h5>
-    <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
-  </div>
-
-
-
-</div>
 
