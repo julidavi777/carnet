@@ -86,7 +86,7 @@ export class HomePage {
                   icon:'pi pi-fw pi-tags',
                   routerLink: ['oferta-comercial/ofertas']
               },
-              {
+             /*  {
                 separator:true
               },
               {
@@ -98,7 +98,7 @@ export class HomePage {
                 label:'Listado de Cotizaciones',
                 icon:'pi pi-fw pi-dollar',
                 routerLink: ['oferta-comercial/cotizaciones']
-             },
+             }, */
 
           ]
       },

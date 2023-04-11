@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class CommercialOffersCotizationController extends Controller
+class CommercialOffersCotizationController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class CommercialOffersCotizationController extends Controller
             'valor_cotizado' => 'required|string|max:50',
             'observaciones' => 'required|string|max:50',
             'cotizacion_file' => 'required|file|mimes:doc,docx,jpg,png,pdf',
-            'commercial_offer_id' =>  'required|integer|exists:commercial_offers,id',
+            'commercial_offer_id' =>  'required|integer|exists:commercial_offers,id|unique:commercial_offers_cotizations',
         ]);
 
         if ($validator->fails()) {

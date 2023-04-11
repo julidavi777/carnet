@@ -28,6 +28,7 @@ class CommercialOfferController extends ApiController
             $e->comercial_offer_visit;
             $e->user;
             $e->commercial_offers_management;
+            $e->commercial_offers_contization;
             if(isset($e->commercial_offers_management)){
                 $e->commercial_offers_management->commercial_offers_management_files;
             }
