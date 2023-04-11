@@ -13,6 +13,7 @@ import { InformesIndicadoresPage } from './informes-indicadores.page';
 
 
 
+
 @NgModule({
   imports: [
     CommonModule,

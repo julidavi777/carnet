@@ -1,40 +1,104 @@
 import { Component, OnInit } from '@angular/core';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-informes-indicadores',
   templateUrl: './informes-indicadores.page.html',
   styleUrls: ['./informes-indicadores.page.scss'],
-
-
 })
 export class InformesIndicadoresPage implements OnInit {
-  basicData: any;
-  basicOptions: any;
-
-  constructor() { }
 
 
-  ngOnInit() {
-    this.basicData = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-          {
-              label: 'First Dataset',
-              data: [65, 59, 80, 81, 56, 55, 40],
-              fill: false,
-              borderColor: '#42A5F5',
-              tension: .4
-          },
-          {
-              label: 'Second Dataset',
-              data: [28, 48, 40, 19, 86, 27, 90],
-              fill: false,
-              borderColor: '#FFA726',
-              tension: .4
-          }
-      ]
-  };
-  }
+  isLarge = false;
 
+toggleSize() {
+this.isLarge = !this.isLarge;
+}
+chart: any;
+showTable = false;
+
+public columnSize: number = 2;
+public isExpanded: boolean = false;
+
+expandColumn(): void {
+if (!this.isExpanded) {
+this.columnSize = 5; // reduce la columna a la mitad del tamaño original
+this.isExpanded = true;
+} else {
+this.columnSize = 3;
+this.isExpanded = false;
+}
 }
 
+constructor() { }
+
+toggleCard() {
+this.isExpanded = !this.isExpanded;
+}
+
+
+  ngOnInit(): void {
+    const cantCotizacionData = {
+      label: 'Cantidad de Cotizaciones',
+      data: [159, 173, 328, 369, 400, 523, 551, 376, 495, 478],
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgba(255, 99, 132, 1)',
+      borderWidth: 1
+    };
+
+
+
+    const data = {
+      labels: ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'],
+      datasets: [cantCotizacionData]
+    };
+
+    const options = {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    };
+
+    this.chart = new Chart('canvas', {
+      type: 'line',
+      data: data,
+
+    });
+
+    // codigo grafica 2
+
+    const ofertasPresentadas = {
+      label: 'Ofertas presentadas',
+      data: [42,42,57,31,43,29,23,38,37,32,45,23,442],
+
+    };
+
+
+    const data2 = {
+      labels: ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV','DIC'],
+      datasets: [ofertasPresentadas]
+    };
+
+    const options2 = {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            min: 0,
+            max: 60
+          }
+        }]
+      }
+    };
+
+    this.chart = new Chart('canvas2', {
+      type: 'bar',
+      data: data2,
+
+    });
+  }
+}
