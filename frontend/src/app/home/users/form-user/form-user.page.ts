@@ -45,7 +45,6 @@ export class FormUserPage implements OnInit {
 
       this.userForm.removeControl('password')
       this.userForm.removeControl('password_confirmation')
-      this.userForm.controls['email'].disable();
 
       this.userForm.patchValue(this.usersService.dataUser)
     }
@@ -88,13 +87,14 @@ export class FormUserPage implements OnInit {
   updateUser(data: any){
     this.usersService.updateUser(data, this.usersService.dataUser['id']).subscribe((res: any) => {
       //alert('Uploaded Successfully.');
-      this.successMessage();
+
+      this.successMessage(res?.email_confirmation);
       this.isSavingData = false;
       this.userForm.reset();
       setTimeout(() => {
         
         this.router.navigate(['home/users']);
-      }, 1000);
+      }, res?.email_confirmation ? 6000 : 1000);
       }, (err:any) => {
         this.isSavingData = false;
         this.errorMessage();
@@ -114,8 +114,9 @@ export class FormUserPage implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  successMessage() {
-    this.messageService.add({key: 'successMessage', severity:'success', summary: 'Éxito', detail: `Usuario ${this.isEditingData ? 'actualizado': 'registrado'}`});
+  successMessage(email_confirmation = null) {
+    let confirm_notification = email_confirmation ? ', Se ha enviado una notificación para confirmar el nuevo correo electrónico.' : '';
+    this.messageService.add({key: 'successMessage', severity:'success', summary: 'Éxito', detail: `Usuario ${this.isEditingData ? 'actualizado': 'registrado'}`+ confirm_notification });
   }
   errorMessage() {
     this.messageService.add({key: 'errorMessage', severity:'error', summary: 'Error', detail: `Usuario no ${this.isEditingData ? 'actualizado': 'registrado'}`});

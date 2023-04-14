@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\VerifyAccountNotificationMail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends ApiController
@@ -62,35 +66,77 @@ class UserController extends ApiController
         $validator = Validator::make($data, [
             'name' => 'nullable|string',
             'surname' => 'nullable|string',
+            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
             'role_id' => 'nullable|exists:roles,id',
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
+        
+        return DB::transaction(function() use ($request, $user) {
+            try{
+                $user->email = $request->post('email');
+                $EMAIL_CONFIRMATION = false;
+                if($user->isDirty('email')){
+                    $user->email_verified_at = null;
+                    $EMAIL_CONFIRMATION = true;
+                    $token = Auth::login($user);
 
+                    try {
+                        $myEmail = $user->email;
+                        Mail::to($myEmail)->send(new VerifyAccountNotificationMail($token));
+        
+                       /*  return response()->json([
+                            'is_error' => false,
+                            'message' => 'User created successfully',
+                            'user' => $user,
+                            'Auth' => [
+                                'token' => $token,
+                                'type' => 'bearer',
+                            ]
+                        ]); */
+                    } catch (\Throwable $ex) {
+                        DB::rollback();
+                        return response()->json(['status' => false, 'message' => 'something went wrong send email'.$ex], 400);
+                    }
+                }
 
-        $user->name = $request->post('name');
-        $user->surname = $request->post('surname');
-
-        if(!is_null($request->post('role_id'))){
-
-            $user->syncRoles([$request->role_id]);
-        }
-
-        $updated = $user->update();
-
-        if ($updated) {
-            return response()->json([
-                "status" => true,
-                "message" => "edited sucessfully"
-            ], 200);
-        } else {
-            return response()->json([
-                "status" => false,
-                "message" => "cannot edit"
-            ], 400);
-        }
+            
+        
+        
+                $user->name = $request->post('name');
+                $user->surname = $request->post('surname');
+        
+                if(!is_null($request->post('role_id'))){
+        
+                    $user->syncRoles([$request->role_id]);
+                }
+        
+                $updated = $user->update();
+        
+                if ($updated) {
+                    return response()->json([
+                        "status" => true,
+                        "message" => "edited sucessfully",
+                        "email_confirmation" => $EMAIL_CONFIRMATION
+                    ], 200);
+                } else {
+                    DB::rollback();
+                    return response()->json([
+                        "status" => false,
+                        "message" => "cannot edit"
+                    ], 400);
+                }
+            }catch (\Exception $ex) {
+                DB::rollback();
+                // throw $ex;
+                return response()->json(['status' => false, 'message' => 'something went wrong registro dog o usuario'.$ex], 400);
+            }
+           
+            
+        });
+       
     }
 
         /**
