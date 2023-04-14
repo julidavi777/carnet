@@ -92,4 +92,19 @@ class UserController extends ApiController
             ], 400);
         }
     }
+
+        /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\User  $user_id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($user_id)
+    {   
+        $user = User::findOrFail($user_id);
+
+        $user->delete();
+
+        return $this->showOne($user);
+    }
 }

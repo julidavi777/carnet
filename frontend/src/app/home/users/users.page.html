@@ -71,7 +71,9 @@
             <ion-button  (click)="editUser(row)"  style="color: #ffc107" data-tooltip="Editar" data-tooltip-conf="right">
               <ion-icon name="pencil"></ion-icon>
             </ion-button>
-
+            <ion-button (click)="deleteUser(row.id)" style="color: #dc3545" data-tooltip="Eliminar" data-tooltip-conf="left">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
           </ion-buttons>
         </ng-template>
       </ngx-datatable-column>
@@ -116,6 +118,9 @@
     </div>
     <div class="col-1"></div>
   </div>
+  <p-toast position="bottom-center" key="deletedMessage"></p-toast>
+  <p-toast position="bottom-center" key="errorDeleteMessage"></p-toast>
+  <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
 
 </div>

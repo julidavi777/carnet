@@ -56,7 +56,7 @@
       <div class="mb-3 form-group col-md-6">
         <label  *ngIf="!hasCotitzationDataToPatch" class="form-label" for="">Adjuntar Cotización</label>
         <input *ngIf="!hasCotitzationDataToPatch" type="file" class="form-control" formControlName="cotizacion_file_field" (change)="onFileSelected($event)" placeholder="" required>
-        <button *ngIf="contization_file" (click)="watchDocument()" type="button" class="btn btn-primary">Ver cotización adjuntada</button>
+        <button *ngIf="contization_file" (click)="watchDocument()" type="button" class="btn btn-primary">Cotización adjuntada</button>
       </div>
       <br>
 

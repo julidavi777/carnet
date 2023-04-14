@@ -10,6 +10,9 @@ import { UsersPage } from './users.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {ButtonModule} from 'primeng/button';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import {ToastModule} from 'primeng/toast';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+
 
 @NgModule({
   imports: [
@@ -19,7 +22,9 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     UsersPageRoutingModule,
     NgxDatatableModule,
     ButtonModule,
-    NgxPermissionsModule
+    NgxPermissionsModule,
+    ToastModule,
+    ConfirmDialogModule
   ],
   declarations: [UsersPage]
 })

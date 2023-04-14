@@ -24,6 +24,10 @@ export class UsersService {
     return this.http.put(this.API_URL+'users/'+id, data);
   }
 
+  deleteUser(id){
+    return this.http.delete(this.API_URL+'users/'+id)
+  }
+
   private _dataUser: any | null = null;
   get dataUser(){
     return this._dataUser;

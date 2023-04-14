@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MessageService } from 'primeng/api';
 import { RolesService } from '../../roles/roles.service';
 import { UsersService } from '../users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-user',
@@ -24,7 +25,8 @@ export class FormUserPage implements OnInit {
     private usersService: UsersService,
     private messageService: MessageService,
     private rolesService: RolesService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private router: Router) {
 
     }
 
@@ -51,8 +53,9 @@ export class FormUserPage implements OnInit {
   }
 
   onSubmit(){
+
     this.isSavingData = true;
-    if(this.isEditingData){
+    if(!this.isEditingData){
       this.registerUser();
       return;
     }
@@ -72,6 +75,9 @@ export class FormUserPage implements OnInit {
       this.successMessage();
       this.isSavingData = false;
       this.userForm.reset();
+      setTimeout(() => {
+        this.router.navigate(['home/users']);
+      }, 1000);
       }, (err:any) => {
         this.isSavingData = false;
         this.errorMessage();
@@ -85,6 +91,10 @@ export class FormUserPage implements OnInit {
       this.successMessage();
       this.isSavingData = false;
       this.userForm.reset();
+      setTimeout(() => {
+        
+        this.router.navigate(['home/users']);
+      }, 1000);
       }, (err:any) => {
         this.isSavingData = false;
         this.errorMessage();
