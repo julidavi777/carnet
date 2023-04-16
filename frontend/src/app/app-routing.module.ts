@@ -19,6 +19,17 @@ const routes: Routes = [
     path: 'admin-oportunidad',
     loadChildren: () => import('./home/oferta-comercial/admin-oportunidad/admin-oportunidad.module').then( m => m.AdminOportunidadPageModule)
   },
+  {
+    path: 'pdf-estadisticas',
+    loadChildren: () => import('./home/pdf-estadisticas/pdf-estadisticas.module').then( m => m.PdfEstadisticasPageModule)
+  },
+  // {
+  //   path: 'pdf-estadisticas',
+  //   loadChildren: () => import('./home/pdf-estadisticas/pdf-estadisticas.module').then( m => m.PdfEstadisticasPageModule)
+  // },
+
+
+
   // {
   //   path: 'informes-indicadores',
   //   loadChildren: () => import('./home/informes-indicadores/informes-indicadores.module').then( m => m.InformesIndicadoresPageModule)
