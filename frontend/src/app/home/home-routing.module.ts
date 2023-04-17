@@ -78,6 +78,11 @@ const routes: Routes = [
         path: 'informes-indicadores',
         loadChildren: () => import('./informes-indicadores/informes-indicadores.module').then(m => m.InformesIndicadoresPageModule)
       },
+      {
+        path: 'pdf-estadisticas',
+        loadChildren: () => import('./pdf-estadisticas/pdf-estadisticas.module').then( m => m.PdfEstadisticasPageModule)
+      },
+
 
 
     ]

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class InformesIndicadoresService {
+export class PdfEstadisticasService {
 
   constructor() { }
 }

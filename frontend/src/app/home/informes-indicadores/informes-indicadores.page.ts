@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-informes-indicadores',
@@ -100,5 +105,45 @@ this.isExpanded = !this.isExpanded;
       data: data2,
 
     });
+  }
+
+  generatePDF() {
+    const cantCotizacionData = {
+      label: 'Cantidad de Cotizaciones',
+      data: [159, 173, 328, 369, 400, 523, 551, 376, 495, 478],
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgba(255, 99, 132, 1)',
+      borderWidth: 1
+    };
+
+    const data = {
+      labels: ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'],
+      datasets: [cantCotizacionData]
+    };
+
+    const options = {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    };
+
+    const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+    const canvasImg = canvas.toDataURL('image/png');
+
+    const docDefinition = {
+      content: [
+        {
+          image: canvasImg,
+          width: 500,
+          height: 400
+        }
+      ]
+    };
+
+    pdfMake.createPdf(docDefinition).open();
   }
 }
