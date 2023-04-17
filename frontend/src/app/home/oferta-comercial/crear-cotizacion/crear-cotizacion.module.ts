@@ -8,14 +8,15 @@ import { IonicModule } from '@ionic/angular';
 import { CrearCotizacionPageRoutingModule } from './crear-cotizacion-routing.module';
 
 import { CrearCotizacionPage } from './crear-cotizacion.page';
-
+import { ButtonModule } from 'primeng/button';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     CrearCotizacionPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ButtonModule
   ],
   declarations: [CrearCotizacionPage]
 })

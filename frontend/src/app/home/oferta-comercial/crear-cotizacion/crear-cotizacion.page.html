@@ -28,16 +28,30 @@
         <input type="number" class="form-control" formControlName="identification" id="" placeholder="" required>
       </div>
 
-      <div class="mb-3 form-group col-md-6">
+      <div class="mb-3 form-group col-md-6" *ngIf="isNit">
         <label class="form-label" for="">Razón social</label>
         <input type="text" class="form-control" formControlName="razon_social" id="" placeholder="" required>
       </div>
       <br>
 
-      <div class="mb-3 form-group col-md-6">
+      <div class="mb-3 form-group col-md-6" *ngIf="isNit">
         <label class="form-label" for="">Razón Comercial</label>
         <input type="text" class="form-control"  formControlName="razon_comercial" id="" placeholder="" required>
       </div>
+
+      <div class="mb-3 form-group col-md-6" *ngIf="!isNit">
+        <label class="form-label" for="">Nombre</label>
+        <input type="text" class="form-control" formControlName="name" id="" placeholder="" required>
+      </div>
+      <br>
+
+      <div class="mb-3 form-group col-md-6" *ngIf="!isNit">
+        <label class="form-label" for="">Apellido</label>
+        <input type="text" class="form-control"  formControlName="surname" id="" placeholder="" required>
+      </div>
+
+
+      
 
 
       <div class="mb-3 form-group col-md-6">
@@ -56,7 +70,8 @@
       <div class="mb-3 form-group col-md-6">
         <label  *ngIf="!hasCotitzationDataToPatch" class="form-label" for="">Adjuntar Cotización</label>
         <input *ngIf="!hasCotitzationDataToPatch" type="file" class="form-control" formControlName="cotizacion_file_field" (change)="onFileSelected($event)" placeholder="" required>
-        <button *ngIf="contization_file" (click)="watchDocument()" type="button" class="btn btn-primary">Cotización adjuntada</button>
+
+        <p-button (click)="watchDocument()" label="Cotización adjuntada" icon="pi pi-file" iconPos="right" styleClass="p-button-danger"></p-button>
       </div>
       <br>
 

@@ -16,13 +16,16 @@ export class CrearCotizacionPage implements OnInit {
     commercial_offer_id :number = 0;
     contization_file: any = null;
     hasCotitzationDataToPatch: boolean = false;
+    isNit:boolean = false;
 
     cotizacionForm: any = new FormGroup({
       sede: new FormControl('', [Validators.required]),
       sequential_number: new FormControl('', [Validators.required]),
       identification: new FormControl(''),
-      razon_social: new FormControl('', [Validators.required]),
-      razon_comercial: new FormControl('', [Validators.required]),
+      razon_social: new FormControl('',),
+      razon_comercial: new FormControl('',),
+      name: new FormControl('',),
+      surname: new FormControl('',),
       valor_cotizado: new FormControl(''),
       observaciones: new FormControl('', [Validators.required]),
 
@@ -44,6 +47,8 @@ export class CrearCotizacionPage implements OnInit {
     this.cotizacionForm.controls['identification'].disable();
     this.cotizacionForm.controls['razon_comercial'].disable();
     this.cotizacionForm.controls['razon_social'].disable();
+    this.cotizacionForm.controls['name'].disable();
+    this.cotizacionForm.controls['surname'].disable();
 
     let dataCommercialOffer = this.crearCotizacionService.dataCommercialOffer;
 
@@ -54,6 +59,10 @@ export class CrearCotizacionPage implements OnInit {
         this.hasCotitzationDataToPatch = true;
       }
       this.commercial_offer_id = dataCommercialOffer.id;
+
+      if(dataCommercialOffer?.customer?.identification_type == 2){
+        this.isNit = true;
+      }
       console.log("dataaa")
       console.log(dataCommercialOffer)
       this.cotizacionForm.patchValue({
@@ -61,6 +70,8 @@ export class CrearCotizacionPage implements OnInit {
         identification: dataCommercialOffer?.customer?.identification,
         razon_comercial: dataCommercialOffer?.customer?.razon_comercial,
         razon_social: dataCommercialOffer?.customer?.razon_social,
+        name: dataCommercialOffer?.customer?.name,
+        surname: dataCommercialOffer?.customer?.surname,
       })
     }else{
       this.router.navigate(['home/oferta-comercial/ofertas']);
