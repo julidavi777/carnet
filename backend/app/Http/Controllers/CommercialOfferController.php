@@ -28,7 +28,8 @@ class CommercialOfferController extends ApiController
             $e->comercial_offer_visit;
             $e->user;
             $e->commercial_offers_management;
-            $e->commercial_offers_contization;
+            $e->commercial_offers_contizations;
+            $e->{'hello'} = collect($e->commercial_offers_contizations)->sortByDesc('id')->values();
             if(isset($e->commercial_offers_management)){
                 $e->commercial_offers_management->commercial_offers_management_files;
             }

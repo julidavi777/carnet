@@ -83,9 +83,9 @@ class CommercialOffer extends Model
     }
 
 
-    public function commercial_offers_contization()
+    public function commercial_offers_contizations()
     {
-        return $this->hasOne(CommercialOffersCotization::class);
+        return $this->hasMany(CommercialOffersCotization::class)->orderByDesc('id');;
     }
 
     /**

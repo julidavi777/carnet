@@ -76,6 +76,7 @@ Route::apiResource('departamentos.municipios', DepartamentoMunicipioController::
 
 // CommercialOffersCotization
 Route::post('commercialOffersCotizations',  [CommercialOffersCotizationController::class,'store']);
+Route::get('commercialOffersCotizations',  [CommercialOffersCotizationController::class,'index']);
 
 Route::group([
 

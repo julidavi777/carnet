@@ -16,7 +16,11 @@ class CommercialOffersCotizationController extends ApiController
      */
     public function index()
     {
-        //
+        $commercialOffers = CommercialOffersCotization::get();
+
+        $commercialOffers = $commercialOffers->sortBy('id')->values();
+
+        return $this->showAll($commercialOffers);
     }
 
     /**
@@ -35,7 +39,7 @@ class CommercialOffersCotizationController extends ApiController
             'valor_cotizado' => 'required|string|max:50',
             'observaciones' => 'required|string|max:50',
             'cotizacion_file' => 'required|file|mimes:doc,docx,jpg,png,pdf',
-            'commercial_offer_id' =>  'required|integer|exists:commercial_offers,id|unique:commercial_offers_cotizations',
+            'commercial_offer_id' =>  'required|integer|exists:commercial_offers,id',
         ]);
 
         if ($validator->fails()) {

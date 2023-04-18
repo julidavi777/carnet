@@ -83,10 +83,15 @@ const routes: Routes = [
         loadChildren: () => import('./pdf-estadisticas/pdf-estadisticas.module').then( m => m.PdfEstadisticasPageModule)
       },
 
-
+      {
+        path: 'cotizaciones',
+        loadChildren: () => import('./cotizaciones/cotizaciones.module').then( m => m.CotizacionesPageModule)
+      },
 
     ]
   },
+  
+ 
 
 
 ];

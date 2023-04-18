@@ -111,12 +111,12 @@ export class HomePage {
 
                 label:'Oportunidades abiertas',
                 icon:'pi pi-fw pi-lock-open',
-                routerLink: ['clientes/crear-cliente']
+                routerLink: ['cotizaciones']
             },
             {
                 label:' Oportunidades cerradas',
                 icon:'pi pi-fw pi-lock',
-                routerLink: ['clientes/clientes-list']
+                routerLink: ['cotizaciones']
             },
 
         ]

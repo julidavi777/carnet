@@ -19,7 +19,7 @@ class CreateCommercialOffersCotizationsTable extends Migration
             $table->text('observaciones');
             $table->json('cotizacion_file');
 
-            $table->unsignedBigInteger('commercial_offer_id')->nullable();
+            $table->unsignedBigInteger('commercial_offer_id');
             $table->foreign('commercial_offer_id')
                  ->references('id')->on('commercial_offers')
                  ->onDelete('set null')

@@ -6,7 +6,7 @@
     <div class="row">
 
       <div class="mb-3 form-group col-md-12">
-        <ion-label>DATOS CLIENTE</ion-label>
+        <ion-label>Datos cotización</ion-label>
       </div>
 
       <div class="mb-3 form-group col-md-2">
@@ -23,7 +23,7 @@
         <input type="text" class="form-control is-valid" formControlName="sequential_number" id="validationServer01" placeholder="#" />
       </div>
 
-      <div class="mb-3 form-group col-md-6">
+      <div class="mb-3 form-group col-md-8">
         <label class="form-label" for="">Identificación:</label>
         <input type="number" class="form-control" formControlName="identification" id="" placeholder="" required>
       </div>
@@ -68,19 +68,27 @@
 
       
       <div class="mb-3 form-group col-md-6">
-        <label  *ngIf="!hasCotitzationDataToPatch" class="form-label" for="">Adjuntar Cotización</label>
-        <input *ngIf="!hasCotitzationDataToPatch" type="file" class="form-control" formControlName="cotizacion_file_field" (change)="onFileSelected($event)" placeholder="" required>
+        <label  *ngIf="!hasCotitzationDataToPatch || isEditing" class="form-label" for="">Adjuntar Cotización</label>
+        <input *ngIf="!hasCotitzationDataToPatch || isEditing" type="file" accept=".doc,.docx,image/jpeg,image/png,application/pdf" class="form-control mb-3" formControlName="cotizacion_file_field" (change)="onFileSelected($event)" placeholder="" required>
 
-        <p-button (click)="watchDocument()" label="Cotización adjuntada" icon="pi pi-file" iconPos="right" styleClass="p-button-danger"></p-button>
+        <p-button  (click)="watchDocument()" *ngIf="hasCotitzationDataToPatch && !isEditing" label="Ver cotización adjuntada" icon="pi pi-paperclip" iconPos="right" styleClass="p-button-danger"></p-button>
       </div>
+      
       <br>
 
     </div>
 
-
-
-    <div *ngIf="!hasCotitzationDataToPatch" class="d-flex justify-content-end col-md-12">
-      <button type="submit" class="btn btn-primary">Crear Cotización</button>
+    <div class="mb-3 form-group col-md-12">
+      <ion-label>Acciones</ion-label>
+    </div>
+    <div class="row" >
+      <div class="col-md-12" style="    display: flex;gap: 10px;">
+        <p-button (onClick)="editContization()" *ngIf="!isEditing && hasCotitzationDataToPatch" label="Editar cotización" icon="pi pi-pencil" iconPos="right" styleClass="p-button-warning"></p-button>
+        <p-button (onClick)="cancelEditContization()" *ngIf="isEditing && hasCotitzationDataToPatch" label="Cancelar" icon="pi pi-times" iconPos="right" styleClass="p-button-danger"></p-button>
+        <p-button label="Ver versiones" *ngIf="hasCotitzationDataToPatch" icon="pi pi-database" iconPos="right"></p-button>
+        <p-button [disabled]="cotizacionForm.invalid"  type="submit" icon="pi pi-plus" [label]="isEditing ? 'Guardar' : 'Crear Cotización'" *ngIf="!hasCotitzationDataToPatch || isEditing" styleClass="p-button-success "></p-button>
+      </div>
+      
     </div>
 
   </form>

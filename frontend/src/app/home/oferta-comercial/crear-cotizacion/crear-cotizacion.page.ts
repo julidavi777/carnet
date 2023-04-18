@@ -17,6 +17,7 @@ export class CrearCotizacionPage implements OnInit {
     contization_file: any = null;
     hasCotitzationDataToPatch: boolean = false;
     isNit:boolean = false;
+    isEditing: boolean = false;
 
     cotizacionForm: any = new FormGroup({
       sede: new FormControl('', [Validators.required]),
@@ -26,7 +27,7 @@ export class CrearCotizacionPage implements OnInit {
       razon_comercial: new FormControl('',),
       name: new FormControl('',),
       surname: new FormControl('',),
-      valor_cotizado: new FormControl(''),
+      valor_cotizado: new FormControl('', [Validators.required]),
       observaciones: new FormControl('', [Validators.required]),
 
       cotizacion_file: new FormControl('',),
@@ -53,10 +54,13 @@ export class CrearCotizacionPage implements OnInit {
     let dataCommercialOffer = this.crearCotizacionService.dataCommercialOffer;
 
     if(dataCommercialOffer){
-      if(dataCommercialOffer?.commercial_offers_contization){
-        this.cotizacionForm.patchValue(dataCommercialOffer?.commercial_offers_contization);
-        this.contization_file = dataCommercialOffer?.commercial_offers_contization?.cotizacion_file;
+      if(dataCommercialOffer?.commercial_offers_contizations.length > 0){
+        this.cotizacionForm.patchValue(dataCommercialOffer?.commercial_offers_contizations[0]);
+        this.contization_file = dataCommercialOffer?.commercial_offers_contizations[0]?.cotizacion_file;
         this.hasCotitzationDataToPatch = true;
+        
+        this.cotizacionForm.controls['valor_cotizado'].disable();
+        this.cotizacionForm.controls['observaciones'].disable();
       }
       this.commercial_offer_id = dataCommercialOffer.id;
 
@@ -118,6 +122,19 @@ export class CrearCotizacionPage implements OnInit {
   
       window.open(this.STORAGE_URL+result, "_blank");
     }
+  }
+
+  editContization(){
+    this.isEditing = true;
+
+    this.cotizacionForm.controls['valor_cotizado'].enable();
+    this.cotizacionForm.controls['observaciones'].enable();
+  }
+
+  cancelEditContization(){
+    this.isEditing = false;
+    this.cotizacionForm.controls['valor_cotizado'].disable();
+    this.cotizacionForm.controls['observaciones'].disable();
   }
 
 }
