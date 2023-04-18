@@ -40,6 +40,20 @@ export class CrearCotizacionPage implements OnInit {
 
   });
 
+
+  rowsSeguimientos = [
+    {
+      status: "app1",
+      observaciones: "app2",
+      created_at: "created_at",
+    }
+  ]
+
+  seguimientosForm = new FormGroup({
+    status: new FormControl('', [Validators.required]),
+    observaciones: new FormControl('', [Validators.required]),
+  })
+
   constructor(
     private crearCotizacionService: CrearCotizacionService,
     private router: Router,
@@ -158,5 +172,11 @@ export class CrearCotizacionPage implements OnInit {
       
     });
     return await modal.present();
+  }
+
+  onSubmitSeguimientosForm(){
+    if(this.seguimientosForm.valid){
+      console.log(this.seguimientosForm.value)
+    }
   }
 }

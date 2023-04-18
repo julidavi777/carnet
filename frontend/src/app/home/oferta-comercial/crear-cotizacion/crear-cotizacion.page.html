@@ -1,6 +1,6 @@
 
 <div class="container">
-  <p class="h2 my-3">Nueva cotización</p>
+  <p class="h2 my-3">Cotización</p>
 
   <form class="formu" [formGroup]="cotizacionForm" (ngSubmit)="onSubmit()">
     <div class="row">
@@ -93,6 +93,87 @@
 
   </form>
 </div>
+
+<div class="container">
+  <p class="h2 my-3">Seguimientos</p>
+
+  <form class="formu" [formGroup]="seguimientosForm" (ngSubmit)="onSubmitSeguimientosForm()">
+    <div class="row">
+
+      <div class="mb-3 form-group col-md-12">
+        <ion-label>Datos seguimiento</ion-label>
+      </div>
+
+      <div class="mb-3 form-group col-md-5">
+        <label class="form-label" for="">Estado:*</label>
+        <select class="form-select" formControlName="status" aria-label="Default select example">
+          <option value="1">ABIERTA</option>
+          <option value="2">ADJUDICADA A CUBIKAR</option>
+          <option value="3">ADJUDICADA A OTRO PROVEEDOR</option>
+          <option value="4">NO DAN INFORMACIÓN</option>
+          <option value="5">NO SE HA PODIDO ESTABLECER COMUNICACIÓN</option>
+          <option value="6">NO SE VA A EJECUTAR</option>
+          <option value="7">SUSPENDIDO O APLAZADO</option>
+        </select>
+      </div>
+
+      <div class="mb-3 form-group col-md-5">
+        <label class="form-label" for="">Observaciones: *</label>
+        <textarea  formControlName="observaciones" class="form-control" rows="2" cols="50">
+
+        </textarea>
+      </div>
+
+      
+      <div class="col-md-2" style="    display: flex;gap: 10px;     margin-top: 30px; ">
+        <p-button [disabled]="seguimientosForm.invalid"  type="submit" icon="pi pi-plus" label="Guardar"  styleClass="p-button-success "></p-button>
+      </div>
+    </div>
+
+    <ngx-datatable
+    class="material mt-2"
+
+    [rows]="rowsSeguimientos"
+    [headerHeight]="70"
+    [footerHeight]="70"
+    rowHeight="auto"
+    [limit]="10"
+    [scrollbarH]="true"
+  >
+  <ngx-datatable-column name="identification_type" [resizeable]="true">
+    <ng-template ngx-datatable-header-template>
+      Estado:
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.status}}
+    </ng-template>
+  </ngx-datatable-column>
+  
+  <ngx-datatable-column name="identification_type" [resizeable]="true">
+    <ng-template ngx-datatable-header-template>
+      Observaciones:
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.observaciones}}
+    </ng-template>
+  </ngx-datatable-column>
+    
+    <ngx-datatable-column name="identification_type" [resizeable]="true">
+      <ng-template ngx-datatable-header-template>
+        Fecha creación:
+      </ng-template>
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.created_at}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    </ngx-datatable>
+  </form>
+
+
+</div>
+<br>
+<br>
 
 
 
