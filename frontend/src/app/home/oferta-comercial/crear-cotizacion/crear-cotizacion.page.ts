@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrearCotizacionService } from './crear-cotizacion.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { ModalController } from '@ionic/angular';
+import { CotizationVersionsPage } from './cotization-versions/cotization-versions.page';
 
 @Component({
   selector: 'app-crear-cotizacion',
@@ -18,6 +20,8 @@ export class CrearCotizacionPage implements OnInit {
     hasCotitzationDataToPatch: boolean = false;
     isNit:boolean = false;
     isEditing: boolean = false;
+
+    cotizationsList: any = [];
 
     cotizacionForm: any = new FormGroup({
       sede: new FormControl('', [Validators.required]),
@@ -38,7 +42,8 @@ export class CrearCotizacionPage implements OnInit {
 
   constructor(
     private crearCotizacionService: CrearCotizacionService,
-    private router: Router
+    private router: Router,
+    public modalController: ModalController
   ) { }
 
 
@@ -55,6 +60,7 @@ export class CrearCotizacionPage implements OnInit {
 
     if(dataCommercialOffer){
       if(dataCommercialOffer?.commercial_offers_contizations.length > 0){
+        this.cotizationsList = dataCommercialOffer?.commercial_offers_contizations;
         this.cotizacionForm.patchValue(dataCommercialOffer?.commercial_offers_contizations[0]);
         this.contization_file = dataCommercialOffer?.commercial_offers_contizations[0]?.cotizacion_file;
         this.hasCotitzationDataToPatch = true;
@@ -137,4 +143,20 @@ export class CrearCotizacionPage implements OnInit {
     this.cotizacionForm.controls['observaciones'].disable();
   }
 
+
+  async openModalVersions(){
+    
+    const modal = await this.modalController.create({
+      component: CotizationVersionsPage,
+      cssClass: 'my-custom-modal-css',
+      componentProps: {
+        data: this.cotizationsList
+      }
+    });
+    modal.onDidDismiss()
+    .then((res) => {
+      
+    });
+    return await modal.present();
+  }
 }

@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar class="ion-header-custom">
+    <ion-title>Versiones de la cotización</ion-title>
+      <ion-button style="padding-right: 5px;" slot="end" (click)="dismiss()" color="danger">
+        <ion-icon slot="start" name="close"></ion-icon>
+        cerrar
+      </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ngx-datatable
+class="material mt-2"
+
+[rows]="rows"
+[headerHeight]="70"
+[footerHeight]="70"
+rowHeight="auto"
+[limit]="10"
+[scrollbarH]="true"
+[loadingIndicator]="loadingIndicator"
+>
+  <ngx-datatable-column name="identification_type" [resizeable]="true">
+    <ng-template ngx-datatable-header-template>
+      Valor cotizado:
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.valor_cotizado}}
+    </ng-template>
+  </ngx-datatable-column>
+  
+  <ngx-datatable-column name="identification_type" [resizeable]="true">
+    <ng-template ngx-datatable-header-template>
+      Observaciones:
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.observaciones}}
+    </ng-template>
+  </ngx-datatable-column>
+  
+  <ngx-datatable-column name="identification_type" [resizeable]="true">
+    <ng-template ngx-datatable-header-template>
+      Fecha creación:
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.created_at}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="identification_type" [resizeable]="true">
+    <ng-template ngx-datatable-header-template>
+      Archivo:
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <p-button  (click)="watchDocument(row.cotizacion_file)"   icon="pi pi-paperclip" iconPos="right" styleClass="p-button-danger p-button-sm "></p-button>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>
+

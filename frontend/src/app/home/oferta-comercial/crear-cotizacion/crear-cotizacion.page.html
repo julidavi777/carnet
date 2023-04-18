@@ -85,7 +85,7 @@
       <div class="col-md-12" style="    display: flex;gap: 10px;">
         <p-button (onClick)="editContization()" *ngIf="!isEditing && hasCotitzationDataToPatch" label="Editar cotización" icon="pi pi-pencil" iconPos="right" styleClass="p-button-warning"></p-button>
         <p-button (onClick)="cancelEditContization()" *ngIf="isEditing && hasCotitzationDataToPatch" label="Cancelar" icon="pi pi-times" iconPos="right" styleClass="p-button-danger"></p-button>
-        <p-button label="Ver versiones" *ngIf="hasCotitzationDataToPatch" icon="pi pi-database" iconPos="right"></p-button>
+        <p-button (onClick)="openModalVersions()" label="Ver versiones" *ngIf="hasCotitzationDataToPatch" icon="pi pi-database" iconPos="right"></p-button>
         <p-button [disabled]="cotizacionForm.invalid"  type="submit" icon="pi pi-plus" [label]="isEditing ? 'Guardar' : 'Crear Cotización'" *ngIf="!hasCotitzationDataToPatch || isEditing" styleClass="p-button-success "></p-button>
       </div>
       
