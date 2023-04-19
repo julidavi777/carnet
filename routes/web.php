@@ -16,4 +16,4 @@ Route::get('/cuadros-principales', [CuadrosPrincipalesController::class, 'index'
 Route::post('/cuadros-principales', [CuadrosPrincipalesController::class, 'getCuadrosPrincipales'])
     ->name('cuadros.principales');
 
-# require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';
