@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { RolesService } from '../../roles/roles.service';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./form-user.page.scss'],
   providers: [MessageService]
 })
-export class FormUserPage implements OnInit {
+export class FormUserPage implements OnInit, OnDestroy {
 
   showPassword = false;
   isSavingData = false;
@@ -121,4 +121,9 @@ export class FormUserPage implements OnInit {
   errorMessage() {
     this.messageService.add({key: 'errorMessage', severity:'error', summary: 'Error', detail: `Usuario no ${this.isEditingData ? 'actualizado': 'registrado'}`});
   }
+
+  ngOnDestroy() {
+    this.usersService.dataUser = null;
+  }
+  
 }

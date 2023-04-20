@@ -44,7 +44,7 @@ export class OfertaEditarPage implements OnInit {
     sector_productivo: new FormControl('', [Validators.required]),
     sector_productivo_other: new FormControl(''),
     object_description: new FormControl('',[Validators.required]),
-    numero: new FormControl('',[Validators.required]),
+    numero: new FormControl(''),
     cuantia: new FormControl('',),
     location: new FormControl('',),
     release_date: new FormControl('',),
@@ -102,9 +102,9 @@ export class OfertaEditarPage implements OnInit {
         razon_social: editData.customer.razon_social,
         razon_comercial: editData.customer.razon_comercial,
         responsable_id: editData?.responsable_rel?.id,
-        release_date: this.formatDate(editData.release_date),
-        delivery_date: this.formatDate(editData.delivery_date),
-        visit_date: this.formatDate(editData?.comercial_offer_visit?.visit_date),
+        release_date:editData.release_date? this.formatDate(editData.release_date): '',
+        delivery_date:editData.delivery_date? this.formatDate(editData.delivery_date): '',
+        visit_date:editData?.comercial_offer_visit?.visit_date ? this.formatDate(editData?.comercial_offer_visit?.visit_date) : '',
         visit_place: editData?.comercial_offer_visit?.visit_place,
         person_attending: editData?.comercial_offer_visit?.person_attending,
         phone_number_person_attending: editData?.comercial_offer_visit?.phone_number_person_attending,
@@ -135,7 +135,7 @@ export class OfertaEditarPage implements OnInit {
     formData.append('sector_productivo', this.offersForm.get('sector_productivo').value);
     formData.append('sector_productivo_other', this.offersForm.get('sector_productivo_other').value);
     formData.append('object_description', this.offersForm.get('object_description').value);
-    formData.append('numero', this.offersForm.get('numero').value);
+    formData.append('numero', this.offersForm.get('numero').value ? this.offersForm.get('numero').value : '');
     formData.append('cuantia', this.offersForm.get('cuantia').value);
     formData.append('location', this.offersForm.get('location').value);
     formData.append('release_date', this.offersForm.get('release_date').value);
@@ -156,6 +156,9 @@ export class OfertaEditarPage implements OnInit {
     this.ofertaEditarService.editOffer(formData, this.idOffer ).subscribe((res: any) => {
         console.log(res);
         this.registeredSuccessfully = true;
+        setTimeout(() => {
+          this.router.navigate(['home/oferta-comercial/ofertas']);
+        }, 2000)
     },err => {
       alert("Error al registrar")
     });
