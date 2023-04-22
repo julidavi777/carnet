@@ -13,6 +13,12 @@
                 --}}
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @auth
+                        <x-nav-link :href="route('inscripciones.inicio')" :active="request()->routeIs('inscripciones.inicio')">
+                            {{ __('Inscripciones') }}
+                        </x-nav-link>
+                    @endauth
+
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Grupos Round Robin') }}
                     </x-nav-link>

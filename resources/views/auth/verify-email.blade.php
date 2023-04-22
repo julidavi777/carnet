@@ -1,9 +1,10 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
+            <h1 class="text-4xl text-center text-gray-900 pt-2 font-medium">{{ __('Zolve')}}</h1>
+            <div class="pt-1 mb-3 text-center">
+                <span class="-mt-2 text-sm opacity-80">{{ __('Verificar email') }}</span>
+            </div>
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
@@ -16,7 +17,7 @@
             </div>
         @endif
 
-        <div class="mt-4 flex items-center justify-between">
+        <div class="mt-4">
             <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
 
@@ -26,7 +27,8 @@
                     </x-button>
                 </div>
             </form>
-
+        </div>
+        <div class="mt-4 text-center">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
 
