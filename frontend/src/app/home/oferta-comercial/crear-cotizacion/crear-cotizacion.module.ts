@@ -10,6 +10,7 @@ import { CrearCotizacionPageRoutingModule } from './crear-cotizacion-routing.mod
 import { CrearCotizacionPage } from './crear-cotizacion.page';
 import { ButtonModule } from 'primeng/button';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { StatusSeguimientoPipe } from './status-seguimiento.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,6 +21,6 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     ButtonModule,
     NgxDatatableModule
   ],
-  declarations: [CrearCotizacionPage]
+  declarations: [CrearCotizacionPage, StatusSeguimientoPipe]
 })
 export class CrearCotizacionPageModule {}

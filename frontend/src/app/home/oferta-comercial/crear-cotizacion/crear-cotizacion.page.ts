@@ -13,7 +13,10 @@ import { CotizationVersionsPage } from './cotization-versions/cotization-version
 })
 export class CrearCotizacionPage implements OnInit {
 
-  readonly STORAGE_URL = environment.storageUrl;
+    readonly STORAGE_URL = environment.storageUrl;
+
+    statusOptionsSeguimiento = [];
+
     selectedFile: string = '';
     commercial_offer_id :number = 0;
     contization_file: any = null;
@@ -42,16 +45,16 @@ export class CrearCotizacionPage implements OnInit {
 
 
   rowsSeguimientos = [
-    {
+    /* {
       status: "app1",
       observaciones: "app2",
       created_at: "created_at",
-    }
+    } */
   ]
 
   seguimientosForm = new FormGroup({
     status: new FormControl('', [Validators.required]),
-    observaciones: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
   })
 
   constructor(
@@ -62,6 +65,9 @@ export class CrearCotizacionPage implements OnInit {
 
 
   ngOnInit() {
+
+    this.statusOptionsSeguimiento = this.crearCotizacionService.statusOptionsSeguimiento;
+
     this.cotizacionForm.controls['sede'].disable();
     this.cotizacionForm.controls['sequential_number'].disable();
     this.cotizacionForm.controls['identification'].disable();
@@ -82,6 +88,7 @@ export class CrearCotizacionPage implements OnInit {
         this.cotizacionForm.controls['valor_cotizado'].disable();
         this.cotizacionForm.controls['observaciones'].disable();
       }
+      
       this.commercial_offer_id = dataCommercialOffer.id;
 
       if(dataCommercialOffer?.customer?.identification_type == 2){
@@ -100,6 +107,7 @@ export class CrearCotizacionPage implements OnInit {
     }else{
       this.router.navigate(['home/oferta-comercial/ofertas']);
     }
+    this.getSeguimientos();
   }
 
   onSubmit(){
@@ -174,9 +182,28 @@ export class CrearCotizacionPage implements OnInit {
     return await modal.present();
   }
 
+  getSeguimientos(){
+    this.crearCotizacionService.getCommercialOffersSeguimientos(this.commercial_offer_id).subscribe((res: any) => {
+      this.rowsSeguimientos = res.data;
+    })
+  }
+
   onSubmitSeguimientosForm(){
     if(this.seguimientosForm.valid){
       console.log(this.seguimientosForm.value)
+
+      let data = {
+        ...this.seguimientosForm.value,
+        commercial_offer_id: this.commercial_offer_id
+      }
+
+      this.crearCotizacionService.saveCommercialOffersSeguimientos(data).subscribe((res: any) => {
+        alert("Seguimiento registrado")
+        this.getSeguimientos();
+        this.seguimientosForm.reset();
+      }, err => {
+        alert("Error al registrar el seguimiento")
+      });
     }
   }
 }

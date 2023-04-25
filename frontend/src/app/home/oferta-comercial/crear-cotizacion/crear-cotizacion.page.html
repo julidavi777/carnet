@@ -107,19 +107,13 @@
       <div class="mb-3 form-group col-md-5">
         <label class="form-label" for="">Estado:*</label>
         <select class="form-select" formControlName="status" aria-label="Default select example">
-          <option value="1">ABIERTA</option>
-          <option value="2">ADJUDICADA A CUBIKAR</option>
-          <option value="3">ADJUDICADA A OTRO PROVEEDOR</option>
-          <option value="4">NO DAN INFORMACIÓN</option>
-          <option value="5">NO SE HA PODIDO ESTABLECER COMUNICACIÓN</option>
-          <option value="6">NO SE VA A EJECUTAR</option>
-          <option value="7">SUSPENDIDO O APLAZADO</option>
+          <option [value]="option.value" *ngFor="let option of statusOptionsSeguimiento">{{option.name}}</option>
         </select>
       </div>
 
       <div class="mb-3 form-group col-md-5">
         <label class="form-label" for="">Observaciones: *</label>
-        <textarea  formControlName="observaciones" class="form-control" rows="2" cols="50">
+        <textarea  formControlName="description" class="form-control" rows="2" cols="50">
 
         </textarea>
       </div>
@@ -139,13 +133,14 @@
     rowHeight="auto"
     [limit]="10"
     [scrollbarH]="true"
+    columnMode="force"
   >
   <ngx-datatable-column name="identification_type" [resizeable]="true">
     <ng-template ngx-datatable-header-template>
       Estado:
     </ng-template>
     <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.status}}
+      {{row.status | statusSeguimiento}}
     </ng-template>
   </ngx-datatable-column>
   
@@ -154,7 +149,7 @@
       Observaciones:
     </ng-template>
     <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.observaciones}}
+      {{row.description}}
     </ng-template>
   </ngx-datatable-column>
     

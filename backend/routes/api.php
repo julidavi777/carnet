@@ -7,6 +7,7 @@ use App\Http\Controllers\CommercialOfferController;
 use App\Http\Controllers\CommercialOffersCotizationController;
 use App\Http\Controllers\CommercialOffersManagementController;
 use App\Http\Controllers\CommercialOffersManagementFileController;
+use App\Http\Controllers\CommercialOffersSeguimientoController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\DepartamentoMunicipioController;
@@ -78,6 +79,9 @@ Route::apiResource('departamentos.municipios', DepartamentoMunicipioController::
 Route::post('commercialOffersCotizations',  [CommercialOffersCotizationController::class,'store']);
 Route::get('commercialOffersCotizations',  [CommercialOffersCotizationController::class,'index']);
 
+//CommercialOffersSeguimiento
+Route::post('commercialOffersSeguimientos',  [CommercialOffersSeguimientoController::class,'store']);
+Route::get('commercialOffers/{id_offer}/commercialOffersSeguimientos',  [CommercialOffersSeguimientoController::class,'indexByIdOffer']);
 Route::group([
 
     'middleware' => 'api',

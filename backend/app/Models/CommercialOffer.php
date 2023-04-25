@@ -85,7 +85,13 @@ class CommercialOffer extends Model
 
     public function commercial_offers_contizations()
     {
-        return $this->hasMany(CommercialOffersCotization::class)->orderByDesc('id');;
+        return $this->hasMany(CommercialOffersCotization::class)->orderByDesc('id');
+    }
+
+    
+    public function commercial_offers_seguimientos()
+    {
+        return $this->hasMany(CommercialOffersSeguimiento::class)->orderByDesc('id');
     }
 
     /**
