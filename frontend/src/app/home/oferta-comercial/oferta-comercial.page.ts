@@ -25,7 +25,7 @@ export class OfertaComercialPage implements OnInit {
     private router: Router,
     private OfertaEditarService:OfertaEditarService,
     private adminOportunidadService: AdminOportunidadService,
-    private crearCotizacionService: CrearCotizacionService
+    private crearCotizacionService: CrearCotizacionService,
 
   ) { }
 
@@ -73,6 +73,14 @@ export class OfertaComercialPage implements OnInit {
     //console.log(row);
     this.crearCotizacionService.dataCommercialOffer = row;
     this.router.navigate(['home/oferta-comercial/crear-cotizacion']);	
+  }
+
+  getColorById(value){
+
+    if(value){
+      return this.crearCotizacionService.statusOptionsSeguimiento.find(e => e.value == value)?.color;
+    }
+    return 'white';
   }
 
 }

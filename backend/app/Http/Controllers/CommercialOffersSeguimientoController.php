@@ -15,7 +15,7 @@ class CommercialOffersSeguimientoController extends ApiController
      */
     public function index()
     {
-        $commercialOffersSeguimientos = CommercialOffersSeguimiento::get();
+        $commercialOffersSeguimientos = CommercialOffersSeguimiento::orderByDesc('id')->get();
         return $this->showAll($commercialOffersSeguimientos);
     }
     
@@ -102,7 +102,7 @@ class CommercialOffersSeguimientoController extends ApiController
      */
     public function indexByIdOffer($idOffer)
     {
-        $commercialOffersSeguimientos = CommercialOffersSeguimiento::where('commercial_offer_id', $idOffer)->get();
+        $commercialOffersSeguimientos = CommercialOffersSeguimiento::where('commercial_offer_id', $idOffer)->orderByDesc('id')->get();
         return $this->showAll($commercialOffersSeguimientos);
     }
 }

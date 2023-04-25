@@ -170,12 +170,31 @@
         </ng-template>
       </ngx-datatable-column> -->
 
-      <ngx-datatable-column [resizeable]="true" [width]="100">
+      <ngx-datatable-column [resizeable]="true" [width]="300">
         <ng-template ngx-datatable-header-template>
           Observaciones:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{row.observations}}
+        </ng-template>
+      </ngx-datatable-column>
+
+
+      <ngx-datatable-column [resizeable]="true" [width]="123">
+        <ng-template ngx-datatable-header-template>
+          Color oportunidad:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div [style]="'height: 40px; width: 40px; background-color:'+getColorById(row?.commercial_offers_seguimientos[0]?.status)"></div>
+        </ng-template>
+      </ngx-datatable-column>
+      
+      <ngx-datatable-column [resizeable]="true" [width]="125">
+        <ng-template ngx-datatable-header-template>
+          Estado oportunidad:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row?.commercial_offers_seguimientos[0]?.status | statusSeguimiento:'name'}}
         </ng-template>
       </ngx-datatable-column>
 

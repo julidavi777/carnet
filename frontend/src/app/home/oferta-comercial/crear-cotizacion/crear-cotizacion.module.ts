@@ -10,7 +10,8 @@ import { CrearCotizacionPageRoutingModule } from './crear-cotizacion-routing.mod
 import { CrearCotizacionPage } from './crear-cotizacion.page';
 import { ButtonModule } from 'primeng/button';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { StatusSeguimientoPipe } from './status-seguimiento.pipe';
+import { PipesModule } from 'src/app/pipes/pipes.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,8 +20,9 @@ import { StatusSeguimientoPipe } from './status-seguimiento.pipe';
     CrearCotizacionPageRoutingModule,
     ReactiveFormsModule,
     ButtonModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    PipesModule
   ],
-  declarations: [CrearCotizacionPage, StatusSeguimientoPipe]
+  declarations: [CrearCotizacionPage]
 })
 export class CrearCotizacionPageModule {}

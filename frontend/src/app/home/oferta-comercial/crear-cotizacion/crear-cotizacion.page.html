@@ -124,6 +124,10 @@
       </div>
     </div>
 
+    <div class="mb-3 form-group col-md-12">
+      <ion-label>Seguimientos</ion-label>
+    </div>
+
     <ngx-datatable
     class="material mt-2"
 
@@ -140,7 +144,7 @@
       Estado:
     </ng-template>
     <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.status | statusSeguimiento}}
+      {{row.status | statusSeguimiento:'name'}}
     </ng-template>
   </ngx-datatable-column>
   

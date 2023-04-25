@@ -12,6 +12,7 @@ import { OfertaComercialPage } from './oferta-comercial.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {ButtonModule} from 'primeng/button';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     OfertaComercialPageRoutingModule,
     NgxDatatableModule,
     ButtonModule,
-    NgxPermissionsModule.forChild()
+    NgxPermissionsModule.forChild(),
+    PipesModule
   ],
   declarations: [OfertaComercialPage, TipoContratacionPipe,TipoServicioPipe,  SectorProductivoPipe  ]
 })
