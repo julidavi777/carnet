@@ -4,28 +4,24 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'tipoServicio'
 })
 export class TipoServicioPipe implements PipeTransform {
+  data = [
+    { value: 1, name: "CONSULTORIAS E INTERVENTORIAS" },
+    { value: 2, name: "MANTENIMIENTOS" },
+    { value: 3, name: "OBRAS CIVILES" },
+    { value: 4, name: "REMODELACIONES Y ADECUACIONES" },
+  ]
+  transform(value: number, other_value: string = ""): string {
 
-  transform(value: number): string {
+  
+    let found_item = this.data.find(item => item.value == value);
 
-    if(value == 1){
-      return "Construcción"
+    if(found_item){
+       return found_item.name;
     }
+ 
+     return other_value;
 
-    if(value == 2){
-      return "Mantenimiento"
-    }
 
-    if(value == 3){
-      return "Consultoria"
-    }
-
-    if(value == 4){
-      return "tipoContratacion"
-    }
-
-    return "value";
-
-    return "null";
   }
 
 }

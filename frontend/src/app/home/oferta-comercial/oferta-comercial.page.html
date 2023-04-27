@@ -23,7 +23,7 @@
       [limit]="10"
       [scrollbarH]="true"
       [loadingIndicator]="loadingIndicator"
-
+      columnMode="force"
       >
       <ngx-datatable-column [resizeable]="true" [width]="200">
         <ng-template ngx-datatable-header-template>
@@ -61,7 +61,7 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column [resizeable]="true" [width]="100">
+      <ngx-datatable-column [resizeable]="true" [width]="140">
         <ng-template ngx-datatable-header-template>
           Razón comercial:
         </ng-template>
@@ -84,26 +84,26 @@
           Tipo de contratación:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{row.contract_type | tipoContratacion}}
+          {{row.contract_type | tipoContratacion:row.contract_type_other | uppercase}}
         </ng-template>
       </ngx-datatable-column>
 
 
-      <ngx-datatable-column [resizeable]="true" [width]="100">
+      <ngx-datatable-column [resizeable]="true" [width]="140">
         <ng-template ngx-datatable-header-template>
-          Tipo de servicio:
+          Unidad de negocio:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{row.service_type | tipoServicio}}
+          {{row.service_type | tipoServicio:row.service_type_other | uppercase}}
         </ng-template>
       </ngx-datatable-column>
 
       <ngx-datatable-column [resizeable]="true" [width]="100">
         <ng-template ngx-datatable-header-template>
-          Tipo de productivo:
+          Sector Economía:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{row.sector_productivo | sectorProductivo}}
+          {{row.sector_productivo | sectorProductivo:row.sector_productivo_other | uppercase}}
         </ng-template>
       </ngx-datatable-column>
 

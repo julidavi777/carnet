@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TipoContratacionPipe implements PipeTransform {
 
-  transform(value: number): string {
+  transform(value: number, other_value: string = ""): string {
 
     if(value == 1){
       return "Precio global fijo"
@@ -19,13 +19,7 @@ export class TipoContratacionPipe implements PipeTransform {
       return "Administración delegada"
     }
 
-    if(value == 4){
-      return "tipoContratacion"
-    }
-
-    return "value";
-
-    return "null";
+    return other_value;
   }
 
 }
