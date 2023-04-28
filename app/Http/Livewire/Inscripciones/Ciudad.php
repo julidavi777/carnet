@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Inscripciones;
 
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
 class Ciudad extends Component
