@@ -106,14 +106,7 @@
                                 </x-flowbite.select>                         
                             </div>
                             <div class="mb-6">
-                                <x-flowbite.label for="club">
-                                    Club <span>*</span> 
-                                </x-flowbite.label>
-
-                                <x-flowbite.select :id="'club'" required>
-                                    <option selected>-- Seleccione --</option>
-                                    <option value="club">Club</option>
-                                </x-flowbite.select>                         
+                                <livewire:inscripciones.club>
                             </div>
                             <div class="mb-6">
                                 <x-flowbite.label for="categoria">
