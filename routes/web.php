@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GruposRoundRobinController;
 use App\Http\Controllers\CuadrosPrincipalesController;
+use App\Http\Controllers\InscripcionesController;
 
 Route::middleware('preventHistory')->group(function()
 {
@@ -20,9 +21,8 @@ Route::middleware('preventHistory')->group(function()
 
     Route::prefix('/inscripciones')->middleware(['auth', 'verified'])->group(function()
     {
-        Route::get('/', function(){
-            return view('inscripciones.inicio');
-        })->name('inscripciones.inicio');
+        Route::get('/', [InscripcionesController::class, 'index'])
+            ->name('inscripciones.inicio');
     });
 
     require __DIR__.'/auth.php';
