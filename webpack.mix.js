@@ -11,7 +11,11 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
-    require('tailwindcss'),
-    require('autoprefixer'),
-]);
+mix.js('resources/js/app.js', 'public/js')
+    .postCss('resources/css/app.css', 'public/css', [
+        require('tailwindcss'),
+        require('autoprefixer')
+    ])
+    .js('./node_modules/flowbite/dist/flowbite.js', 'public/js')
+    .postCss('./node_modules/flowbite/dist/flowbite.css', 'public/css')
+    .js('./node_modules/flowbite/dist/datepicker.js', 'public/js');

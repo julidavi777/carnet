@@ -16,6 +16,8 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
 
+        <link rel="stylesheet" href="{{ asset('css/flowbite.css') }}">
+
         @stack('styles')
 
         @livewireStyles
@@ -39,6 +41,7 @@
 
         @stack('scripts')
 
+        <script src="{{ asset('js/flowbite.js') }}"></script>
         @livewireScripts
     </body>
 </html>
