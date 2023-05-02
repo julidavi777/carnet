@@ -85,16 +85,30 @@
                                 
                                 <x-flowbite.input type="email" :id="'email'" required/>
                             </div>
-                            <div class="residencia col-span-2 grid grid-cols-2 gap-6">
+                            <div class="residencia">
                                 <div class="mb-6">
-                                    <livewire:inscripciones.pais />
+                                    <x-flowbite.label for="pais-residencia">
+                                        Pais residencia <span>*</span> 
+                                    </x-flowbite.label>
+    
+                                    <x-flowbite.select :id="'pais-residencia'" required>
+                                        <option selected>-- Seleccione --</option>
+                                        <option value="pais">Pais</option>
+                                    </x-flowbite.select>                         
                                 </div>
                                 <div class="mb-6">
-                                    <livewire:inscripciones.ciudad />
+                                    <x-flowbite.label for="ciudad-residencia">
+                                        Ciudad residencia <span>*</span> 
+                                    </x-flowbite.label>
+    
+                                    <x-flowbite.select :id="'ciudad-residencia'" required>
+                                        <option selected>-- Seleccione --</option>
+                                        <option value="ciudad">Ciudad</option>
+                                    </x-flowbite.select>                         
                                 </div>
                             </div>
                             <div class="mb-6">
-                                <livewire:inscripciones.club />
+                                <livewire:inscripciones.club>
                             </div>
                             <div class="mb-6">
                                 <x-flowbite.label for="categoria">
