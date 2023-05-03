@@ -85,16 +85,9 @@
                                 
                                 <x-flowbite.input type="email" :id="'email'" required/>
                             </div>
-                            <div class="residencia">
-                                <div class="mb-6">
-                                    <x-flowbite.label for="pais-residencia">
-                                        Pais residencia <span>*</span> 
-                                    </x-flowbite.label>
-    
-                                    <x-flowbite.select :id="'pais-residencia'" required>
-                                        <option selected>-- Seleccione --</option>
-                                        <option value="pais">Pais</option>
-                                    </x-flowbite.select>                         
+                            <div class="residencia col-span-2">
+                                <div class="mb-6 ">
+                                    <x-inscripcion.pais/>
                                 </div>
                                 <div class="mb-6">
                                     <x-flowbite.label for="ciudad-residencia">
