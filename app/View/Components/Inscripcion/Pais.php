@@ -2,12 +2,12 @@
 
 namespace App\View\Components\Inscripcion;
 
-use Illuminate\Support\Facades\Http;
 use Illuminate\View\Component;
+use App\Services\Inscripciones\PaisesService;
 
 class Pais extends Component
 {
-    public $test;
+    public $paises;
     /**
      * Create a new component instance.
      *
@@ -16,7 +16,7 @@ class Pais extends Component
     public function __construct()
     {
         //
-        $this->test = 'test';
+        $this->paises = json_decode(PaisesService::getListaPaises());
     }
 
     /**

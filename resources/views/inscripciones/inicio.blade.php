@@ -101,7 +101,7 @@
                                 </div>
                             </div>
                             <div class="mb-6">
-                                <livewire:inscripciones.club>
+                               club
                             </div>
                             <div class="mb-6">
                                 <x-flowbite.label for="categoria">
