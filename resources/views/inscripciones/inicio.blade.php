@@ -101,7 +101,7 @@
                                 </div>
                             </div>
                             <div class="mb-6">
-                               club
+                                <x-inscripcion.club/>
                             </div>
                             <div class="mb-6">
                                 <x-flowbite.label for="categoria">
