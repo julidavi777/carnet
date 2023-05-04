@@ -25,30 +25,30 @@ class UserController extends ApiController
         if(!is_null($specificRole)){
             //SECURE LOGIC
             $specificRole = $specificRole == 'admin' ? 'responsable' : $specificRole;
-            
+
             $users = $users->filter(function($user) use ($specificRole){
                 if($user->hasRole($specificRole)){
                     return $user;
                 }
             })->values();
-            
+
             return $this->showAll($users);
         }else{
-            
+
 
             $users = $users->filter(function($user){
                 if(!$user->hasRole('admin')){
                     return $user;
                 }
-            })->values();
-            
+            })->sortBy('name')->values();
+
             return $this->showAll($users);
         }
 
-        
+
     }
 
-    
+
 
      /**
      * Update the specified resource in storage.
@@ -73,7 +73,7 @@ class UserController extends ApiController
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
-        
+
         return DB::transaction(function() use ($request, $user) {
             try{
                 $user->email = $request->post('email');
@@ -86,7 +86,7 @@ class UserController extends ApiController
                     try {
                         $myEmail = $user->email;
                         Mail::to($myEmail)->send(new VerifyAccountNotificationMail($token));
-        
+
                        /*  return response()->json([
                             'is_error' => false,
                             'message' => 'User created successfully',
@@ -102,19 +102,19 @@ class UserController extends ApiController
                     }
                 }
 
-            
-        
-        
+
+
+
                 $user->name = $request->post('name');
                 $user->surname = $request->post('surname');
-        
+
                 if(!is_null($request->post('role_id'))){
-        
+
                     $user->syncRoles([$request->role_id]);
                 }
-        
+
                 $updated = $user->update();
-        
+
                 if ($updated) {
                     return response()->json([
                         "status" => true,
@@ -133,10 +133,10 @@ class UserController extends ApiController
                 // throw $ex;
                 return response()->json(['status' => false, 'message' => 'something went wrong registro dog o usuario'.$ex], 400);
             }
-           
-            
+
+
         });
-       
+
     }
 
         /**
@@ -146,7 +146,7 @@ class UserController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($user_id)
-    {   
+    {
         $user = User::findOrFail($user_id);
 
         $user->delete();

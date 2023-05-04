@@ -133,7 +133,7 @@ class AuthController extends Controller
                 'message' => $validator->errors()], 422);
         }
 
-       
+
 
 
         return DB::transaction(function() use ($request) {
@@ -144,14 +144,14 @@ class AuthController extends Controller
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                 ])->assignRole($request->role_id/* Role::where('id', $request->role_id)->first()['name'] */);
-    
+
                 $token = Auth::login($user);
-    
-                
+
+
                 try {
                     $myEmail = $user->email;
                     Mail::to($myEmail)->send(new VerifyAccountNotificationMail($token));
-    
+
                     return response()->json([
                         'is_error' => false,
                         'message' => 'User created successfully',
@@ -165,14 +165,14 @@ class AuthController extends Controller
                     DB::rollback();
                     return response()->json(['status' => false, 'message' => 'something went wrong send email'.$ex], 400);
                 }
-                
+
             }catch (\Exception $ex) {
                 DB::rollback();
                 // throw $ex;
                 return response()->json(['status' => false, 'message' => 'something went wrong registro dog o usuario'.$ex], 400);
             }
-           
-            
+
+
         });
     }
 
@@ -182,7 +182,7 @@ class AuthController extends Controller
         if(is_null($user)){
             return response()->json(['message' => 'User not found, token expired'], 422);
         }
-        
+
         $updated = User::where('id', $user->id)->update([
             'email_verified_at' => Carbon::now()
         ]);
@@ -199,7 +199,7 @@ class AuthController extends Controller
             'name' => 'admin.commercialOffers.update',
             'description' => 'Actualizar ofertas'
         ])->syncRoles([1]);
-        
+
         return "hellow";
         /* $user = User::where('id', 1)->first();
 

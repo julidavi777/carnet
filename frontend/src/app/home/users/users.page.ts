@@ -49,7 +49,7 @@ export class UsersPage implements OnInit {
   deleteUser(id){
     //console.log(id);
     this.confirmDelete(id);
-   
+
   }
 
   confirmDelete(id) {
