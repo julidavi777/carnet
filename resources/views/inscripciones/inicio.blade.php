@@ -91,17 +91,26 @@
                                 </div>
                                 <div class="mb-6">
                                     <x-flowbite.label for="ciudad-residencia">
-                                        Ciudad residencia <span>*</span> 
+                                        Departamento <span>*</span> 
                                     </x-flowbite.label>
     
                                     <x-flowbite.select :id="'ciudad-residencia'" required>
                                         <option selected>-- Seleccione --</option>
                                         <option value="ciudad">Ciudad</option>
-                                    </x-flowbite.select>                         
+                                    </x-flowbite.select>  
+                                    
+                                    <x-flowbite.label for="ciudad-residencia">
+                                        Municipio <span>*</span> 
+                                    </x-flowbite.label>
+    
+                                    <x-flowbite.select :id="'ciudad-residencia'" required>
+                                        <option selected>-- Seleccione --</option>
+                                        <option value="ciudad">Ciudad</option>
+                                    </x-flowbite.select>  
                                 </div>
                             </div>
                             <div class="mb-6">
-                                <x-inscripcion.club/>
+                                <x-inscripcion.club />
                             </div>
                             <div class="mb-6">
                                 <x-flowbite.label for="categoria">
