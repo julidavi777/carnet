@@ -26,9 +26,9 @@
 </div>
 
 
-<div class="row formu">
-  <div class="col-1"></div>
-  <div class="col-10">
+<div class="row formu d-flex justify-content-md-center">
+  <!-- <div class="col-1"></div> -->
+  <div class="col-11">
     <div >
       <ngx-datatable
       class="material mt-2"
@@ -41,6 +41,7 @@
       [scrollbarH]="true"
       [sortType]="SortType.multi"
       [loadingIndicator]="loadingIndicator"
+      columnMode="force"
       >
       <ngx-datatable-column name="identification_type" [resizeable]="true" [width]="120">
         <ng-template ngx-datatable-header-template>
@@ -60,7 +61,7 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="name" [resizeable]="true" [width]="100">
+      <ngx-datatable-column name="name" [resizeable]="true" [width]="180">
         <ng-template ngx-datatable-header-template>
           Nombre:
         </ng-template>
@@ -69,7 +70,7 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="surname" [resizeable]="true" [width]="100">
+      <ngx-datatable-column name="surname" [resizeable]="true" [width]="180">
         <ng-template ngx-datatable-header-template>
           Apellido:
         </ng-template>
@@ -78,7 +79,7 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column  name="razon_social"  [resizeable]="true" [width]="100">
+      <ngx-datatable-column  name="razon_social"  [resizeable]="true" [width]="180">
         <ng-template ngx-datatable-header-template>
           Razon social
         </ng-template>
@@ -87,7 +88,7 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="razon_comercial" [resizeable]="true" [width]="110">
+      <ngx-datatable-column name="razon_comercial" [resizeable]="true" [width]="180">
         <ng-template ngx-datatable-header-template>
           Razon comercial
         </ng-template>
@@ -114,7 +115,7 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="phone_number"  [resizeable]="true" [width]="120">
+      <ngx-datatable-column name="phone_number"  [resizeable]="true" [width]="310">
         <ng-template ngx-datatable-header-template>
           Correo electronico:
         </ng-template>
@@ -123,7 +124,7 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column  name="address" [resizeable]="true" [width]="100">
+      <ngx-datatable-column  name="address" [resizeable]="true" [width]="310">
         <ng-template ngx-datatable-header-template>
           Dirección:
         </ng-template>
@@ -168,7 +169,7 @@
 
     </div>
   </div>
-  <div class="col-1"></div>
+  <!-- <div class="col-1"></div> -->
   <p-toast position="bottom-center" key="warningMessage"></p-toast>
 </div>
 
