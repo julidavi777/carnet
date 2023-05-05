@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RolesService } from './roles.service';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.page.html',
   styleUrls: ['./roles.page.scss'],
+  providers: [ConfirmationService]
 })
 export class RolesPage implements OnInit {
   rows: any = []
@@ -14,6 +16,7 @@ export class RolesPage implements OnInit {
   constructor(
     private rolesService: RolesService,
     private router: Router,
+    private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit() {
@@ -33,6 +36,19 @@ export class RolesPage implements OnInit {
     this.rolesService.roleData = row;
     
     this.router.navigate(['home/roles/form-rol']);
+  }
+
+
+  confirmDelete(id) {
+    this.confirmationService.confirm({
+        header: 'Confirmación',
+        icon: 'pi pi-info-circle',
+        message: '¿Estas seguro de realizar esta acción?',
+        accept: () => {
+            //Actual logic to perform a confirmation
+            this.deleteRol(id)
+        }
+    });
   }
 
   deleteRol(role_id){

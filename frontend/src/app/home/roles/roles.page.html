@@ -57,7 +57,7 @@
                 <ion-icon name="pencil"></ion-icon>
               </ion-button>
 
-              <ion-button  style="color: #dc3545" data-tooltip="Eliminar" data-tooltip-conf="right" (click)="deleteRol(row.id)">
+              <ion-button  style="color: #dc3545" data-tooltip="Eliminar" data-tooltip-conf="right" (click)="confirmDelete(row.id)">
                 <ion-icon name="trash"></ion-icon>
               </ion-button>
 
@@ -70,5 +70,5 @@
       <div class="col-2"></div>
     </div>
 
-
+    <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
   </div>

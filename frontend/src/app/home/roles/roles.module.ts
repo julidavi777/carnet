@@ -9,6 +9,7 @@ import { RolesPageRoutingModule } from './roles-routing.module';
 import { RolesPage } from './roles.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {ButtonModule} from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +17,8 @@ import {ButtonModule} from 'primeng/button';
     IonicModule,
     RolesPageRoutingModule,
     NgxDatatableModule,
-    ButtonModule
+    ButtonModule,
+    ConfirmDialogModule
   ],
   declarations: [RolesPage]
 })
