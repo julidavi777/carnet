@@ -87,26 +87,13 @@
                             </div>
                             <div class="residencia col-span-2">
                                 <div class="mb-6 ">
-                                    <x-inscripcion.pais/>
+                                    <x-inscripcion.pais />
                                 </div>
                                 <div class="mb-6">
-                                    <x-flowbite.label for="ciudad-residencia">
-                                        Departamento <span>*</span> 
-                                    </x-flowbite.label>
-    
-                                    <x-flowbite.select :id="'ciudad-residencia'" required>
-                                        <option selected>-- Seleccione --</option>
-                                        <option value="ciudad">Ciudad</option>
-                                    </x-flowbite.select>  
+                                    <livewire:inscripciones.departamento />
                                     
-                                    <x-flowbite.label for="ciudad-residencia">
-                                        Municipio <span>*</span> 
-                                    </x-flowbite.label>
-    
-                                    <x-flowbite.select :id="'ciudad-residencia'" required>
-                                        <option selected>-- Seleccione --</option>
-                                        <option value="ciudad">Ciudad</option>
-                                    </x-flowbite.select>  
+                                    <livewire:inscripciones.municipio />
+
                                 </div>
                             </div>
                             <div class="mb-6">
