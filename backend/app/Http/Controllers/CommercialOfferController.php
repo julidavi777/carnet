@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\commercialOfferAssignedNotification;
 use App\Models\CommercialOffer;
 use App\Models\CommercialOffersVisit;
 use App\Models\Customer;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class CommercialOfferController extends ApiController
@@ -91,6 +94,20 @@ class CommercialOfferController extends ApiController
                     
                 }
 
+                $responsableComercialEmail = User::where('id', $request->post('responsable_id'))->first()->email;
+
+                
+                $responsableOperativoEmail = User::where('id', $request->post('responsable_operativo_id'))->first()->email;
+                
+                try {
+                    Mail::to($responsableComercialEmail)->send(new commercialOfferAssignedNotification());
+
+                    Mail::to($responsableOperativoEmail)->send(new commercialOfferAssignedNotification());
+
+                } catch (\Throwable $ex) {
+                    DB::rollback();
+                    return response()->json(['status' => false, 'message' => 'something went wrong send email'.$ex], 400);
+                }
                 //get Customer
                 $customer = Customer::where('identification', $request->post('customer_identification'))->first();
 
@@ -113,7 +130,7 @@ class CommercialOfferController extends ApiController
                     'observations'  => $request->post('observations'),
                     'anexos'  => $anexos_json_urls,
                     'customer_id'  => $customer->id,
-                    'responsable_id'  => $request->post('responsable_id'),
+                    'responsable_id'  => $request->post('responsable_id'),//responsable comercial 
                     'responsable_operativo_id'  => $request->post('responsable_operativo_id'),
                     
                 
