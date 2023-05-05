@@ -25,7 +25,7 @@ export class CrearOfertaService {
     return this.http.get(`${this.API_URL}customers/searchFilterByName/filter?filterParamIdentification=${valueParam}`)
   }
 
-  getUsers(){
-    return this.http.get(`${this.API_URL}users`)
+  getUsers(specific_role: string = ''){
+    return this.http.get(`${this.API_URL}users?specific_role=${specific_role}`)
   }
 }

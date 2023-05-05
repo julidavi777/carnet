@@ -23,7 +23,7 @@ class UserController extends ApiController
         $users = User::get();
 
         if(!is_null($specificRole)){
-            //SECURE LOGIC
+            //SECURE LOGIC: avoid to select admin users
             $specificRole = $specificRole == 'admin' ? 'responsable' : $specificRole;
 
             $users = $users->filter(function($user) use ($specificRole){

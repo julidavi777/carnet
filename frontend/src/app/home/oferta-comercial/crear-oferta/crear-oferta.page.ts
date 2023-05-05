@@ -16,7 +16,8 @@ export class CrearOfertaPage implements OnInit {
     isCustomerFound: boolean | null= null;
     registeredSuccessfully: boolean = false;
 
-    usersListResponsable: any = [];
+    usersListResponsableComercial: any = [];
+    usersListResponsableOperativo: any = [];
 
     offersForm: any = new FormGroup({
     sede: new FormControl('', [Validators.required]),
@@ -174,8 +175,11 @@ export class CrearOfertaPage implements OnInit {
   }
 
   getUsers(){
-    this.crearOfertaService.getUsers().subscribe((res: any) => {
-      this.usersListResponsable = res.data;
+    this.crearOfertaService.getUsers("COMERCIAL").subscribe((res: any) => {
+      this.usersListResponsableComercial = res.data;
+    });
+    this.crearOfertaService.getUsers("OPERATIVO").subscribe((res: any) => {
+      this.usersListResponsableOperativo = res.data;
     });
   }
 

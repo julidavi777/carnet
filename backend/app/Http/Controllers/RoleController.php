@@ -18,7 +18,7 @@ class RoleController extends ApiController
      */
     public function index()
     {
-        $roles = Role::with('permissions')->whereNotIn('name', ['admin'])->get();
+        $roles = Role::with('permissions')->whereNotIn('name', ['admin'])->orderBy('name')->get();
         return $this->showAll($roles);
     }
 
