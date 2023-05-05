@@ -41,6 +41,7 @@ Route::delete('users/{user_id}',  [UserController::class, 'destroy']);
 Route::get('roles', [RoleController::class, 'index']);
 Route::post('roles', [RoleController::class, 'store']);
 Route::put('roles/{role_id}', [RoleController::class, 'update']);
+Route::delete('roles/{role_id}', [RoleController::class, 'destroy']);
 //PERMISSIONS
 Route::get('permissions', [PermissionController::class, 'index']);
 

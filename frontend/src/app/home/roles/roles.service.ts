@@ -26,6 +26,10 @@ export class RolesService {
     return this.http.put(`${this.API_URL}roles/${id_role}`, data);
   }
 
+  deleteRole(role_id: any){
+    return this.http.delete(`${this.API_URL}roles/${role_id}`);
+  }
+
   getPermissions(){
     return this.http.get(`${this.API_URL}permissions`);
   }

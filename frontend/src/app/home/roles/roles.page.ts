@@ -34,4 +34,20 @@ export class RolesPage implements OnInit {
     
     this.router.navigate(['home/roles/form-rol']);
   }
+
+  deleteRol(role_id){
+    console.log(role_id);
+    this.rolesService.deleteRole(role_id).subscribe(res => {
+      alert("Rol eliminado")
+      this.ngOnInit();
+    }, err => {
+      console.log(err)
+      if(err.status === 422 && err.error.message === "The are users with this role assigned" ){
+        let usersStr = err.error.usersFound.map(user => `${user.name} ${user.surname} \n`);
+        alert("No se puede eliminar el rol ya que los siguientes usuarios lo tienen asignado \n"+usersStr )
+
+      }
+    })
+    
+  }
 }

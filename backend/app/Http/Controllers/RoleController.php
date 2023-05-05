@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -94,5 +95,48 @@ class RoleController extends ApiController
                 return response()->json(['status' => false, 'message' => 'something went wrong registro role'.$ex], 400);
             }
         });
+    }
+
+       /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Role  $role_id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($role_id)
+    {
+        $role = Role::findOrFail($role_id);
+
+
+        if($role){
+            $users = User::get();
+
+            $usersFound = $users->filter(function($user) use ($role){
+                if($user->hasAnyRole([$role->name])){
+                    return $user;
+                }
+            })->values();
+
+            if(count($usersFound) > 0){
+                return response()->json([
+                    'status' => false, 
+                    'message' => 'The are users with this role assigned',
+                    'usersFound' => $usersFound
+                ], 422);
+            }
+            $role->syncPermissions([]);
+            
+            $role->delete();
+            
+            
+            return response()->json([
+                'status' => true, 
+                'message' => 'Rol deleted successfully'
+            ], 200);
+
+
+        }
+
+
     }
 }

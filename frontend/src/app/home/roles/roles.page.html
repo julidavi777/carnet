@@ -57,6 +57,10 @@
                 <ion-icon name="pencil"></ion-icon>
               </ion-button>
 
+              <ion-button  style="color: #dc3545" data-tooltip="Eliminar" data-tooltip-conf="right" (click)="deleteRol(row.id)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+
             </ion-buttons>
           </ng-template>
         </ngx-datatable-column>
