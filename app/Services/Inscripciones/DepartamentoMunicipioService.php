@@ -22,6 +22,7 @@ class DepartamentoMunicipioService
         $munucipios = DB::table('departamento_municipio')
             ->select('municipio')
             ->where('departamento', $departamento)
+            ->orderBy('municipio')
             ->get();
 
         return $munucipios->toJson();

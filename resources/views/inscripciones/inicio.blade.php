@@ -71,13 +71,67 @@
                                 
                                 <x-flowbite.input type="text" :id="'nacionalidad'" required/>
                             </div>
+
+                            <div class="residencia col-span-2">
+                                <div class="mb-6 ">
+                                    <x-inscripcion.pais />
+
+                                    @push('scripts')
+                                        <script>
+                                            const prefijo_pais = "+";
+                                            let pais = document.getElementById('pais-residencia'); 
+                                            let selected = pais.selectedOptions;
+                                            let pais_defecto = selected[0].label;
+
+                                            getSoloColombia(pais_defecto, (prefijo_pais + selected[0].dataset.phoneCode));
+
+                                            pais.addEventListener('change', () => {
+                                                getSoloColombia(selected[0].label, (prefijo_pais + selected[0].dataset.phoneCode));
+                                            });
+
+                                            function getSoloColombia(pais, codigo_pais)
+                                            {
+                                                document.getElementById('codigo_pais').innerText = codigo_pais;
+                                                document.getElementById('codigo_tel').value = codigo_pais;
+
+                                                if(pais !== 'Colombia')
+                                                    document.getElementById('solo-colombia').hidden = true;
+                                                else
+                                                    document.getElementById('solo-colombia').hidden = false;
+                                            }
+
+                                        </script>
+                                    @endpush
+                                </div>
+
+                                <div id="solo-colombia">
+                                    <div class="mb-6">
+                                        <livewire:inscripciones.departamento />
+                                    </div>
+    
+                                    <div class="mb-6">
+                                        <livewire:inscripciones.municipio />
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="mb-6">
                                 <x-flowbite.label for="telefono-contacto">
                                     Número de celular
                                 </x-flowbite.label>
-                                
-                                <x-flowbite.input type="number" :id="'telefono-contacto'" required/>
+
+                                <div class="flex">
+
+                                    <span id="codigo_pais" class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"> </span>
+
+                                    <x-flowbite.input class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                        type="number" :id="'telefono-contacto'" required />
+
+                                    <input type="hidden" id="codigo_tel" name="codigo_tel" />
+                                </div>
+
                             </div>
+
                             <div class="mb-6">
                                 <x-flowbite.label for="email">
                                     Correo electrónico
@@ -85,17 +139,7 @@
                                 
                                 <x-flowbite.input type="email" :id="'email'" required/>
                             </div>
-                            <div class="residencia col-span-2">
-                                <div class="mb-6 ">
-                                    <x-inscripcion.pais />
-                                </div>
-                                <div class="mb-6">
-                                    <livewire:inscripciones.departamento />
-                                    
-                                    <livewire:inscripciones.municipio />
 
-                                </div>
-                            </div>
                             <div class="mb-6">
                                 <x-inscripcion.club />
                             </div>

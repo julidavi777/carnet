@@ -4,9 +4,8 @@
     </x-flowbite.label>
 
     <x-flowbite.select :id="'pais-residencia'" required>
-        <option>-- Seleccione --</option>
         @foreach ($paises as $pais)
-            <option value="{{ $pais->nombre }}" @if($pais->nombre === 'Colombia') selected @endif >
+            <option value="{{ $pais->nombre }}" data-phone-code="{{ $pais->phone_code }}" @if($pais->nombre === 'Colombia') selected @endif >
                 {{ $pais->nombre }}
             </option>
         @endforeach
