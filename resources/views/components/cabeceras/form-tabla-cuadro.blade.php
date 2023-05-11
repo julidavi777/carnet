@@ -55,9 +55,13 @@
             </x-flowbite.select>
         </div>
         <div class="mt-5 w-48 text-center">
-            <x-flowbite.button-green-1 type="button">
+            <x-flowbite.button type="button" :color="'lime'">
                 Recuperar datos
-            </x-flowbite.button-green-1>
+            </x-flowbite.button>
+
+            <button class="text-white bg-lime-600 hover:bg-lime-700 focus:outline-none focus:ring-4 focus:ring-lime-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800">
+                botón
+            </button>
         </div>
     </div>
 </form>
