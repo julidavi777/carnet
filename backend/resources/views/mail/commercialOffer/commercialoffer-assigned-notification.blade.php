@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -23,7 +24,9 @@
                   </div>
                   <div style="padding: 20px; background-color: rgb(255, 255, 255);">
                     <div style="color: rgb(0, 0, 0); text-align: left;">
-                      <h1 style="margin: 1rem 0">Paso final...</h1>
+                      <h1 style="margin: 1rem 0">Fuiste asignado a la siguiente oferta comercial</h1>
+                      <p style="padding-bottom: 16px">La oferta con consecutivo {{$consecutivo}}, fue generada para la empresa {{$company_name}}, y fuiste asignado como <strong>{{$responsabletype}}</strong></p>
+                      <br>
                       <p style="padding-bottom: 16px">Si no solicitaste verificar esta dirección, puedes ignorar este correo electrónico.</p>
                     </div>
                   </div>
