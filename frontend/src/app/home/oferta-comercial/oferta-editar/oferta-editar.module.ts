@@ -8,6 +8,8 @@ import { OfertaEditarPageRoutingModule } from './oferta-editar-routing.module';
 
 import { OfertaEditarPage } from './oferta-editar.page';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AdminOportunidadPageModule } from '../admin-oportunidad/admin-oportunidad.module';
+import { CrearCotizacionPageModule } from '../crear-cotizacion/crear-cotizacion.module';
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     IonicModule,
     OfertaEditarPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AdminOportunidadPageModule,
+    CrearCotizacionPageModule
   ],
   declarations: [OfertaEditarPage]
 })

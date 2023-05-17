@@ -21,7 +21,7 @@ export class AdminOportunidadPage implements OnInit {
 
   formGroup: any = new FormGroup({
     requirements_determination: new FormControl(''),
-    current_status: new FormControl(''),
+    //current_status: new FormControl(''),
     requirements_verification: new FormControl(''),
   });
 
@@ -50,9 +50,9 @@ export class AdminOportunidadPage implements OnInit {
 
     this.valueChangesSelects();
 
-    if(this.dataCommercialOffer){
-
-      this.idOfferManagement = this.dataCommercialOffer.commercial_offers_management.id;
+    if(this.dataCommercialOffer.commercial_offers_management){
+      //debugger
+      this.idOfferManagement = this.dataCommercialOffer.commercial_offers_management?.id;
 
       this.isBringingDataFromDatabase = true;
       this.formGroup.controls['requirements_determination'].disable();
@@ -147,7 +147,7 @@ export class AdminOportunidadPage implements OnInit {
     console.log(this.formGroup.value)
     let formData = new FormData();
     formData.append('requirements_determination', this.formGroup.value['requirements_determination']);
-    formData.append('current_status', this.formGroup.value['current_status']);
+    //formData.append('current_status', this.formGroup.value['current_status']);
     formData.append('requirements_verification', this.formGroup.value['requirements_verification']);
     formData.append('commercial_offer_id', this.dataCommercialOffer.id.toString());
     

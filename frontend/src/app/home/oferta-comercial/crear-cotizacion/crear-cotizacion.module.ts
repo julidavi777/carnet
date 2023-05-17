@@ -23,6 +23,7 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     NgxDatatableModule,
     PipesModule
   ],
-  declarations: [CrearCotizacionPage]
+  declarations: [CrearCotizacionPage],
+  exports: [CrearCotizacionPage]
 })
 export class CrearCotizacionPageModule {}

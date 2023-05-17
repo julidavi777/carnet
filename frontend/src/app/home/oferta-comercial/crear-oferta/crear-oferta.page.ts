@@ -47,8 +47,8 @@ export class CrearOfertaPage implements OnInit {
 
 
 
-    anexos_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
-    anexos: new FormControl('',),
+    //anexos_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
+    //anexos: new FormControl('',),
 
     //MODAL VISIT
     visit_date: new FormControl('',),
@@ -184,7 +184,7 @@ export class CrearOfertaPage implements OnInit {
   }
 
 
-  onFileChange(event: any, name_field: string){
+  /* onFileChange(event: any, name_field: string){
     if(name_field == "anexos_file_field" ){
       if (event.target.files.length > 0) {
         const file = event.target.files[0];
@@ -193,6 +193,6 @@ export class CrearOfertaPage implements OnInit {
         });
       }
     }
-  }
+  } */
 
 }
