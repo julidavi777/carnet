@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ModalController } from '@ionic/angular';
 import { CotizationVersionsPage } from './cotization-versions/cotization-versions.page';
 
+
 @Component({
   selector: 'app-crear-cotizacion',
   templateUrl: './crear-cotizacion.page.html',
@@ -15,6 +16,9 @@ export class CrearCotizacionPage implements OnInit {
 
     readonly STORAGE_URL = environment.storageUrl;
 
+
+    items: any[] = [];
+
     selectedFile: string = '';
     commercial_offer_id :number = 0;
     contization_file: any = null;
@@ -23,6 +27,12 @@ export class CrearCotizacionPage implements OnInit {
     isEditing: boolean = false;
 
     cotizationsList: any = [];
+    subtotal: number;
+    admin: number;
+    imprevisto: number;
+    utilidad: number;
+    iva: number;
+    total: number;
 
     cotizacionForm: any = new FormGroup({
       sede: new FormControl('', [Validators.required]),
@@ -37,6 +47,10 @@ export class CrearCotizacionPage implements OnInit {
 
       cotizacion_file: new FormControl('',),
       cotizacion_file_field: new FormControl('',),
+
+
+
+
 
 
   });
@@ -67,11 +81,11 @@ export class CrearCotizacionPage implements OnInit {
         this.cotizacionForm.patchValue(dataCommercialOffer?.commercial_offers_contizations[0]);
         this.contization_file = dataCommercialOffer?.commercial_offers_contizations[0]?.cotizacion_file;
         this.hasCotitzationDataToPatch = true;
-        
+
         this.cotizacionForm.controls['valor_cotizado'].disable();
         this.cotizacionForm.controls['observaciones'].disable();
       }
-      
+
       this.commercial_offer_id = dataCommercialOffer.id;
 
       if(dataCommercialOffer?.customer?.identification_type == 2){
@@ -130,7 +144,7 @@ export class CrearCotizacionPage implements OnInit {
 
       let result = this.contization_file.server_hash_name.replace("public/", "");
       console.log(result)
-  
+
       window.open(this.STORAGE_URL+result, "_blank");
     }
   }
@@ -150,7 +164,7 @@ export class CrearCotizacionPage implements OnInit {
 
 
   async openModalVersions(){
-    
+
     const modal = await this.modalController.create({
       component: CotizationVersionsPage,
       cssClass: 'my-custom-modal-css',
@@ -160,12 +174,14 @@ export class CrearCotizacionPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((res) => {
-      
+
     });
     return await modal.present();
   }
 
 
 
-  
+  calcularTotal() {
+    this.total = this.subtotal + this.admin + this.imprevisto + this.utilidad + (this.subtotal * this.iva / 100);
+  }
 }
