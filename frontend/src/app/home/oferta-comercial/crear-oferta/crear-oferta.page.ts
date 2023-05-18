@@ -113,9 +113,9 @@ export class CrearOfertaPage implements OnInit {
     formData.append('release_date', this.offersForm.get('release_date').value);
     formData.append('delivery_date', this.offersForm.get('delivery_date').value);
     formData.append('observations', this.offersForm.get('observations').value);
-    formData.append('anexos', this.offersForm.get('anexos').value);
+    //formData.append('anexos', this.offersForm.get('anexos').value);
 
-    formData.append('file', this.offersForm.get('anexos').value);
+    //formData.append('file', this.offersForm.get('anexos').value);
 
     //MODAL DATA
     formData.append('visit_date', this.offersForm.get('visit_date').value);
