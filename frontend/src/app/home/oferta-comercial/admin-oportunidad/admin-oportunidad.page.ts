@@ -138,6 +138,7 @@ export class AdminOportunidadPage implements OnInit {
       let data = this.formGroup.value;
       this.adminOportunidadService.updateCommercialOfferManagement(data, this.idOfferManagement).subscribe(e => {
         alert("Actualizado");
+        this.router.navigate(['home/oferta-comercial/ofertas'])
       },e => {
         alert("Error al actualizar");
       });
@@ -165,10 +166,13 @@ export class AdminOportunidadPage implements OnInit {
         formData.append('file',element);
         this.adminOportunidadService.saveManagementFile(formData).subscribe(e => {
           console.log(e)
+
+          
         })
       });
 
       alert("datos registrados")
+      this.router.navigate(['home/oferta-comercial/ofertas'])
     },err => {
       alert("Error");
     });

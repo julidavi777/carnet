@@ -8,6 +8,7 @@ import { CrearOfertaPageRoutingModule } from './crear-oferta-routing.module';
 
 import { CrearOfertaPage } from './crear-oferta.page';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     IonicModule,
     CrearOfertaPageRoutingModule,
     ReactiveFormsModule,
+    NgxCurrencyModule
   ],
   declarations: [CrearOfertaPage]
 })

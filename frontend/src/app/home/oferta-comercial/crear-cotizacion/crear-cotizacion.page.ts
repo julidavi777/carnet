@@ -120,7 +120,7 @@ export class CrearCotizacionPage implements OnInit {
 
     this.crearCotizacionService.saveCotizacion(formData).subscribe((res: any) =>{
       alert("Cotizacion registrada")
-      
+      this.router.navigate(['home/oferta-comercial/ofertas'])
     },
     err => {
       alert("Error al registrar la cotizacion")

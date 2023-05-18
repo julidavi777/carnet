@@ -10,6 +10,7 @@ import { OfertaEditarPage } from './oferta-editar.page';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminOportunidadPageModule } from '../admin-oportunidad/admin-oportunidad.module';
 import { CrearCotizacionPageModule } from '../crear-cotizacion/crear-cotizacion.module';
+import { NgxCurrencyModule } from "ngx-currency";
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { CrearCotizacionPageModule } from '../crear-cotizacion/crear-cotizacion.
     OfertaEditarPageRoutingModule,
     ReactiveFormsModule,
     AdminOportunidadPageModule,
-    CrearCotizacionPageModule
+    CrearCotizacionPageModule,
+    NgxCurrencyModule
   ],
   declarations: [OfertaEditarPage]
 })

@@ -56,12 +56,12 @@
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="">Valor cotizado</label>
-        <input type="text" class="form-control"  formControlName="valor_cotizado"id="" placeholder="$" required>
+        <input type="text" class="form-control" currencyMask   formControlName="valor_cotizado" id=""  [options]="{ prefix: '$ ', thousands: '.', decimal: ',',precision: 0 }">
       </div>
 
             <!-- Modal -->
                 <!-- Button trigger modal -->
-                <button
+               <!--  <button
                 type="button"
                 class="col-md-4"
                 for="validation09"
@@ -69,7 +69,7 @@
                 data-bs-target="#exampleModal"
                 >
                 Calcular AIU + IVA
-              </button>
+              </button> -->
               <br />
 
 

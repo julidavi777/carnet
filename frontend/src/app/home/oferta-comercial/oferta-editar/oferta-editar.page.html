@@ -236,7 +236,7 @@
 
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Cuantía (Presupuesto oficial)</label>
-        <input type="text" class="form-control" formControlName="cuantia" id="validation09" placeholder="$" required>
+        <input type="text" class="form-control" currencyMask formControlName="cuantia" id="validation09"  [options]="{ prefix: '$ ', thousands: '.', decimal: ',',precision: 0 }">
       </div>
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="validation09">Ubicación *</label>

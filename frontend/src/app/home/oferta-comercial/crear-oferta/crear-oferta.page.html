@@ -283,10 +283,10 @@
         <input
           type="text"
           class="form-control"
+          currencyMask
           formControlName="cuantia"
           id="validation09"
-          placeholder="$"
-          required
+          [options]="{ prefix: '$ ', thousands: '.', decimal: ',',precision: 0 }"
         />
       </div>
       <div class="mb-3 form-group col-md-6">
