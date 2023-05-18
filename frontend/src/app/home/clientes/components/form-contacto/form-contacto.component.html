@@ -1,14 +1,15 @@
 <ion-header>
   <ion-toolbar class="ion-header-custom">
-    <ion-title>Registre Contacto Comercial</ion-title>
-      <ion-button style="padding-right: 5px;" slot="end" (click)="dismiss()" color="danger">
+    <ion-title style="    margin-left: 20px;">{{ contact_type_id | contactTitle}}</ion-title>
+      <ion-button style="background-color: #da3136;
+      margin: 0px 15px;" slot="end" (click)="dismiss()" color="danger">
         <ion-icon slot="start" name="close"></ion-icon>
         cerrar
       </ion-button>
   </ion-toolbar>
 </ion-header>
 
-<form [formGroup]="formContacto">
+<form [formGroup]="formContacto" style="padding: 20px;" >
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 

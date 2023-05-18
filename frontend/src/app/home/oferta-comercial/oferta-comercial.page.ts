@@ -59,20 +59,23 @@ export class OfertaComercialPage implements OnInit {
   editOffer(data: any,){
 
     this.OfertaEditarService.setDataOffer(data);
+
+    this.crearCotizacionService.dataCommercialOffer = data;
+    this.adminOportunidadService.dataCommercialOffer = data;
     this.router.navigate(['home/oferta-comercial/oferta-editar']);
 
 
   }
   
-  openAdminOportunidad(data){
+  /* openAdminOportunidad(data){
     this.adminOportunidadService.dataCommercialOffer = data;
     this.router.navigate(['home/oferta-comercial/ofertas/admin-oportunidad']);
-  }
+  } */
 
-  openCotizacion(row){
+  openSeguimientos(row){
     //console.log(row);
     this.crearCotizacionService.dataCommercialOffer = row;
-    this.router.navigate(['home/oferta-comercial/crear-cotizacion']);	
+    this.router.navigate(['home/oferta-comercial/ofertas/seguimientos-form']);	
   }
 
   getColorById(value){

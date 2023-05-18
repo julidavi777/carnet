@@ -31,7 +31,7 @@ class CommercialOffersManagementController extends Controller
 
         $validator = Validator::make($data, [
             'requirements_determination' => 'required|string',
-            'current_status' => 'required|string',
+            //'current_status' => 'required|string',
             'requirements_verification' => 'nullable|string',
             'commercial_offer_id' => 'required|exists:commercial_offers,id',
         ]);
@@ -44,7 +44,7 @@ class CommercialOffersManagementController extends Controller
 
         $created = CommercialOffersManagement::create([
             'requirements_determination' => $request->post('requirements_determination'),
-            'current_status' => $request->post('current_status'),
+            //'current_status' => $request->post('current_status'),
             'requirements_verification' => $request->post('requirements_verification'),
             'commercial_offer_id' => $request->post('commercial_offer_id')
         ]);

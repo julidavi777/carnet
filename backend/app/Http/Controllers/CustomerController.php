@@ -22,7 +22,7 @@ class CustomerController extends ApiController
         $customers = $customers->map(function ($customer){
             $customer->customersContacts;
             return $customer;
-        })->sortBy('id')->values();
+        })->sortBy('name')->values();
         return $this->showAll($customers);
     }
 
@@ -66,7 +66,7 @@ class CustomerController extends ApiController
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
-        
+
         return DB::transaction(function() use ($request) {
             try{
 
@@ -76,28 +76,28 @@ class CustomerController extends ApiController
         if ($request->hasFile('rut_file')) {
             $file = $request->file('rut_file');
             $rut_file_json_urls = $this->saveFile($file, 'customersFiles');
-            
+
         }
 
         $camara_commerce_file_json_urls = null;
         if ($request->hasFile('camara_commerce_file')) {
             $file = $request->file('camara_commerce_file');
             $camara_commerce_file_json_urls = $this->saveFile($file, 'customersFiles');
-            
+
         }
 
         $income_statement_file_json_urls = null;
         if ($request->hasFile('income_statement_file')) {
             $file = $request->file('income_statement_file');
             $income_statement_file_json_urls = $this->saveFile($file, 'customersFiles');
-            
+
         }
 
         $cliente_logo_file_json_urls = null;
         if ($request->hasFile('cliente_logo')) {
             $file = $request->file('cliente_logo');
             $cliente_logo_file_json_urls = $this->saveFile($file, 'customersFiles');
-            
+
         }
 
 
@@ -237,7 +237,7 @@ class CustomerController extends ApiController
 
             $file = $request->file('rut_file');
             $rut_file_json_urls = $this->saveFile($file, 'customersFiles');
-            
+
         }
 
         $camara_commerce_file_json_urls = $customer->camara_commerce_file;
@@ -250,7 +250,7 @@ class CustomerController extends ApiController
             //SAVE NEW FILE
             $file = $request->file('camara_commerce_file');
             $camara_commerce_file_json_urls = $this->saveFile($file, 'customersFiles');
-            
+
         }
 
         $income_statement_file_json_urls = $customer->income_statement_file;
@@ -263,7 +263,7 @@ class CustomerController extends ApiController
             //SAVE NEW FILE
             $file = $request->file('income_statement_file');
             $income_statement_file_json_urls = $this->saveFile($file, 'customersFiles');
-            
+
         }
 
         $cliente_logo_file_json_urls = $customer->cliente_logo;
@@ -276,10 +276,10 @@ class CustomerController extends ApiController
             //SAVE NEW FILE
             $file = $request->file('cliente_logo');
             $cliente_logo_file_json_urls = $this->saveFile($file, 'customersFiles');
-            
+
         }
-  
-        $updated = Customer::where('id', $customer->id)->update([    
+
+        $updated = Customer::where('id', $customer->id)->update([
             'identification_type' => $request->post('identification_type'),
             'identification' => $request->post('identification'),
             'digit_v' => $request->post('digit_v'),
@@ -319,7 +319,7 @@ class CustomerController extends ApiController
         }
         if(!is_null($request->post("form_contacto2"))){
             $data = json_decode($request->post("form_contacto2"));
-            
+
             $recordFound = CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 2)->first();
             if(!is_null($recordFound)){
                 CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 2)->update((array) $data);
@@ -331,7 +331,7 @@ class CustomerController extends ApiController
         }
         if(!is_null($request->post("form_contacto_facturacion"))){
             $data = json_decode($request->post("form_contacto_facturacion"));
-            
+
             $recordFound = CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 3)->first();
             if(!is_null($recordFound)){
                 CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 3)->update((array) $data);
@@ -343,7 +343,7 @@ class CustomerController extends ApiController
         }
         if(!is_null($request->post("form_contacto_pagos"))){
             $data = json_decode($request->post("form_contacto_pagos"));
-            
+
             $recordFound = CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 4)->first();
             if(!is_null($recordFound)){
                 CustomersContact::where('customer_id', $customer->id)->where('customers_contact_type_id', 4)->update((array) $data);
@@ -364,9 +364,9 @@ class CustomerController extends ApiController
             return response()->json([
                 "status" => false,
                 "message" => "cannot edit"
-                
+
             ], 400);
-            
+
         }
         } catch (\Exception $ex) {
         DB::rollback();
@@ -390,10 +390,10 @@ class CustomerController extends ApiController
     public function searchFilter(Request $request){
         $paramValue = $request->query('filterParam');
         $paramValueIdentification = $request->query('filterParamIdentification');
-        
+
         if(!is_null($paramValueIdentification)){
             $customer = Customer::where('identification', $paramValueIdentification)->first();
-            
+
             if(is_null($customer)){
                 return response()->json(["data" => []]);
             }
@@ -405,14 +405,14 @@ class CustomerController extends ApiController
             $customers = Customer::get();
             return $this->showAll($customers);
         }
-  
+
         $customers = Customer::where('identification', 'ilike', '%'.$paramValue.'%')->
                                orWhere('name', 'ilike', '%'.$paramValue.'%')->
                                orWhere('surname', 'ilike', '%'.$paramValue.'%')->
                                orWhere('razon_social', 'ilike', '%'.$paramValue.'%')->
                                orWhere('razon_comercial', 'ilike', '%'.$paramValue.'%')
                                 ->get();
-                                
+
         return $this->showAll($customers);
     }
 }

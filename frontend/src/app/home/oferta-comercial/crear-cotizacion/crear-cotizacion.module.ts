@@ -11,6 +11,7 @@ import { CrearCotizacionPage } from './crear-cotizacion.page';
 import { ButtonModule } from 'primeng/button';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { NgxCurrencyModule } from "ngx-currency";
 
 @NgModule({
   imports: [
@@ -21,8 +22,10 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     ReactiveFormsModule,
     ButtonModule,
     NgxDatatableModule,
-    PipesModule
+    PipesModule,
+    NgxCurrencyModule
   ],
-  declarations: [CrearCotizacionPage]
+  declarations: [CrearCotizacionPage],
+  exports: [CrearCotizacionPage]
 })
 export class CrearCotizacionPageModule {}

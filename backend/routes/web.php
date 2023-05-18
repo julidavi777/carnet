@@ -18,5 +18,6 @@ Route::get('/', function () {
 });
 
 Route::get('/verify', function () {
-    return view('mail.auth.verify-account-notification');
+    $variable = "hello";
+    return view('mail.commercialOffer.commercialoffer-assigned-notification', array ([ "data" => ["variable" => $variable] ]),);
 });

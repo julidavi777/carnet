@@ -5,10 +5,12 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicSelectableModule } from 'ionic-selectable';
+import { ContactTitlePipe } from './contact-title.pipe';
 
 @NgModule({
   declarations: [
-    FormContactoComponent
+    FormContactoComponent,
+    ContactTitlePipe
   ],
   imports: [
     CommonModule,

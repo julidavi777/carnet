@@ -94,20 +94,6 @@ class CommercialOfferController extends ApiController
                     
                 }
 
-                $responsableComercialEmail = User::where('id', $request->post('responsable_id'))->first()->email;
-
-                
-                $responsableOperativoEmail = User::where('id', $request->post('responsable_operativo_id'))->first()->email;
-                
-                try {
-                    Mail::to($responsableComercialEmail)->send(new commercialOfferAssignedNotification());
-
-                    Mail::to($responsableOperativoEmail)->send(new commercialOfferAssignedNotification());
-
-                } catch (\Throwable $ex) {
-                    DB::rollback();
-                    return response()->json(['status' => false, 'message' => 'something went wrong send email'.$ex], 400);
-                }
                 //get Customer
                 $customer = Customer::where('identification', $request->post('customer_identification'))->first();
 
@@ -152,6 +138,34 @@ class CommercialOfferController extends ApiController
                 }
 
                 if($createdCommercialOffer){
+
+                    $responsableComercialEmail = User::where('id', $request->post('responsable_id'))->first()->email;
+
+                
+                    $responsableOperativoEmail = User::where('id', $request->post('responsable_operativo_id'))->first()->email;
+                    
+                    try {
+                        Mail::to($responsableOperativoEmail)->send(
+                            new commercialOfferAssignedNotification(
+                            strval($request->post('sequential_number')), 
+                            $customer->name." ".$customer->surname, 
+                            "responsable_operativo"
+                            )
+                        );
+                        Mail::to($responsableComercialEmail)->send(
+                            new commercialOfferAssignedNotification(
+                            strval($request->post('sequential_number')), 
+                            $customer->name." ".$customer->surname, 
+                            "responsable_comercial"
+                            )
+                        );
+
+    
+                    } catch (\Throwable $ex) {
+                        DB::rollback();
+                        return response()->json(['status' => false, 'message' => 'something went wrong send email'.$ex], 400);
+                    }
+
                     return response()->json([
                         "status" => true,
                         "message" => "created sucessfully"

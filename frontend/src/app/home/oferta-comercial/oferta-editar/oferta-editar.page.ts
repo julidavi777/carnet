@@ -51,8 +51,8 @@ export class OfertaEditarPage implements OnInit {
     delivery_date: new FormControl('',),
     observations: new FormControl('',),
     
-    anexos_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
-    anexos: new FormControl('',),
+   /*  anexos_file_field: new FormControl('',),//SOLO REFERENCIA NO ENVIAR
+    anexos: new FormControl('',), */
     
     //MODAL VISIT
     visit_date: new FormControl('',),
@@ -92,7 +92,7 @@ export class OfertaEditarPage implements OnInit {
     console.log(this.ofertaEditarService.getDataOffer())  
     let editData = this.ofertaEditarService.getDataOffer();
     if(editData){
-      delete editData?.anexos;
+      /* delete editData?.anexos; */
       this.idOffer = editData.id;
       this.offersForm.patchValue({
         ...editData,
@@ -142,9 +142,9 @@ export class OfertaEditarPage implements OnInit {
     formData.append('delivery_date', this.offersForm.get('delivery_date').value);
     formData.append('visit_date', this.offersForm.get('visit_date').value);
     formData.append('observations', this.offersForm.get('observations').value);
-    formData.append('anexos', this.offersForm.get('anexos').value ? this.offersForm.get('anexos').value: '');
+    /* formData.append('anexos', this.offersForm.get('anexos').value ? this.offersForm.get('anexos').value: '');
 
-    formData.append('file', this.offersForm.get('anexos').value);
+    formData.append('file', this.offersForm.get('anexos').value); */
 
     //MODAL DATA
     formData.append('visit_date', this.offersForm.get('visit_date').value);
@@ -205,7 +205,7 @@ export class OfertaEditarPage implements OnInit {
   }
 
 
-  onFileChange(event: any, name_field: string){
+  /* onFileChange(event: any, name_field: string){
     if(name_field == "anexos_file_field" ){
       if (event.target.files.length > 0) {
         const file = event.target.files[0];
@@ -214,7 +214,7 @@ export class OfertaEditarPage implements OnInit {
         });
       }
     }
-  }
+  } */
 
   private formatDate(date) {
     const d = new Date(date);

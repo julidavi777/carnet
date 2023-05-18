@@ -29,6 +29,10 @@ const routes: Routes = [
   {
     path: 'oferta-editar',
     loadChildren: () => import('./oferta-editar/oferta-editar.module').then( m => m.OfertaEditarPageModule)
+  },
+  {
+    path: 'seguimientos-form',
+    loadChildren: () => import('./seguimientos-form/seguimientos-form.module').then( m => m.SeguimientosFormPageModule)
   }
 ];
 

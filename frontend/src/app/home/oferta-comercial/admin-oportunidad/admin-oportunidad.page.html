@@ -1,124 +1,133 @@
-
-<form  [formGroup]="formGroup" (ngSubmit)="onSubmit()" >
-  <div class="formu">
-    <p class="h2 my-3"><b>Gestión de oportunidades</b>.</p>
-  
-  
-  
-    <div class="row">
-      <div class="form-group col-md-6">
-        <label for="validation09">Determinación de requisitos</label>
-        <select class="form-select" formControlName="requirements_determination" >
+<div class="container">
+  <form  [formGroup]="formGroup" (ngSubmit)="onSubmit()" >
+    <div class="formu">
+      <p class="h2 my-3"><b>Gestión de oportunidades</b>.</p>
+    
+    
+    
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="validation09">Determinación de requisitos</label>
+          <select class="form-select" formControlName="requirements_determination" >
+            <option value="1">Si</option>
+            <option value="2">No</option>
+           </select>
+        </div>
+        <br>
+    
+    
+    
+      <div class="form-group col-md-6" *ngIf="isEnabledVerificacionRequisitos">
+          <!-- <label for="validation09">Estado actual del proceso</label>
+          <select class="form-select"  formControlName="current_status" >
+            <option value="1">Descartada</option>
+            <option value="2">En revisión</option>
+            <option value="3">MP- En espera de sorteo</option>
+            <option value="4">No favorecidos sorteo</option>
+            <option value="5">No presentada</option>
+            <option value="6">Presentada- Adjudicada a otro</option>
+            <option value="7">Presentada- En evaluación entidad</option>
+          </select> -->
+          <label class="form-label" for="validation01">Verificación de Requisitos</label>
+          <select formControlName="requirements_verification" class="form-select" >
+            <option value="1">Si</option>
+            <option value="2">No</option>
+          </select>
+     
+    
+      </div>
+    
+      <br>
+    <!-- 
+       <div class="mb-3 form-group col-md-6" *ngIf="isEnabledVerificacionRequisitos">
+        <label class="form-label" for="validation01">Verificación de Requisitos</label>
+        <select formControlName="requirements_verification" class="form-select" >
           <option value="1">Si</option>
           <option value="2">No</option>
-         </select>
+        </select> -->
+  
+      
       </div>
       <br>
-  
-  
-  
-    <div class="form-group col-md-6">
-        <label for="validation09">Estado actual del proceso</label>
-        <select class="form-select"  formControlName="current_status" >
-          <option value="1">Descartada</option>
-          <option value="2">En revisión</option>
-          <option value="3">MP- En espera de sorteo</option>
-          <option value="4">No favorecidos sorteo</option>
-          <option value="5">No presentada</option>
-          <option value="6">Presentada- Adjudicada a otro</option>
-          <option value="7">Presentada- En evaluación entidad</option>
-        </select>
+      <br>
+      <div class="row" *ngIf="!isBringingDataFromDatabase && showSelectFileVerificacion">
+        <div class="col-md-6">
+          <!-- <input  class="form-control" *ngIf="showSelectFileVerificacion" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" > -->
+          <input #myInput class="form-control" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" accept=".doc,.docx,image/jpeg,image/png,application/pdf">
+        </div>
+        <div class="col-md-6">
+          <p-button (click)="addFile()" [disabled]="actualFileSelected === null" label="Small" styleClass="p-button-sm"  label="Agregar archivo" ></p-button>
+  <!--         <p-button label="Small" styleClass="p-button-sm" *ngIf="showSelectFileVerificacion" label="Agregar archivo" ></p-button>
+   -->      </div>
       </div>
-  
-    </div>
-  
-    <br>
-  
-     <div class="mb-3 form-group col-md-6" *ngIf="isEnabledVerificacionRequisitos">
-      <label class="form-label" for="validation01">Verificación de Requisitos</label>
-      <select formControlName="requirements_verification" class="form-select" >
-        <option value="1">Si</option>
-        <option value="2">No</option>
-      </select>
-
-     
-
-    </div>
-    <div class="row" *ngIf="!isBringingDataFromDatabase && showSelectFileVerificacion">
-      <div class="col-md-6">
-        <!-- <input  class="form-control" *ngIf="showSelectFileVerificacion" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" > -->
-        <input #myInput class="form-control" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" accept=".doc,.docx,image/jpeg,image/png,application/pdf">
-      </div>
-      <div class="col-md-6">
-        <p-button (click)="addFile()" [disabled]="actualFileSelected === null" label="Small" styleClass="p-button-sm"  label="Agregar archivo" ></p-button>
-<!--         <p-button label="Small" styleClass="p-button-sm" *ngIf="showSelectFileVerificacion" label="Agregar archivo" ></p-button>
- -->      </div>
-    </div>
-  
-  
-    <ngx-datatable
-        class="material mt-2"
-        *ngIf="showSelectFileVerificacion"
-        [rows]="files"
-        [headerHeight]="70"
-        [footerHeight]="70"
-        rowHeight="auto"
-        [limit]="10"
-        [scrollbarH]="true"
-        >
-        <ngx-datatable-column name="identification_type" [resizeable]="true"  [width]="400">
-          <ng-template ngx-datatable-header-template>
-            Nombre:
-          </ng-template>
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <div *ngIf="row?.name;else templateName">
-              {{row?.name}}
-
-            </div>
-            <ng-template #templateName>
-              <p ><a class="link-opacity-75" [href]="row?.file?.server_hash_name | formatUrl" target="_blank">{{row?.file?.original_name}}</a></p>
+    
+    
+      <ngx-datatable
+          class="material mt-2"
+          *ngIf="showSelectFileVerificacion"
+          [rows]="files"
+          [headerHeight]="70"
+          [footerHeight]="70"
+          rowHeight="auto"
+          [limit]="10"
+          [scrollbarH]="true"
+          columnMode="force"
+          >
+          <ngx-datatable-column name="identification_type" [resizeable]="true"  [width]="400">
+            <ng-template ngx-datatable-header-template>
+              Nombre archivo:
             </ng-template>
-          </ng-template>
-        </ngx-datatable-column>
-
-
-        <ngx-datatable-column *ngIf="!isBringingDataFromDatabase" name="identification" [resizeable]="true"  [width]="300">
-          <ng-template ngx-datatable-header-template>
-            Peso:
-          </ng-template>
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.size | formatFileSize}}
-          </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column *ngIf="isBringingDataFromDatabase" name="identification" [resizeable]="true"  [width]="300">
-          <ng-template ngx-datatable-header-template>
-            Estado:
-          </ng-template>
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.status}}
-          </ng-template>
-        </ngx-datatable-column>
-
-
-        <ngx-datatable-column  name="acciones" [resizeable]="false"  [width]="200">
-          <ng-template ngx-datatable-header-template>
-            Acciones:
-          </ng-template>
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <ion-buttons class="grid-container" style="margin-left: 10px;" >
-              <!-- (click)="editCustomer(row)"  -->
-              <ion-button  *ngIf="!isBringingDataFromDatabase" (click)="deleteFile(row.id)"  style="color: #ff0707" data-tooltip="Eliminar" data-tooltip-conf="right">
-                <ion-icon name="trash"></ion-icon>
-              </ion-button>
-
-            </ion-buttons>
-          </ng-template>
-        </ngx-datatable-column>
-
-        </ngx-datatable>
-        <p-button  type="submit" [label]="isBringingDataFromDatabase ? 'Actualizar' : 'Guardar'" class="mt-4" ></p-button>
-  </div>
-</form>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <div *ngIf="row?.name;else templateName">
+                {{row?.name}}
+  
+              </div>
+              <ng-template #templateName>
+                <p ><a class="link-opacity-75" [href]="row?.file?.server_hash_name | formatUrl" target="_blank">{{row?.file?.original_name}}</a></p>
+              </ng-template>
+            </ng-template>
+          </ngx-datatable-column>
+  
+  
+          <ngx-datatable-column *ngIf="!isBringingDataFromDatabase" name="identification" [resizeable]="true"  [width]="300">
+            <ng-template ngx-datatable-header-template>
+              Peso:
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.size | formatFileSize}}
+            </ng-template>
+          </ngx-datatable-column>
+  
+          <!-- <ngx-datatable-column *ngIf="isBringingDataFromDatabase" name="identification" [resizeable]="true"  [width]="300">
+            <ng-template ngx-datatable-header-template>
+              Estado:
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.status}}
+            </ng-template>
+          </ngx-datatable-column> -->
+  
+  
+          <ngx-datatable-column  *ngIf="!isBringingDataFromDatabase"  name="acciones" [resizeable]="false"  [width]="200">
+            <ng-template ngx-datatable-header-template>
+              Acciones:
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <ion-buttons class="grid-container" style="margin-left: 10px;" >
+                <!-- (click)="editCustomer(row)"  -->
+                <ion-button  *ngIf="!isBringingDataFromDatabase" (click)="deleteFile(row.id)"  style="color: #ff0707" data-tooltip="Eliminar" data-tooltip-conf="right">
+                  <ion-icon name="trash"></ion-icon>
+                </ion-button>
+  
+              </ion-buttons>
+            </ng-template>
+          </ngx-datatable-column>
+  
+          </ngx-datatable>
+          <!-- <p-button  type="submit" [label]="isBringingDataFromDatabase ? 'Actualizar' : 'Guardar'" class="mt-4" ></p-button> -->
+          <p-button *ngIf="!isBringingDataFromDatabase"  type="submit"  label="Guardar" class="mt-4" ></p-button>
+    </div>
+  </form>
+</div>
 
 

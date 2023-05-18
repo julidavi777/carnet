@@ -21,7 +21,7 @@ export class AdminOportunidadPage implements OnInit {
 
   formGroup: any = new FormGroup({
     requirements_determination: new FormControl(''),
-    current_status: new FormControl(''),
+    //current_status: new FormControl(''),
     requirements_verification: new FormControl(''),
   });
 
@@ -50,9 +50,9 @@ export class AdminOportunidadPage implements OnInit {
 
     this.valueChangesSelects();
 
-    if(this.dataCommercialOffer){
-
-      this.idOfferManagement = this.dataCommercialOffer.commercial_offers_management.id;
+    if(this.dataCommercialOffer.commercial_offers_management){
+      //debugger
+      this.idOfferManagement = this.dataCommercialOffer.commercial_offers_management?.id;
 
       this.isBringingDataFromDatabase = true;
       this.formGroup.controls['requirements_determination'].disable();
@@ -138,6 +138,7 @@ export class AdminOportunidadPage implements OnInit {
       let data = this.formGroup.value;
       this.adminOportunidadService.updateCommercialOfferManagement(data, this.idOfferManagement).subscribe(e => {
         alert("Actualizado");
+        this.router.navigate(['home/oferta-comercial/ofertas'])
       },e => {
         alert("Error al actualizar");
       });
@@ -147,7 +148,7 @@ export class AdminOportunidadPage implements OnInit {
     console.log(this.formGroup.value)
     let formData = new FormData();
     formData.append('requirements_determination', this.formGroup.value['requirements_determination']);
-    formData.append('current_status', this.formGroup.value['current_status']);
+    //formData.append('current_status', this.formGroup.value['current_status']);
     formData.append('requirements_verification', this.formGroup.value['requirements_verification']);
     formData.append('commercial_offer_id', this.dataCommercialOffer.id.toString());
     
@@ -165,10 +166,13 @@ export class AdminOportunidadPage implements OnInit {
         formData.append('file',element);
         this.adminOportunidadService.saveManagementFile(formData).subscribe(e => {
           console.log(e)
+
+          
         })
       });
 
       alert("datos registrados")
+      this.router.navigate(['home/oferta-comercial/ofertas'])
     },err => {
       alert("Error");
     });

@@ -28,6 +28,9 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     NgxDatatableModule,
     PipesModule
   ],
-  declarations: [AdminOportunidadPage]
+  declarations: [AdminOportunidadPage],
+  exports: [
+    AdminOportunidadPage
+  ]
 })
 export class AdminOportunidadPageModule {}
