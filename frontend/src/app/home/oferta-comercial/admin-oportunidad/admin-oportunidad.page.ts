@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminOportunidadService } from './admin-oportunidad.service';
@@ -12,7 +12,8 @@ import { CommercialOffer } from './interfaces/CommercialOffer.interface';
 })
 export class AdminOportunidadPage implements OnInit {
 
-
+  @Input() isCreating: boolean = false;
+  
   isBringingDataFromDatabase: boolean = false;
   files = [];
   @ViewChild('myInput') myInputVariable: ElementRef;
@@ -50,7 +51,7 @@ export class AdminOportunidadPage implements OnInit {
 
     this.valueChangesSelects();
 
-    if(this.dataCommercialOffer.commercial_offers_management){
+    if(this.dataCommercialOffer?.commercial_offers_management && !this.isCreating){
       //debugger
       this.idOfferManagement = this.dataCommercialOffer.commercial_offers_management?.id;
 
@@ -133,7 +134,23 @@ export class AdminOportunidadPage implements OnInit {
 }
 
 
-  onSubmit(){
+  async onSubmit(){
+
+    if(this.isCreating){
+      console.log(this.formGroup.value)
+
+      let resFiles = [];
+      for await (let e of this.files) {
+        let base64 = await  this.getBase64(e.file);
+        resFiles.push({
+          base64
+        }) 
+      }
+   
+      console.log(resFiles)
+      return;
+    }
+
     if(this.isBringingDataFromDatabase){
       let data = this.formGroup.value;
       this.adminOportunidadService.updateCommercialOfferManagement(data, this.idOfferManagement).subscribe(e => {
@@ -182,5 +199,22 @@ export class AdminOportunidadPage implements OnInit {
     this.files = [...this.files.filter(f => f.id !== id)];
     console.log(id);
   }
+
+  getBase64(file) {
+
+    return new Promise<any>((resolve, reject) => {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+        //console.log(reader.result);
+        resolve(reader.result)
+
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+        reject('Error: '+ error)
+      };
+    })
+ }
 
 }

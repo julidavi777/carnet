@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrearCotizacionService } from './crear-cotizacion.service';
 import { Router } from '@angular/router';
@@ -17,6 +17,8 @@ export class CrearCotizacionPage implements OnInit {
     readonly STORAGE_URL = environment.storageUrl;
 
 
+    @Input() isCreating: boolean = false;
+    
     items: any[] = [];
 
     selectedFile: string = '';
@@ -75,7 +77,7 @@ export class CrearCotizacionPage implements OnInit {
 
     let dataCommercialOffer = this.crearCotizacionService.dataCommercialOffer;
 
-    if(dataCommercialOffer){
+    if(dataCommercialOffer && !this.isCreating){
       if(dataCommercialOffer?.commercial_offers_contizations.length > 0){
         this.cotizationsList = dataCommercialOffer?.commercial_offers_contizations;
         this.cotizacionForm.patchValue(dataCommercialOffer?.commercial_offers_contizations[0]);
@@ -107,7 +109,24 @@ export class CrearCotizacionPage implements OnInit {
    
   }
 
-  onSubmit(){
+  async onSubmit(){
+
+    if(this.isCreating){
+
+        let valueFile = await this.getBase64(this.cotizacionForm.get('cotizacion_file').value);
+
+        let data = {
+            ...this.cotizacionForm.value,
+            cotizacion_file: valueFile 
+         }
+
+        delete data.cotizacion_file_field;
+
+        console.log(data)
+
+        return;
+    }
+
     console.log(this.cotizacionForm.value)
 
 
@@ -184,4 +203,22 @@ export class CrearCotizacionPage implements OnInit {
   calcularTotal() {
     this.total = this.subtotal + this.admin + this.imprevisto + this.utilidad + (this.subtotal * this.iva / 100);
   }
+
+  getBase64(file) {
+
+    return new Promise<any>((resolve, reject) => {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+        //console.log(reader.result);
+        resolve(reader.result)
+
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+        reject('Error: '+ error)
+      };
+    })
+ }
+
 }

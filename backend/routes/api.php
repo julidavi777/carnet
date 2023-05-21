@@ -27,7 +27,7 @@ use App\Http\Controllers\UserController;
 |
 */
 //AUTH
-Route::get('testRoute',  [AuthController::class, 'test']);
+Route::post('testRoute',  [AuthController::class, 'test']);
 Route::post('login',  [AuthController::class, 'login']);
 Route::post('register',  [AuthController::class, 'register']);
 Route::get('verifyAccount',  [AuthController::class, 'verifyAccount']);

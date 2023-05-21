@@ -11,9 +11,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Http\UploadedFile;
+use SplFileInfo;
+use Symfony\Component\HttpFoundation\File\File;
 
 class AuthController extends Controller
 {
@@ -193,14 +198,42 @@ class AuthController extends Controller
         return response()->json(['message' => 'Error account not verified']);
     }
 
-    public function test(){
+    public function test(Request $request){
+
+        $base64_file = $request->post('bse');
+
+        
+        // Get the file extension
+        $extension = '';
+        if (strpos($base64_file, 'data:image/jpeg;base64') === 0) {
+            $extension = 'jpg';
+        } elseif (strpos($base64_file, 'data:image/png;base64') === 0) {
+            $extension = 'png';
+        } elseif (strpos($base64_file, 'data:image/gif;base64') === 0) {
+            $extension = 'gif';
+        } elseif (strpos($base64_file, 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64') === 0) {
+            $extension = 'xlsx';
+        } elseif (strpos($base64_file, 'data:application/pdf;base64') === 0) {
+            $extension = 'pdf';
+        }
+
+        $data = substr($base64_file, strpos($base64_file, ',') + 1);
+
+        if($extension == ''){
+            return response()->json([
+                "error" => "invalid file extension"
+            ], 422);
+        }
+        Storage::disk('public')->put("myFile.".$extension, base64_decode($data));
+
+       
         return ["hello" => "world"];
-        Permission::create([
+        /* Permission::create([
             'name' => 'admin.commercialOffers.update',
             'description' => 'Actualizar ofertas'
         ])->syncRoles([1]);
 
-        return "hellow";
+        return "hellow"; */
         /* $user = User::where('id', 1)->first();
 
         dd($user->getAllPermissions()->pluck('name')->toArray()) ; */
