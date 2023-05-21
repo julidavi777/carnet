@@ -80,6 +80,8 @@ class CommercialOfferController extends ApiController
             'phone_number_person_attending' => 'nullable|integer'
         ]);
 
+        return $data;
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }

@@ -200,46 +200,7 @@ class AuthController extends Controller
 
     public function test(Request $request){
 
-        $base64_file = $request->post('bse');
-
         
-        // Get the file extension
-        $extension = '';
-        if (strpos($base64_file, 'data:image/jpeg;base64') === 0) {
-            $extension = 'jpg';
-        } elseif (strpos($base64_file, 'data:image/png;base64') === 0) {
-            $extension = 'png';
-        } elseif (strpos($base64_file, 'data:image/gif;base64') === 0) {
-            $extension = 'gif';
-        } elseif (strpos($base64_file, 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64') === 0) {
-            $extension = 'xlsx';
-        } elseif (strpos($base64_file, 'data:application/pdf;base64') === 0) {
-            $extension = 'pdf';
-        } elseif (strpos($base64_file, 'data:image/jpeg;base64') === 0) {
-            $extension = 'jpeg';
-        } elseif (strpos($base64_file, 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64') === 0) {
-            $extension = 'docx';
-        }
-
-        $data = substr($base64_file, strpos($base64_file, ',') + 1);
-
-        if($extension == ''){
-            return response()->json([
-                "error" => "invalid file extension"
-            ], 422);
-        }
-        //Storage::disk('public')->put("myFile.".$extension, base64_decode($data));
-        $fileName = Str::uuid()->toString();
-        Storage::disk('public')->put("files/myFiles/".$fileName.".".$extension, base64_decode($data));
-
-        $fileUrl = Storage::disk('public')->url("files/myFiles/".$fileName.".".$extension);
-        
-        $host = parse_url($fileUrl, PHP_URL_HOST);
-        $fileNameWithoutHost = Str::after($fileUrl, $host);
-        $fileNameWithoutHost = str_replace("/storage", "public", $fileNameWithoutHost);
-        
-        
-        return ["hello" => "world", $fileNameWithoutHost];
        
        
         /* Permission::create([
