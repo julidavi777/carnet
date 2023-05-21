@@ -53,7 +53,7 @@
       <div class="row" *ngIf="!isBringingDataFromDatabase && showSelectFileVerificacion">
         <div class="col-md-6">
           <!-- <input  class="form-control" *ngIf="showSelectFileVerificacion" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" > -->
-          <input #myInput class="form-control" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" accept=".doc,.docx,image/jpeg,image/png,application/pdf">
+          <input #myInput class="form-control" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" accept=".doc,.docx,image/jpeg,image/png,application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,vnd.openxmlformats-officedocument.wordprocessingml.document">
         </div>
         <div class="col-md-6">
           <p-button (click)="addFile()" [disabled]="actualFileSelected === null" label="Small" styleClass="p-button-sm"  label="Agregar archivo" ></p-button>

@@ -215,6 +215,10 @@ class AuthController extends Controller
             $extension = 'xlsx';
         } elseif (strpos($base64_file, 'data:application/pdf;base64') === 0) {
             $extension = 'pdf';
+        } elseif (strpos($base64_file, 'data:image/jpeg;base64') === 0) {
+            $extension = 'jpeg';
+        } elseif (strpos($base64_file, 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64') === 0) {
+            $extension = 'docx';
         }
 
         $data = substr($base64_file, strpos($base64_file, ',') + 1);
@@ -224,10 +228,20 @@ class AuthController extends Controller
                 "error" => "invalid file extension"
             ], 422);
         }
-        Storage::disk('public')->put("myFile.".$extension, base64_decode($data));
+        //Storage::disk('public')->put("myFile.".$extension, base64_decode($data));
+        $fileName = Str::uuid()->toString();
+        Storage::disk('public')->put("files/myFiles/".$fileName.".".$extension, base64_decode($data));
 
+        $fileUrl = Storage::disk('public')->url("files/myFiles/".$fileName.".".$extension);
+        
+        $host = parse_url($fileUrl, PHP_URL_HOST);
+        $fileNameWithoutHost = Str::after($fileUrl, $host);
+        $fileNameWithoutHost = str_replace("/storage", "public", $fileNameWithoutHost);
+        
+        
+        return ["hello" => "world", $fileNameWithoutHost];
        
-        return ["hello" => "world"];
+       
         /* Permission::create([
             'name' => 'admin.commercialOffers.update',
             'description' => 'Actualizar ofertas'
