@@ -83,6 +83,10 @@ Route::get('commercialOffersCotizations',  [CommercialOffersCotizationController
 //CommercialOffersSeguimiento
 Route::post('commercialOffersSeguimientos',  [CommercialOffersSeguimientoController::class,'store']);
 Route::get('commercialOffers/{id_offer}/commercialOffersSeguimientos',  [CommercialOffersSeguimientoController::class,'indexByIdOffer']);
+
+Route::apiResource('chapters', ChapterController::class);
+
+
 Route::group([
 
     'middleware' => 'api',

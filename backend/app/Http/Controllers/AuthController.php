@@ -201,7 +201,10 @@ class AuthController extends Controller
     public function test(Request $request){
 
         
-       
+        $path = storage_path() . "\app\capitulacion.json"; 
+        $json = json_decode(file_get_contents($path), true); 
+        return $this->printArray($json);
+        
        
         /* Permission::create([
             'name' => 'admin.commercialOffers.update',
@@ -240,6 +243,22 @@ class AuthController extends Controller
             'description' => 'Actualizar roles'
         ])->syncRoles([1]); */
 
+    }
+
+    function printArray($arr, $pad = 0, $padStr = "\t") {
+        $outerPad = $pad;
+        $innerPad = $pad + 1;
+        $out = '[' . PHP_EOL;
+        foreach ($arr as $k => $v) {
+            if (is_array($v)) {
+                        $out .= str_repeat($padStr, $innerPad)  . $this->printArray($v, $innerPad) .", \n";
+            } else {
+                $out .= str_repeat($padStr, $innerPad) .'"'. $k .'"'. ' => ' . (is_int($v) ? $v:'"'.$v.'"') ;
+                $out .= PHP_EOL;
+            }
+        }
+        $out .= str_repeat($padStr, $outerPad) . ']';
+        return $out;
     }
 }
 // hacer api y ruta de login pendiente
