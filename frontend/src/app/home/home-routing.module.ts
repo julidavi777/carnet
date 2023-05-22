@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminAccessGuard } from '../guards/admin-access.guard';
 import { HomePage } from './home.page';
 
+
 const routes: Routes = [
   {
     path: '',
@@ -88,10 +89,15 @@ const routes: Routes = [
         loadChildren: () => import('./cotizaciones/cotizaciones.module').then( m => m.CotizacionesPageModule)
       },
 
+      {
+        path: 'gestionar-proyectos',
+        loadChildren: () => import('./gestionar-proyectos/gestionar-proyectos.module').then( m => m.GestionarProyectosPageModule)
+      },
+
     ]
   },
-  
- 
+
+
 
 
 ];
