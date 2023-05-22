@@ -24,6 +24,11 @@ const routes: Routes = [
     loadChildren: () => import('./home/pdf-estadisticas/pdf-estadisticas.module').then( m => m.PdfEstadisticasPageModule)
   },
   // {
+  //   path: 'gestionar-proyectos',
+  //   loadChildren: () => import('./home/gestionar-proyectos/gestionar-proyectos.module').then( m => m.GestionarProyectosPageModule)
+  // },
+
+  // {
   //   path: 'pdf-estadisticas',
   //   loadChildren: () => import('./home/pdf-estadisticas/pdf-estadisticas.module').then( m => m.PdfEstadisticasPageModule)
   // },

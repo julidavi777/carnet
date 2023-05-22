@@ -86,41 +86,11 @@ export class HomePage {
                   icon:'pi pi-fw pi-tags',
                   routerLink: ['oferta-comercial/ofertas']
               },
-             /*  {
-                separator:true
-              },
-              {
-                  label:'Crear Cotización',
-                  icon:'pi pi-fw pi-money-bill',
-                  routerLink: ['oferta-comercial/crear-cotizacion']
-              },
-              {
-                label:'Listado de Cotizaciones',
-                icon:'pi pi-fw pi-dollar',
-                routerLink: ['oferta-comercial/cotizaciones']
-             }, */
+
 
           ]
       },
 
-      {
-        label:'Seguimientos',
-        icon:'pi pi-fw pi-chart-bar',
-        items:[
-            {
-
-                label:'Oportunidades abiertas',
-                icon:'pi pi-fw pi-lock-open',
-                routerLink: ['cotizaciones']
-            },
-            {
-                label:' Oportunidades cerradas',
-                icon:'pi pi-fw pi-lock',
-                routerLink: ['cotizaciones']
-            },
-
-        ]
-      },
 
     {
       label:'Informes / Indicadores',
@@ -139,6 +109,46 @@ export class HomePage {
           // },
 
       ]
+  },
+
+  {
+    label:'Gestion de Proyectos',
+    icon:'pi pi-fw pi-building',
+    routerLink: ['cotizaciones'],
+    items:[
+        // {
+
+        //     label:'Oportunidades abiertas',
+        //     icon:'pi pi-fw pi-lock-open',
+        //     routerLink: ['cotizaciones']
+        // },
+        // {
+        //     label:' Oportunidades cerradas',
+        //     icon:'pi pi-fw pi-lock',
+        //     routerLink: ['cotizaciones']
+        // },
+
+    ]
+  },
+
+  {
+    label:'A P U',
+    icon:'pi pi-fw pi-database',
+
+    items:[
+        // {
+
+        //     label:'Oportunidades abiertas',
+        //     icon:'pi pi-fw pi-lock-open',
+        //     routerLink: ['cotizaciones']
+        // },
+        // {
+        //     label:' Oportunidades cerradas',
+        //     icon:'pi pi-fw pi-lock',
+        //     routerLink: ['cotizaciones']
+        // },
+
+    ]
   },
     ];
 

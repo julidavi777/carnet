@@ -1,1 +1,106 @@
-<h1>Cotizaciones</h1>
+<div class="justify-content-md-center formu">
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-2">
+      <p class="fs-3 my-3">Ofertas Adjudicadas</p>
+
+
+    </div>
+    <div class="col-9 ">
+
+    </div>
+  </div>
+  <div class="row d-flex justify-content-md-center">
+    <!-- <div class="col-1"></div> -->
+    <div class="col-11">
+      <ngx-datatable
+      class="material"
+      [rows]="rows"
+      [headerHeight]="60"
+      [footerHeight]="60"
+      rowHeight="auto"
+      [limit]="6"
+      [scrollbarH]="true"
+      [loadingIndicator]="loadingIndicator"
+      columnMode="force"
+      >
+      <ngx-datatable-column [resizeable]="true" [width]="200">
+        <ng-template ngx-datatable-header-template>
+          Consecutivo:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.sequential_number}}
+        </ng-template>
+      </ngx-datatable-column>
+
+
+
+      <ngx-datatable-column [resizeable]="true" [width]="280">
+        <ng-template ngx-datatable-header-template>
+          Razón comercial:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row?.customer?.razon_comercial}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [resizeable]="true" [width]="280">
+        <ng-template ngx-datatable-header-template>
+          Responsable:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row?.responsable_rel?.name +' '+ row?.responsable_rel?.surname}}
+        </ng-template>
+      </ngx-datatable-column>
+
+
+
+      <ngx-datatable-column [resizeable]="true" [width]="300">
+        <ng-template ngx-datatable-header-template>
+          Objeto:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.object_description}}
+        </ng-template>
+      </ngx-datatable-column>
+
+
+
+      <ngx-datatable-column  name="acciones" [resizeable]="false" [width]="170">
+        <ng-template ngx-datatable-header-template>
+          Acciones:
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+
+          <ion-buttons class="grid-container" style="margin-left: 10px;" >
+
+            <ion-button (click)="watchDocument(row.anexos)" style="color: #007bff" data-tooltip="ANEXOS" data-tooltip-conf="right">
+              <ion-icon name="document-sharp"></ion-icon>
+            </ion-button>
+
+
+            <ion-button style="color: #dc3545" data-tooltip="Eliminar" data-tooltip-conf="right">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+
+
+
+              <ion-button  (click)="openGestionProyectos(row)" style="color: #59dc35" data-tooltip="Gestionar" data-tooltip-conf="left" >
+                <ion-icon name="list"></ion-icon>
+              </ion-button>
+          </ion-buttons>
+
+
+
+        </ng-template>
+
+      </ngx-datatable-column>
+      </ngx-datatable>
+
+    </div>
+   <!--  <div class="col-1"></div> -->
+  </div>
+    </div>
+
+
