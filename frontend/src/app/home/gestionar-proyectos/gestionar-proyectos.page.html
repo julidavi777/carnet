@@ -1,3 +1,4 @@
+
 <p-accordion class="w-full">
   <p-accordionTab>
       <ng-template pTemplate="header">
@@ -7,11 +8,33 @@
           </div>
       </ng-template>
       <ng-template pTemplate="content">
-          <p class="m-0">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-              laborum.
-          </p>
+        <div class="gantt-chart">
+          <div class="gantt-header">
+            <div class="gantt-header-item">Tareas</div>
+            <div class="gantt-header-item">Inicio</div>
+            <div class="gantt-header-item">Fin</div>
+          </div>
+          <div class="gantt-tasks">
+            <div class="gantt-task" style="left: 20%; width: 50%;">
+              <div class="gantt-task-name">Tarea 1</div>
+              <div class="gantt-task-bar"></div>
+              <div class="gantt-task-start">2023-05-22 09:00</div>
+              <div class="gantt-task-end">2023-05-22 13:30</div>
+            </div>
+            <div class="gantt-task" style="left: 60%; width: 30%;">
+              <div class="gantt-task-name">Tarea 2</div>
+              <div class="gantt-task-bar"></div>
+              <div class="gantt-task-start">2023-05-22 14:00</div>
+              <div class="gantt-task-end">2023-05-22 16:30</div>
+            </div>
+            <div class="gantt-task" style="left: 80%; width: 20%;">
+              <div class="gantt-task-name">Tarea 3</div>
+              <div class="gantt-task-bar"></div>
+              <div class="gantt-task-start">2023-05-22 17:00</div>
+              <div class="gantt-task-end">2023-05-22 18:30</div>
+            </div>
+          </div>
+        </div>
       </ng-template>
   </p-accordionTab>
   <p-accordionTab>
@@ -45,3 +68,6 @@
       </ng-template>
   </p-accordionTab>
 </p-accordion>
+
+
+

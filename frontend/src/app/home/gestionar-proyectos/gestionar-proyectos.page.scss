@@ -1,0 +1,56 @@
+.gantt-chart {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  font-family: Arial, sans-serif;
+}
+
+.gantt-header {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  background-color: #f8f8f8;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.gantt-header-item {
+  flex: 1;
+}
+
+.gantt-tasks {
+  display: flex;
+  align-items: center;
+  min-height: 100px;
+}
+
+.gantt-task {
+  position: relative;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 3px;
+  margin: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.gantt-task-name,
+.gantt-task-start,
+.gantt-task-end {
+  padding: 5px 10px;
+}
+
+.gantt-task-bar {
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.gantt-task-start,
+.gantt-task-end {
+  font-size: 12px;
+}
+
+.gantt-task-start::before,
+.gantt-task-end::before {
+  content: '\f017';
+  font-family: FontAwesome;
+  margin-right: 5px;
+}
