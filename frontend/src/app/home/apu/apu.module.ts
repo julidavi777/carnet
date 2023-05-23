@@ -9,14 +9,22 @@ import { ApuPageRoutingModule } from './apu-routing.module';
 import { ApuPage } from './apu.page';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
+import {ButtonModule} from 'primeng/button';
+import { SupplyApuFormComponent } from './supply-apu-form/supply-apu-form.component';
+import { IonicSelectableModule } from 'ionic-selectable';
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ApuPageRoutingModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ButtonModule,
+    IonicSelectableModule
   ],
-  declarations: [ApuPage]
+  declarations: [ApuPage, SupplyApuFormComponent]
 })
 export class ApuPageModule {}

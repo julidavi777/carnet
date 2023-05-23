@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { SupplyApuFormComponent } from './supply-apu-form/supply-apu-form.component';
 
 @Component({
   selector: 'app-apu',
@@ -52,7 +54,9 @@ export class ApuPage implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(
+    public modalController: ModalController
+  ) { }
 
   ngOnInit() {
   }
@@ -66,6 +70,21 @@ export class ApuPage implements OnInit {
       row.treeStatus = 'collapsed';
     }
     this.rows = [...this.rows];
+  }
+
+  async openCreateForm(){
+    const modal = await this.modalController.create({
+      component: SupplyApuFormComponent,
+      cssClass: 'my-custom-modal-css',
+      backdropDismiss: false,
+      componentProps: {
+      }
+    });
+    modal.onDidDismiss()
+    .then((res) => {
+      
+    });
+    return await modal.present();
   }
 
 }
