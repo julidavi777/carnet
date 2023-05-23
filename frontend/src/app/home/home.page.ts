@@ -114,14 +114,13 @@ export class HomePage {
   {
     label:'Gestion de Proyectos',
     icon:'pi pi-fw pi-building',
-    routerLink: ['cotizaciones'],
     items:[
-        // {
+        {
 
-        //     label:'Oportunidades abiertas',
-        //     icon:'pi pi-fw pi-lock-open',
-        //     routerLink: ['cotizaciones']
-        // },
+            label:'Ofertas Adjudicadas',
+            icon:'pi pi-fw pi-key',
+            routerLink: ['cotizaciones']
+        },
         // {
         //     label:' Oportunidades cerradas',
         //     icon:'pi pi-fw pi-lock',
