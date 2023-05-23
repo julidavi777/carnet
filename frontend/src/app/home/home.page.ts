@@ -132,22 +132,25 @@ export class HomePage {
   },
 
   {
-    label:'A P U',
+    label:'Presupuesto general',
     icon:'pi pi-fw pi-database',
 
     items:[
-        // {
-
-        //     label:'Oportunidades abiertas',
-        //     icon:'pi pi-fw pi-lock-open',
-        //     routerLink: ['cotizaciones']
-        // },
-        // {
-        //     label:' Oportunidades cerradas',
-        //     icon:'pi pi-fw pi-lock',
-        //     routerLink: ['cotizaciones']
-        // },
-
+        {
+            label:'Administrar capitulación',
+            icon:'pi pi-fw pi-lock',
+            routerLink: ['chapters']
+        },
+        {
+            label:'Administrar insumos',
+            icon:'pi pi-fw pi-lock',
+            routerLink: ['supplies']
+        },
+        {
+            label:'APU',
+            icon:'pi pi-fw pi-lock-open',
+            routerLink: ['apu']
+        },
     ]
   },
     ];

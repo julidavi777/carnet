@@ -93,7 +93,19 @@ const routes: Routes = [
         path: 'gestionar-proyectos',
         loadChildren: () => import('./gestionar-proyectos/gestionar-proyectos.module').then( m => m.GestionarProyectosPageModule)
       },
-
+      {
+        path: 'supplies',
+        loadChildren: () => import('./supplies/supplies.module').then( m => m.SuppliesPageModule)
+      },
+      {
+        path: 'chapters',
+        loadChildren: () => import('./chapters/chapters.module').then( m => m.ChaptersPageModule)
+      },
+      {
+        path: 'apu',
+        loadChildren: () => import('./apu/apu.module').then( m => m.ApuPageModule)
+      },
+    
     ]
   },
 

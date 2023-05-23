@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\CommercialOfferController;
 use App\Http\Controllers\CommercialOffersCotizationController;
 use App\Http\Controllers\CommercialOffersManagementController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\DepartamentoMunicipioController;
 use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -85,7 +87,7 @@ Route::post('commercialOffersSeguimientos',  [CommercialOffersSeguimientoControl
 Route::get('commercialOffers/{id_offer}/commercialOffersSeguimientos',  [CommercialOffersSeguimientoController::class,'indexByIdOffer']);
 
 Route::apiResource('chapters', ChapterController::class);
-
+Route::resource('supplies', SupplyController::class);
 
 Route::group([
 

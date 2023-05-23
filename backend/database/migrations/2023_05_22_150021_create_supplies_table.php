@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChaptersTable extends Migration
+class CreateSuppliesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateChaptersTable extends Migration
      */
     public function up()
     {
-        Schema::create('chapters', function (Blueprint $table) {
+        Schema::create('supplies', function (Blueprint $table) {
             $table->id();
-            $table->integer('no')->unique();
-            $table->integer('sequential');
-            $table->string('chapter');
+            $table->string('code')->unique();
+            $table->string('description');
+            //$table->string('code_2');
+            $table->string('type');
+            $table->string('unidad');
+            $table->decimal('value', 15, 2);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +33,6 @@ class CreateChaptersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chapters');
+        Schema::dropIfExists('supplies');
     }
 }

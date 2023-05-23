@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar class="ion-header-custom">
+    <ion-title style="    margin-left: 20px;">Formulario insumo</ion-title>
+      <ion-button style="background-color: #da3136;
+      margin: 0px 15px;" slot="end" (click)="dismiss()" color="danger">
+        <ion-icon slot="start" name="close"></ion-icon>
+        cerrar
+      </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<div class="container mt-4">
+  <form [formGroup]="supplyForm" (ngSubmit)="onSubmit()" class="formu">
+
+    <!-- Dynamic form fields based on field names -->
+    <div class="row">
+      <div class="mb-3 col-md-4">
+        <label class="form-label">Código</label>
+        <input type="text" class="form-control" formControlName="code">
+      </div>
+
+      <div class="mb-3 col-md-4">
+        <label class="form-label">Descripción</label>
+        <input type="text" class="form-control" formControlName="description">
+      </div>
+
+      <div class="mb-3 col-md-2">
+        <label class="form-label">Tipo</label>
+        <input type="text" class="form-control" formControlName="type">
+      </div>
+
+      <div class="mb-3 col-md-2">
+        <label class="form-label">Unidad</label>
+        <input type="text" class="form-control" formControlName="unidad">
+      </div>
+
+      <div class="mb-3 col-md-4">
+        <label class="form-label">Valor</label>
+        <input type="text" class="form-control" formControlName="value">
+      </div>
+    </div>
+
+    <!-- Submit button -->
+    <div class="row">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>
