@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { OfertaComercialService } from './oferta-comercial.service';
 import { AdminOportunidadService } from './admin-oportunidad/admin-oportunidad.service';
 import { CrearCotizacionService } from './crear-cotizacion/crear-cotizacion.service';
+import { CotizacionesService } from './cotizaciones/cotizaciones.service';
 
 @Component({
   selector: 'app-oferta-comercial',
@@ -26,6 +27,7 @@ export class OfertaComercialPage implements OnInit {
     private OfertaEditarService:OfertaEditarService,
     private adminOportunidadService: AdminOportunidadService,
     private crearCotizacionService: CrearCotizacionService,
+    private CotizacionesService: CotizacionesService
 
   ) { }
 
@@ -50,10 +52,10 @@ export class OfertaComercialPage implements OnInit {
 
       let result = url.server_hash_name.replace("public/", "");
       console.log(result)
-  
+
       window.open(this.STORAGE_URL+result, "_blank");
     }
-    
+
   }
 
   editOffer(data: any,){
@@ -66,7 +68,7 @@ export class OfertaComercialPage implements OnInit {
 
 
   }
-  
+
   /* openAdminOportunidad(data){
     this.adminOportunidadService.dataCommercialOffer = data;
     this.router.navigate(['home/oferta-comercial/ofertas/admin-oportunidad']);
@@ -75,7 +77,7 @@ export class OfertaComercialPage implements OnInit {
   openSeguimientos(row){
     //console.log(row);
     this.crearCotizacionService.dataCommercialOffer = row;
-    this.router.navigate(['home/oferta-comercial/ofertas/seguimientos-form']);	
+    this.router.navigate(['home/oferta-comercial/ofertas/seguimientos-form']);
   }
 
   getColorById(value){

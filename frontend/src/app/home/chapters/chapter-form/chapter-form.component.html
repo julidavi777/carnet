@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar class="ion-header-custom">
+    <ion-title style="    margin-left: 20px;">Formulario insumo</ion-title>
+      <ion-button style="background-color: #da3136;
+      margin: 0px 15px;" slot="end" (click)="dismiss()" color="danger">
+        <ion-icon slot="start" name="close"></ion-icon>
+        cerrar
+      </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<div class="container mt-4">
+  <form [formGroup]="chapterForm" (ngSubmit)="onSubmit()" class="formu">
+
+    <!-- Dynamic form fields based on field names -->
+    <div class="row">
+      <div class="mb-3 col-md-6">
+        <label class="form-label">No</label>
+        <input type="text" class="form-control" formControlName="no">
+      </div>
+
+      <div class="mb-3 col-md-6">
+        <label class="form-label">Nombre Capitulo</label>
+        <input type="text" class="form-control" formControlName="chapter">
+      </div>
+    </div>
+
+    <!-- Submit button -->
+    <div class="row">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>

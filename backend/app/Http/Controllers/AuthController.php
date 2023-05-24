@@ -11,9 +11,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Http\UploadedFile;
+use SplFileInfo;
+use Symfony\Component\HttpFoundation\File\File;
 
 class AuthController extends Controller
 {
@@ -193,14 +198,20 @@ class AuthController extends Controller
         return response()->json(['message' => 'Error account not verified']);
     }
 
-    public function test(){
-        return ["hello" => "world"];
-        Permission::create([
+    public function test(Request $request){
+
+        
+        $path = storage_path() . "\app\capitulacion.json"; 
+        $json = json_decode(file_get_contents($path), true); 
+        return $this->printArray($json);
+        
+       
+        /* Permission::create([
             'name' => 'admin.commercialOffers.update',
             'description' => 'Actualizar ofertas'
         ])->syncRoles([1]);
 
-        return "hellow";
+        return "hellow"; */
         /* $user = User::where('id', 1)->first();
 
         dd($user->getAllPermissions()->pluck('name')->toArray()) ; */
@@ -232,6 +243,22 @@ class AuthController extends Controller
             'description' => 'Actualizar roles'
         ])->syncRoles([1]); */
 
+    }
+
+    function printArray($arr, $pad = 0, $padStr = "\t") {
+        $outerPad = $pad;
+        $innerPad = $pad + 1;
+        $out = '[' . PHP_EOL;
+        foreach ($arr as $k => $v) {
+            if (is_array($v)) {
+                        $out .= str_repeat($padStr, $innerPad)  . $this->printArray($v, $innerPad) .", \n";
+            } else {
+                $out .= str_repeat($padStr, $innerPad) .'"'. $k .'"'. ' => ' . (is_int($v) ? $v:'"'.$v.'"') ;
+                $out .= PHP_EOL;
+            }
+        }
+        $out .= str_repeat($padStr, $outerPad) . ']';
+        return $out;
     }
 }
 // hacer api y ruta de login pendiente

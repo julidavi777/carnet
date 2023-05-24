@@ -84,7 +84,7 @@
 
       <div class="mb-3 form-group col-md-6">
         <label  *ngIf="!hasCotitzationDataToPatch || isEditing" class="form-label" for="">Adjuntar Cotización</label>
-        <input *ngIf="!hasCotitzationDataToPatch || isEditing" type="file" accept=".doc,.docx,image/jpeg,image/png,application/pdf" class="form-control mb-3" formControlName="cotizacion_file_field" (change)="onFileSelected($event)" placeholder="" required>
+        <input *ngIf="!hasCotitzationDataToPatch || isEditing" type="file" accept=".docx,image/jpeg,image/png,application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,vnd.openxmlformats-officedocument.wordprocessingml.document" class="form-control mb-3" formControlName="cotizacion_file_field" (change)="onFileSelected($event)" placeholder="" required>
 
         <p-button  (click)="watchDocument()" *ngIf="hasCotitzationDataToPatch && !isEditing" label="Ver cotización adjunta" icon="pi pi-paperclip" iconPos="right" styleClass="p-button-danger"></p-button>
       </div>

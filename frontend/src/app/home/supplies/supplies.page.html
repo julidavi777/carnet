@@ -1,0 +1,83 @@
+
+
+<div class="justify-content-md-center formu">
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-3">
+      <p class="fs-3 my-3">Listado de insumos</p>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-3 mb-3">
+      <p-button label="Agregar" icon="pi pi-plus" iconPos="right" routerLink="form-rol" class="mb-3" (click)="openCreateForm()"></p-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <ngx-datatable
+  class="material mt-2"
+  [rows]="data"
+  [headerHeight]="70"
+  [footerHeight]="70"
+  rowHeight="auto"
+  [limit]="7"
+  [scrollbarH]="true"
+  [loadingIndicator]="loadingIndicator"
+  columnMode="force"
+>
+  <ngx-datatable-column name="code" [resizeable]="true" [width]="100">
+    <ng-template ngx-datatable-header-template>
+      Code
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.code }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="description" [resizeable]="true" [width]="300">
+    <ng-template ngx-datatable-header-template>
+      Description
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.description }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="type" [resizeable]="true" [width]="100">
+    <ng-template ngx-datatable-header-template>
+      Type
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.type }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="unidad" [resizeable]="true" [width]="100">
+    <ng-template ngx-datatable-header-template>
+      Unidad
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.unidad }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="value" [resizeable]="true" [width]="150">
+    <ng-template ngx-datatable-header-template>
+      Value
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.value }}
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>
+    </div>
+    <div class="col-1"></div>
+  </div>
+
+</div>

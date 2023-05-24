@@ -1,0 +1,24 @@
+.content{
+  padding: 2em;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+
+}
+
+.card-cliente{
+  cursor: pointer;
+}
+.card-cliente:hover{
+  border: 1px solid #333;
+}
+
+.formu{
+  position: relative;
+  z-index: 300; /* valor alto para que el formulario aparezca encima del logo de fondo */
+}
+
+
+
+

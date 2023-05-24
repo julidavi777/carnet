@@ -9,6 +9,9 @@ import { CrearOfertaPageRoutingModule } from './crear-oferta-routing.module';
 import { CrearOfertaPage } from './crear-oferta.page';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxCurrencyModule } from 'ngx-currency';
+import { AdminOportunidadPageModule } from '../admin-oportunidad/admin-oportunidad.module';
+import { CrearCotizacionPageModule } from '../crear-cotizacion/crear-cotizacion.module';
+
 
 @NgModule({
   imports: [
@@ -17,7 +20,9 @@ import { NgxCurrencyModule } from 'ngx-currency';
     IonicModule,
     CrearOfertaPageRoutingModule,
     ReactiveFormsModule,
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    AdminOportunidadPageModule,
+    CrearCotizacionPageModule
   ],
   declarations: [CrearOfertaPage]
 })

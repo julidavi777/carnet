@@ -27,7 +27,7 @@ class UserController extends ApiController
             $specificRole = $specificRole == 'admin' ? 'responsable' : $specificRole;
 
             $users = $users->filter(function($user) use ($specificRole){
-                if($user->hasRole($specificRole)){
+                if($user->hasRole(ucwords(strtolower($specificRole)))){
                     return $user;
                 }
             })->values();

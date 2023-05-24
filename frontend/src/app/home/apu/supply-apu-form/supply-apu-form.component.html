@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar class="ion-header-custom">
+    <ion-title style="    margin-left: 20px;">Formulario insumo</ion-title>
+      <ion-button style="background-color: #da3136;
+      margin: 0px 15px;" slot="end" (click)="dismiss()" color="danger">
+        <ion-icon slot="start" name="close"></ion-icon>
+        cerrar
+      </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<div class="row">
+  <div class="col-6">
+    <ion-item>
+      <ion-label >Capitulo</ion-label>
+      <ionic-selectable
+        [items]="chapters"
+        itemValueField="no"
+        itemTextField="capitulo"
+        [canSearch]="true"
+        >
+      </ionic-selectable>
+    </ion-item>
+  </div>
+  <div class="col-6">
+    <ion-item>
+      <ion-label >Insumo</ion-label>
+      <ionic-selectable
+        [items]="supplies"
+        itemValueField="code"
+        itemTextField="description"
+        [canSearch]="true"
+        >
+      </ionic-selectable>
+    </ion-item>
+  </div>
+</div>
+<br>
+<button class="btn btn-primary">Agregar</button>
+
