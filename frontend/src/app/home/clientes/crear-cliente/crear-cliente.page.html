@@ -165,7 +165,7 @@
 
         <br>
         <input type="file" class="form-control d-none"  formControlName="cliente_logo_field" (change)="onFileSelected($event)" #photoInput accept="image/png, image/jpeg" id="validation09" placeholder="Seleccione" >
-        <img [src]="selectedFile || '/assets/icon/foto.png'" class="img-fluid" alt="No image"
+        <img [src]="selectedFile || 'assets/icon/foto.png'" class="img-fluid" alt="No image"
         (click)="photoInput.click()">
 
       </div>
