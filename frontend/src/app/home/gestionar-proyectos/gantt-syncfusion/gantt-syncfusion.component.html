@@ -1,0 +1,22 @@
+<div class="control-section">
+  <ejs-gantt
+    id="ganttDefault"
+    height="430px"
+    [dataSource]="data"
+    [taskFields]="taskSettings"
+    [allowSelection]="true"
+    [labelSettings]="labelSettings"
+    [enableContextMenu]="true"
+    [showColumnMenu]="true"
+    [columns]="columns"
+    [treeColumnIndex]="1"
+    height="400px"
+    [projectStartDate]="projectStartDate"
+    [projectEndDate]="projectEndDate"
+    [highlightWeekends]="true"
+    [toolbar]="toolbar"
+    [editSettings]="editSettings"
+    (created)="created()"
+  >
+  </ejs-gantt>
+</div>
