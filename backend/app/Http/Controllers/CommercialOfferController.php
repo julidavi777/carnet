@@ -20,8 +20,11 @@ class CommercialOfferController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        
+       
+
         $commercialOffers = CommercialOffer::get();
 
         $commercialOffers = $commercialOffers->map(function($e){
@@ -38,6 +41,22 @@ class CommercialOfferController extends ApiController
             }
             return $e;
         })->sortBy('id')->values();
+
+
+        $AJUDICADA_A_CUBIKAR = "2";
+        if($request->query('needsAwardedOffers') == "yes"){
+            $commercialOffers = $commercialOffers->filter(function($e) use ($AJUDICADA_A_CUBIKAR){
+                
+                $commercial_offers_seguimiento = $e->commercial_offers_seguimientos->sortByDesc('id')->first();
+
+                if(!is_null($commercial_offers_seguimiento)){
+                    return $commercial_offers_seguimiento->status == $AJUDICADA_A_CUBIKAR;
+                }
+
+            })->sortBy('id')->values();
+
+        }   
+
 
         return $this->showAll($commercialOffers);
     }
