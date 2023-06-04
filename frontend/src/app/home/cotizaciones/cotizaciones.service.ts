@@ -28,4 +28,8 @@ export class CotizacionesService {
   getUsers(specific_role: string = ''){
     return this.http.get(`${this.API_URL}users?specific_role=${specific_role}`)
   }
+
+  getOfertas(){
+    return this.http.get(`${this.API_URL}commercialOffers?needsAwardedOffers=yes`);
+  }
 }
