@@ -27,6 +27,8 @@
                       <h1 style="margin: 1rem 0">Fuiste asignado a la siguiente oferta comercial</h1>
                       <p style="padding-bottom: 16px">La oferta con consecutivo {{$consecutivo}}, fue generada para la empresa {{$company_name}}, y fuiste asignado como <strong>{{$responsabletype}}</strong></p>
                       <br>
+                      <p style="padding-bottom: 16px">Para gestionarla, inicia sesión <a href="http://3.225.219.38/cubikar/www/login" target="_blank">aquí</a>.</p>
+                      <br>
                       <p style="padding-bottom: 16px">Si no solicitaste verificar esta dirección, puedes ignorar este correo electrónico.</p>
                     </div>
                   </div>
