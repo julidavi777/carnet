@@ -90,7 +90,7 @@ export class AdminOportunidadPage implements OnInit {
     
   }
 
-  addFile(){
+  async addFile(){
     this.countFile = this.countFile+1;
     this.files.push({...this.actualFileSelected, id: this.countFile});
     this.actualFileSelected = null;
@@ -102,6 +102,16 @@ export class AdminOportunidadPage implements OnInit {
     console.log(this.documentos); */
     console.log(this.files);
     this.files = [...this.files];
+
+    let resFiles = [];
+      for await (let e of this.files) {
+        let base64 = await  this.getBase64(e.file);
+        resFiles.push({
+          base64
+        }) 
+      }
+   
+    console.log(resFiles)
   }
 
 
@@ -136,20 +146,6 @@ export class AdminOportunidadPage implements OnInit {
 
   async onSubmit(){
 
-    if(this.isCreating){
-      console.log(this.formGroup.value)
-
-      let resFiles = [];
-      for await (let e of this.files) {
-        let base64 = await  this.getBase64(e.file);
-        resFiles.push({
-          base64
-        }) 
-      }
-   
-      console.log(resFiles)
-      return;
-    }
 
     if(this.isBringingDataFromDatabase){
       let data = this.formGroup.value;

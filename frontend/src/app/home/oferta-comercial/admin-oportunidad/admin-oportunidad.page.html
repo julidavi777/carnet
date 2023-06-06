@@ -125,7 +125,7 @@
   
           </ngx-datatable>
           <!-- <p-button  type="submit" [label]="isBringingDataFromDatabase ? 'Actualizar' : 'Guardar'" class="mt-4" ></p-button> -->
-          <p-button *ngIf="!isBringingDataFromDatabase"  type="submit"  label="Guardar" class="mt-4" ></p-button>
+          <p-button *ngIf="!isBringingDataFromDatabase && !isCreating"  type="submit"  label="Guardar" class="mt-4" ></p-button>
     </div>
   </form>
 </div>
