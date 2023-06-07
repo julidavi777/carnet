@@ -17,6 +17,10 @@ export class OfertaComercialPage implements OnInit {
   rows: any = []
   loadingIndicator: boolean = true;
 
+  responsables: any[] = []
+  clientes: any[] = []
+  estados: any[] = []
+
   readonly STORAGE_URL = environment.storageUrl;
 
 

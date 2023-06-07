@@ -13,6 +13,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {ButtonModule} from 'primeng/button';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { IonicSelectableModule } from 'ionic-selectable';
+
 
 @NgModule({
   imports: [
@@ -23,7 +25,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     NgxDatatableModule,
     ButtonModule,
     NgxPermissionsModule.forChild(),
-    PipesModule
+    PipesModule,
+    IonicSelectableModule
   ],
   declarations: [OfertaComercialPage, TipoContratacionPipe,TipoServicioPipe,  SectorProductivoPipe  ]
 })
