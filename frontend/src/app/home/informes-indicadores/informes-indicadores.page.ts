@@ -151,6 +151,345 @@ this.isExpanded = !this.isExpanded;
 
 
   createPdf(){
+    var empresas = [
+
+      {
+        total: '201',
+        porcentaje: '55%',
+        nombre: 'DINFRO S.A.S',
+        numero_ofertas: '111',
+        ingresos_totales: '$ 92.760.506.448',
+        ingresos_por_empresa: '$ 44.249.398.747',
+        porcentaje_ingresos: '48%',
+      },
+      {
+        total: '201',
+        porcentaje: '11%',
+        nombre: 'CYS S.A.S',
+        numero_ofertas: '23',
+        ingresos_totales: '$ 92.760.506.448',
+        ingresos_por_empresa: '$ 14.224.113.471',
+        porcentaje_ingresos: '20%',
+      },
+      {
+        total: '201',
+        porcentaje: '33%',
+        nombre: 'DINCREA',
+        numero_ofertas: '67',
+        ingresos_totales: '$ 92.760.506.448',
+        ingresos_por_empresa: '$ 30.228.999.230',
+        porcentaje_ingresos: '33%',
+      },
+  ];
+    var ofertasAprobadas = [
+
+      {
+        num_propuestas: '62',
+        porcentaje: '81%',
+        nombre: 'CONSULTORÍA Y DISEÑOS',
+        numero_ofertas: '50',
+        ingresos_totales: '$ 11.573.597.978',
+        ingresos_por_empresa: '$10.489.439.013',
+        porcentaje_ingresos: '91%',
+      },
+      {
+        num_propuestas: '62',
+        porcentaje: '11%',
+        nombre: 'GERENCIA E INTERVENTORIA',
+        numero_ofertas: '7',
+        ingresos_totales: '$ 11.573.597.978',
+        ingresos_por_empresa: '$248.139.057',
+        porcentaje_ingresos: '40%',
+      },
+      {
+        num_propuestas: '62',
+        porcentaje: '21%',
+        nombre: 'CONST. Y  MANTENIMIENTO',
+        numero_ofertas: '5',
+        ingresos_totales: '$ 11.573.597.978',
+        ingresos_por_empresa: '$820.019.574',
+        porcentaje_ingresos: '7%',
+      },
+  ];
+
+    var ofertasNoEjecutadas = [
+
+    ];
+
+
+  const tableBodyTotal = [
+    [
+      {
+        text: '',
+        fontSize: 10,
+        rowSpan: 4,
+        alignment: 'center',
+        colSpan: 1,
+      },
+      { text: '31%', alignment: 'center', colSpan: 6 },
+      '',
+      '',
+      '',
+      '',
+      '',
+      { text: '12%', alignment: 'center', colSpan: 5 },
+      '',
+      '',
+      '',
+      '',
+    ],
+    [
+      { text: '62', fontSize: 12, rowSpan: 3 },
+      { text: '81%', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 1 },
+      { text: 'CONSULTORÍA Y DISEÑOS', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+      { text: '50', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 1 },
+      { text: '$ 11.573.597.978', style: 'tableHeader', alignment: 'center', fontSize: 10, rowSpan: 3, colSpan: 3 },
+      '',
+      '',
+      { text: '$10.489.439.013', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+      { text: '91%', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+    ],
+    [
+      '',
+      '',
+      '',
+      '',
+      { text: '7', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 1 },
+      '',
+      '',
+      '',
+      { text: '$248.139.057', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+      { text: '2%', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+    ],
+    [
+      '',
+      '',
+      '',
+      '',
+      { text: '5', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 1 },
+      '',
+      '',
+      '',
+      { text: '$820.019.574', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+      { text: '7%', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+    ],
+    [
+      { text: '', alignment: 'center', colSpan: 12 },
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+    ],
+  ];
+
+  const tableBodyAprobadas = [
+    [
+      {
+        text: 'PROPUESTAS APROBADAS',
+        fontSize: 10,
+        rowSpan: 4,
+        alignment: 'center',
+        colSpan: 1,
+      },
+      { text: '31%', alignment: 'center', colSpan: 6 },
+      '',
+      '',
+      '',
+      '',
+      '',
+      { text: '12%', alignment: 'center', colSpan: 5 },
+      '',
+      '',
+      '',
+      '',
+    ],
+    [
+      { text: '62', fontSize: 12, rowSpan: 3 },
+      { text: '81%', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 1 },
+      { text: 'CONSULTORÍA Y DISEÑOS', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+      { text: '50', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 1 },
+      { text: '$ 11.573.597.978', style: 'tableHeader', alignment: 'center', fontSize: 10, rowSpan: 3, colSpan: 3 },
+      '',
+      '',
+      { text: '$10.489.439.013', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+      { text: '91%', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+    ],
+    [
+      '',
+      '',
+      '',
+      '',
+      { text: '7', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 1 },
+      '',
+      '',
+      '',
+      { text: '$248.139.057', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+      { text: '2%', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+    ],
+    [
+      '',
+      '',
+      '',
+      '',
+      { text: '5', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 1 },
+      '',
+      '',
+      '',
+      { text: '$820.019.574', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+      { text: '7%', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+    ],
+    [
+      { text: '', alignment: 'center', colSpan: 12 },
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+    ],
+  ];
+
+  const tableBodyNoEjecutadas = [
+    [
+      {
+        text: 'PROPUESTAS APROBADAS',
+        fontSize: 10,
+        rowSpan: 4,
+        alignment: 'center',
+        colSpan: 1,
+      },
+      { text: '31%', alignment: 'center', colSpan: 6 },
+      '',
+      '',
+      '',
+      '',
+      '',
+      { text: '12%', alignment: 'center', colSpan: 5 },
+      '',
+      '',
+      '',
+      '',
+    ],
+    [
+      { text: '62', fontSize: 12, rowSpan: 3 },
+      { text: '81%', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 1 },
+      { text: 'CONSULTORÍA Y DISEÑOS', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+      { text: '50', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 1 },
+      { text: '$ 11.573.597.978', style: 'tableHeader', alignment: 'center', fontSize: 10, rowSpan: 3, colSpan: 3 },
+      '',
+      '',
+      { text: '$10.489.439.013', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+      { text: '91%', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+    ],
+    [
+      '',
+      '',
+      '',
+      '',
+      { text: '7', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 1 },
+      '',
+      '',
+      '',
+      { text: '$248.139.057', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+      { text: '2%', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+    ],
+    [
+      '',
+      '',
+      '',
+      '',
+      { text: '5', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 1 },
+      '',
+      '',
+      '',
+      { text: '$820.019.574', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+      { text: '7%', style: 'tableHeader', alignment: 'center', fontSize: 10, colSpan: 2 },
+      '',
+    ],
+    [
+      { text: '', alignment: 'center', colSpan: 12 },
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+    ],
+  ];
+
+
+  empresas.forEach((empresa) => {
+    tableBodyTotal.push([
+      empresa.total,
+      empresa.porcentaje,
+      empresa.nombre,
+      empresa.numero_ofertas,
+      empresa.ingresos_totales,
+      empresa.ingresos_por_empresa,
+      empresa.porcentaje_ingresos,
+    ]);
+  });
+
+  ofertasAprobadas.forEach((ofertasAprobadas) => {
+    tableBodyAprobadas.push([
+      ofertasAprobadas.num_propuestas,
+      ofertasAprobadas.porcentaje,
+      ofertasAprobadas.nombre,
+      ofertasAprobadas.numero_ofertas,
+      ofertasAprobadas.ingresos_totales,
+      ofertasAprobadas.ingresos_por_empresa,
+      ofertasAprobadas.porcentaje_ingresos,
+    ]);
+  });
+
+  ofertasNoEjecutadas.forEach((ofertasNoEjecutadas) => {
+    tableBodyNoEjecutadas.push([
+      ofertasNoEjecutadas.num_propuestas,
+      ofertasNoEjecutadas.porcentaje,
+      ofertasNoEjecutadas.nombre,
+      ofertasNoEjecutadas.numero_ofertas,
+      ofertasNoEjecutadas.ingresos_totales,
+      ofertasNoEjecutadas.ingresos_por_empresa,
+      ofertasNoEjecutadas.porcentaje_ingresos,
+    ]);
+  });
     const pdfDefinition: any = {
       pageOrientation: 'landscape',
       content: [
@@ -160,6 +499,7 @@ this.isExpanded = !this.isExpanded;
           alignment: 'center',
           fontSize: 20
         },
+      // primera tabla con el encabezado
         {
           style: 'tableExample',
           color: '#444',
@@ -202,101 +542,31 @@ this.isExpanded = !this.isExpanded;
 
 
         },
-
+// segunda tabla con los datos de propuestas gestionadas
         {
           style: 'tableExample',
           color: '#444',
           table: {
             widths: [60, 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, 30],
-            body: [
-              [
-                { rowSpan: 3, text: '201',fontSize: 30 },
-                { text: '55%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'DINFRO S.A.S', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '111', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 92.760.506.448', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ 44.249.398.747', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '48%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-              [
-                { rowSpan: 3, text: '201',fontSize: 12 },
-                { text: '11%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'CYS S.A.S', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '23', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 92.760.506.448', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ 14.224.113.471', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '20%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-
-              [
-                { rowSpan: 3, text: '201',fontSize: 12 },
-                { text: '33%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'DINCREA', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '67', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 92.760.506.448', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ 30.228.999.230', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '33%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-              [
-                { colSpan: 12, text: '', alignment: 'center' },
-                '', '', '', '', '', '', '', '', '', '', ''
-              ],
-              // [
-              //   // { rowSpan: 4, text: 'PROPUESTAS APROBADAS',fontSize: 8 },
-              //   { rowSpan: 4, colSpan: 6, text: '31%', alignment: 'center' },'', '', '', '','',
-              //   { rowSpan: 4, colSpan: 6, text: '12%', alignment: 'center' },'', '', '', '','',
-
-              // ],
+            body: tableBodyTotal,
 
 
-            ],
           },
 
 
         },
-
+// tabla propuestas aprobadas
         {
           style: 'tableExample',
           color: '#444',
           table: {
             widths: [60, 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, 30],
-            body: [
-              [
-                {
-                  rowSpan: 4,
-                  stack: [
-                    { text: 'PROPUESTAS APROBADAS', fontSize: 10 },
-                    { text: '62', fontSize: 40, alignment: 'center' }
-                  ]
-                },
-                { colSpan: 6, text: '31%', alignment: 'center' },
-                '', '', '', '', '',
-                { colSpan: 5, text: '12%', alignment: 'center' },
-                '', '', '', '',
-              ],
-              [
-
-                { rowSpan: 3, text: '62',fontSize: 12 },
-                { text: '81%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'CONSULTORÍA Y DISEÑOS', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '50', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 11.573.597.978', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$10.489.439.013', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '91%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-              [
-
-                { rowSpan: 3, text: '62',fontSize: 12 },
-                { text: '11%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'GERENCIA E INTERVENTORIA', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '7', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 11.573.597.978', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$248.139.057', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '2%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-
-              [
-
-                { rowSpan: 3, text: '62',fontSize: 12 },
-                { text: '8%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'CONST. Y MANTENIMIENTO', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '5', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 11.573.597.978', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$820.019.574', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '7%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-              [
-                { colSpan: 12, text: '', alignment: 'center' },
-                '', '', '', '', '', '', '', '', '', '', ''
-              ],
-              // [
-              //   { colSpan: 6, text: '31%', alignment: 'center' },'', '', '', '', '',
-              //   { colSpan: 6, text: '12%', alignment: 'center' },'', '', '', '', '',
-              // ],
-
-
-            ],
+            body: tableBodyAprobadas,
           },
 
 
         },
-
+// tabla con pendientes por definir
         {
           style: 'tableExample',
           color: '#444',
@@ -350,7 +620,7 @@ this.isExpanded = !this.isExpanded;
 
 
         },
-
+// tabla con propuestas no adjudicadas
         {
           style: 'tableExample',
           color: '#444',
@@ -419,67 +689,33 @@ this.isExpanded = !this.isExpanded;
 
         },
 
-
+// tabla con proyectos noe jecutados
         {
           style: 'tableExample',
           color: '#444',
           table: {
             widths: [60, 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, 30],
-            body: [
-              [
-                {
-                  rowSpan: 4,
-                  stack: [
-                    { text: 'PROYECTOS NO EJECUTADOS', fontSize: 8 },
-                    { text: '48', fontSize: 40, alignment: 'center' }
-                  ]
-                },
-                { colSpan: 6, text: '24%', alignment: 'center' },
-                '', '', '', '', '',
-                { colSpan: 5, text: '10%', alignment: 'center' },
-                '', '', '', '',
-              ],
-              [
-                { rowSpan: 3, text: '201',fontSize: 30 },
-                { text: '104%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'DINFRO S.A.S', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '24', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 9.510.202.127', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ 44.249.398.747', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '33%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-              [
-                { rowSpan: 3, text: '201',fontSize: 12 },
-                { text: '11%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'CYS S.A.S', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '23', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 9.510.202.127', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ 14.224.113.471', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '7%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
+            body: tableBodyNoEjecutadas,
 
-              [
-                { rowSpan: 3, text: '201',fontSize: 12 },
-                { text: '33%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'DINCREA', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '67', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 9.510.202.127', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ 30.228.999.230', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '26%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-
-
-
-
-
-            ],
           },
 
 
         },
       ],
-      layout: {
-        hLineWidth: function (i, node) {
-          return 1;
-        },
-        vLineWidth: function (i, node) {
-          return 1;
-        },
-        hLineColor: function (i, node) {
-          return "blue";
-        },
-        vLineColor: function (i, node) {
-          return "blue";
-        },
-      },
+      // layout: {
+      //   hLineWidth: function (i, node) {
+      //     return 1;
+      //   },
+      //   vLineWidth: function (i, node) {
+      //     return 1;
+      //   },
+      //   hLineColor: function (i, node) {
+      //     return "blue";
+      //   },
+      //   vLineColor: function (i, node) {
+      //     return "blue";
+      //   },
+      // },
 
 
       //   styles: {
