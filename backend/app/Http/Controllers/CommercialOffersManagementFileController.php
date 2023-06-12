@@ -35,7 +35,7 @@ class CommercialOffersManagementFileController extends ApiController
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'file' => 'required|file|mimes:doc,docx,jpg,png,pdf',
+            'file' => 'required|file|mimes:xlsx,doc,docx,jpg,png,pdf',
             'commercial_offers_management_id' => 'required|exists:commercial_offers_managements,id',
         ]);
 

@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrearCotizacionService } from './crear-cotizacion.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ModalController } from '@ionic/angular';
 import { CotizationVersionsPage } from './cotization-versions/cotization-versions.page';
+import { GlobalService } from 'src/app/services/global.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class CrearCotizacionPage implements OnInit {
 
 
     @Input() isCreating: boolean = false;
+    @Input() parentFormGroup;
     
     items: any[] = [];
 
@@ -37,8 +39,8 @@ export class CrearCotizacionPage implements OnInit {
     total: number;
 
     cotizacionForm: any = new FormGroup({
-      sede: new FormControl('', [Validators.required]),
-      sequential_number: new FormControl('', [Validators.required]),
+      sede: new FormControl(''),
+      sequential_number: new FormControl(''),
       identification: new FormControl(''),
       razon_social: new FormControl('',),
       razon_comercial: new FormControl('',),
@@ -47,8 +49,8 @@ export class CrearCotizacionPage implements OnInit {
       valor_cotizado: new FormControl('', [Validators.required]),
       observaciones: new FormControl('', [Validators.required]),
 
-      cotizacion_file: new FormControl('',),
-      cotizacion_file_field: new FormControl('',),
+      cotizacion_file: new FormControl('',[Validators.required]),
+      cotizacion_file_field: new FormControl('',[Validators.required]),
 
 
 
@@ -61,7 +63,8 @@ export class CrearCotizacionPage implements OnInit {
   constructor(
     private crearCotizacionService: CrearCotizacionService,
     private router: Router,
-    public modalController: ModalController
+    public modalController: ModalController,
+    public globalService: GlobalService,
   ) { }
 
 
@@ -106,18 +109,35 @@ export class CrearCotizacionPage implements OnInit {
     }/* else{
       this.router.navigate(['home/oferta-comercial/ofertas']);
     } */
+    if(this.isCreating){
+      this.addChildFormGroup();
+    }
    
+  }
+
+  addChildFormGroup(): void {
+
+    this.parentFormGroup.addControl('cotizacionForm', this.cotizacionForm);
+  }
+
+  get valor_cotizado(): FormControl {
+    return this.cotizacionForm.get('valor_cotizado') as FormControl;
+  }
+
+  get observaciones(): FormControl {
+    return this.cotizacionForm.get('observaciones') as FormControl;
+  }
+  get cotizacion_file_field(): FormControl {
+    return this.cotizacionForm.get('cotizacion_file_field') as FormControl;
   }
 
   async onSubmit(){
 
     if(this.isCreating){
 
-        let valueFile = await this.getBase64(this.cotizacionForm.get('cotizacion_file').value);
-
         let data = {
             ...this.cotizacionForm.value,
-            cotizacion_file: valueFile 
+            cotizacion_file: this.cotizacionForm.get('cotizacion_file').value 
          }
 
         delete data.cotizacion_file_field;
@@ -220,5 +240,6 @@ export class CrearCotizacionPage implements OnInit {
       };
     })
  }
+
 
 }
