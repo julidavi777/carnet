@@ -3,7 +3,7 @@
   <p class="h2 my-3">Cotización</p>
 
   <form class="formu" [formGroup]="cotizacionForm" (ngSubmit)="onSubmit()">
-    <div class="row">
+    <div class="row" *ngIf="!isCreating">
 
       <div class="mb-3 form-group col-md-12">
         <ion-label>Datos cotización</ion-label>
@@ -25,38 +25,41 @@
 
       <div class="mb-3 form-group col-md-8">
         <label class="form-label" for="">Identificación:</label>
-        <input type="number" class="form-control" formControlName="identification" id="" placeholder="" required>
+        <input type="number" class="form-control" formControlName="identification">
       </div>
 
       <div class="mb-3 form-group col-md-6" *ngIf="isNit">
         <label class="form-label" for="">Razón social</label>
-        <input type="text" class="form-control" formControlName="razon_social" id="" placeholder="" required>
+        <input type="text" class="form-control" formControlName="razon_social">
       </div>
       <br>
 
       <div class="mb-3 form-group col-md-6" *ngIf="isNit">
         <label class="form-label" for="">Razón Comercial</label>
-        <input type="text" class="form-control"  formControlName="razon_comercial" id="" placeholder="" required>
+        <input type="text" class="form-control"  formControlName="razon_comercial">
       </div>
 
       <div class="mb-3 form-group col-md-6" *ngIf="!isNit">
         <label class="form-label" for="">Nombre</label>
-        <input type="text" class="form-control" formControlName="name" id="" placeholder="" required>
+        <input type="text" class="form-control" formControlName="name">
       </div>
       <br>
 
       <div class="mb-3 form-group col-md-6" *ngIf="!isNit">
         <label class="form-label" for="">Apellido</label>
-        <input type="text" class="form-control"  formControlName="surname" id="" placeholder="" required>
+        <input type="text" class="form-control"  formControlName="surname">
       </div>
 
 
 
-
-
+    </div>
+    <div class="row" >
       <div class="mb-3 form-group col-md-6">
         <label class="form-label" for="">Valor cotizado</label>
         <input type="text" class="form-control" currencyMask   formControlName="valor_cotizado" id=""  [options]="{ prefix: '$ ', thousands: '.', decimal: ',',precision: 0 }">
+        <div *ngIf="globalService.isFieldInvalid(valor_cotizado, 'required')">
+          <small style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
       </div>
 
             <!-- Modal -->
@@ -79,12 +82,21 @@
         <textarea  formControlName="observaciones" class="form-control" rows="4" cols="50">
 
         </textarea>
+        <div *ngIf="globalService.isFieldInvalid(observaciones, 'required')">
+          <small style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
       </div>
 
 
       <div class="mb-3 form-group col-md-6">
         <label  *ngIf="!hasCotitzationDataToPatch || isEditing" class="form-label" for="">Adjuntar Cotización</label>
-        <input *ngIf="!hasCotitzationDataToPatch || isEditing" type="file" accept=".docx,image/jpeg,image/png,application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,vnd.openxmlformats-officedocument.wordprocessingml.document" class="form-control mb-3" formControlName="cotizacion_file_field" (change)="onFileSelected($event)" placeholder="" required>
+        <input *ngIf="!hasCotitzationDataToPatch || isEditing" type="file" accept=".docx,image/jpeg,image/png,application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,vnd.openxmlformats-officedocument.wordprocessingml.document" class="form-control mb-3" formControlName="cotizacion_file_field" (change)="onFileSelected($event)" placeholder="">
+        <div *ngIf="!hasCotitzationDataToPatch || isEditing">
+
+          <div *ngIf="globalService.isFieldInvalid(cotizacion_file_field, 'required')">
+            <small style="color: #ef4444;">Este campo no puede estar vació</small>
+          </div>
+        </div>
 
         <p-button  (click)="watchDocument()" *ngIf="hasCotitzationDataToPatch && !isEditing" label="Ver cotización adjunta" icon="pi pi-paperclip" iconPos="right" styleClass="p-button-danger"></p-button>
       </div>
@@ -93,10 +105,10 @@
 
     </div>
 
-    <div class="mb-3 form-group col-md-12">
+    <div class="mb-3 form-group col-md-12" *ngIf="!isCreating">
       <ion-label>Acciones</ion-label>
     </div>
-    <div class="row" >
+    <div class="row" *ngIf="!isCreating">
       <div class="col-md-12" style="    display: flex;gap: 10px;">
         <p-button (onClick)="editContization()" *ngIf="!isEditing && hasCotitzationDataToPatch" label="Editar cotización" icon="pi pi-pencil" iconPos="right" styleClass="p-button-warning"></p-button>
         <p-button (onClick)="cancelEditContization()" *ngIf="isEditing && hasCotitzationDataToPatch" label="Cancelar" icon="pi pi-times" iconPos="right" styleClass="p-button-danger"></p-button>

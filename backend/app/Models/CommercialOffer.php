@@ -12,7 +12,6 @@ class CommercialOffer extends Model
     protected $fillable = [
         'sede',
         'sequential_number',
-        'sequential_number_format',
         'contract_type',
         'contract_type_other',
         'service_type',

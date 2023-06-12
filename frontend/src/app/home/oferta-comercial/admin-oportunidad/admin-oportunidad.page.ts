@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminOportunidadService } from './admin-oportunidad.service';
@@ -12,11 +12,14 @@ import { CommercialOffer } from './interfaces/CommercialOffer.interface';
 })
 export class AdminOportunidadPage implements OnInit {
 
+  @Output() newFileEvent = new EventEmitter<Array<any>>();
+  @Output() requirementsVerificationValuesEvent = new EventEmitter<object>();
+
   @Input() isCreating: boolean = false;
   
   isBringingDataFromDatabase: boolean = false;
   files = [];
-  @ViewChild('myInput') myInputVariable: ElementRef;
+  @ViewChild('fileInput') fileInputRef: ElementRef;
 
   dataCommercialOffer: CommercialOffer | null = null;
 
@@ -94,7 +97,7 @@ export class AdminOportunidadPage implements OnInit {
     this.countFile = this.countFile+1;
     this.files.push({...this.actualFileSelected, id: this.countFile});
     this.actualFileSelected = null;
-    this.myInputVariable.nativeElement.value = "";
+    this.fileInputRef.nativeElement.value = "";
     /* this.documentos.push({
       nombre: file.name,
       tamaño: file.size
@@ -102,6 +105,8 @@ export class AdminOportunidadPage implements OnInit {
     console.log(this.documentos); */
     console.log(this.files);
     this.files = [...this.files];
+
+    this.newFileEvent.emit(this.files);
 
     let resFiles = [];
       for await (let e of this.files) {
@@ -122,10 +127,12 @@ export class AdminOportunidadPage implements OnInit {
       const NOT = "2";
       if(value == NOT){
         this.isEnabledVerificacionRequisitos = false;
+        this.showSelectFileVerificacion = false;
       }
       else{
         this.isEnabledVerificacionRequisitos = true;
       }
+      this.emitRequirementsVerificationValues();
     });
 
     this.formGroup.get('requirements_verification').valueChanges.subscribe((value) => {
@@ -136,12 +143,23 @@ export class AdminOportunidadPage implements OnInit {
       else{
         this.showSelectFileVerificacion = false;
       }
+      this.emitRequirementsVerificationValues();
     });
+  }
+
+  emitRequirementsVerificationValues(): void{
+    setTimeout(() => {
+
+      this.requirementsVerificationValuesEvent.emit({
+        requirements_determination: this.formGroup.value['requirements_determination'],
+        requirements_verification: this.formGroup.value['requirements_verification']
+      })
+    }, 1)
   }
 
   handleChange(e: { checked: any; }) {
     var isChecked = e.checked;
-}
+  }
 
 
   async onSubmit(){
@@ -193,6 +211,7 @@ export class AdminOportunidadPage implements OnInit {
 
   deleteFile(id){
     this.files = [...this.files.filter(f => f.id !== id)];
+    this.newFileEvent.emit(this.files);
     console.log(id);
   }
 
