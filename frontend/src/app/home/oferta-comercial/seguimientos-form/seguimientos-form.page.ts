@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrearCotizacionService } from '../crear-cotizacion/crear-cotizacion.service';
 import { Router } from '@angular/router';
+import { GlobalService } from 'src/app/services/global.service';
+import { SeguimientosFormService } from './seguimientos-form.service';
 
 @Component({
   selector: 'app-seguimientos-form',
@@ -14,6 +16,8 @@ export class SeguimientosFormPage implements OnInit {
 
   statusOptionsSeguimiento = [];
 
+  probabilities = [];
+
   rowsSeguimientos = [
     /* {
       status: "app1",
@@ -25,14 +29,18 @@ export class SeguimientosFormPage implements OnInit {
   seguimientosForm = new FormGroup({
     status: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
+    probability: new FormControl('', [Validators.required]),
   })
   
   constructor(
     private crearCotizacionService: CrearCotizacionService,
     private router: Router,
+    public globalService: GlobalService,
+    private seguimientosFormService: SeguimientosFormService
   ) { }
 
   ngOnInit() {
+    this.probabilities = this.seguimientosFormService.probabilities;
 
     let dataCommercialOffer = this.crearCotizacionService.dataCommercialOffer;
     if(dataCommercialOffer){
@@ -45,6 +53,10 @@ export class SeguimientosFormPage implements OnInit {
     this.getSeguimientos();
   }
 
+  get status () { return this.seguimientosForm.get('status') }
+  get description () { return this.seguimientosForm.get('description') }
+  get probability () { return this.seguimientosForm.get('probability') }
+
 
   getSeguimientos(){
     this.crearCotizacionService.getCommercialOffersSeguimientos(this.commercial_offer_id).subscribe((res: any) => {
@@ -53,6 +65,12 @@ export class SeguimientosFormPage implements OnInit {
   }
 
   onSubmitSeguimientosForm(){
+
+    if(!this.seguimientosForm.valid){
+      this.seguimientosForm.markAllAsTouched();
+      return;
+    }
+
     if(this.seguimientosForm.valid){
       console.log(this.seguimientosForm.value)
 

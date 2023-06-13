@@ -13,6 +13,7 @@ class CommercialOffersSeguimiento extends Model
         'status',
         'description',
         'commercial_offer_id',
+        'probability'
     ];
 
     public function commercial_offer()

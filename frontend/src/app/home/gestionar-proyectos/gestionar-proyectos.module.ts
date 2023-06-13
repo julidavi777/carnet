@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { GestionarProyectosPageRoutingModule } from './gestionar-proyectos-routing.module';
 
 import { GestionarProyectosPage } from './gestionar-proyectos.page';
+import { GanttSyncfusionModule } from './gantt-syncfusion/gantt-syncfusion.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { GestionarProyectosPage } from './gestionar-proyectos.page';
     FormsModule,
     IonicModule,
     GestionarProyectosPageRoutingModule,
-    AccordionModule
+    AccordionModule,
+    GanttSyncfusionModule
   ],
   declarations: [GestionarProyectosPage]
 })

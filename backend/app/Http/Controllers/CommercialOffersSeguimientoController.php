@@ -34,6 +34,7 @@ class CommercialOffersSeguimientoController extends ApiController
             'status' => 'required|string',
             'description' => 'required|string',
             'commercial_offer_id' => 'required|integer|exists:commercial_offers,id',
+            'probability' => 'required|string',
         ]);
         
         if ($validator->fails()) {
@@ -44,6 +45,7 @@ class CommercialOffersSeguimientoController extends ApiController
             'status' => $request->post('status'),
             'description' => $request->post('description'),
             'commercial_offer_id' => $request->post('commercial_offer_id'),
+            'probability' => $request->post('probability'),
         ]);
         
         if($record){

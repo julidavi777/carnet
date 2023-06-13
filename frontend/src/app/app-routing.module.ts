@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'pdf-estadisticas',
     loadChildren: () => import('./home/pdf-estadisticas/pdf-estadisticas.module').then( m => m.PdfEstadisticasPageModule)
+  },  {
+    path: 'generador-informes-pdf',
+    loadChildren: () => import('./generador-informes-pdf/generador-informes-pdf.module').then( m => m.GeneradorInformesPdfPageModule)
   },
+
   // {
   //   path: 'gestionar-proyectos',
   //   loadChildren: () => import('./home/gestionar-proyectos/gestionar-proyectos.module').then( m => m.GestionarProyectosPageModule)

@@ -32,7 +32,6 @@ export class OfertaEditarPage implements OnInit {
     customer_identification: new FormControl('',),
     name: new FormControl('', [Validators.required]),
     surname: new FormControl('',[Validators.required]),
-    assignment_date: new FormControl('',[Validators.required]),
     razon_comercial: new FormControl('', [Validators.required]),
     razon_social: new FormControl('', [Validators.required]),
     responsable_id: new FormControl('', [Validators.required]),
@@ -122,35 +121,34 @@ export class OfertaEditarPage implements OnInit {
 
     const formData = new FormData();
 
-    formData.append('sede', this.offersForm.get('sede').value);
-    formData.append('sequential_number', this.offersForm.get('sequential_number').value);
-    formData.append('responsable_id', this.offersForm.get('responsable_id').value);
-    formData.append('responsable_operativo_id', this.offersForm.get('responsable_operativo_id').value);
-    formData.append('customer_identification', this.offersForm.get('customer_identification').value);
-    formData.append('assignment_date', this.offersForm.get('assignment_date').value);
-    formData.append('contract_type', this.offersForm.get('contract_type').value);
-    formData.append('contract_type_other', this.offersForm.get('contract_type_other').value);
-    formData.append('service_type', this.offersForm.get('service_type').value);
-    formData.append('service_type_other', this.offersForm.get('service_type_other').value);
-    formData.append('sector_productivo', this.offersForm.get('sector_productivo').value);
-    formData.append('sector_productivo_other', this.offersForm.get('sector_productivo_other').value);
-    formData.append('object_description', this.offersForm.get('object_description').value);
+    formData.append('sede', this.offersForm.get('sede').value ? this.offersForm.get('sede').value: '');
+    formData.append('sequential_number', this.offersForm.get('sequential_number').value ? this.offersForm.get('sequential_number').value : '');
+    formData.append('responsable_id', this.offersForm.get('responsable_id').value ? this.offersForm.get('responsable_id').value : '');
+    formData.append('responsable_operativo_id', this.offersForm.get('responsable_operativo_id').value ? this.offersForm.get('responsable_operativo_id').value : '');
+    formData.append('customer_identification', this.offersForm.get('customer_identification').value ? this.offersForm.get('customer_identification').value : '');
+    formData.append('contract_type', this.offersForm.get('contract_type').value ? this.offersForm.get('contract_type').value : '');
+    formData.append('contract_type_other', this.offersForm.get('contract_type_other').value ? this.offersForm.get('contract_type_other').value : '');
+    formData.append('service_type', this.offersForm.get('service_type').value ? this.offersForm.get('service_type').value : '');
+    formData.append('service_type_other', this.offersForm.get('service_type_other').value ? this.offersForm.get('service_type_other').value : '');
+    formData.append('sector_productivo', this.offersForm.get('sector_productivo').value ? this.offersForm.get('sector_productivo').value : '');
+    formData.append('sector_productivo_other', this.offersForm.get('sector_productivo_other').value ? this.offersForm.get('sector_productivo_other').value : '');
+    formData.append('object_description', this.offersForm.get('object_description').value ? this.offersForm.get('object_description').value : '');
     formData.append('numero', this.offersForm.get('numero').value ? this.offersForm.get('numero').value : '');
-    formData.append('cuantia', this.offersForm.get('cuantia').value);
-    formData.append('location', this.offersForm.get('location').value);
-    formData.append('release_date', this.offersForm.get('release_date').value);
-    formData.append('delivery_date', this.offersForm.get('delivery_date').value);
-    formData.append('visit_date', this.offersForm.get('visit_date').value);
-    formData.append('observations', this.offersForm.get('observations').value);
+    formData.append('cuantia', this.offersForm.get('cuantia').value ? this.offersForm.get('cuantia').value : '');
+    formData.append('location', this.offersForm.get('location').value ? this.offersForm.get('location').value : '');
+    formData.append('release_date', this.offersForm.get('release_date').value ? this.offersForm.get('release_date').value : '');
+    formData.append('delivery_date', this.offersForm.get('delivery_date').value ? this.offersForm.get('delivery_date').value : '');
+    formData.append('visit_date', this.offersForm.get('visit_date').value ? this.offersForm.get('visit_date').value : '');
+    formData.append('observations', this.offersForm.get('observations').value ? this.offersForm.get('observations').value : '');
     /* formData.append('anexos', this.offersForm.get('anexos').value ? this.offersForm.get('anexos').value: '');
 
     formData.append('file', this.offersForm.get('anexos').value); */
 
     //MODAL DATA
-    formData.append('visit_date', this.offersForm.get('visit_date').value);
-    formData.append('visit_place', this.offersForm.get('visit_place').value);
-    formData.append('person_attending', this.offersForm.get('person_attending').value);
-    formData.append('phone_number_person_attending', this.offersForm.get('phone_number_person_attending').value);
+    formData.append('visit_date', this.offersForm.get('visit_date').value ? this.offersForm.get('visit_date').value : '');
+    formData.append('visit_place', this.offersForm.get('visit_place').value ? this.offersForm.get('visit_place').value : '');
+    formData.append('person_attending', this.offersForm.get('person_attending').value ? this.offersForm.get('person_attending').value : '');
+    formData.append('phone_number_person_attending', this.offersForm.get('phone_number_person_attending').value ? this.offersForm.get('phone_number_person_attending').value : '');
 
         
     this.ofertaEditarService.editOffer(formData, this.idOffer ).subscribe((res: any) => {
