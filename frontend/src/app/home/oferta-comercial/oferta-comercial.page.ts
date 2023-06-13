@@ -90,7 +90,7 @@ export class OfertaComercialPage implements OnInit {
       
       console.log(filtersData)
 
-      let route = '/my-route?';
+      let route = '?';
 
       for (const param of filtersData) {
         const key = Object.keys(param)[0];
@@ -107,6 +107,12 @@ export class OfertaComercialPage implements OnInit {
       }
 
       console.log(route);
+      this.loadingIndicator = true;
+      this.ofertaComercialService.getOfertas(route).subscribe((res: any) => {
+        this.rows = res.data;
+        this.years = res.years;
+        this.loadingIndicator = false;
+      })
     })
   }
 

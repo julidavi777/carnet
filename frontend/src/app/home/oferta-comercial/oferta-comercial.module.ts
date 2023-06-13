@@ -15,6 +15,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { TooltipModule } from 'primeng/tooltip';
+import { SedePipe } from './sede.pipe';
 
 @NgModule({
   imports: [
@@ -30,6 +31,6 @@ import { TooltipModule } from 'primeng/tooltip';
     IonicSelectableModule,
     TooltipModule
   ],
-  declarations: [OfertaComercialPage, TipoContratacionPipe,TipoServicioPipe,  SectorProductivoPipe  ]
+  declarations: [OfertaComercialPage, TipoContratacionPipe,TipoServicioPipe,  SectorProductivoPipe, SedePipe  ]
 })
 export class OfertaComercialPageModule {}
