@@ -7,10 +7,117 @@
 
 
     </div>
-    <div class="col-9 ">
-
-    </div>
   </div>
+
+  <form [formGroup]="filtersForm">
+  <div class="container mb-3">
+    <div class="row">
+      <div class="col-4">
+        <ion-item>
+          <ion-label >Responsable comercial</ion-label>
+          <ionic-selectable
+            formControlName="comercial_responsables"
+            [items]="comercial_responsables"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            >
+          </ionic-selectable>
+        </ion-item>
+      </div>
+      <div class="col-4">
+        <ion-item>
+          <ion-label >Cliente</ion-label>
+          <ionic-selectable
+            formControlName="clientes"
+            [items]="clientes"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            >
+          </ionic-selectable>
+        </ion-item>
+      </div>
+      <div class="col-4">
+        <ion-item>
+          <ion-label >Estado</ion-label>
+          <ionic-selectable
+            formControlName="estados"
+            [items]="estados"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            >
+          </ionic-selectable>
+        </ion-item>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col-4">
+        <ion-item>
+          <ion-label >Sede</ion-label>
+          <ionic-selectable
+            formControlName="sedes"
+            [items]="sedes"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            >
+          </ionic-selectable>
+        </ion-item>
+      </div>
+      <div class="col-4">
+        <ion-item>
+          <ion-label >Unidad negocio</ion-label>
+          <ionic-selectable
+            formControlName="unidad_negocios"
+            [items]="unidad_negocios"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            >
+          </ionic-selectable>
+        </ion-item>
+      </div>
+      <div class="col-4">
+        <ion-item>
+          <ion-label >Año</ion-label>
+          <ionic-selectable
+            formControlName="years"
+            [items]="years"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            >
+          </ionic-selectable>
+        </ion-item>
+      </div>
+    </div>
+    <div class="mb-3">
+      <div class="row">
+        <div class="col-4">
+          <ion-item>
+            <ion-label >Responsable operativo</ion-label>
+            <ionic-selectable
+              formControlName="operativo_responsables"
+              [items]="operativo_responsables"
+              itemValueField="id"
+              itemTextField="name"
+              [canSearch]="true"
+              >
+            </ionic-selectable>
+          </ion-item>
+        </div>
+        <div class="col-4">
+            <p-button (click)="clearFiltersValues()" icon="pi pi-times" styleClass="p-button-rounded p-button-danger " pTooltip="Limpiar filtros" tooltipPosition="bottom"></p-button>
+        </div>
+        <div class="col-4"></div>
+      </div>
+    </div>
+
+  </div>
+</form>
+  
   <div class="row d-flex justify-content-md-center">
     <!-- <div class="col-1"></div> -->
     <div class="col-11">
@@ -25,12 +132,12 @@
       [loadingIndicator]="loadingIndicator"
       columnMode="force"
       >
-      <ngx-datatable-column [resizeable]="true" [width]="200">
+      <ngx-datatable-column [resizeable]="true" [width]="140">
         <ng-template ngx-datatable-header-template>
           Consecutivo:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{row.sequential_number}}
+          {{row.sede | sede:sedes }} {{row.sequential_number}}
         </ng-template>
       </ngx-datatable-column>
 
@@ -43,23 +150,18 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column [resizeable]="true" [width]="280">
+
+      <ngx-datatable-column [resizeable]="true" [width]="180">
         <ng-template ngx-datatable-header-template>
-          Nombres:
+          Nombre completo:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{row?.customer?.name}}
+          {{ row?.customer?.name + ' ' + row?.customer?.surname }}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column [resizeable]="true" [width]="280">
-        <ng-template ngx-datatable-header-template>
-          Apellidos:
-        </ng-template>
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          {{row?.customer?.surname}}
-        </ng-template>
-      </ngx-datatable-column>
+
+
 
       <ngx-datatable-column [resizeable]="true" [width]="280">
         <ng-template ngx-datatable-header-template>
@@ -79,33 +181,33 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column [resizeable]="true" [width]="280">
+      <!-- <ngx-datatable-column [resizeable]="true" [width]="280">
         <ng-template ngx-datatable-header-template>
           Tipo de contratación:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{row.contract_type | tipoContratacion:row.contract_type_other | uppercase}}
         </ng-template>
-      </ngx-datatable-column>
+      </ngx-datatable-column> -->
 
 
-      <ngx-datatable-column [resizeable]="true" [width]="280">
+      <!-- <ngx-datatable-column [resizeable]="true" [width]="280">
         <ng-template ngx-datatable-header-template>
           Unidad de negocio:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{row.service_type | tipoServicio:row.service_type_other | uppercase}}
         </ng-template>
-      </ngx-datatable-column>
+      </ngx-datatable-column> -->
 
-      <ngx-datatable-column [resizeable]="true" [width]="280">
+      <!-- <ngx-datatable-column [resizeable]="true" [width]="280">
         <ng-template ngx-datatable-header-template>
           Sector Economía:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{row.sector_productivo | sectorProductivo:row.sector_productivo_other | uppercase}}
         </ng-template>
-      </ngx-datatable-column>
+      </ngx-datatable-column> -->
 
       <ngx-datatable-column [resizeable]="true" [width]="300">
         <ng-template ngx-datatable-header-template>
@@ -116,50 +218,50 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column [resizeable]="true" [width]="100">
+      <!-- <ngx-datatable-column [resizeable]="true" [width]="100">
         <ng-template ngx-datatable-header-template>
           Número:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{row.numero}}
         </ng-template>
-      </ngx-datatable-column>
+      </ngx-datatable-column> -->
 
-      <ngx-datatable-column [resizeable]="true" [width]="100">
+      <!-- <ngx-datatable-column [resizeable]="true" [width]="100">
         <ng-template ngx-datatable-header-template>
           Cuantia:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{row.cuantia}}
         </ng-template>
-      </ngx-datatable-column>
+      </ngx-datatable-column> -->
 
-      <ngx-datatable-column [resizeable]="true" [width]="100">
+      <!-- <ngx-datatable-column [resizeable]="true" [width]="100">
         <ng-template ngx-datatable-header-template>
           Ubicación:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{row.location}}
         </ng-template>
-      </ngx-datatable-column>
+      </ngx-datatable-column> -->
 
-      <ngx-datatable-column [resizeable]="true" [width]="240">
+      <!-- <ngx-datatable-column [resizeable]="true" [width]="240">
         <ng-template ngx-datatable-header-template>
           Fecha de publicación:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{row.release_date}}
         </ng-template>
-      </ngx-datatable-column>
+      </ngx-datatable-column> -->
 
-      <ngx-datatable-column [resizeable]="true" [width]="240">
+      <!-- <ngx-datatable-column [resizeable]="true" [width]="240">
         <ng-template ngx-datatable-header-template>
           Fecha de entrega:
         </ng-template>
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{row.delivery_date}}
         </ng-template>
-      </ngx-datatable-column>
+      </ngx-datatable-column> -->
 
       <!-- <ngx-datatable-column [resizeable]="true" [width]="100">
         <ng-template ngx-datatable-header-template>
@@ -188,7 +290,7 @@
           <div [style]="'height: 40px; width: 40px; background-color:'+getColorById(row?.commercial_offers_seguimientos[0]?.status)"></div>
         </ng-template>
       </ngx-datatable-column>
-      
+
       <ngx-datatable-column [resizeable]="true" [width]="125">
         <ng-template ngx-datatable-header-template>
           Estado oportunidad:
@@ -228,7 +330,7 @@
             <ion-button style="color: #dc3545" data-tooltip="Eliminar" data-tooltip-conf="right">
               <ion-icon name="trash"></ion-icon>
             </ion-button>
-            
+
             <!-- <ion-button  (click)="openAdminOportunidad(row)" style="color: #59dc35" data-tooltip="Gestionar" data-tooltip-conf="up" >
               <ion-icon name="document-attach-outline"></ion-icon>
             </ion-button> -->

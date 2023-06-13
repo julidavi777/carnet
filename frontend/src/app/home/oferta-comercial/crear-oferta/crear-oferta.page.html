@@ -9,9 +9,7 @@
           formControlName="sede"
           aria-label="Default select example"
         >
-          <option value="1">BOG</option>
-          <option value="2">MED</option>
-          <option value="3">PER</option>
+          <option *ngFor="let sede of sedes" [value]="sede.id">{{sede.name}}</option>
         </select>
         <br />
        <!--  <input
@@ -21,6 +19,9 @@
           formControlName="contract_type_other"
           placeholder="Ingrese el tipo de contratación"
         /> -->
+        <div *ngIf="globalService.isFieldInvalid(sede, 'required')">
+          <small style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
       </div>
 
       <div class="mb-3 form-group col-md-2">
@@ -32,16 +33,24 @@
           class="form-control is-valid"
           id="validationServer01"
           placeholder="#"
+          [disabled]="true"
         />
+        <div *ngIf="globalService.isFieldInvalid(sequential_number, 'required')">
+          <small style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
       </div>
 
       <div class="mb-3 form-group col-md-10">
         <label class="form-label" for="validation03">Número identificación cliente *</label>
         <input type="number" class="form-control" [ngClass]="isCustomerFound === null ? '' : isCustomerFound ? 'is-valid' : 'is-invalid'" formControlName="customer_identification" id="validation03" placeholder=""/>
+        <div *ngIf="globalService.isFieldInvalid(customer_identification, 'required')">
+          <small  style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
         <div class="valid-feedback">Cliente encontrado con {{identification_type}}</div>
         <div class="invalid-feedback">
           Cliente no encontrado por favor digite un numero correcto.
         </div>
+        
       </div>
 
       <div *ngIf="identification_type !== 'NIT';else elseCondition" class="row">
@@ -73,9 +82,6 @@
             class="form-control"
             formControlName="razon_social"
             [readonly]="true"
-            id="validation06"
-            placeholder=""
-            required
           />
         </div>
   
@@ -86,9 +92,6 @@
             class="form-control"
             formControlName="razon_comercial"
             [readonly]="true"
-            id="validation06"
-            placeholder=""
-            required
           />
         </div>
       </div>
@@ -101,9 +104,6 @@
               class="form-control"
               formControlName="razon_social"
               [readonly]="true"
-              id="validation06"
-              placeholder=""
-              required
             />
           </div>
     
@@ -114,9 +114,6 @@
               class="form-control"
               formControlName="razon_comercial"
               [readonly]="true"
-              id="validation06"
-              placeholder=""
-              required
             />
           </div>
           
@@ -158,6 +155,9 @@
             {{user.name}} {{user.surname}}
           </option>
         </select>
+        <div *ngIf="globalService.isFieldInvalid(responsable_id, 'required')">
+          <small  style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
       </div>
 
       <div class="mb-3 form-group col-md-6">
@@ -171,6 +171,9 @@
             {{user.name}} {{user.surname}}
           </option>
         </select>
+        <div *ngIf="globalService.isFieldInvalid(responsable_operativo_id, 'required')">
+          <small  style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
       </div>
 
       <div class="mb-3 form-group col-md-6">
@@ -187,6 +190,9 @@
           <option value="3">ADMINISTRACIÓN DELEGADA</option>
           <option value="4">OTRO</option>
         </select>
+        <div *ngIf="globalService.isFieldInvalid(contract_type, 'required')">
+          <small  style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
         <br />
         <input
           class="form-control"
@@ -204,12 +210,11 @@
           formControlName="service_type"
           aria-label="Default select example"
         >
-          <option value="1">CONSULTORIAS E INTERVENTORIAS</option>
-          <option value="2">MANTENIMIENTOS</option>
-          <option value="3">OBRAS CIVILES</option>
-          <option value="4">REMODELACIONES Y ADECUACIONES</option>
-          <option value="5">OTRO</option>
+          <option *ngFor="let negocio_unidad of negocio_unidades" [value]="negocio_unidad.id">{{negocio_unidad.name}}</option>
         </select>
+        <div *ngIf="globalService.isFieldInvalid(service_type, 'required')">
+          <small  style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
         <br />
         <input
           class="form-control"
@@ -240,6 +245,9 @@
           <option value="11">TRANSPORTE</option>
           <option value="12">OTRO</option>
         </select>
+        <div *ngIf="globalService.isFieldInvalid(sector_productivo, 'required')">
+          <small  style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
         <br />
         <input
           class="form-control"
@@ -260,8 +268,10 @@
           placeholder="Objeto"
           rows="4"
           cols="50"
-          required
         ></textarea>
+        <div *ngIf="globalService.isFieldInvalid(object_description, 'required')">
+          <small  style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
       </div>
 
       <div class="mb-3 form-group col-md-6">
@@ -270,9 +280,7 @@
           type="number"
           class="form-control"
           formControlName="numero"
-          id="validation08"
           placeholder="#"
-          required
         />
       </div>
 
@@ -295,10 +303,10 @@
           type="text"
           class="form-control"
           formControlName="location"
-          id="validation09"
-          placeholder=""
-          required
         />
+        <div *ngIf="globalService.isFieldInvalid(location, 'required')">
+          <small  style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
       </div>
       <br />
 
@@ -310,10 +318,11 @@
           type="date"
           class="form-control"
           formControlName="release_date"
-          id="validation09"
           placeholder="Cargue archivo"
-          required
         />
+        <div *ngIf="globalService.isFieldInvalid(release_date, 'required')">
+          <small  style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
       </div>
 
       <div class="mb-3 form-group col-md-6">
@@ -322,10 +331,11 @@
           type="date"
           class="form-control"
           formControlName="delivery_date"
-          id="validation09"
           placeholder="Seleccione"
-          required
         />
+        <div *ngIf="globalService.isFieldInvalid(delivery_date, 'required')">
+          <small  style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
       </div>
     </div>
     <br />
@@ -384,7 +394,6 @@
             formControlName="visit_date"
             id="validation09"
             placeholder="Seleccione"
-            required
           />
         </div>
 
@@ -441,50 +450,32 @@
       ></textarea>
     </div>
 
-    <!-- <div class="mb-3 form-group col-md-6">
-      <label class="form-label" for="validation09">Anexos</label>
-      <input
-        type="file"
-        class="form-control"
-        formControlName="anexos_file_field"
-        (change)="onFileChange($event, 'anexos_file_field')"
-        id="validation09"
-        placeholder="Seleccione"
-        required
-        textarea
-      />
-    </div> -->
     
 
-    <div class="d-flex justify-content-end col-md-12">
-      <button type="submit" class="btn btn-primary">Guardar oportunidad</button>
-    </div>
 
-    <div
-      *ngIf="registeredSuccessfully"
-      class="alert alert-success alert-dismissible fade show mt-2"
-      role="alert"
-    >
-      <strong>Mensaje</strong> Oferta registrada exitosamente
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="alert"
-        aria-label="Close"
-      ></button>
-    </div>
   </form>
 
 </div>
-<!-- <br>
+<br>
   <app-admin-oportunidad 
     [isCreating]="true"
+    (newFileEvent)="newFileEventChildAdminOportunidad($event)"
+    (requirementsVerificationValuesEvent)="requirementsVerificationValuesEvent($event)"
   ></app-admin-oportunidad>
-  
+
+
 <br>
 
 <app-crear-cotizacion 
   [isCreating]="true"
+  [parentFormGroup]="offersForm"
 ></app-crear-cotizacion>
- -->
+
+<div class="row d-flex justify-content-center">
+  <button (click)="onSubmit()" class="btn btn-primary col-4">Guardar oportunidad</button>
+</div>
+<br>
+
+<p-toast key="errorToast" position="bottom-center"></p-toast>
+<p-toast key="successToast" position="bottom-center"></p-toast>
 

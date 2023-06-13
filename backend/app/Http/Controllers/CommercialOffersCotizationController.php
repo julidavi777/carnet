@@ -38,7 +38,7 @@ class CommercialOffersCotizationController extends ApiController
         $validator = Validator::make($data, [
             'valor_cotizado' => 'required|string|max:50',
             'observaciones' => 'required|string|max:50',
-            'cotizacion_file' => 'required|file|mimes:doc,docx,jpg,png,pdf',
+            'cotizacion_file' => 'required|file|mimes:xlsx,doc,docx,jpg,png,pdf',
             'commercial_offer_id' =>  'required|integer|exists:commercial_offers,id',
         ]);
 

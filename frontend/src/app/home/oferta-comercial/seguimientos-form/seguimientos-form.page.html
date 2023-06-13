@@ -13,6 +13,19 @@
         <select class="form-select" formControlName="status" aria-label="Default select example">
           <option [value]="option.value" *ngFor="let option of statusOptionsSeguimiento">{{option.name}}</option>
         </select>
+        <div *ngIf="globalService.isFieldInvalid(status, 'required')">
+          <small  style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
+      </div>
+
+      <div class="mb-3 form-group col-md-5">
+        <label class="form-label" for="">Probabilidad:*</label>
+        <select class="form-select" formControlName="probability" aria-label="Default select example">
+          <option [value]="option.id" *ngFor="let option of probabilities">{{option.name}}</option>
+        </select>
+        <div *ngIf="globalService.isFieldInvalid(probability, 'required')">
+          <small  style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
       </div>
 
       <div class="mb-3 form-group col-md-5">
@@ -20,11 +33,14 @@
         <textarea  formControlName="description" class="form-control" rows="2" cols="50">
 
         </textarea>
+        <div *ngIf="globalService.isFieldInvalid(description, 'required')">
+          <small  style="color: #ef4444;">Este campo no puede estar vació</small>
+        </div>
       </div>
 
       
       <div class="col-md-2" style="    display: flex;gap: 10px;     margin-top: 30px; ">
-        <p-button [disabled]="seguimientosForm.invalid"  type="submit" icon="pi pi-plus" label="Guardar"  styleClass="p-button-success "></p-button>
+        <p-button  type="submit" icon="pi pi-plus" label="Guardar"  styleClass="p-button-success "></p-button>
       </div>
     </div>
 
@@ -60,13 +76,22 @@
       {{row.description}}
     </ng-template>
   </ngx-datatable-column>
+
+  <ngx-datatable-column name="identification_type" [resizeable]="true">
+    <ng-template ngx-datatable-header-template>
+      Probabilidad:
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row?.probability | probability:probabilities}}
+    </ng-template>
+  </ngx-datatable-column>
     
     <ngx-datatable-column name="identification_type" [resizeable]="true">
       <ng-template ngx-datatable-header-template>
         Fecha creación:
       </ng-template>
       <ng-template let-row="row" ngx-datatable-cell-template>
-        {{row.created_at}}
+        {{row.created_at | date:'medium'}}
       </ng-template>
     </ngx-datatable-column>
 

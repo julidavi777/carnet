@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { OfertaComercialService } from '../oferta-comercial/oferta-comercial.service';
+import { CotizacionesService } from './cotizaciones.service';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class CotizacionesPage implements OnInit {
   constructor(
 
     private router: Router,
-    private ofertaComercialService: OfertaComercialService
+    private cotizacionesService: CotizacionesService
 
 
 
@@ -33,12 +33,14 @@ export class CotizacionesPage implements OnInit {
   ngOnInit() {
     this.getOfertas();
   }
+
   getOfertas(){
-    this.ofertaComercialService.getOfertas().subscribe((res: any) => {
+    this.cotizacionesService.getOfertas().subscribe((res: any) => {
       this.rows = res.data;
       this.loadingIndicator = false;
     })
   }
+
   watchDocument(value:any){
 
     if(value){
@@ -56,20 +58,6 @@ export class CotizacionesPage implements OnInit {
     }
 
   }
-
-  editOffer(data: any,){
-
-
-
-    this.router.navigate(['home/oferta-comercial/oferta-editar']);
-
-
-  }
-
-  /* openAdminOportunidad(data){
-    this.adminOportunidadService.dataCommercialOffer = data;
-    this.router.navigate(['home/oferta-comercial/ofertas/admin-oportunidad']);
-  } */
 
   openGestionProyectos(row){
     this.router.navigate(['home/gestionar-proyectos']);

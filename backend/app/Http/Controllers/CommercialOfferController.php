@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Mail\commercialOfferAssignedNotification;
 use App\Models\CommercialOffer;
+use App\Models\CommercialOffersCotization;
+use App\Models\CommercialOffersManagement;
+use App\Models\CommercialOffersManagementFile;
 use App\Models\CommercialOffersVisit;
 use App\Models\Customer;
 use App\Models\User;
@@ -11,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class CommercialOfferController extends ApiController
@@ -20,12 +24,22 @@ class CommercialOfferController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $queryParams = $request->query();
+
+        /* if(count($queryParams) == 0){
+            return "hello";
+        } */
+
         $commercialOffers = CommercialOffer::get();
 
+        $years = $commercialOffers->pluck('sequential_number')->map(function($sn){
+            $pieces = explode("-", $sn);
+            return (object)["id" => $pieces[1], "name" => $pieces[1]];
+        })->unique("id")->values();
+
         $commercialOffers = $commercialOffers->map(function($e){
-            $e->assignment_date = Carbon::parse($e->created_at)->format('Y-m-d H:m:s') ;
             $e->customer;
             $e->responsableRel;
             $e->comercial_offer_visit;
@@ -39,7 +53,82 @@ class CommercialOfferController extends ApiController
             return $e;
         })->sortBy('id')->values();
 
-        return $this->showAll($commercialOffers);
+
+        $AJUDICADA_A_CUBIKAR = "2";
+        if($request->query('needsAwardedOffers') == "yes"){
+            $commercialOffers = $commercialOffers->filter(function($e) use ($AJUDICADA_A_CUBIKAR){
+                
+                $commercial_offers_seguimiento = $e->commercial_offers_seguimientos->sortByDesc('id')->first();
+
+                if(!is_null($commercial_offers_seguimiento)){
+                    return $commercial_offers_seguimiento->status == $AJUDICADA_A_CUBIKAR;
+                }
+
+            })->sortBy('id')->values();
+
+        }   
+
+
+        if(count($queryParams) != 0){
+            if(isset($queryParams["operativo_responsables"]) && !is_null($queryParams["operativo_responsables"])){
+                $commercialOffers = $commercialOffers->filter(function($e) use ($queryParams){
+                    if($e->responsable_operativo_id == $queryParams["operativo_responsables"]){
+                        return $e;
+                    }
+                })->values();
+            }
+            if(isset($queryParams["comercial_responsables"]) && !is_null($queryParams["comercial_responsables"])){
+                $commercialOffers = $commercialOffers->filter(function($e) use ($queryParams){
+
+                    if($e->responsableRel->toArray()["id"] == $queryParams["comercial_responsables"]){
+                        return $e;
+                    }
+                })->values();
+            }
+            if(isset($queryParams["clientes"]) && !is_null($queryParams["clientes"])){
+                $commercialOffers = $commercialOffers->filter(function($e) use ($queryParams){
+                    if($e->customer->id == $queryParams["clientes"]){
+                        return $e;
+                    }
+                })->values();
+            }
+            if(isset($queryParams["estados"]) && !is_null($queryParams["estados"])){
+                $commercialOffers = $commercialOffers->filter(function($e) use ($queryParams){
+                    //dd($e->commercial_offers_seguimientos->toArray()[0]['status']);
+                    if(count($e->commercial_offers_seguimientos->toArray()) > 0 ){
+                        if($e->commercial_offers_seguimientos->toArray()[0]['status'] == $queryParams["estados"]){
+                            return $e;
+                        }
+                    }
+                })->values();
+            }
+
+            if(isset($queryParams["sedes"]) && !is_null($queryParams["sedes"])){
+                $commercialOffers = $commercialOffers->filter(function($e) use ($queryParams){
+                    if($e->sede == $queryParams["sedes"]){
+                        return $e;
+                    }
+                })->values();
+            }
+
+            if(isset($queryParams["unidad_negocios"]) && !is_null($queryParams["unidad_negocios"])){
+                $commercialOffers = $commercialOffers->filter(function($e) use ($queryParams){
+                    if($e->service_type == $queryParams["unidad_negocios"]){
+                        return $e;
+                    }
+                })->values();
+            }
+
+            if(isset($queryParams["years"]) && !is_null($queryParams["years"])){
+                $commercialOffers = $commercialOffers->filter(function($e) use ($queryParams){
+                    if(explode("-", $e->sequential_number)[1] == $queryParams["years"]){
+                        return $e;
+                    }
+                })->values();
+            }
+        }
+
+        return response()->json(["data" => $commercialOffers, "years" => $years], 200);
     }
 
     /**
@@ -52,7 +141,7 @@ class CommercialOfferController extends ApiController
     {
         $data = $request->all();
 
-        $validator = Validator::make($data, [
+        $validationRules = [
             'sede' => 'required|string',
             'customer_identification' => 'required|integer|exists:customers,identification',
             'sequential_number' => 'required|string|unique:commercial_offers',
@@ -70,32 +159,40 @@ class CommercialOfferController extends ApiController
             'delivery_date' => 'required|date',
             //'visit_date' => 'required|date',
             'observations' => 'nullable|string',
-            'anexos' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
             'responsable_id' => 'required|integer|exists:users,id',
             'responsable_operativo_id' => 'required|integer|exists:users,id',
 
             'visit_date' => 'nullable|date',
             'visit_place' => 'nullable|string',
             'person_attending' => 'nullable|string',
-            'phone_number_person_attending' => 'nullable|integer'
-        ]);
+            'phone_number_person_attending' => 'nullable|integer',
+            
 
-        //return $data;
+            //management fields
+            'requirements_determination' => 'required|string',
+            'requirements_verification' => 'nullable|string',
+
+            //cotization fields 
+            'valor_cotizado' => 'required|string|max:50',
+            'observaciones' => 'required|string|max:50',
+            'cotizacion_file' => 'required|file|mimes:xlsx,doc,docx,jpg,png,pdf',
+        ];
+
+        for ($i=0; $i < $data['file_opportunity_length']; $i++) { 
+            $validationRules['file_opportunity_'.$i] = 'file|mimes:xlsx,doc,docx,jpg,png,pdf';
+        }
+
+
+        $validator = Validator::make($data, $validationRules);
+        
+
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
-        return DB::transaction(function() use ($request) {
+        return DB::transaction(function() use ($request, $data) {
+            $savedFilesManagement = [];
             try{
-                //SAVING FILES
-
-                $anexos_json_urls = null;
-                if ($request->hasFile('anexos')) {
-                    $file = $request->file('anexos');
-                    $anexos_json_urls = $this->saveFile($file, 'commercialOffersFiles');
-                    
-                }
-
                 //get Customer
                 $customer = Customer::where('identification', $request->post('customer_identification'))->first();
 
@@ -116,7 +213,6 @@ class CommercialOfferController extends ApiController
                     'release_date'  => $request->post('release_date'),
                     'delivery_date'  => $request->post('delivery_date'),
                     'observations'  => $request->post('observations'),
-                    'anexos'  => $anexos_json_urls,
                     'customer_id'  => $customer->id,
                     'responsable_id'  => $request->post('responsable_id'),//responsable comercial 
                     'responsable_operativo_id'  => $request->post('responsable_operativo_id'),
@@ -124,6 +220,7 @@ class CommercialOfferController extends ApiController
                 
                 ]);
 
+                //save visit data
                 if(
                     !is_null($request->post('visit_date')) || 
                     !is_null($request->post('visit_place')) ||
@@ -138,6 +235,44 @@ class CommercialOfferController extends ApiController
                         'commercial_offer_id' => $createdCommercialOffer->id,
                     ]);
                 }
+
+                //save management information
+
+                $commercialOffersManagementCreated = CommercialOffersManagement::create([
+                    'requirements_determination' => $request->post('requirements_determination'),
+                    //'current_status' => $request->post('current_status'),
+                    'requirements_verification' => $request->post('requirements_verification'),
+                    'commercial_offer_id' => $createdCommercialOffer->id
+                ]);
+
+                //save management files
+                for ($i=0; $i < $data['file_opportunity_length']; $i++) { 
+                    $file = null;
+                    if ($request->hasFile('file_opportunity_'.$i)) {
+                        $file = $request->file('file_opportunity_'.$i);
+                        $file = $this->saveFile($file, 'commercialOffersManagementsFiles');
+                        array_push($savedFilesManagement, $file['server_hash_name']);
+                    }
+        
+                     CommercialOffersManagementFile::create([
+                        'file' => $file,
+                        'commercial_offers_management_id' => $commercialOffersManagementCreated->id 
+                    ]);
+                }
+
+                //save cotization data
+                $contizacion_file_json_urls = null;
+                if ($request->hasFile('cotizacion_file')) {
+                    $file = $request->file('cotizacion_file');
+                    $contizacion_file_json_urls = $this->saveFile($file, 'commercialOffersContizations');
+                }
+
+                CommercialOffersCotization::create([
+                    'valor_cotizado' => $request->post('valor_cotizado'),
+                    'observaciones' => $request->post('observaciones'),
+                    'cotizacion_file' => $contizacion_file_json_urls,
+                    'commercial_offer_id' => $createdCommercialOffer->id,
+                ]);
 
                 if($createdCommercialOffer){
 
@@ -181,6 +316,7 @@ class CommercialOfferController extends ApiController
 
         } catch (\Exception $ex) {
         DB::rollback();
+        Storage::delete($savedFilesManagement);
         // throw $ex;
         return response()->json(['status' => false, 'message' => 'something went wrong registro dog o usuario'.$ex], 400);
         }});
@@ -227,7 +363,6 @@ class CommercialOfferController extends ApiController
             'delivery_date' => 'nullable|date',
             //'visit_date' => 'nullable|date',
             'observations' => 'nullable|string',
-            'anexos' => 'nullable|file|mimes:doc,docx,jpg,png,pdf',
             'responsable_id' => 'nullable|integer|exists:users,id',
             'responsable_operativo_id' => 'nullable|integer|exists:users,id'
         ]);
@@ -242,21 +377,6 @@ class CommercialOfferController extends ApiController
             //$customer = Customer::where('identification', $request->post('customer_identification'))->first();
 
             //SAVING FILES
-
-            $anexos_json_urls = $commercialOffer->anexos;
-            if ($request->hasFile('anexos')) {
-
-                //DELETE FILE
-                if(!is_null($commercialOffer->anexos)){
-                    unlink(storage_path('app/'.$commercialOffer->anexos['server_hash_name']));
-                }
-
-
-                $file = $request->file('anexos');
-                $anexos_json_urls = $this->saveFile($file, 'commercialOffersFiles');
-                
-            }
-    
     
             $updated = CommercialOffer::where('id', $commercialOffer->id)->update([    
                 'sede'  => $request->post('sede'),
@@ -274,7 +394,6 @@ class CommercialOfferController extends ApiController
                 'delivery_date'  => $request->post('delivery_date'),
                 //'visit_date'  => $request->post('visit_date'),
                 'observations'  => $request->post('observations'),
-                'anexos'  => $anexos_json_urls,
                 //'customer_id'  => $customer->id,
                 'responsable_id'  => $request->post('responsable_id'),
                 'responsable_operativo_id'  => $request->post('responsable_operativo_id')
