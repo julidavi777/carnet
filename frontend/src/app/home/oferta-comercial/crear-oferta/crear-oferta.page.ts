@@ -65,7 +65,9 @@ export class CrearOfertaPage implements OnInit {
 
   constructor(
 
-    private crearOfertaService: CrearOfertaService
+    private crearOfertaService: CrearOfertaService,
+    public globalService: GlobalService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit() {
