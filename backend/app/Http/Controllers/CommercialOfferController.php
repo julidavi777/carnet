@@ -26,10 +26,18 @@ class CommercialOfferController extends ApiController
      */
     public function index(Request $request)
     {
-        
-       
+        $queryParams = $request->query();
+
+        /* if(count($queryParams) == 0){
+            return "hello";
+        } */
 
         $commercialOffers = CommercialOffer::get();
+
+        $years = $commercialOffers->pluck('sequential_number')->map(function($sn){
+            $pieces = explode("-", $sn);
+            return (object)["id" => $pieces[1], "name" => $pieces[1]];
+        })->unique("id")->values();
 
         $commercialOffers = $commercialOffers->map(function($e){
             $e->customer;
@@ -61,7 +69,66 @@ class CommercialOfferController extends ApiController
         }   
 
 
-        return $this->showAll($commercialOffers);
+        if(count($queryParams) != 0){
+            if(isset($queryParams["operativo_responsables"]) && !is_null($queryParams["operativo_responsables"])){
+                $commercialOffers = $commercialOffers->filter(function($e) use ($queryParams){
+                    if($e->responsable_operativo_id == $queryParams["operativo_responsables"]){
+                        return $e;
+                    }
+                })->values();
+            }
+            if(isset($queryParams["comercial_responsables"]) && !is_null($queryParams["comercial_responsables"])){
+                $commercialOffers = $commercialOffers->filter(function($e) use ($queryParams){
+
+                    if($e->responsableRel->toArray()["id"] == $queryParams["comercial_responsables"]){
+                        return $e;
+                    }
+                })->values();
+            }
+            if(isset($queryParams["clientes"]) && !is_null($queryParams["clientes"])){
+                $commercialOffers = $commercialOffers->filter(function($e) use ($queryParams){
+                    if($e->customer->id == $queryParams["clientes"]){
+                        return $e;
+                    }
+                })->values();
+            }
+            if(isset($queryParams["estados"]) && !is_null($queryParams["estados"])){
+                $commercialOffers = $commercialOffers->filter(function($e) use ($queryParams){
+                    //dd($e->commercial_offers_seguimientos->toArray()[0]['status']);
+                    if(count($e->commercial_offers_seguimientos->toArray()) > 0 ){
+                        if($e->commercial_offers_seguimientos->toArray()[0]['status'] == $queryParams["estados"]){
+                            return $e;
+                        }
+                    }
+                })->values();
+            }
+
+            if(isset($queryParams["sedes"]) && !is_null($queryParams["sedes"])){
+                $commercialOffers = $commercialOffers->filter(function($e) use ($queryParams){
+                    if($e->sede == $queryParams["sedes"]){
+                        return $e;
+                    }
+                })->values();
+            }
+
+            if(isset($queryParams["unidad_negocios"]) && !is_null($queryParams["unidad_negocios"])){
+                $commercialOffers = $commercialOffers->filter(function($e) use ($queryParams){
+                    if($e->service_type == $queryParams["unidad_negocios"]){
+                        return $e;
+                    }
+                })->values();
+            }
+
+            if(isset($queryParams["years"]) && !is_null($queryParams["years"])){
+                $commercialOffers = $commercialOffers->filter(function($e) use ($queryParams){
+                    if(explode("-", $e->sequential_number)[1] == $queryParams["years"]){
+                        return $e;
+                    }
+                })->values();
+            }
+        }
+
+        return response()->json(["data" => $commercialOffers, "years" => $years], 200);
     }
 
     /**
