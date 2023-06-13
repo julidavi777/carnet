@@ -20,6 +20,8 @@ export class CrearOfertaPage implements OnInit {
 
     usersListResponsableComercial: any = [];
     usersListResponsableOperativo: any = [];
+    sedes: any[] = [];
+    negocio_unidades: any[] = [];
 
     offersForm: any = new FormGroup({
     sede: new FormControl('', [Validators.required]),
@@ -62,13 +64,16 @@ export class CrearOfertaPage implements OnInit {
   isValidCustomerField: boolean = false;
 
   constructor(
-    private crearOfertaService: CrearOfertaService,
-    private messageService: MessageService,
-    public globalService: GlobalService
-    ) { }
-    
-    ngOnInit() {
-    //this.offersForm.controls['sequential_number'].disable();
+
+    private crearOfertaService: CrearOfertaService
+  ) { }
+
+  ngOnInit() {
+    this.sedes = this.crearOfertaService.sedes;
+    this.negocio_unidades = this.crearOfertaService.negocio_unidades;
+
+    this.offersForm.controls['sequential_number'].disable();
+
     this.offersForm.controls['name'].disable();
     this.offersForm.controls['surname'].disable();
     this.offersForm.controls['razon_social'].disable();

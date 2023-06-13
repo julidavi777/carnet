@@ -7,6 +7,20 @@ import { environment } from 'src/environments/environment';
 })
 export class CrearOfertaService {
 
+  readonly sedes = [
+    { id: '1', name: 'BOG' },
+    { id: '2', name: 'MED' },
+    { id: '3', name: 'PER' }
+  ]
+
+  negocio_unidades = [
+    { id: '1', name: 'CONSULTORIAS E INTERVENTORIAS' },
+    { id: '2', name: 'MANTENIMIENTOS' },
+    { id: '3', name: 'OBRAS CIVILES' },
+    { id: '4', name: 'REMODELACIONES Y ADECUACIONES' },
+    { id: '5', name: 'OTRO' }
+  ]
+
   readonly API_URL = environment.baseUrl;
 
   constructor(

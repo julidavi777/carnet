@@ -9,9 +9,7 @@
           formControlName="sede"
           aria-label="Default select example"
         >
-          <option value="1">BOG</option>
-          <option value="2">MED</option>
-          <option value="3">PER</option>
+          <option *ngFor="let sede of sedes" [value]="sede.id">{{sede.name}}</option>
         </select>
         <br />
        <!--  <input
@@ -212,11 +210,7 @@
           formControlName="service_type"
           aria-label="Default select example"
         >
-          <option value="1">CONSULTORIAS E INTERVENTORIAS</option>
-          <option value="2">MANTENIMIENTOS</option>
-          <option value="3">OBRAS CIVILES</option>
-          <option value="4">REMODELACIONES Y ADECUACIONES</option>
-          <option value="5">OTRO</option>
+          <option *ngFor="let negocio_unidad of negocio_unidades" [value]="negocio_unidad.id">{{negocio_unidad.name}}</option>
         </select>
         <div *ngIf="globalService.isFieldInvalid(service_type, 'required')">
           <small  style="color: #ef4444;">Este campo no puede estar vació</small>

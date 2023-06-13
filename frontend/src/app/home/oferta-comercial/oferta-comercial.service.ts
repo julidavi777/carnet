@@ -15,8 +15,8 @@ export class OfertaComercialService {
 
   ) { }
 
-  getOfertas(){
-    return this.http.get(`${this.API_URL}commercialOffers`);
+  getOfertas(queryParams: string = ""){
+    return this.http.get(`${this.API_URL}commercialOffers${queryParams}`);
   }
 
   editOfert(data: any,){
