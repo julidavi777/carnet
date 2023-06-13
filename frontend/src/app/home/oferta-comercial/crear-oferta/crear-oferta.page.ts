@@ -18,6 +18,8 @@ export class CrearOfertaPage implements OnInit {
 
     usersListResponsableComercial: any = [];
     usersListResponsableOperativo: any = [];
+    sedes: any[] = [];
+    negocio_unidades: any[] = [];
 
     offersForm: any = new FormGroup({
     sede: new FormControl('', [Validators.required]),
@@ -76,6 +78,9 @@ export class CrearOfertaPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.sedes = this.crearOfertaService.sedes;
+    this.negocio_unidades = this.crearOfertaService.negocio_unidades;
+
     this.offersForm.controls['sequential_number'].disable();
     this.offersForm.controls['name'].disable();
     this.offersForm.controls['surname'].disable();

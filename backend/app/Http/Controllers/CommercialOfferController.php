@@ -22,10 +22,18 @@ class CommercialOfferController extends ApiController
      */
     public function index(Request $request)
     {
-        
-       
+        $queryParams = $request->query();
+
+        /* if(count($queryParams) == 0){
+            return "hello";
+        } */
 
         $commercialOffers = CommercialOffer::get();
+
+        $years = $commercialOffers->pluck('sequential_number')->map(function($sn){
+            $pieces = explode("-", $sn);
+            return (object)["id" => $pieces[1], "name" => $pieces[1]];
+        })->unique("id")->values();
 
         $commercialOffers = $commercialOffers->map(function($e){
             $e->assignment_date = Carbon::parse($e->created_at)->format('Y-m-d H:m:s') ;
@@ -58,7 +66,19 @@ class CommercialOfferController extends ApiController
         }   
 
 
-        return $this->showAll($commercialOffers);
+        if(count($queryParams) != 0){
+            /* $commercialOffers = $commercialOffers->filter(function($commercialOffer) use ($queryParams){
+                
+            }); */
+            /* foreach ($commercialOffers as $commercialOffer) {
+
+                if(isset($queryParams["hello"]) && !is_null($queryParams["hello"])){
+                    return $commercialOffer;
+                }
+            } */
+        }
+
+        return response()->json(["data" => $commercialOffers, "years" => $years], 200);
     }
 
     /**

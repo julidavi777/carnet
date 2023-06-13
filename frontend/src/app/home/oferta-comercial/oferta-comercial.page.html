@@ -9,46 +9,116 @@
     </div>
   </div>
 
-<div class="container mb-3">
-  <div class="row">
-    <div class="col-4">
-      <ion-item>
-        <ion-label >Capitulo</ion-label>
-        <ionic-selectable
-          [items]="responsables"
-          itemValueField="no"
-          itemTextField="capitulo"
-          [canSearch]="true"
-          >
-        </ionic-selectable>
-      </ion-item>
+  <form [formGroup]="filtersForm">
+  <div class="container mb-3">
+    <div class="row">
+      <div class="col-4">
+        <ion-item>
+          <ion-label >Responsable comercial</ion-label>
+          <ionic-selectable
+            formControlName="comercial_responsables"
+            [items]="comercial_responsables"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            >
+          </ionic-selectable>
+        </ion-item>
+      </div>
+      <div class="col-4">
+        <ion-item>
+          <ion-label >Cliente</ion-label>
+          <ionic-selectable
+            formControlName="clientes"
+            [items]="clientes"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            >
+          </ionic-selectable>
+        </ion-item>
+      </div>
+      <div class="col-4">
+        <ion-item>
+          <ion-label >Estado</ion-label>
+          <ionic-selectable
+            formControlName="estados"
+            [items]="estados"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            >
+          </ionic-selectable>
+        </ion-item>
+      </div>
     </div>
-    <div class="col-4">
-      <ion-item>
-        <ion-label >Insumo</ion-label>
-        <ionic-selectable
-          [items]="clientes"
-          itemValueField="code"
-          itemTextField="description"
-          [canSearch]="true"
-          >
-        </ionic-selectable>
-      </ion-item>
+    <div class="row my-3">
+      <div class="col-4">
+        <ion-item>
+          <ion-label >Sede</ion-label>
+          <ionic-selectable
+            formControlName="sedes"
+            [items]="sedes"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            >
+          </ionic-selectable>
+        </ion-item>
+      </div>
+      <div class="col-4">
+        <ion-item>
+          <ion-label >Unidad negocio</ion-label>
+          <ionic-selectable
+            formControlName="unidad_negocios"
+            [items]="unidad_negocios"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            >
+          </ionic-selectable>
+        </ion-item>
+      </div>
+      <div class="col-4">
+        <ion-item>
+          <ion-label >Año</ion-label>
+          <ionic-selectable
+            formControlName="years"
+            [items]="years"
+            itemValueField="id"
+            itemTextField="name"
+            [canSearch]="true"
+            >
+          </ionic-selectable>
+        </ion-item>
+      </div>
     </div>
-    <div class="col-4">
-      <ion-item>
-        <ion-label >Estado</ion-label>
-        <ionic-selectable
-          [items]="estados"
-          itemValueField="code"
-          itemTextField="description"
-          [canSearch]="true"
-          >
-        </ionic-selectable>
-      </ion-item>
+    <div class="mb-3">
+      <div class="row">
+        <div class="col-4">
+          <ion-item>
+            <ion-label >Responsable operativo</ion-label>
+            <ionic-selectable
+              formControlName="operativo_responsables"
+              [items]="operativo_responsables"
+              itemValueField="id"
+              itemTextField="name"
+              [canSearch]="true"
+              >
+            </ionic-selectable>
+          </ion-item>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-end">
+      <div class="col-1">
+        <p-button (click)="clearFiltersValues()" icon="pi pi-times" styleClass="p-button-rounded p-button-danger " pTooltip="Limpiar filtros" tooltipPosition="bottom"></p-button>
+      </div>
     </div>
   </div>
-</div>
+</form>
   
   <div class="row d-flex justify-content-md-center">
     <!-- <div class="col-1"></div> -->
