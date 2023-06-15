@@ -11,6 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrearOfertaService } from './crear-oferta/crear-oferta.service';
 import { map } from 'rxjs/operators';
 import { ClientesService } from '../clientes/clientes.service';
+import { DataForPDF } from './interfaces/data-for-pdf.interface';
 
 @Component({
   selector: 'app-oferta-comercial',
@@ -44,6 +45,7 @@ export class OfertaComercialPage implements OnInit {
   sedes: any[] = []
   unidad_negocios: any[] = []
   years: any[] = []
+  data_for_pdf: DataForPDF;
 
   readonly STORAGE_URL = environment.storageUrl;
 
@@ -70,6 +72,7 @@ export class OfertaComercialPage implements OnInit {
     this.ofertaComercialService.getOfertas().subscribe((res: any) => {
       this.rows = res.data;
       this.years = res.years;
+      this.data_for_pdf = res.data_for_pdf;
       this.loadingIndicator = false;
     })
   }
@@ -111,6 +114,7 @@ export class OfertaComercialPage implements OnInit {
       this.ofertaComercialService.getOfertas(route).subscribe((res: any) => {
         this.rows = res.data;
         this.years = res.years;
+        this.data_for_pdf = res.data_for_pdf;
         this.loadingIndicator = false;
       })
     })
@@ -210,6 +214,10 @@ export class OfertaComercialPage implements OnInit {
       return this.crearCotizacionService.statusOptionsSeguimiento.find(e => e.value == value)?.color;
     }
     return 'white';
+  }
+
+  generatePdfReport(){
+    this.ofertaComercialService.generatePdfReport(this.data_for_pdf)
   }
 
 }
