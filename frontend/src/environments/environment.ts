@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-  baseUrl: "http://127.0.0.1:8000/api/",
-  storageUrl: "http://127.0.0.1:8000/storage/",
-
+ /*  baseUrl: "http://127.0.0.1:8000/api/",
+  storageUrl: "http://127.0.0.1:8000/storage/", */
+  baseUrl: "http://3.225.219.38/cubikar/backend/public/api/",
+  storageUrl: "http://3.225.219.38/cubikar/backend/public/storage/",
 };
 
 /*

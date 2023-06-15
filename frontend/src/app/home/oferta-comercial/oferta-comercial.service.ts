@@ -42,12 +42,15 @@ export class OfertaComercialService {
 
       let arr = []
       data.offers_managed_companies.forEach(offers_managed_companie => {
-       arr.push([
-        { rowSpan: offers_managed_companies_length, text: data.total_offers_managed,fontSize: 30,margin: [ 12, 16, 0, 0 ] },
-        { text: offers_managed_companie.percentage+"%", style: 'tableHeader', alignment: 'center', fontSize:10 },
-        {colSpan:2, text: offers_managed_companie.company_name, style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: offers_managed_companie.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$'+data.total_cotizations, style: 'tableHeader', alignment: 'center',fontSize: 10,margin: [ 0, 22, 0, 0 ] },  '', '', {colSpan:2, text: '$'+offers_managed_companie.sum_cotizations, style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: offers_managed_companie.percentage_cotization+'%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-      ]) 
+
+          arr.push([
+            { rowSpan: offers_managed_companies_length, text: data.total_offers_managed,fontSize: 30,margin: [ 12, 16, 0, 0 ] },
+            { text: offers_managed_companie.percentage+"%", style: 'tableHeader', alignment: 'center', fontSize:10 },
+            {colSpan:2, text: offers_managed_companie.company_name, style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: offers_managed_companie.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: offers_managed_companies_length,colSpan:3, text: '$'+data.total_cotizations, style: 'tableHeader', alignment: 'center',fontSize: 10,margin: [ 0, 22, 0, 0 ] },  '', '', {colSpan:2, text: '$'+offers_managed_companie.sum_cotizations, style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: offers_managed_companie.percentage_cotization+'%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
+          ])
+       
       })
+  
       return arr;
       return [
         [
@@ -144,7 +147,7 @@ export class OfertaComercialService {
           style: 'tableExample',
           color: '#444',
           table: {
-            widths: [60, 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, 30],
+            widths: [70, 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, 30],
             body: getTablePropuestasGestionadas(),
           },
 
