@@ -128,7 +128,45 @@ class CommercialOfferController extends ApiController
             }
         }
 
-        return response()->json(["data" => $commercialOffers, "years" => $years], 200);
+        //DATA FOR PDF
+
+        $control_date = Carbon::now()->format('d/m/Y');
+        $total_offers_managed = $commercialOffers->count();
+
+        //
+        
+
+        $companies = collect();
+        foreach ($commercialOffers->groupBy('customer.name') as $key => $commercialOffer) {
+
+            $commercial_offer_contizations = $commercialOffer->pluck('commercial_offers_contizations')->collapse();
+
+            $companies->push((object)[
+                "company_name" => $key,
+                "sum_cotizations" => $commercial_offer_contizations->sum('valor_cotizado'),
+                "total_offers" => $commercialOffer->count(),
+                "percentage" => number_format(($commercialOffer->count() * 100) / $total_offers_managed, 1) 
+            ]);
+        }
+
+
+        $total_cotizations = $companies->sum('sum_cotizations');
+
+        $companies = $companies->map(function ($companie) use ($total_cotizations) {
+            $companie->percentage_cotization = number_format(($companie->sum_cotizations * 100) / $total_cotizations, 7);
+            return $companie;
+        });
+
+        return response()->json([
+            "data_for_pdf" => [
+                "control_date" => $control_date,
+                "total_offers_managed" => $total_offers_managed,
+                "total_cotizations" => $total_cotizations,
+                "offers_managed_companies" => $companies 
+            ],
+            "data" => $commercialOffers, 
+            "years" => $years,
+        ], 200);
     }
 
     /**
