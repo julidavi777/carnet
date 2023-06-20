@@ -32,57 +32,34 @@ export class OfertaComercialService {
     // this.router.navigate(['home/clientes/cliente-editar']);
   }
 
+  getTablePropuestasGestionadas(data: DataForPDF) {
+
+    let offers_managed_companies_length = data.offers_managed_companies.length;
+
+    let arr: any = [
+      [
+        { colSpan: 12, text: 'TOTAL PROPUESTAS GESTIONADAS', alignment: 'center' },
+        '', '', '', '', '', '', '', '', '', '', ''
+      ],
+    ]
+    data.offers_managed_companies.forEach(offers_managed_companie => {
+
+        arr.push([
+          { rowSpan: offers_managed_companies_length, text: data.total_offers_managed,fontSize: 30,margin: [ 12, 16, 0, 0 ] },
+          { text: offers_managed_companie.percentage+"%", style: 'tableHeader', alignment: 'center', fontSize:10 },
+          {colSpan:2, text: offers_managed_companie.company_name, style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: offers_managed_companie.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: offers_managed_companies_length,colSpan:3, text: '$'+data.total_cotizations, style: 'tableHeader', alignment: 'center',fontSize: 10,margin: [ 0, 22, 0, 0 ] },  '', '', {colSpan:2, text: '$'+offers_managed_companie.sum_cotizations, style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: offers_managed_companie.percentage_cotization+'%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
+        ])
+     
+    })
+
+    return arr;
+  };
+
 
   generatePdfReport(data: DataForPDF){
 
 
-    const getTablePropuestasGestionadas = () => {
-
-      let offers_managed_companies_length = data.offers_managed_companies.length;
-
-      let arr = []
-      data.offers_managed_companies.forEach(offers_managed_companie => {
-
-          arr.push([
-            { rowSpan: offers_managed_companies_length, text: data.total_offers_managed,fontSize: 30,margin: [ 12, 16, 0, 0 ] },
-            { text: offers_managed_companie.percentage+"%", style: 'tableHeader', alignment: 'center', fontSize:10 },
-            {colSpan:2, text: offers_managed_companie.company_name, style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: offers_managed_companie.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: offers_managed_companies_length,colSpan:3, text: '$'+data.total_cotizations, style: 'tableHeader', alignment: 'center',fontSize: 10,margin: [ 0, 22, 0, 0 ] },  '', '', {colSpan:2, text: '$'+offers_managed_companie.sum_cotizations, style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: offers_managed_companie.percentage_cotization+'%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-          ])
-       
-      })
-  
-      return arr;
-      return [
-        [
-          { rowSpan: 3, text: '201',fontSize: 30 },
-          { text: '55%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-          {colSpan:2, text: 'DINFRO S.A.S', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '111', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 92.760.506.448', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ 44.249.398.747', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '48%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-        ],
-        [
-          { rowSpan: 3, text: '201',fontSize: 12 },
-          { text: '11%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-          {colSpan:2, text: 'CYS S.A.S', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '23', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 92.760.506.448', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ 14.224.113.471', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '20%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-        ],
-  
-        [
-          { rowSpan: 3, text: '201',fontSize: 12 },
-          { text: '33%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-          {colSpan:2, text: 'DINCREA', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '67', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 92.760.506.448', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ 30.228.999.230', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '33%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-        ],
-        [
-          { colSpan: 12, text: '', alignment: 'center' },
-          '', '', '', '', '', '', '', '', '', '', ''
-        ],
-        // [
-        //   // { rowSpan: 4, text: 'PROPUESTAS APROBADAS',fontSize: 8 },
-        //   { rowSpan: 4, colSpan: 6, text: '31%', alignment: 'center' },'', '', '', '','',
-        //   { rowSpan: 4, colSpan: 6, text: '12%', alignment: 'center' },'', '', '', '','',
-  
-        // ],
-  
-  
-      ]
-    };
+    
 
     const pdfDefinition: any = {
       pageOrientation: 'landscape',
@@ -97,7 +74,7 @@ export class OfertaComercialService {
           style: 'tableExample',
           color: '#444',
           table: {
-            widths: [100, 40, 60, 30, 30, 30, 30, 30, 30, 30, 50, 30],
+            widths: ['*', 40, 60, 30, 30, 30, 30, 30, 30, 30, 50, '*'],
             body: [
               [
                 {
@@ -131,10 +108,7 @@ export class OfertaComercialService {
                 { colSpan: 12, text: '', alignment: 'center' },
                 '', '', '', '', '', '', '', '', '', '', ''
               ],
-              [
-                { colSpan: 12, text: 'TOTAL PROPUESTAS GESTIONADAS', alignment: 'center' },
-                '', '', '', '', '', '', '', '', '', '', ''
-              ],
+             
 
 
             ],
@@ -143,22 +117,24 @@ export class OfertaComercialService {
 
         },
 
+        ' ',
+
         {
           style: 'tableExample',
           color: '#444',
           table: {
-            widths: [70, 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, 30],
-            body: getTablePropuestasGestionadas(),
+            widths: ['*', 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, '*'],
+            body: this.getTablePropuestasGestionadas(data),
           },
 
 
         },
-
+        ' ',
         {
           style: 'tableExample',
           color: '#444',
           table: {
-            widths: [60, 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, 30],
+            widths: ['*', 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, '*'],
             body: [
               [
                 {
@@ -175,27 +151,24 @@ export class OfertaComercialService {
               ],
               [
 
-                { rowSpan: 3, text: '62',fontSize: 12 },
+                { rowSpan: 4, text: '62',fontSize: 12 },
                 { text: '81%', style: 'tableHeader', alignment: 'center', fontSize:10 },
                 {colSpan:2, text: 'CONSULTORÍA Y DISEÑOS', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '50', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 11.573.597.978', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$10.489.439.013', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '91%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
               ],
               [
 
-                { rowSpan: 3, text: '62',fontSize: 12 },
+                { rowSpan: 4, text: '62',fontSize: 12 },
                 { text: '11%', style: 'tableHeader', alignment: 'center', fontSize:10 },
                 {colSpan:2, text: 'GERENCIA E INTERVENTORIA', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '7', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 11.573.597.978', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$248.139.057', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '2%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
               ],
 
               [
 
-                { rowSpan: 3, text: '62',fontSize: 12 },
+                { rowSpan: 4, text: '62',fontSize: 12 },
                 { text: '8%', style: 'tableHeader', alignment: 'center', fontSize:10 },
                 {colSpan:2, text: 'CONST. Y MANTENIMIENTO', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '5', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 11.573.597.978', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$820.019.574', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '7%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
               ],
-              [
-                { colSpan: 12, text: '', alignment: 'center' },
-                '', '', '', '', '', '', '', '', '', '', ''
-              ],
+
               // [
               //   { colSpan: 6, text: '31%', alignment: 'center' },'', '', '', '', '',
               //   { colSpan: 6, text: '12%', alignment: 'center' },'', '', '', '', '',
@@ -208,11 +181,11 @@ export class OfertaComercialService {
 
         },
 
-        {
+         /* {
           style: 'tableExample',
           color: '#444',
           table: {
-            widths: [60, 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, 30],
+            widths: ['*', 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, '*'],
             body: [
               [
                 {
@@ -228,11 +201,12 @@ export class OfertaComercialService {
                 '', '', '', '',
               ],
               [
-
-                { rowSpan: 3, text: '62',fontSize: 12 },
+                '',
+                { text: '62',fontSize: 12 },
                 { text: '48%', style: 'tableHeader', alignment: 'center', fontSize:10 },
                 {colSpan:2, text: 'PROBABILIDAD ALTA', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '11', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 14.257.923.096', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$7.081.841.090', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '50%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
               ],
+              
               [
 
                 { rowSpan: 3, text: '62',fontSize: 12 },
@@ -260,13 +234,13 @@ export class OfertaComercialService {
           },
 
 
-        },
-
+        }, */
+/*
         {
           style: 'tableExample',
           color: '#444',
           table: {
-            widths: [60, 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, 30],
+            widths: ['*', 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, '*'],
             body: [
               [
                 {
@@ -335,7 +309,7 @@ export class OfertaComercialService {
           style: 'tableExample',
           color: '#444',
           table: {
-            widths: [60, 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, 30],
+            widths: ['*', 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, '*'],
             body: [
               [
                 {
@@ -375,42 +349,8 @@ export class OfertaComercialService {
           },
 
 
-        },
+        }, */
       ],
-      layout: {
-        hLineWidth: function (i, node) {
-          return 1;
-        },
-        vLineWidth: function (i, node) {
-          return 1;
-        },
-        hLineColor: function (i, node) {
-          return "blue";
-        },
-        vLineColor: function (i, node) {
-          return "blue";
-        },
-      },
-
-
-      //   styles: {
-      //     // Estilo para el encabezado de la tabla
-      //     tableHeader: {
-      //       fontSize: 10,
-      //       bold: true,
-      //       color: 'blue'
-      //     },
-
-      //     // Estilo para el cuerpo de la tabla
-      //     tableExample: {
-      //       fontSize: 8,
-      //       margin: [0, 5, 0, 15] // Margen superior, derecho, inferior e izquierdo respectivamente
-      //     }
-
-
-      // },
-
-
 
 
     }
