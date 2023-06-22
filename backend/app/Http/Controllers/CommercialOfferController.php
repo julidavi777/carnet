@@ -136,9 +136,8 @@ class CommercialOfferController extends ApiController
         //
         $res = $commercialOffers->groupBy('service_type');
 
-        return $res;
 
-        $companies = collect();
+        /* $companies = collect();
         foreach ($commercialOffers->groupBy('customer.name') as $key => $commercialOffer) {
 
             $commercial_offer_contizations = $commercialOffer->pluck('commercial_offers_contizations')->collapse();
@@ -167,17 +166,73 @@ class CommercialOfferController extends ApiController
             $companie->percentage_cotization = $percentage_cotization;
             return $companie;
         });
+ */
+        $pendingCommercialOffers = $commercialOffers->filter(function($e){
+            $arr = $e->commercial_offers_seguimientos->toArray();
+            if(count($arr) != 0){
+
+                $status = $arr[0]['status'];
+                //filter pendientes
+                if($status == 4 || $status == 5 || $status == 7 ){
+                    return $e;
+                }
+            }
+        })->values();
+
+        //return $pendingCommercialOffers;
 
         return response()->json([
             "data_for_pdf" => [
                 "control_date" => $control_date,
-                "total_offers_managed" => $total_offers_managed,
-                "total_cotizations" => $total_cotizations,
-                "offers_managed_companies" => $companies 
+                "customer_name" => $this->groupDataByKey('customer.name', $commercialOffers),
+                "service_type" => $this->groupDataByKey('service_type', $pendingCommercialOffers),
             ],
             "data" => $commercialOffers, 
             "years" => $years,
         ], 200);
+    }
+
+
+    function groupDataByKey($keyName, $commercialOffers)
+    {
+        $total_offers_managed = $commercialOffers->count();
+
+        $companies = collect();
+
+        foreach ($commercialOffers->groupBy($keyName) as $key => $commercialOffer) {
+            $commercial_offer_contizations = $commercialOffer->pluck('commercial_offers_contizations')->collapse();
+
+            $percentage = 0;
+            if ($total_offers_managed != 0) {
+                $percentage = number_format(($commercialOffer->count() * 100) / $total_offers_managed, 1);
+            }
+
+            $companies->push((object) [
+                "item_name" => $key,
+                "sum_cotizations" => $commercial_offer_contizations->sum('valor_cotizado'),
+                "total_offers" => $commercialOffer->count(),
+                "percentage" => $percentage
+            ]);
+        }
+
+        $total_cotizations = $companies->sum('sum_cotizations');
+
+        $companies = $companies->map(function ($companie) use ($total_cotizations) {
+            $percentage_cotization = 0;
+            if($total_cotizations != 0){
+                $percentage_cotization =  number_format(($companie->sum_cotizations * 100) / $total_cotizations, 7);
+            }
+            $companie->percentage_cotization = $percentage_cotization;
+            return $companie;
+        });
+
+        
+
+        return [
+            "total_offers_managed" => $total_offers_managed,
+            "total_cotizations" => $total_cotizations,
+            "offers_managed_companies" => $companies 
+        ];
     }
 
     /**
