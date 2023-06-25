@@ -32,6 +32,13 @@ export class OfertaComercialService {
     // this.router.navigate(['home/clientes/cliente-editar']);
   }
 
+  currencyFormatCOP(price: number){
+    if(price){
+      return new Intl.NumberFormat('es-CO').format(price)
+    }
+    return price
+  }
+
   getTablePropuestasGestionadas(data: DataForPDF) {
 
     let offers_managed_companies_length = data.managed_proposals.items.length;
@@ -42,15 +49,175 @@ export class OfertaComercialService {
         '', '', '', '', '', '', '', '', '', '', ''
       ],
     ]
-    data.managed_proposals.items.forEach(item => {
 
-        arr.push([
-          { rowSpan: offers_managed_companies_length, text: data.managed_proposals.total_offers_managed ,fontSize: 30,margin: [ 12, 16, 0, 0 ] },
-          { text: item.percentage+"%", style: 'tableHeader', alignment: 'center', fontSize:10 },
-          {colSpan:2, text: item.item_name, style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: item.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: offers_managed_companies_length,colSpan:3, text: '$'+data.managed_proposals.total_cotizations, style: 'tableHeader', alignment: 'center',fontSize: 10,margin: [ 0, 22, 0, 0 ] },  '', '', {colSpan:2, text: '$'+item.sum_cotizations, style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: item.percentage_cotization+'%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-        ])
-     
-    })
+    if(offers_managed_companies_length != 0){
+      data.managed_proposals.items.forEach(item => {
+  
+          arr.push([
+            { rowSpan: offers_managed_companies_length, text: data.managed_proposals.total_offers ,fontSize: 30,margin: [ 12, 16, 0, 0 ] },
+            { text: item.percentage+"%", style: 'tableHeader', alignment: 'center', fontSize:10 },
+            {colSpan:2, text: item.item_name, style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: item.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: offers_managed_companies_length,colSpan:3, text: '$ '+this.currencyFormatCOP(data.managed_proposals.total_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10,margin: [ 0, 22, 0, 0 ] },  '', '', {colSpan:2, text: '$ '+this.currencyFormatCOP(item.sum_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: item.percentage_cotization+'%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
+          ])
+       
+      })
+    }
+
+    return arr;
+  };
+
+  getTablePropuestasAprobadas(data: DataForPDF) {
+
+    let service_types = [
+      { id: '1', name: 'CONSULTORIAS E INTERVENTORIAS' },
+      { id: '2', name: 'MANTENIMIENTOS' },
+      { id: '3', name: 'OBRAS CIVILES' },
+      { id: '4', name: 'REMODELACIONES Y ADECUACIONES' },
+      { id: '5', name: 'OTRO' }
+    ]
+
+    const getNameServiceTypeById = (id: string | number) => {
+      let foundServiceType = service_types.filter(service => service.id == id);
+      if(foundServiceType.length > 0){
+        return foundServiceType[0].name;
+      }
+      return id; 
+    }
+
+    let approved_proposals = data.approved_proposals;
+    let items_length = approved_proposals.items.length;
+
+    let arr: any = [
+      [
+        {
+          rowSpan: items_length == 0 ? 0 :  items_length+1,
+          stack: [
+            { text: 'PROPUESTAS APROBADAS', fontSize: 10 },
+            { text: approved_proposals.total_offers, fontSize: 40, alignment: 'center' }
+          ]
+        },
+        { colSpan: 6, text: '31%', alignment: 'center' },
+        '', '', '', '', '',
+        { colSpan: 5, text: '12%', alignment: 'center' },
+        '', '', '', '',
+      ],
+    ];
+
+    if(items_length != 0){
+      approved_proposals.items.forEach(item => {
+  
+          arr.push([
+  
+            { rowSpan: items_length+1, text: approved_proposals.total_offers,fontSize: 12 },//+1 header plush
+            { text: item.percentage+' %', style: 'tableHeader', alignment: 'center', fontSize:10 },
+            {colSpan:2, text: getNameServiceTypeById(item.item_name), style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: item.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: items_length,colSpan:3, text: '$ '+this.currencyFormatCOP(approved_proposals.total_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ '+this.currencyFormatCOP(item.sum_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: item.percentage_cotization+' %', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
+          ])
+  
+          
+       
+      })
+    }
+
+    return arr;
+  };
+
+  getTablePropuestasPendientes(data: DataForPDF) {
+
+    let probabilities = [
+      {
+        id: 1,
+        name: 'Probabilidad Alta'
+      },
+      {
+        id: 2,
+        name: 'Probabilidad Media'
+      },
+      {
+        id: 3,
+        name: 'Probabilidad Baja'
+      },
+    ]
+
+    const getNameProbabilityById = (id: string | number) => {
+      let foundServiceType = probabilities.filter(service => service.id == id);
+      if(foundServiceType.length > 0){
+        return foundServiceType[0].name;
+      }
+      return id; 
+    }
+
+    let pending_offers = data.pending_offers;
+    let items_length = pending_offers.items.length;
+
+    let arr: any = [
+      [
+        {
+          rowSpan: items_length == 0 ? 0 :  items_length+1,
+          stack: [
+            { text: 'PENDIENTES POR DEFINIR', fontSize: 10 },
+            { text: pending_offers.total_offers, fontSize: 40, alignment: 'center' }
+          ]
+        },
+        { colSpan: 6, text: '31%', alignment: 'center' },
+        '', '', '', '', '',
+        { colSpan: 5, text: '12%', alignment: 'center' },
+        '', '', '', '',
+      ],
+    ];
+
+    if(items_length != 0){
+      pending_offers.items.forEach(item => {
+  
+          arr.push([
+  
+            { rowSpan: items_length+1, text: pending_offers.total_offers,fontSize: 12 },//+1 header plush
+            { text: item.percentage+' %', style: 'tableHeader', alignment: 'center', fontSize:10 },
+            {colSpan:2, text: getNameProbabilityById(item.item_name), style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: item.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: items_length,colSpan:3, text: '$ '+this.currencyFormatCOP(pending_offers.total_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ '+this.currencyFormatCOP(item.sum_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: item.percentage_cotization+' %', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
+          ])
+  
+          
+       
+      })
+    }
+
+    return arr;
+  };
+
+
+  getTablePropuestasNoEjecutadas(data: DataForPDF) {
+
+    let unexecuted_projects = data.unexecuted_projects;
+    let items_length = unexecuted_projects.items.length;
+
+    let arr: any = [
+      [
+        {
+          rowSpan: items_length == 0 ? 0 :  items_length+1,
+          stack: [
+            { text: 'PROYECTOS NO EJECUTADOS', fontSize: 10 },
+            { text: unexecuted_projects.total_offers, fontSize: 40, alignment: 'center' }
+          ]
+        },
+        { colSpan: 6, text: '31%', alignment: 'center' },
+        '', '', '', '', '',
+        { colSpan: 5, text: '12%', alignment: 'center' },
+        '', '', '', '',
+      ],
+    ];
+
+    if(items_length != 0){
+      unexecuted_projects.items.forEach(item => {
+  
+          arr.push([
+  
+            { rowSpan: items_length+1, text: unexecuted_projects.total_offers,fontSize: 12 },//+1 header plush
+            { text: item.percentage+' %', style: 'tableHeader', alignment: 'center', fontSize:10 },
+            {colSpan:2, text: item.item_name, style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: item.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: items_length,colSpan:3, text: '$ '+this.currencyFormatCOP(unexecuted_projects.total_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ '+this.currencyFormatCOP(item.sum_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: item.percentage_cotization+' %', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
+          ])
+  
+          
+       
+      })
+    }
 
     return arr;
   };
@@ -135,226 +302,40 @@ export class OfertaComercialService {
           color: '#444',
           table: {
             widths: ['*', 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, '*'],
-            body: [
-              [
-                {
-                  rowSpan: 4,
-                  stack: [
-                    { text: 'PROPUESTAS APROBADAS', fontSize: 10 },
-                    { text: '62', fontSize: 40, alignment: 'center' }
-                  ]
-                },
-                { colSpan: 6, text: '31%', alignment: 'center' },
-                '', '', '', '', '',
-                { colSpan: 5, text: '12%', alignment: 'center' },
-                '', '', '', '',
-              ],
-              [
-
-                { rowSpan: 4, text: '62',fontSize: 12 },
-                { text: '81%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'CONSULTORÍA Y DISEÑOS', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '50', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 11.573.597.978', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$10.489.439.013', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '91%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-              [
-
-                { rowSpan: 4, text: '62',fontSize: 12 },
-                { text: '11%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'GERENCIA E INTERVENTORIA', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '7', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 11.573.597.978', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$248.139.057', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '2%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-
-              [
-
-                { rowSpan: 4, text: '62',fontSize: 12 },
-                { text: '8%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'CONST. Y MANTENIMIENTO', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '5', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 11.573.597.978', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$820.019.574', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '7%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-
-              // [
-              //   { colSpan: 6, text: '31%', alignment: 'center' },'', '', '', '', '',
-              //   { colSpan: 6, text: '12%', alignment: 'center' },'', '', '', '', '',
-              // ],
-
-
-            ],
+            body: this.getTablePropuestasAprobadas(data)
           },
 
 
         },
-
-         /* {
-          style: 'tableExample',
-          color: '#444',
-          table: {
-            widths: ['*', 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, '*'],
-            body: [
-              [
-                {
-                  rowSpan: 4,
-                  stack: [
-                    { text: 'PENDIENTES POR DEFINIR', fontSize: 10 },
-                    { text: '23', fontSize: 40, alignment: 'center' }
-                  ]
-                },
-                { colSpan: 6, text: '11%', alignment: 'center' },
-                '', '', '', '', '',
-                { colSpan: 5, text: '15%', alignment: 'center' },
-                '', '', '', '',
-              ],
-              [
-                '',
-                { text: '62',fontSize: 12 },
-                { text: '48%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'PROBABILIDAD ALTA', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '11', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 14.257.923.096', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$7.081.841.090', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '50%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-              
-              [
-
-                { rowSpan: 3, text: '62',fontSize: 12 },
-                { text: '26%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'PROBABILIDAD MEDIA', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '6', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 14.257.923.096', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$5.725.112.032', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '40%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-
-              [
-
-                { rowSpan: 3, text: '62',fontSize: 12 },
-                { text: '8%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'PROBABILIDAD BAJA', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '6', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 14.257.923.096', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$1.450.999.974', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '10%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-              [
-                { colSpan: 12, text: '', alignment: 'center' },
-                '', '', '', '', '', '', '', '', '', '', ''
-              ],
-              // [
-              //   { colSpan: 6, text: '31%', alignment: 'center' },'', '', '', '', '',
-              //   { colSpan: 6, text: '12%', alignment: 'center' },'', '', '', '', '',
-              // ],
-
-
-            ],
-          },
-
-
-        }, */
-/*
+        {text: ' ',pageBreak: 'after'},
         {
           style: 'tableExample',
           color: '#444',
           table: {
             widths: ['*', 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, '*'],
-            body: [
-              [
-                {
-                  rowSpan: 7,
-                  stack: [
-                    { text: 'NO ADJUDICADAS', fontSize: 8 },
-                    { text: '68', fontSize: 40, alignment: 'center' }
-                  ]
-                },
-                { colSpan: 6, text: '34%', alignment: 'center' },
-                '', '', '', '', '',
-                { colSpan: 5, text: '39%', alignment: 'center' },
-                '', '', '', '',
-              ],
-              [
-
-                { rowSpan: 7, text: '62',fontSize: 12 },
-                { text: '81%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'COSTO', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '55', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 35.929.539.628', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$30.615.948.625', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '85%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-              [
-                { rowSpan:7, text: '0',fontSize: 12 },
-                { text: '0%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'TIEMPO DE ENTREGA', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '0', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 35.929.539.628', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ -', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '0%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-              [
-
-                { rowSpan: 7, text: '62',fontSize: 12 },
-                { text: '4%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'PROP. TECNICANO VIALE', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '3', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 35.929.539.628', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$2.634.163.243', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '7%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-              [
-                { rowSpan: 7, text: '0',fontSize: 12 },
-                { text: '0%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'CALIDAD DE SERVICIO', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '0', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 35.929.539.628', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ -', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '0%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-              [
-                { rowSpan: 7, text: '0',fontSize: 12 },
-                { text: '0%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'POCA CERCANIA CON EL CLIENTE', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '0', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 35.929.539.628', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ -', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '0%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-
-              [
-                { rowSpan: 7, text: '0',fontSize: 12 },
-                { text: '0%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'CONFIDENCIALIDAD', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '0', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 35.929.539.628', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ -', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '0%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-              [
-                { colSpan: 12, text: '', alignment: 'center' },
-                '', '', '', '', '', '', '', '', '', '', ''
-              ],
-              // [
-              //   { colSpan: 6, text: '31%', alignment: 'center' },'', '', '', '', '',
-              //   { colSpan: 6, text: '12%', alignment: 'center' },'', '', '', '', '',
-              // ],
-
-
-            ],
+            body: this.getTablePropuestasPendientes(data)
           },
 
 
         },
-
-
+        ' ',
         {
           style: 'tableExample',
           color: '#444',
           table: {
             widths: ['*', 50, 60, 30, 30, 50, 30, 30, 30, 40, 50, '*'],
-            body: [
-              [
-                {
-                  rowSpan: 4,
-                  stack: [
-                    { text: 'PROYECTOS NO EJECUTADOS', fontSize: 8 },
-                    { text: '48', fontSize: 40, alignment: 'center' }
-                  ]
-                },
-                { colSpan: 6, text: '24%', alignment: 'center' },
-                '', '', '', '', '',
-                { colSpan: 5, text: '10%', alignment: 'center' },
-                '', '', '', '',
-              ],
-              [
-                { rowSpan: 3, text: '201',fontSize: 30 },
-                { text: '104%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'DINFRO S.A.S', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '24', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 9.510.202.127', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ 44.249.398.747', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '33%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-              [
-                { rowSpan: 3, text: '201',fontSize: 12 },
-                { text: '11%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'CYS S.A.S', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '23', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 9.510.202.127', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ 14.224.113.471', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '7%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-
-              [
-                { rowSpan: 3, text: '201',fontSize: 12 },
-                { text: '33%', style: 'tableHeader', alignment: 'center', fontSize:10 },
-                {colSpan:2, text: 'DINCREA', style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: '67', style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: 3,colSpan:3, text: '$ 9.510.202.127', style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ 30.228.999.230', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: '26%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
-              ],
-
-
-
-
-
-            ],
+            body: this.getTablePropuestasNoEjecutadas(data)
           },
 
 
-        }, */
+        },
+ 
+    
       ],
 
 
     }
-
+    console.log(pdfDefinition)
     /* pdfMake.createPdf(pdfDefinition).print(); */
 
     const pdf = pdfMake.createPdf(pdfDefinition);

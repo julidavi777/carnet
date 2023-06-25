@@ -151,8 +151,7 @@ class CommercialOfferController extends ApiController
         $pendingCommercialOffers = $this->filterCommercialOffersByStatus($commercialOffers, [4,5,7]);
   
         $unexecutedCommercialOffers = $this->filterCommercialOffersByStatus($commercialOffers, [3,6]);
-
-
+        
         return response()->json([
             "data_for_pdf" => [
                 "control_date" => $control_date,
@@ -238,7 +237,7 @@ class CommercialOfferController extends ApiController
         
 
         return [
-            "total_offers_managed" => $total_offers_managed,
+            "total_offers" => $total_offers_managed,
             "total_cotizations" => $total_cotizations,
             "items" => $companies 
         ];
