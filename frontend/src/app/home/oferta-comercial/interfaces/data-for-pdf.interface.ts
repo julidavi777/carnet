@@ -9,8 +9,10 @@ export interface DataForPDF {
 }
 
 export interface GeneralDataItem {
-    total_offers: number;
-    total_cotizations:    number;
+    total_offers:              number;
+    total_cotizations:         number;
+    percentage_offers:         string;
+    percentage_cotizations:    string;
     items: Item[];
 }
 

@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Validator;
 
 class CommercialOfferController extends ApiController
 {
+
+    public $sum_total_cotizations = null;
+    public $total_comercial_offers = null;
     /**
      * Display a listing of the resource.
      *
@@ -149,9 +152,16 @@ class CommercialOfferController extends ApiController
         $approvedCommercialOffers = $this->filterCommercialOffersByStatus($commercialOffers, [2]);
 
         $pendingCommercialOffers = $this->filterCommercialOffersByStatus($commercialOffers, [4,5,7]);
+
   
         $unexecutedCommercialOffers = $this->filterCommercialOffersByStatus($commercialOffers, [3,6]);
         
+        $sum_total_cotizations = $commercialOffers->pluck('commercial_offers_contizations')->collapse()->sum('valor_cotizado');
+        $total_comercial_offers = $commercialOffers->count();
+
+        $this->sum_total_cotizations = $sum_total_cotizations;
+        $this->total_comercial_offers = $total_comercial_offers;
+
         return response()->json([
             "data_for_pdf" => [
                 "control_date" => $control_date,
@@ -184,6 +194,7 @@ class CommercialOfferController extends ApiController
     function groupDataByKey($keyName, $commercialOffers, $group_by_special = null)
     {
 
+        
         
         if(!is_null($group_by_special) && $group_by_special == "pending_offers"){
             $commercialOffers = $commercialOffers->filter(function($item){
@@ -239,6 +250,8 @@ class CommercialOfferController extends ApiController
         return [
             "total_offers" => $total_offers_managed,
             "total_cotizations" => $total_cotizations,
+            "percentage_offers" => number_format(($total_offers_managed * 100) / $this->total_comercial_offers),
+            "percentage_cotizations" => number_format(($total_cotizations * 100 ) / $this->sum_total_cotizations),
             "items" => $companies 
         ];
     }

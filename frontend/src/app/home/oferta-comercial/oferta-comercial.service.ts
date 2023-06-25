@@ -95,9 +95,9 @@ export class OfertaComercialService {
             { text: approved_proposals.total_offers, fontSize: 40, alignment: 'center' }
           ]
         },
-        { colSpan: 6, text: '31%', alignment: 'center' },
+        { colSpan: 6, text: approved_proposals.percentage_offers + '%', alignment: 'center' },
         '', '', '', '', '',
-        { colSpan: 5, text: '12%', alignment: 'center' },
+        { colSpan: 5, text: approved_proposals.percentage_cotizations + '%', alignment: 'center' },
         '', '', '', '',
       ],
     ];
@@ -108,8 +108,8 @@ export class OfertaComercialService {
           arr.push([
   
             { rowSpan: items_length+1, text: approved_proposals.total_offers,fontSize: 12 },//+1 header plush
-            { text: item.percentage+' %', style: 'tableHeader', alignment: 'center', fontSize:10 },
-            {colSpan:2, text: getNameServiceTypeById(item.item_name), style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: item.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: items_length,colSpan:3, text: '$ '+this.currencyFormatCOP(approved_proposals.total_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ '+this.currencyFormatCOP(item.sum_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: item.percentage_cotization+' %', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
+            { text: item.percentage+'%', style: 'tableHeader', alignment: 'center', fontSize:10 },
+            {colSpan:2, text: getNameServiceTypeById(item.item_name), style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: item.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: items_length,colSpan:3, text: '$ '+this.currencyFormatCOP(approved_proposals.total_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ '+this.currencyFormatCOP(item.sum_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: item.percentage_cotization+'%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
           ])
   
           
@@ -157,9 +157,9 @@ export class OfertaComercialService {
             { text: pending_offers.total_offers, fontSize: 40, alignment: 'center' }
           ]
         },
-        { colSpan: 6, text: '31%', alignment: 'center' },
+        { colSpan: 6, text: pending_offers.percentage_offers + '%', alignment: 'center' },
         '', '', '', '', '',
-        { colSpan: 5, text: '12%', alignment: 'center' },
+        { colSpan: 5, text: pending_offers.percentage_cotizations + '%', alignment: 'center' },
         '', '', '', '',
       ],
     ];
@@ -170,8 +170,8 @@ export class OfertaComercialService {
           arr.push([
   
             { rowSpan: items_length+1, text: pending_offers.total_offers,fontSize: 12 },//+1 header plush
-            { text: item.percentage+' %', style: 'tableHeader', alignment: 'center', fontSize:10 },
-            {colSpan:2, text: getNameProbabilityById(item.item_name), style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: item.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: items_length,colSpan:3, text: '$ '+this.currencyFormatCOP(pending_offers.total_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ '+this.currencyFormatCOP(item.sum_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: item.percentage_cotization+' %', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
+            { text: item.percentage+'%', style: 'tableHeader', alignment: 'center', fontSize:10 },
+            {colSpan:2, text: getNameProbabilityById(item.item_name), style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: item.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: items_length,colSpan:3, text: '$ '+this.currencyFormatCOP(pending_offers.total_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ '+this.currencyFormatCOP(item.sum_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: item.percentage_cotization+'%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
           ])
   
           
@@ -197,9 +197,9 @@ export class OfertaComercialService {
             { text: unexecuted_projects.total_offers, fontSize: 40, alignment: 'center' }
           ]
         },
-        { colSpan: 6, text: '31%', alignment: 'center' },
+        { colSpan: 6, text: unexecuted_projects.percentage_offers + '%',alignment: 'center' },
         '', '', '', '', '',
-        { colSpan: 5, text: '12%', alignment: 'center' },
+        { colSpan: 5, text: unexecuted_projects.percentage_cotizations + '%',alignment: 'center' },
         '', '', '', '',
       ],
     ];
@@ -210,8 +210,8 @@ export class OfertaComercialService {
           arr.push([
   
             { rowSpan: items_length+1, text: unexecuted_projects.total_offers,fontSize: 12 },//+1 header plush
-            { text: item.percentage+' %', style: 'tableHeader', alignment: 'center', fontSize:10 },
-            {colSpan:2, text: item.item_name, style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: item.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: items_length,colSpan:3, text: '$ '+this.currencyFormatCOP(unexecuted_projects.total_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ '+this.currencyFormatCOP(item.sum_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: item.percentage_cotization+' %', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
+            { text: item.percentage+'%', style: 'tableHeader', alignment: 'center', fontSize:10 },
+            {colSpan:2, text: item.item_name, style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: item.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: items_length,colSpan:3, text: '$ '+this.currencyFormatCOP(unexecuted_projects.total_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 },  '', '', {colSpan:2, text: '$ '+this.currencyFormatCOP(item.sum_cotizations), style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: item.percentage_cotization+'%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
           ])
   
           
