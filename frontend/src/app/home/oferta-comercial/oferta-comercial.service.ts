@@ -34,7 +34,7 @@ export class OfertaComercialService {
 
   getTablePropuestasGestionadas(data: DataForPDF) {
 
-    let offers_managed_companies_length = data.offers_managed_companies.length;
+    let offers_managed_companies_length = data.managed_proposals.items.length;
 
     let arr: any = [
       [
@@ -42,12 +42,12 @@ export class OfertaComercialService {
         '', '', '', '', '', '', '', '', '', '', ''
       ],
     ]
-    data.offers_managed_companies.forEach(offers_managed_companie => {
+    data.managed_proposals.items.forEach(item => {
 
         arr.push([
-          { rowSpan: offers_managed_companies_length, text: data.total_offers_managed,fontSize: 30,margin: [ 12, 16, 0, 0 ] },
-          { text: offers_managed_companie.percentage+"%", style: 'tableHeader', alignment: 'center', fontSize:10 },
-          {colSpan:2, text: offers_managed_companie.company_name, style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: offers_managed_companie.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: offers_managed_companies_length,colSpan:3, text: '$'+data.total_cotizations, style: 'tableHeader', alignment: 'center',fontSize: 10,margin: [ 0, 22, 0, 0 ] },  '', '', {colSpan:2, text: '$'+offers_managed_companie.sum_cotizations, style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: offers_managed_companie.percentage_cotization+'%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
+          { rowSpan: offers_managed_companies_length, text: data.managed_proposals.total_offers_managed ,fontSize: 30,margin: [ 12, 16, 0, 0 ] },
+          { text: item.percentage+"%", style: 'tableHeader', alignment: 'center', fontSize:10 },
+          {colSpan:2, text: item.item_name, style: 'tableHeader', alignment: 'center', fontSize: 10 },'', { text: item.total_offers, style: 'tableHeader', alignment: 'center' ,fontSize: 10},{rowSpan: offers_managed_companies_length,colSpan:3, text: '$'+data.managed_proposals.total_cotizations, style: 'tableHeader', alignment: 'center',fontSize: 10,margin: [ 0, 22, 0, 0 ] },  '', '', {colSpan:2, text: '$'+item.sum_cotizations, style: 'tableHeader', alignment: 'center',fontSize: 10 }, '', {colSpan:2, text: item.percentage_cotization+'%', style: 'tableHeader', alignment: 'center',fontSize: 10 }, '',
         ])
      
     })

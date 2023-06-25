@@ -131,61 +131,35 @@ class CommercialOfferController extends ApiController
         //DATA FOR PDF
 
         $control_date = Carbon::now()->format('d/m/Y');
-        $total_offers_managed = $commercialOffers->count();
-
-        //
-        $res = $commercialOffers->groupBy('service_type');
 
 
-        /* $companies = collect();
-        foreach ($commercialOffers->groupBy('customer.name') as $key => $commercialOffer) {
-
-            $commercial_offer_contizations = $commercialOffer->pluck('commercial_offers_contizations')->collapse();
-
-            $percentage = 0;
-            if($total_offers_managed != 0){
-                $percentage =  number_format(($commercialOffer->count() * 100) / $total_offers_managed, 1);
+        /* return $commercialOffers->filter(function($item){
+            if($item->commercial_offers_seguimientos->count() != 0){
+                return $item->commercial_offers_seguimientos[0]->probability != null;
             }
-
-            $companies->push((object)[
-                "company_name" => $key,
-                "sum_cotizations" => $commercial_offer_contizations->sum('valor_cotizado'),
-                "total_offers" => $commercialOffer->count(),
-                "percentage" => $percentage
-            ]);
-        }
-
-
-        $total_cotizations = $companies->sum('sum_cotizations');
-
-        $companies = $companies->map(function ($companie) use ($total_cotizations) {
-            $percentage_cotization = 0;
-            if($total_cotizations != 0){
-                $percentage_cotization =  number_format(($companie->sum_cotizations * 100) / $total_cotizations, 7);
-            }
-            $companie->percentage_cotization = $percentage_cotization;
-            return $companie;
-        });
- */
-        $pendingCommercialOffers = $commercialOffers->filter(function($e){
-            $arr = $e->commercial_offers_seguimientos->toArray();
-            if(count($arr) != 0){
-
-                $status = $arr[0]['status'];
-                //filter pendientes
-                if($status == 4 || $status == 5 || $status == 7 ){
-                    return $e;
+        })->groupBy(function ($item) {
+            if($item->commercial_offers_seguimientos->count() != 0){
+                if(!is_null($item->commercial_offers_seguimientos[0]->probability)){
+                    return $item->commercial_offers_seguimientos[0]->probability;
                 }
             }
-        })->values();
+        }); */
 
-        //return $pendingCommercialOffers;
+
+        $approvedCommercialOffers = $this->filterCommercialOffersByStatus($commercialOffers, [2]);
+
+        $pendingCommercialOffers = $this->filterCommercialOffersByStatus($commercialOffers, [4,5,7]);
+  
+        $unexecutedCommercialOffers = $this->filterCommercialOffersByStatus($commercialOffers, [3,6]);
+
 
         return response()->json([
             "data_for_pdf" => [
                 "control_date" => $control_date,
-                "customer_name" => $this->groupDataByKey('customer.name', $commercialOffers),
-                "service_type" => $this->groupDataByKey('service_type', $pendingCommercialOffers),
+                "managed_proposals" => $this->groupDataByKey('customer.name', $commercialOffers),
+                "approved_proposals" => $this->groupDataByKey('service_type', $approvedCommercialOffers),
+                "pending_offers" => $this->groupDataByKey('service_type', $pendingCommercialOffers, "pending_offers"),
+                "unexecuted_projects" => $this->groupDataByKey('customer.name', $unexecutedCommercialOffers),
             ],
             "data" => $commercialOffers, 
             "years" => $years,
@@ -193,13 +167,48 @@ class CommercialOfferController extends ApiController
     }
 
 
-    function groupDataByKey($keyName, $commercialOffers)
+    function filterCommercialOffersByStatus($commercialOfferList, $statusList){
+        return $commercialOfferList->filter(function($e) use ($statusList){
+            $arr = $e->commercial_offers_seguimientos->toArray();
+            if(count($arr) != 0){
+
+                $status = $arr[0]['status'];
+                //filter pendientes
+                if(in_array($status, $statusList) ){
+                    return $e;
+                }
+            }
+        })->values();
+    }
+
+
+    function groupDataByKey($keyName, $commercialOffers, $group_by_special = null)
     {
+
+        
+        if(!is_null($group_by_special) && $group_by_special == "pending_offers"){
+            $commercialOffers = $commercialOffers->filter(function($item){
+                if($item->commercial_offers_seguimientos->count() != 0){
+                    return $item->commercial_offers_seguimientos[0]->probability != null;
+                }
+            });
+            
+            $commercialOffersGrouped = $commercialOffers->groupBy(function ($item) {
+                if($item->commercial_offers_seguimientos->count() != 0){
+                    if(!is_null($item->commercial_offers_seguimientos[0]->probability)){
+                        return $item->commercial_offers_seguimientos[0]->probability;
+                    }
+                }
+            });
+        }else{
+            $commercialOffersGrouped = $commercialOffers->groupBy($keyName);
+        }
+
         $total_offers_managed = $commercialOffers->count();
 
         $companies = collect();
 
-        foreach ($commercialOffers->groupBy($keyName) as $key => $commercialOffer) {
+        foreach ($commercialOffersGrouped as $key => $commercialOffer) {
             $commercial_offer_contizations = $commercialOffer->pluck('commercial_offers_contizations')->collapse();
 
             $percentage = 0;
@@ -231,7 +240,7 @@ class CommercialOfferController extends ApiController
         return [
             "total_offers_managed" => $total_offers_managed,
             "total_cotizations" => $total_cotizations,
-            "offers_managed_companies" => $companies 
+            "items" => $companies 
         ];
     }
 
