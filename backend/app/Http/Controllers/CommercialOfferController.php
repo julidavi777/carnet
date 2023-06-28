@@ -246,12 +246,21 @@ class CommercialOfferController extends ApiController
         });
 
         
+        $percentage_offers = 0;
+        if($this->total_comercial_offers != 0){
+            $percentage_offers = number_format(($total_offers_managed * 100) / $this->total_comercial_offers);
+        }
+
+        $percentage_cotizations = 0;
+        if($this->sum_total_cotizations != 0){
+            $percentage_cotizations = number_format(($total_cotizations * 100 ) / $this->sum_total_cotizations);
+        }
 
         return [
             "total_offers" => $total_offers_managed,
             "total_cotizations" => $total_cotizations,
-            "percentage_offers" => number_format(($total_offers_managed * 100) / $this->total_comercial_offers),
-            "percentage_cotizations" => number_format(($total_cotizations * 100 ) / $this->sum_total_cotizations),
+            "percentage_offers" => $percentage_offers,
+            "percentage_cotizations" => $percentage_cotizations,
             "items" => $companies 
         ];
     }
