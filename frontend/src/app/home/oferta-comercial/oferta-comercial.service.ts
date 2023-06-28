@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-
-import * as pdfMake from 'pdfmake/build/pdfmake';
-
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { DataForPDF } from './interfaces/data-for-pdf.interface';
 
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Injectable({

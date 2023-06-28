@@ -105,6 +105,11 @@ const routes: Routes = [
         path: 'apu',
         loadChildren: () => import('./apu/apu.module').then( m => m.ApuPageModule)
       },
+      {
+        path: 'apu-activities',
+        loadChildren: () => import('./apu-activities/apu-activities.module').then( m => m.ApuActivitiesPageModule)
+      },
+    
     
     ]
   },

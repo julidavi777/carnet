@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar class="ion-header-custom">
+    <ion-title style="    margin-left: 20px;">Formulario Actividad</ion-title>
+      <ion-button style="background-color: #da3136;
+      margin: 0px 15px;" slot="end" (click)="dismiss()" color="danger">
+        <ion-icon slot="start" name="close"></ion-icon>
+        cerrar
+      </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<div class="container mt-4">
+  <form [formGroup]="apuActivityForm" (ngSubmit)="onSubmit()" class="formu">
+
+    <!-- Dynamic form fields based on field names -->
+    <div class="row">
+      <div class="mb-3 col-md-6">
+        <label class="form-label">Ciudad</label>
+        <input type="text" class="form-control" formControlName="city">
+      </div>
+      
+      <div class="mb-3 col-md-6">
+        <label class="form-label">Proyecto</label>
+        <input type="text" class="form-control" formControlName="project">
+      </div>
+      
+      <div class="mb-3 col-md-6">
+        <label class="form-label">Capacidad</label>
+        <input type="text" class="form-control" formControlName="capacity">
+      </div>
+      
+      <div class="mb-3 col-md-6">
+        <label class="form-label">Descripción</label>
+        <input type="text" class="form-control" formControlName="description">
+      </div>
+      
+      <div class="mb-3 col-md-6">
+        <label class="form-label">Unidad</label>
+        <input type="text" class="form-control" formControlName="unit">
+      </div>
+      
+      <div class="mb-3 col-md-6">
+        <label class="form-label">Cantidad</label>
+        <input type="text" class="form-control" formControlName="quantity">
+      </div>
+      
+      <div class="mb-3 col-md-6">
+        <label class="form-label">Precio unitario</label>
+        <input type="text" class="form-control" formControlName="unit_price">
+      </div>
+    </div>
+    <!-- Submit button -->
+    <div class="row">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>
