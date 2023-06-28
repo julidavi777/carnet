@@ -146,10 +146,15 @@ export class HomePage {
             routerLink: ['supplies']
         },
         {
+            label:'Administrar actividades',
+            icon:'pi pi-fw pi-lock',
+            routerLink: ['apu-activities']
+        },
+        /* {
             label:'APU',
             icon:'pi pi-fw pi-lock-open',
             routerLink: ['apu']
-        },
+        }, */
     ]
   },
     ];

@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxCurrencyModule } from 'ngx-currency';
 import { AdminOportunidadPageModule } from '../admin-oportunidad/admin-oportunidad.module';
 import { CrearCotizacionPageModule } from '../crear-cotizacion/crear-cotizacion.module';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CrearCotizacionPageModule } from '../crear-cotizacion/crear-cotizacion.
     ReactiveFormsModule,
     NgxCurrencyModule,
     AdminOportunidadPageModule,
-    CrearCotizacionPageModule
+    CrearCotizacionPageModule,
+    ToastModule
   ],
   declarations: [CrearOfertaPage]
 })

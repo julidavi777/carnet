@@ -20,6 +20,7 @@ use Illuminate\Http\UploadedFile;
 use SplFileInfo;
 use Symfony\Component\HttpFoundation\File\File;
 
+
 class AuthController extends Controller
 {
 
@@ -200,7 +201,10 @@ class AuthController extends Controller
 
     public function test(Request $request){
 
-        
+	   // $password = 'iVBORw0KGgo';
+
+	  //  $hashedPassword = Hash::make($password);
+       return "hh"; 
         $path = storage_path() . "\app\capitulacion.json"; 
         $json = json_decode(file_get_contents($path), true); 
         return $this->printArray($json);
