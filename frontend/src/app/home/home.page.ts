@@ -150,6 +150,11 @@ export class HomePage {
             icon:'pi pi-fw pi-lock',
             routerLink: ['apu-activities']
         },
+        {
+            label:'Administrar materiales',
+            icon:'pi pi-fw pi-lock',
+            routerLink: ['apu-materials']
+        },
         /* {
             label:'APU',
             icon:'pi pi-fw pi-lock-open',
