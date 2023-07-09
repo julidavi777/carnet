@@ -36,7 +36,6 @@ export class LoginPage implements OnInit {
     this.isInvalidData = false;
 
     this.loginService.login(this.loginForm.value).subscribe((res: LoginResponse) => {
-      console.log(res);
       //CUANDO ES EXITOSO status 200 OK
       
       //SAVE TOKEN

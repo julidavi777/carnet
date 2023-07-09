@@ -6,7 +6,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 //set dates in Spanish
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
 
 registerLocaleData(localeEs, 'es')
 
@@ -37,7 +38,8 @@ registerLocaleData(localeEs, 'es')
     {
       provide: LOCALE_ID,
       useValue: 'es'
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

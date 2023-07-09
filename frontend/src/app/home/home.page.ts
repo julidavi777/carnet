@@ -178,7 +178,7 @@ export class HomePage {
     ] */
 
     this.permissionsService.loadPermissions(permissions);
-   console.log(permissions)
+  
 
     /* ADMIN */
     if(!permissions.includes('admin')){
