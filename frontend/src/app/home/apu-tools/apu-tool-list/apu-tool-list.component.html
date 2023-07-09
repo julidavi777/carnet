@@ -1,0 +1,66 @@
+<button class="btn btn-danger" routerLink="/home/apu-tools/create">Crear</button>
+<ngx-datatable
+  class="material mt-2"
+  [rows]="apuTools"
+  [headerHeight]="70"
+  [footerHeight]="70"
+  rowHeight="auto"
+  [limit]="10"
+  [scrollbarH]="true"
+  [loadingIndicator]="loadingIndicator"
+>
+  <ngx-datatable-column name="id" [resizeable]="true" [width]="100">
+    <ng-template ngx-datatable-header-template>
+      ID
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.id }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="description" [resizeable]="true" [width]="300">
+    <ng-template ngx-datatable-header-template>
+      Descripción
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.description }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="unit" [resizeable]="true" [width]="200">
+    <ng-template ngx-datatable-header-template>
+      Unidad
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.unit }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="unitValue" [resizeable]="true" [width]="200">
+    <ng-template ngx-datatable-header-template>
+      Valor de la Unidad
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.unitValue }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="referenceLink" [resizeable]="true" [width]="300">
+    <ng-template ngx-datatable-header-template>
+      Enlace de Referencia
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.referenceLink }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="actions" [resizeable]="false" [width]="200">
+    <ng-template ngx-datatable-header-template>
+      Acciones
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <a [routerLink]="['/home/apu-tools/edit', row.id]" class="btn btn-primary">Editar</a>
+      
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

@@ -1,0 +1,68 @@
+<button routerLink="/home/apu-transport-prices/create">Crear</button>
+
+<ngx-datatable
+  class="material mt-2"
+  [rows]="rows"
+  [headerHeight]="70"
+  [footerHeight]="70"
+  rowHeight="auto"
+  [limit]="10"
+  [scrollbarH]="true"
+  [loadingIndicator]="loadingIndicator"
+>
+  <ngx-datatable-column name="description" [resizeable]="true" [width]="300">
+    <ng-template ngx-datatable-header-template>
+      Descripción:
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.description }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- Add additional columns here -->
+  <ngx-datatable-column name="unit" [resizeable]="true" [width]="100">
+    <ng-template ngx-datatable-header-template>
+      Unit:
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.unit }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="unit_price_eje_value" [resizeable]="true" [width]="150">
+    <ng-template ngx-datatable-header-template>
+      Unit Price Eje Value:
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.unit_price_eje_value }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="unit_price_bogota_value" [resizeable]="true" [width]="150">
+    <ng-template ngx-datatable-header-template>
+      Unit Price Bogota Value:
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.unit_price_bogota_value }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="unit_price_medellin_value" [resizeable]="true" [width]="150">
+    <ng-template ngx-datatable-header-template>
+      Unit Price Medellin Value:
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.unit_price_medellin_value }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="actions" [resizeable]="false" [width]="100">
+    <ng-template ngx-datatable-header-template>
+      Actions:
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <a [routerLink]="['/edit', row.id]">Edit</a>
+      <button (click)="deleteTransport(row.id)">Delete</button>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

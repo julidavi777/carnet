@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="apuToolForm" (ngSubmit)="saveApuTool()">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="description">Descripción</label>
+            <input type="text" class="form-control" id="description" formControlName="description" required>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="unit">Unidad</label>
+            <input type="text" class="form-control" id="unit" formControlName="unit" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="unitValue">Valor de la unidad</label>
+            <input type="number" class="form-control" id="unitValue" formControlName="unitValue" required>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="referenceLink">Enlace de referencia</label>
+            <input type="text" class="form-control" id="referenceLink" formControlName="referenceLink">
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+  </div>
+</div>

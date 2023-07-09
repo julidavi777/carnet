@@ -155,6 +155,16 @@ export class HomePage {
             icon:'pi pi-fw pi-lock',
             routerLink: ['apu-materials']
         },
+        {
+            label:'Administrar herramientas',
+            icon:'pi pi-fw pi-lock',
+            routerLink: ['apu-tools']
+        },
+        {
+            label:'Administrar precios transporte',
+            icon:'pi pi-fw pi-lock',
+            routerLink: ['apu-transport-prices']
+        },
         /* {
             label:'APU',
             icon:'pi pi-fw pi-lock-open',
