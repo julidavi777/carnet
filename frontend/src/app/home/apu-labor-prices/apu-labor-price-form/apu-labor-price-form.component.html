@@ -1,0 +1,45 @@
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title">Labor Price Form</h2>
+    <form [formGroup]="laborPriceForm" (ngSubmit)="saveLaborPrice()">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" formControlName="description" class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Unit</label>
+            <input type="text" formControlName="unit" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Unit Price Eje Value</label>
+            <input type="number" formControlName="unit_price_eje_value" class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Unit Price Bogota Value</label>
+            <input type="number" formControlName="unit_price_bogota_value" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Unit Price Medellin Value</label>
+            <input type="number" formControlName="unit_price_medellin_value" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" routerLink="/apu-labor-prices" class="btn btn-secondary">Cancel</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+
+<button routerLink="/home/apu-labor-prices/create" class="btn btn-success">New Labor Price</button>
+
+<ngx-datatable class="material mt-2"
+  [rows]="laborPrices"
+  [headerHeight]="70"
+  [footerHeight]="70"
+  rowHeight="auto"
+  [limit]="10"
+  [scrollbarH]="true"
+  [loadingIndicator]="loadingIndicator"
+>
+  <ngx-datatable-column name="id" [resizeable]="true" [width]="70">
+    <ng-template ngx-datatable-header-template>
+      ID
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.id }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="description" [resizeable]="true" [width]="300">
+    <ng-template ngx-datatable-header-template>
+      Descripción
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.description }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="unit" [resizeable]="true" [width]="150">
+    <ng-template ngx-datatable-header-template>
+      Unit
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.unit }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="unit_price_eje_value" [resizeable]="true" [width]="200">
+    <ng-template ngx-datatable-header-template>
+      Unit Price Eje Value
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.unit_price_eje_value }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="unit_price_bogota_value" [resizeable]="true" [width]="200">
+    <ng-template ngx-datatable-header-template>
+      Unit Price Bogota Value
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.unit_price_bogota_value }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="unit_price_medellin_value" [resizeable]="true" [width]="200">
+    <ng-template ngx-datatable-header-template>
+      Unit Price Medellin Value
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.unit_price_medellin_value }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="actions" [resizeable]="true" [width]="120">
+    <ng-template ngx-datatable-header-template>
+      Actions
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <button (click)="editLaborPrice(row.id)" class="btn btn-primary">Edit</button>
+      <button (click)="deleteLaborPrice(row.id)" class="btn btn-danger">Delete</button>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>
+
+

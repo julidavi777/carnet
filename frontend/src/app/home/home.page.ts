@@ -165,6 +165,11 @@ export class HomePage {
             icon:'pi pi-fw pi-lock',
             routerLink: ['apu-transport-prices']
         },
+        {
+            label:'Administrar precios mano de obra',
+            icon:'pi pi-fw pi-lock',
+            routerLink: ['apu-labor-prices']
+        },
         /* {
             label:'APU',
             icon:'pi pi-fw pi-lock-open',

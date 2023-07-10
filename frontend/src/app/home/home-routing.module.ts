@@ -121,8 +121,13 @@ const routes: Routes = [
         path: 'apu-transport-prices',
         loadChildren: () => import('./apu-transport-prices/apu-transport-prices.module').then( m => m.ApuTransportPricesPageModule)
       },
+      {
+        path: 'apu-labor-prices',
+        loadChildren: () => import('./apu-labor-prices/apu-labor-prices.module').then( m => m.ApuLaborPricesPageModule)
+      },
     ]
   },
+  
   
 
 
