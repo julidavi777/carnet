@@ -12,22 +12,22 @@ export class ApuMaterialService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any> {
-    return this.http.get(this.API_URL);
+    return this.http.get(this.API_URL+"apu-materials");
   }
 
   getById(id: number): Observable<any> {
-    return this.http.get(`${this.API_URL}/${id}`);
+    return this.http.get(`${this.API_URL}apu-materials/${id}`);
   }
 
   create(material: any): Observable<any> {
-    return this.http.post(this.API_URL, material);
+    return this.http.post(this.API_URL+"apu-materials", material);
   }
 
   update(id: number, material: any): Observable<any> {
-    return this.http.put(`${this.API_URL}/${id}`, material);
+    return this.http.put(`${this.API_URL}apu-materials/${id}`, material);
   }
 
-  delete(id: number): Observable<any> {
+/*   delete(id: number): Observable<any> {
     return this.http.delete(`${this.API_URL}/${id}`);
-  }
+  } */
 }

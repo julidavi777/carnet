@@ -1,14 +1,23 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\ApuActivityController;
+use App\Http\Controllers\ApuInternalChapterController;
+use App\Http\Controllers\ApuLaborPriceController;
+use App\Http\Controllers\ApuMaterialController;
+use App\Http\Controllers\ApuToolController;
+use App\Http\Controllers\ApuTransportPriceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChapterApuActivityController;
+use App\Http\Controllers\ChapterApuLaborPriceController;
+use App\Http\Controllers\ChapterApuMaterialController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\CommercialOfferController;
 use App\Http\Controllers\CommercialOffersCotizationController;
 use App\Http\Controllers\CommercialOffersManagementController;
 use App\Http\Controllers\CommercialOffersManagementFileController;
 use App\Http\Controllers\CommercialOffersSeguimientoController;
+use App\Http\Controllers\CustomerApuActivityController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\DepartamentoMunicipioController;

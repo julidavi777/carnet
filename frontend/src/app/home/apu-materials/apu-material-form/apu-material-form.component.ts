@@ -56,11 +56,11 @@ export class ApuMaterialFormComponent implements OnInit {
       if (this.isEditMode) {
         const materialId = this.route.snapshot.params['id'];
         this.materialService.update(materialId, material).subscribe(() => {
-          this.router.navigate(['/materials']);
+          this.router.navigate(['/home/apu-materials/']);
         });
       } else {
         this.materialService.create(material).subscribe(() => {
-          this.router.navigate(['/materials']);
+          this.router.navigate(['/home/apu-materials/']);
         });
       }
     }

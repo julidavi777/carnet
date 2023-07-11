@@ -25,9 +25,9 @@ export class ApuMaterialListComponent implements OnInit {
 
   deleteMaterial(id: number) {
     if (confirm('¿Estás seguro de eliminar este material?')) {
-      this.materialService.delete(id).subscribe(() => {
+    /*   this.materialService.delete(id).subscribe(() => {
         this.loadMaterials();
-      });
+      }); */
     }
   }
 }
