@@ -15,11 +15,10 @@ class CreateChaptersTable extends Migration
     {
         Schema::create('chapters', function (Blueprint $table) {
             $table->id();
-            $table->integer('no')->unique();
             $table->integer('sequential');
-            $table->string('chapter');
+            $table->string('name');
+            $table->boolean('status')->default(true);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

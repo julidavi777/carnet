@@ -95,6 +95,20 @@ Route::group([
     Route::post('commercialOffersSeguimientos',  [CommercialOffersSeguimientoController::class,'store']);
     Route::get('commercialOffers/{id_offer}/commercialOffersSeguimientos',  [CommercialOffersSeguimientoController::class,'indexByIdOffer']);
 
-    Route::apiResource('chapters', ChapterController::class);
     Route::resource('supplies', SupplyController::class);
+
+    //APU ROUTES
+    Route::apiResource('chapters', ChapterController::class)->except(['destroy']);
+    Route::apiResource('apu-internal-chapters', ApuInternalChapterController::class)->except(['destroy']);
+    Route::apiResource('customers', CustomerController::class)->except(['destroy']);
+    Route::apiResource('apu-activities', ApuActivityController::class)->except(['destroy']);
+    Route::apiResource('apu-materials', ApuMaterialController::class)->except(['destroy']);
+    Route::apiResource('apu-tools', ApuToolController::class)->except(['destroy']);
+    Route::apiResource('apu-transport-prices', ApuTransportPriceController::class)->except(['destroy']);
+    Route::apiResource('apu-labor-analysis-items', ApuLaborPriceController::class)->except(['destroy']);
+
+    Route::apiResource('chapters.apu-activities', ChapterApuActivityController::class)->only(['index']);
+    Route::apiResource('customers.apu-activities', CustomerApuActivityController::class)->only(['index']);
+    Route::apiResource('chapters.apu-materials', ChapterApuMaterialController::class)->only(['index']);
+    Route::apiResource('chapters.apu-labor-prices', ChapterApuLaborPriceController::class)->only(['index']);
 });
