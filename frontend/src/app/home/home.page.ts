@@ -141,11 +141,6 @@ export class HomePage {
             routerLink: ['chapters']
         },
         {
-            label:'Administrar insumos',
-            icon:'pi pi-fw pi-lock',
-            routerLink: ['supplies']
-        },
-        {
             label:'Administrar actividades',
             icon:'pi pi-fw pi-lock',
             routerLink: ['apu-activities']

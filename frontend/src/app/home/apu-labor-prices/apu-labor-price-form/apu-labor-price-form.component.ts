@@ -34,7 +34,8 @@ export class ApuLaborPriceFormComponent implements OnInit {
       unit: ['', Validators.required],
       unit_price_eje_value: ['', Validators.required],
       unit_price_bogota_value: ['', Validators.required],
-      unit_price_medellin_value: ['', Validators.required]
+      unit_price_medellin_value: ['', Validators.required],
+      chapter_id: ['', Validators.required]
     });
   }
 

@@ -50,11 +50,11 @@ export class ApuTransportPriceFormComponent implements OnInit {
     if (this.transportForm.valid) {
       if (this.isEditMode) {
         this.apuTransportPriceService.updateTransport(this.transportId, this.transportForm.value).subscribe(() => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/home/apu-transport-prices']);
         });
       } else {
         this.apuTransportPriceService.createTransport(this.transportForm.value).subscribe(() => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/home/apu-transport-prices']);
         });
       }
     }

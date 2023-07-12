@@ -24,14 +24,17 @@ class ChapterController extends Controller
 
     public function store(Request $request)
     {
+       
         try {
             $this->validate($request, [
-                'sequential' => 'required|integer',
+                //'sequential' => 'required|integer',
                 'name' => 'required|string',
             ]);
 
+            $lastChapterSeq = Chapter::get()->sortByDesc('sequential')->values();
+
             $chapter = Chapter::create([
-                'sequential' => $request->input('sequential'),
+                'sequential' => $lastChapterSeq[0]['sequential'] + 1,
                 'name' => $request->input('name'),
             ]);
 

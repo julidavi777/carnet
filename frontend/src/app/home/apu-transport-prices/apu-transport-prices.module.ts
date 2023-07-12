@@ -8,6 +8,7 @@ import { ApuTransportPricesPageRoutingModule } from './apu-transport-prices-rout
 import { ApuTransportPriceFormComponent } from './apu-transport-price-form/apu-transport-price-form.component';
 import { ApuTransportPriceListComponent } from './apu-transport-price-list/apu-transport-price-list.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     ReactiveFormsModule,
     NgxDatatableModule,
     IonicModule,
+    ButtonModule,
     ApuTransportPricesPageRoutingModule
   ],
   declarations: [

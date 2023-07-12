@@ -15,10 +15,10 @@ export class SuppliesService {
   ) { }
 
   getSupplies(){
-    return this.http.get(this.API_URL+'supplies');
+    return this.http.get(this.API_URL+'apu-materials');
   }
 
   saveSupply(data){
-    return this.http.post(this.API_URL+'supplies', data);
+    return this.http.post(this.API_URL+'apu-materials', data);
   }
 }

@@ -8,7 +8,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ApuMaterialListComponent } from './apu-material-list/apu-material-list.component';
 import { ApuMaterialFormComponent } from './apu-material-form/apu-material-form.component';
 import { ApuMaterialsRoutingModule } from './apu-materials-routing.module';
-
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import { ApuMaterialsRoutingModule } from './apu-materials-routing.module';
     ReactiveFormsModule,
     HttpClientModule,
     NgxDatatableModule,
-    ApuMaterialsRoutingModule
+    ApuMaterialsRoutingModule,
+    ButtonModule
   ]
 })
 export class ApuMaterialModule { }

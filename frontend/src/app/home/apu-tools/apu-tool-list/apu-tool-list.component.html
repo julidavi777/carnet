@@ -1,66 +1,90 @@
-<button class="btn btn-danger" routerLink="/home/apu-tools/create">Crear</button>
-<ngx-datatable
-  class="material mt-2"
-  [rows]="apuTools"
-  [headerHeight]="70"
-  [footerHeight]="70"
-  rowHeight="auto"
-  [limit]="10"
-  [scrollbarH]="true"
-  [loadingIndicator]="loadingIndicator"
->
-  <ngx-datatable-column name="id" [resizeable]="true" [width]="100">
-    <ng-template ngx-datatable-header-template>
-      ID
-    </ng-template>
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{ row.id }}
-    </ng-template>
-  </ngx-datatable-column>
+<div class="justify-content-md-center formu">
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-3">
+      <p class="fs-3 my-3">Lista de Herramientas</p>
+    </div>
 
-  <ngx-datatable-column name="description" [resizeable]="true" [width]="300">
-    <ng-template ngx-datatable-header-template>
-      Descripción
-    </ng-template>
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{ row.description }}
-    </ng-template>
-  </ngx-datatable-column>
+  </div>
 
-  <ngx-datatable-column name="unit" [resizeable]="true" [width]="200">
-    <ng-template ngx-datatable-header-template>
-      Unidad
-    </ng-template>
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{ row.unit }}
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column name="unitValue" [resizeable]="true" [width]="200">
-    <ng-template ngx-datatable-header-template>
-      Valor de la Unidad
-    </ng-template>
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{ row.unitValue }}
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column name="referenceLink" [resizeable]="true" [width]="300">
-    <ng-template ngx-datatable-header-template>
-      Enlace de Referencia
-    </ng-template>
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{ row.referenceLink }}
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column name="actions" [resizeable]="false" [width]="200">
-    <ng-template ngx-datatable-header-template>
-      Acciones
-    </ng-template>
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      <a [routerLink]="['/home/apu-tools/edit', row.id]" class="btn btn-primary">Editar</a>
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-3 mb-3">
+      <p-button label="Agregar" icon="pi pi-plus" iconPos="right" routerLink="form-rol" class="mb-3" routerLink="/home/apu-tools/create"></p-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
       
-    </ng-template>
-  </ngx-datatable-column>
-</ngx-datatable>
+      <ngx-datatable
+        class="material mt-2"
+        [rows]="apuTools"
+        [headerHeight]="70"
+        [footerHeight]="70"
+        rowHeight="auto"
+        [limit]="10"
+        [scrollbarH]="true"
+        [loadingIndicator]="loadingIndicator"
+      >
+        <ngx-datatable-column name="id" [resizeable]="true" [width]="100">
+          <ng-template ngx-datatable-header-template>
+            ID
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.id }}
+          </ng-template>
+        </ngx-datatable-column>
+      
+        <ngx-datatable-column name="description" [resizeable]="true" [width]="300">
+          <ng-template ngx-datatable-header-template>
+            Descripción
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.description }}
+          </ng-template>
+        </ngx-datatable-column>
+      
+        <ngx-datatable-column name="unit" [resizeable]="true" [width]="200">
+          <ng-template ngx-datatable-header-template>
+            Unidad
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.unit }}
+          </ng-template>
+        </ngx-datatable-column>
+      
+        <ngx-datatable-column name="unit_value" [resizeable]="true" [width]="200">
+          <ng-template ngx-datatable-header-template>
+            Valor de la Unidad
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.unit_value }}
+          </ng-template>
+        </ngx-datatable-column>
+      
+        <ngx-datatable-column name="reference_link" [resizeable]="true" [width]="300">
+          <ng-template ngx-datatable-header-template>
+            Enlace de Referencia
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+           <a [href]="row.reference_link" target="_blank" >{{ row.reference_link }}</a> 
+          </ng-template>
+        </ngx-datatable-column>
+      
+        <ngx-datatable-column name="actions" [resizeable]="false" [width]="200">
+          <ng-template ngx-datatable-header-template>
+            Acciones
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <a [routerLink]="['/home/apu-tools/edit', row.id]" class="btn btn-primary">Editar</a>
+            
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+ 
+    </div>
+    <div class="col-1"></div>
+  </div>

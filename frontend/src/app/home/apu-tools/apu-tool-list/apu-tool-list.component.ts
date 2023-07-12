@@ -24,11 +24,5 @@ export class ApuToolListComponent implements OnInit {
     });
   }
 
-  deleteApuTool(id: number) {
-    if (confirm('¿Estás seguro de eliminar esta herramienta APU?')) {
-      this.apuToolService.deleteApuTool(id).subscribe(() => {
-        this.getApuTools();
-      });
-    }
-  }
+ 
 }

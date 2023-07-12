@@ -114,7 +114,7 @@ Route::group([
     Route::apiResource('apu-materials', ApuMaterialController::class)->except(['destroy']);
     Route::apiResource('apu-tools', ApuToolController::class)->except(['destroy']);
     Route::apiResource('apu-transport-prices', ApuTransportPriceController::class)->except(['destroy']);
-    Route::apiResource('apu-labor-analysis-items', ApuLaborPriceController::class)->except(['destroy']);
+    Route::apiResource('apu-labor-prices', ApuLaborPriceController::class)->except(['destroy']);
 
     Route::apiResource('chapters.apu-activities', ChapterApuActivityController::class)->only(['index']);
     Route::apiResource('customers.apu-activities', CustomerApuActivityController::class)->only(['index']);

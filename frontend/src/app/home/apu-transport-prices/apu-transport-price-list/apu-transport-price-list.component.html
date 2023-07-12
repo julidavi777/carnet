@@ -1,6 +1,26 @@
-<button routerLink="/home/apu-transport-prices/create">Crear</button>
 
-<ngx-datatable
+<div class="justify-content-md-center formu">
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-3">
+      <p class="fs-3 my-3">Lista de precios de transporte</p>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-3 mb-3">
+      <p-button label="Agregar" icon="pi pi-plus" iconPos="right" routerLink="form-rol" class="mb-3" routerLink="/home/apu-transport-prices/create"></p-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      
+      <ngx-datatable
   class="material mt-2"
   [rows]="rows"
   [headerHeight]="70"
@@ -61,8 +81,13 @@
       Actions:
     </ng-template>
     <ng-template let-row="row" ngx-datatable-cell-template>
-      <a [routerLink]="['/edit', row.id]">Edit</a>
-      <button (click)="deleteTransport(row.id)">Delete</button>
+      <button [routerLink]="['/home/apu-transport-prices/edit', row.id]" class="btn btn-primary">Edit</button>
     </ng-template>
   </ngx-datatable-column>
 </ngx-datatable>
+ 
+    </div>
+    <div class="col-1"></div>
+  </div>
+
+

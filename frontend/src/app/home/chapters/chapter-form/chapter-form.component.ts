@@ -24,8 +24,8 @@ export class ChapterFormComponent implements OnInit {
   // Initialize the form
   initializeForm(): void {
     this.chapterForm = this.formBuilder.group({
-      no: ['', Validators.required],
-      chapter: ['', Validators.required],
+      //no: ['', Validators.required],
+      name: ['', Validators.required],
     });
   }
 

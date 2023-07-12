@@ -37,8 +37,8 @@ export class ApuToolFormComponent implements OnInit {
     this.apuToolForm = this.formBuilder.group({
       description: ['', Validators.required],
       unit: ['', Validators.required],
-      unitValue: ['', Validators.required],
-      referenceLink: ['']
+      unit_value: ['', Validators.required],
+      reference_link: ['']
     });
   }
 

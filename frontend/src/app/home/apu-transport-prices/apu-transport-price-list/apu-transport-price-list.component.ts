@@ -24,12 +24,5 @@ export class ApuTransportPriceListComponent implements OnInit {
     });
   }
 
-  deleteTransport(id: number) {
-    if (confirm('Are you sure you want to delete this transport?')) {
-      this.apuTransportPriceService.deleteTransport(id).subscribe(() => {
-        this.loadTransportData();
-      });
-    }
-  }
 
 }

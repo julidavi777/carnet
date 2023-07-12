@@ -39,15 +39,5 @@ export class ApuLaborPriceListComponent implements OnInit {
     this.router.navigate(['/home/apu-labor-prices/edit', id]);
   }
 
-  deleteLaborPrice(id: number) {
-    this.apuLaborPriceService.deleteLaborPrice(id)
-      .subscribe(
-        () => {
-          this.fetchLaborPrices();
-        },
-        error => {
-          console.error('Error deleting labor price:', error);
-        }
-      );
-  }
+
 }
