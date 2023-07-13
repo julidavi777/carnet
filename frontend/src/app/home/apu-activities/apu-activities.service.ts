@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ApuActivitiesService {
   readonly API_URL = environment.baseUrl;
+  _apuActivityData = null;
 
   units = [
     {
@@ -68,5 +69,13 @@ export class ApuActivitiesService {
 
   saveApuActivity(data){
     return this.http.post(this.API_URL+'apu-activities', data)
+  }
+
+  set apuActivityData(data){
+    this._apuActivityData = data;
+  }
+
+  get apuActivityData(){
+    return this._apuActivityData;
   }
 }

@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { ApuActivitiesFormComponent } from './apu-activities-form/apu-activities-form.component';
 import { Router } from '@angular/router';
 import { ApuActivitiesService } from './apu-activities.service';
+import { UnitPipe } from './pipes/unit.pipe';
 
 @Component({
   selector: 'app-apu-activities',
@@ -10,6 +11,9 @@ import { ApuActivitiesService } from './apu-activities.service';
   styleUrls: ['./apu-activities.page.scss'],
 })
 export class ApuActivitiesPage implements OnInit {
+
+  private unitPipe: UnitPipe;
+
 
   data: any[] = [];
 
@@ -19,8 +23,10 @@ export class ApuActivitiesPage implements OnInit {
   constructor(
     public modalController: ModalController,
     private router: Router,
-    private apuActivitiesService: ApuActivitiesService
-    ) {}
+    private apuActivitiesService: ApuActivitiesService,
+    ) {
+      this.unitPipe = new UnitPipe(this.apuActivitiesService);
+    }
 
   ngOnInit(): void {
     this.getApuActivities();
@@ -57,8 +63,10 @@ export class ApuActivitiesPage implements OnInit {
     return await modal.present();
   }
 
-  onCreateApu(id){
-    console.log(id)
-    this.router.navigate(['/home/apu'], { queryParams: {id}});
+  onCreateApu(row){
+
+    row.unit = this.unitPipe.transform(row.unit)
+    this.apuActivitiesService.apuActivityData = row;
+    this.router.navigate(['/home/apu']);
   }
 }

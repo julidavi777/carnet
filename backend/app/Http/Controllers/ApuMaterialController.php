@@ -10,7 +10,7 @@ class ApuMaterialController extends Controller
 {
     public function index()
     {
-        $apuMaterials = ApuMaterial::with('chapter')->get();
+        $apuMaterials = ApuMaterial::with('chapter')->limit(100)->get();
 
         return response()->json($apuMaterials);
     }

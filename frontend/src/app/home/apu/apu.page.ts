@@ -6,6 +6,8 @@ import * as pdfMake from 'pdfmake/build/pdfmake';
 
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { ApuService } from './apu.service';
+import { ApuActivitiesService } from '../apu-activities/apu-activities.service';
+import { Router } from '@angular/router';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -15,25 +17,91 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class ApuPage implements OnInit {
   rows =[];
+  temp = [];
 
   internalChapters = []
 
+  apuAcitivityData = null;
+
   constructor(
     public modalController: ModalController,
-    private apuService: ApuService
+    private apuService: ApuService,
+    private apuActivitiesService: ApuActivitiesService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
+    //this.apuAcitivityData = this.apuActivitiesService.apuActivityData;
+    this.apuAcitivityData = {
+      "id": 9,
+      "cap": "16.001",
+      "description": "22",
+      "unit": "PTO",
+      "quantity": 2,
+      "unit_value": 22,
+      "status": true,
+      "customer_id": 23,
+      "chapter_id": 16,
+      "created_at": "2023-07-13T01:02:13.000000Z",
+      "updated_at": "2023-07-13T01:02:13.000000Z",
+      "customer": {
+          "id": 23,
+          "identification_type": 2,
+          "identification": "830004993",
+          "digit_v": "8",
+          "name": "Casatoro S.A",
+          "surname": "Casatoro S.A",
+          "phone_number": "7460010",
+          "address": "Carrera 72 # 170 - 97 Av. Boyaca",
+          "email": "tienda@casatoro.com",
+          "razon_social": "Casatoro S.A",
+          "razon_comercial": "Casatoro S.A",
+          "rut_file": null,
+          "camara_commerce_file": null,
+          "income_statement_file": null,
+          "cliente_logo": null,
+          "status": true,
+          "created_at": "2023-04-12T13:59:51.000000Z",
+          "updated_at": "2023-04-28T16:40:08.000000Z",
+          "departamento_id": 15,
+          "municipio_id": 517,
+          "municipio": {
+              "id": 517,
+              "name": "BOGOTA D.C.",
+              "departamento_id": 15,
+              "created_at": null,
+              "updated_at": null
+          }
+      },
+      "chapter": {
+          "id": 16,
+          "sequential": 16,
+          "name": "CARPINTERIA METALICA Y VIDRIO TEMPLADO",
+          "status": true,
+          "created_at": null,
+          "updated_at": null
+      }
+  };
+
+    if(this.apuAcitivityData == null){
+      this.router.navigate(['/home/apu-activities'])
+    }
+
+    console.log(this.apuAcitivityData)
     this.getInternalChapters();
   }
 
   getInternalChapters(){
     this.apuService.getInternalChapters().subscribe((internalChapters: any) => {
       this.internalChapters = internalChapters;
-      this.rows = this.internalChapters.map(e => {
-        e.treeStatus = "collapsed" 
+      let data = this.internalChapters.map(e => {
+        e.treeStatus = "expanded" 
         return e;
       })
+      this.temp = [...data];
+
+      this.rows = data;
+
     })
   }
 
@@ -48,24 +116,235 @@ export class ApuPage implements OnInit {
     this.rows = [...this.rows];
   }
 
-  async openCreateForm(){
+/*   async openCreateForm(){
+    
+  } */
+
+
+  async addItemAction(row){
+    console.log(row)
     const modal = await this.modalController.create({
       component: SupplyApuFormComponent,
       cssClass: 'my-custom-modal-css',
       backdropDismiss: false,
       componentProps: {
+        internalChapterChoosed: row
       }
     });
     modal.onDidDismiss()
     .then((res) => {
-      
+        console.log(res)
+        if(res.data?.data){
+          let item_data = res.data.data?.item_data
+          this.temp.push(item_data)
+
+
+          this.rows = [...this.temp];
+          console.log(this.rows)
+        }
     });
     return await modal.present();
   }
 
   onGeneratePdf(){
     // playground requires you to assign document definition to a variable called dd
+    const getTableContent = () => {
+      let res = []
+      this.internalChapters.forEach((internalChapter) => {
+        //subHeader
+        res.push( [
+          {
+          text: internalChapter?.name,
+          colSpan: 4,
+          style: 'subheader'
+          },
+          '',
+          '',
+          '',
+          '',
+      ])
+      //h3 Header
+      res.push(
+        [
+          {
+          text: "Descripción",
+          },
+          {
+          text: "Unidad",
+              style: 'tableHeader'
+          },
+           {
+          text: "Rendimiento",
+              style: 'tableHeader'
+          },
+           {
+          text: "Valor Unitario",
+              style: 'tableHeader'
+          },
+            {
+          text: "Valor parcial",
+              style: 'tableHeader'
+          },
+      ]
+      )
 
+      //DATA
+     let data =  this.rows.filter((row) => row.internal_chapter_id == internalChapter.id)
+
+     if(data.length > 0){
+      data.forEach((row) => {
+        res.push( [
+          {
+          text: row?.description,
+          },
+          {
+          text: row?.unit,
+          },
+           {
+          text: row?.performance_value,
+          },
+           {
+          text: row?.unit_value,
+          },
+            {
+          text: "10",
+          },
+          ])
+      })
+     }
+     /* res.push( [
+      {
+      text: "Herramienta menor",
+      },
+      {
+      text: "%",
+      },
+       {
+      text: "1.00",
+      },
+       {
+      text: "9.79",
+      },
+        {
+      text: "10",
+      },
+      ]) */
+      //subTotal
+      res.push( [
+        {
+         text: "",
+          border: [false, false, true, false],
+          colSpan: 3
+         },
+         '',
+         '',
+          {
+         text: "Sub-Total",
+             style: 'tableHeader'
+         },
+           {
+         text: "23",
+         },
+     ])
+     
+
+     //space
+     res.push([
+      {
+        text: "",
+         border: [false, false, false, false],
+         colSpan: 5
+        },
+      '',
+      '',
+      '',
+      '',
+    ])
+    res.push([
+      {
+        text: "",
+         border: [false, false, false, false],
+         colSpan: 5
+        },
+      '',
+      '',
+      '',
+      '',
+    ])
+
+     
+    })
+      let base =  [
+        [
+            {
+            text: "I EQUIPaaO",
+            colSpan: 4,
+            style: 'subheader'
+            },
+            '',
+            '',
+            '',
+            '',
+        ],
+        [
+            {
+            text: "Descripción",
+            },
+            {
+            text: "Unidad",
+                style: 'tableHeader'
+            },
+             {
+            text: "Rendimiento",
+                style: 'tableHeader'
+            },
+             {
+            text: "Valor Unitario",
+                style: 'tableHeader'
+            },
+              {
+            text: "Valor parcial",
+                style: 'tableHeader'
+            },
+        ],
+        [
+            {
+            text: "Herramienta menor",
+            },
+            {
+            text: "%",
+            },
+             {
+            text: "1.00",
+            },
+             {
+            text: "9.79",
+            },
+              {
+            text: "10",
+            },
+        ],
+         [
+           {
+            text: "",
+             border: [false, false, true, false],
+             colSpan: 3
+            },
+            '',
+            '',
+             {
+            text: "Sub-Total",
+                style: 'tableHeader'
+            },
+              {
+            text: "23",
+            },
+        ]
+        
+        ]
+        console.log(res)
+      return res;
+    }
 var dd = {
   pageOrientation: 'landscape',
  content: [
@@ -93,7 +372,7 @@ var dd = {
              ],
               [
                  {
-                     text: "CENTRO MEDICO MIXTO ARMENIA - MP",
+                     text: this.apuAcitivityData?.customer?.name+" "+this.apuAcitivityData?.customer?.surname,
                      colSpan: 2
                  },
                  '',
@@ -109,7 +388,7 @@ var dd = {
                      style: 'tableHeader'
                  },
                  {
-                     text: "PRELIMINARES "
+                     text: this.apuAcitivityData?.chapter?.name
                  },
                   '',
                   '',
@@ -139,7 +418,7 @@ var dd = {
          body: [
             [
                  {
-                 text: "ACTIVIDAD:   LOCALIZACIÓN Y REPLANTEO GENERAL (SIN COMISIÓN DE TOPOGRAFIA)",
+                 text: "ACTIVIDAD:  "+this.apuAcitivityData?.description,
                  rowSpan: 2
              }, {
                  text: "ITEM No.",
@@ -150,20 +429,20 @@ var dd = {
                  style: 'tableHeader'
              }
              , {
-                 text: "M2",
-                 style: 'tableHeader'
+                 text:   this.apuAcitivityData?.unit,
              }
              
              ],
               [
                  '', {
-                 text: "1.01"
+                 text: this.apuAcitivityData?.cap
              }
              , {
-                 text: "CANTIDAD"
+                 text: "CANTIDAD",
+                 style: 'tableHeader'
              }
              , {
-                 text: "106.3"
+                 text: this.apuAcitivityData?.quantity
              }
              
              ]
@@ -174,75 +453,8 @@ var dd = {
      ' ',
      {
          table: {
-         widths: ['*',100 , 70, 100, 90],
-         body: [
-         [
-             {
-             text: "I EQUIPaaO",
-             colSpan: 4,
-             style: 'subheader'
-             },
-             '',
-             '',
-             '',
-             '',
-         ],
-         [
-             {
-             text: "Descripción",
-             },
-             {
-             text: "Unidad",
-                 style: 'tableHeader'
-             },
-              {
-             text: "Rendimiento",
-                 style: 'tableHeader'
-             },
-              {
-             text: "Valor Unitario",
-                 style: 'tableHeader'
-             },
-               {
-             text: "Valor parcial",
-                 style: 'tableHeader'
-             },
-         ],
-         [
-             {
-             text: "Herramienta menor",
-             },
-             {
-             text: "%",
-             },
-              {
-             text: "1.00",
-             },
-              {
-             text: "9.79",
-             },
-               {
-             text: "10",
-             },
-         ],
-          [
-            {
-             text: "",
-              border: [false, false, true, false],
-              colSpan: 3
-             },
-             '',
-             '',
-              {
-             text: "Sub-Total",
-                 style: 'tableHeader'
-             },
-               {
-             text: "23",
-             },
-         ]
-         
-         ]
+         widths: ['*',100 , 70, 100, 90],//getTableContent
+         body: getTableContent()
        }
        
      },
