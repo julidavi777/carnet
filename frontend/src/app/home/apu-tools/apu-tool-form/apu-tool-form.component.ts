@@ -56,11 +56,13 @@ export class ApuToolFormComponent implements OnInit {
     const apuToolData = this.apuToolForm.value;
     if (this.isEditMode) {
       this.apuToolService.updateApuTool(this.apuToolId, apuToolData).subscribe(() => {
-        this.router.navigate(['/apu-tools']);
+        alert("Actualizado exitosamente")
+        this.router.navigate(['/home/apu-tools']);
       });
     } else {
       this.apuToolService.createApuTool(apuToolData).subscribe(() => {
-        this.router.navigate(['/apu-tools']);
+        alert("Registrado exitosamente")
+        this.router.navigate(['/home/apu-tools']);
       });
     }
   }

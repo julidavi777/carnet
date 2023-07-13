@@ -16,8 +16,8 @@ export class SupplyApuFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.supplies = this.ApuService.supplies;
-    this.chapters = this.ApuService.chapters;
+    /* this.supplies = this.ApuService.supplies;
+    this.chapters = this.ApuService.chapters; */
 
   }
 

@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\ApuActivity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class ApuActivityController extends Controller
 {
     public function index()
     {
-        $apuActivities = ApuActivity::all();
+        $apuActivities = ApuActivity::with(['customer.municipio', 'chapter'])->get()->sortBy('cap')->values();
 
         return response()->json($apuActivities);
     }
@@ -24,31 +25,53 @@ class ApuActivityController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $this->validate($request, [
-                'cap' => 'required|integer',
-                'description' => 'required|string',
-                'unit' => 'required|string',
-                'quantity' => 'required|integer',
-                'unit_value' => 'required|integer',
-                'customer_id' => 'required|integer',
-                'chapter_id' => 'required|integer',
-            ]);
 
-            $apuActivity = ApuActivity::create([
-                'cap' => $request->input('cap'),
-                'description' => $request->input('description'),
-                'unit' => $request->input('unit'),
-                'quantity' => $request->input('quantity'),
-                'unit_value' => $request->input('unit_value'),
-                'customer_id' => $request->input('customer_id'),
-                'chapter_id' => $request->input('chapter_id'),
-            ]);
+            $data = $request->all();
 
-            return response()->json($apuActivity, 201);
-        } catch (ValidationException $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            $validator = Validator::make($data, 
+                [
+                    'description' => 'required|string',
+                    'unit' => 'required|integer',
+                    'quantity' => 'required|integer',
+                    'unit_value' => 'required|integer',
+                    'customer_id' =>'required|exists:customers,id',
+                    'chapter_id' => 'required|exists:chapters,id',
+                ]
+            );
+
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 400);
+            }
+
+            $lastApuActivity = ApuActivity::where("chapter_id",$request->input('chapter_id') )->get()->sortByDesc('id')->values();
+            
+    
+
+        if(count($lastApuActivity) > 0){
+            $lastCap = $lastApuActivity[0]['cap'];
+
+            $numero_cap = $lastCap += 0.001;
+
+            $newCap = number_format($numero_cap, 3);
+        }else{
+
+            $numero_cap = $request->input('chapter_id') + 0.001;
+
+            $newCap = number_format($numero_cap, 3);
         }
+
+        $apuActivity = ApuActivity::create([
+            'cap' => $newCap,
+            'description' => $request->input('description'),
+            'unit' => $request->input('unit'),
+            'quantity' => $request->input('quantity'),
+            'unit_value' => $request->input('unit_value'),
+            'customer_id' => $request->input('customer_id'),
+            'chapter_id' => $request->input('chapter_id'),
+        ]);
+
+        return response()->json($apuActivity, 201);
+    
     }
 
     public function update(Request $request, $id)

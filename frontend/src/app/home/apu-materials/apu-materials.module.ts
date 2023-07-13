@@ -9,6 +9,8 @@ import { ApuMaterialListComponent } from './apu-material-list/apu-material-list.
 import { ApuMaterialFormComponent } from './apu-material-form/apu-material-form.component';
 import { ApuMaterialsRoutingModule } from './apu-materials-routing.module';
 import {ButtonModule} from 'primeng/button';
+import { IonicSelectableModule } from 'ionic-selectable';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import {ButtonModule} from 'primeng/button';
     HttpClientModule,
     NgxDatatableModule,
     ApuMaterialsRoutingModule,
-    ButtonModule
+    ButtonModule,
+    IonicSelectableModule,
+    IonicModule
   ]
 })
 export class ApuMaterialModule { }

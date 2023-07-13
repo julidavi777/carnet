@@ -14,6 +14,7 @@ import {ButtonModule} from 'primeng/button';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { ApuActivitiesFormComponent } from './apu-activities-form/apu-activities-form.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { UnitPipe } from './pipes/unit.pipe';
 
 @NgModule({
   imports: [
@@ -27,6 +28,6 @@ import { TooltipModule } from 'primeng/tooltip';
     IonicSelectableModule,
     TooltipModule
   ],
-  declarations: [ApuActivitiesPage, ApuActivitiesFormComponent]
+  declarations: [ApuActivitiesPage, ApuActivitiesFormComponent, UnitPipe]
 })
 export class ApuActivitiesPageModule {}

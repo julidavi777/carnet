@@ -14,30 +14,53 @@
 
     <!-- Dynamic form fields based on field names -->
     <div class="row">
-      <div class="mb-3 col-md-6">
-        <label class="form-label">Ciudad</label>
-        <input type="text" class="form-control" formControlName="city">
-      </div>
+      <ion-item class="mb-3 col-md-6">
+        <ion-label >Cliente</ion-label>
+        <ionic-selectable
+          [items]="customers"
+          itemValueField="id"
+          itemTextField="name"
+          [canSearch]="true"
+          formControlName="customer_id"
+          >
+          <ng-template ionicSelectableItemTemplate let-port="item"
+          >
+          {{port.name}} {{port.surname}}
+        </ng-template>
+        </ionic-selectable>
+      </ion-item>
       
-      <div class="mb-3 col-md-6">
-        <label class="form-label">Proyecto</label>
-        <input type="text" class="form-control" formControlName="project">
-      </div>
-      
-      <div class="mb-3 col-md-6">
-        <label class="form-label">Capacidad</label>
-        <input type="text" class="form-control" formControlName="capacity">
-      </div>
-      
+
+
       <div class="mb-3 col-md-6">
         <label class="form-label">Descripción</label>
         <input type="text" class="form-control" formControlName="description">
       </div>
       
-      <div class="mb-3 col-md-6">
-        <label class="form-label">Unidad</label>
-        <input type="text" class="form-control" formControlName="unit">
-      </div>
+
+      <ion-item class="mb-3 col-md-6">
+        <ion-label >Unidad</ion-label>
+        <ionic-selectable
+          [items]="units"
+          itemValueField="id"
+          itemTextField="name"
+          [canSearch]="true"
+          formControlName="unit"
+          >
+        </ionic-selectable>
+      </ion-item>
+
+      <ion-item class="mb-3 col-md-6">
+        <ion-label >Capitulo</ion-label>
+        <ionic-selectable
+          [items]="chapters"
+          itemValueField="id"
+          itemTextField="name"
+          [canSearch]="true"
+          formControlName="chapter_id"
+          >
+        </ionic-selectable>
+      </ion-item>
       
       <div class="mb-3 col-md-6">
         <label class="form-label">Cantidad</label>
@@ -46,7 +69,7 @@
       
       <div class="mb-3 col-md-6">
         <label class="form-label">Precio unitario</label>
-        <input type="text" class="form-control" formControlName="unit_price">
+        <input type="text" class="form-control" formControlName="unit_value">
       </div>
     </div>
     <!-- Submit button -->

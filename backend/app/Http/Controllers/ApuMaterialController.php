@@ -10,14 +10,14 @@ class ApuMaterialController extends Controller
 {
     public function index()
     {
-        $apuMaterials = ApuMaterial::all();
+        $apuMaterials = ApuMaterial::with('chapter')->get();
 
         return response()->json($apuMaterials);
     }
 
     public function show($id)
     {
-        $apuMaterial = ApuMaterial::findOrFail($id);
+        $apuMaterial = ApuMaterial::with('chapter')->findOrFail($id);
 
         return response()->json($apuMaterial);
     }

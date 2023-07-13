@@ -23,4 +23,10 @@ export class CommonService {
   getDepartamentosMunicipios(departamento_id: number, name_municipio: string = ""){
     return this.http.get(`${this.API_URL}departamentos/${departamento_id}/municipios?name_municipio=${name_municipio}`);
   }
+
+  //APU
+
+  getChapters(){
+    return this.http.get(`${this.API_URL}chapters`);
+  }
 }

@@ -5,6 +5,7 @@ import { SupplyApuFormComponent } from './supply-apu-form/supply-apu-form.compon
 import * as pdfMake from 'pdfmake/build/pdfmake';
 
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { ApuService } from './apu.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -13,212 +14,27 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   styleUrls: ['./apu.page.scss'],
 })
 export class ApuPage implements OnInit {
-  rows =[
-    {
-      "name": "PRELIMINARES",
-      "gender": "female",
-      "company": "Johnson, Johnson and Partners, LLC CMP DDC",
-      "age": 22,
-      "treeStatus": "collapsed"
-    },
-    {
-      "name": "EXCAVACIONES Y RELLENOS",
-      "gender": "female",
-      "company": "Sealoud",
-      "age": 55,
-      "treeStatus": "collapsed"
-    },
-    {
-      "name": "CIMENTACIÓN",
-      "gender": "female",
-      "company": "Velity",
-      "age": 67,
-      "treeStatus": "collapsed"
-    },
-    {
-      "cod": "798",
-      "name": "subcontrato",
-      "type": "ms",
-      "un": "dd",
-      "cant": "0.2500",
-      "unitario": "51000",
-      "total": "12800",
-      "manager": "PRELIMINARES",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "798",
-      "name": "subcontrato",
-      "type": "ms",
-      "un": "dd",
-      "cant": "0.2500",
-      "unitario": "51000",
-      "total": "12800",
-      "manager": "PRELIMINARES",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "798",
-      "name": "subcontrato",
-      "type": "ms",
-      "un": "dd",
-      "cant": "0.2500",
-      "unitario": "51000",
-      "total": "12800",
-      "manager": "PRELIMINARES",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "798",
-      "name": "subcontrato",
-      "type": "ms",
-      "un": "dd",
-      "cant": "0.2500",
-      "unitario": "51000",
-      "total": "12800",
-      "manager": "PRELIMINARES",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "798",
-      "name": "subcontrato",
-      "type": "ms",
-      "un": "dd",
-      "cant": "0.2500",
-      "unitario": "51000",
-      "total": "12800",
-      "manager": "PRELIMINARES",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "798",
-      "name": "subcontrato",
-      "type": "ms",
-      "un": "dd",
-      "cant": "0.2500",
-      "unitario": "51000",
-      "total": "12800",
-      "manager": "PRELIMINARES",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "599",
-      "name": "montacargas 3.5 tn",
-      "type": "Equ",
-      "un": "hh",
-      "cant": "0.1000",
-      "unitario": "51000",
-      "total": "51000",
-      "manager": "PRELIMINARES",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "599",
-      "name": "montacargas 3.5 tn",
-      "type": "Equ",
-      "un": "hh",
-      "cant": "0.1000",
-      "unitario": "51000",
-      "total": "51000",
-      "manager": "CIMENTACIÓN",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "599",
-      "name": "montacargas 3.5 tn",
-      "type": "Equ",
-      "un": "hh",
-      "cant": "0.1000",
-      "unitario": "51000",
-      "total": "51000",
-      "manager": "CIMENTACIÓN",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "599",
-      "name": "montacargas 3.5 tn",
-      "type": "Equ",
-      "un": "hh",
-      "cant": "0.1000",
-      "unitario": "51000",
-      "total": "51000",
-      "manager": "CIMENTACIÓN",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "599",
-      "name": "montacargas 3.5 tn",
-      "type": "Equ",
-      "un": "hh",
-      "cant": "0.1000",
-      "unitario": "51000",
-      "total": "51000",
-      "manager": "EXCAVACIONES Y RELLENOS",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "599",
-      "name": "montacargas 3.5 tn",
-      "type": "Equ",
-      "un": "hh",
-      "cant": "0.1000",
-      "unitario": "51000",
-      "total": "51000",
-      "manager": "EXCAVACIONES Y RELLENOS",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "599",
-      "name": "montacargas 3.5 tn",
-      "type": "Equ",
-      "un": "hh",
-      "cant": "0.1000",
-      "unitario": "51000",
-      "total": "51000",
-      "manager": "EXCAVACIONES Y RELLENOS",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "599",
-      "name": "montacargas 3.5 tn",
-      "type": "Equ",
-      "un": "hh",
-      "cant": "0.1000",
-      "unitario": "51000",
-      "total": "51000",
-      "manager": "EXCAVACIONES Y RELLENOS",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "599",
-      "name": "montacargas 3.5 tn",
-      "type": "Equ",
-      "un": "hh",
-      "cant": "0.1000",
-      "unitario": "51000",
-      "total": "51000",
-      "manager": "EXCAVACIONES Y RELLENOS",
-      "treeStatus": "disabled"
-    },
-    {
-      "cod": "599",
-      "name": "montacargas 3.5 tn",
-      "type": "Equ",
-      "un": "hh",
-      "cant": "0.1000",
-      "unitario": "51000",
-      "total": "51000",
-      "manager": "EXCAVACIONES Y RELLENOS",
-      "treeStatus": "disabled"
-    },
+  rows =[];
 
-  ];
+  internalChapters = []
 
   constructor(
-    public modalController: ModalController
+    public modalController: ModalController,
+    private apuService: ApuService
   ) { }
 
   ngOnInit() {
+    this.getInternalChapters();
+  }
+
+  getInternalChapters(){
+    this.apuService.getInternalChapters().subscribe((internalChapters: any) => {
+      this.internalChapters = internalChapters;
+      this.rows = this.internalChapters.map(e => {
+        e.treeStatus = "collapsed" 
+        return e;
+      })
+    })
   }
 
   onTreeAction(event: any) {

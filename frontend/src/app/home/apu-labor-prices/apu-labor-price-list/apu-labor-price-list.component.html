@@ -82,6 +82,15 @@
             {{ row.unit_price_medellin_value }}
           </ng-template>
         </ngx-datatable-column>
+
+        <ngx-datatable-column name="chapter_id" [resizeable]="true" [width]="200">
+          <ng-template ngx-datatable-header-template>
+            Capítulo:
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.chapter?.name }}
+          </ng-template>
+        </ngx-datatable-column>
       
         <ngx-datatable-column name="actions" [resizeable]="true" [width]="120">
           <ng-template ngx-datatable-header-template>

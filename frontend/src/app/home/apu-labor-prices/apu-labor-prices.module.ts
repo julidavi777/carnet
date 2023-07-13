@@ -9,6 +9,7 @@ import { ApuLaborPriceFormComponent } from './apu-labor-price-form/apu-labor-pri
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ApuLaborPriceListComponent } from './apu-labor-price-list/apu-labor-price-list.component';
 import { ButtonModule } from 'primeng/button';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ButtonModule } from 'primeng/button';
     ApuLaborPricesPageRoutingModule,
     NgxDatatableModule,
     ReactiveFormsModule,
-    ButtonModule
+    ButtonModule,
+    IonicSelectableModule,
   ],
   declarations: [
     ApuLaborPriceListComponent,

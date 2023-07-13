@@ -31,10 +31,18 @@
               <input type="number" id="unit_value" formControlName="unit_value" class="form-control">
             </div>
 
-            <div class="form-group col-md-6">
-              <label for="chapter_id">ID Capítulo:</label>
-              <input type="number" id="chapter_id" formControlName="chapter_id" class="form-control">
-            </div>
+
+            <ion-item class="col-md-6">
+              <ion-label >Capitulo</ion-label>
+              <ionic-selectable
+                [items]="chapters"
+                itemValueField="id"
+                itemTextField="name"
+                [canSearch]="true"
+                formControlName="chapter_id"
+                >
+              </ionic-selectable>
+            </ion-item>
           </div>
 
           <div class="form-group">

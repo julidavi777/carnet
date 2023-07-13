@@ -15,7 +15,7 @@ class CreateApuActivitesTable extends Migration
     {
         Schema::create('apu_activities', function (Blueprint $table) {
             $table->id();
-            $table->integer('cap');
+            $table->double('cap');
             $table->text('description');
             $table->string('unit');
             $table->integer('quantity');
