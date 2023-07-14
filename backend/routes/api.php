@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ApuActivityApuController;
 use App\Http\Controllers\ApuActivityController;
+use App\Http\Controllers\ApuController;
 use App\Http\Controllers\ApuInternalChapterController;
 use App\Http\Controllers\ApuLaborPriceController;
 use App\Http\Controllers\ApuMaterialController;
@@ -120,4 +122,7 @@ Route::group([
     Route::apiResource('customers.apu-activities', CustomerApuActivityController::class)->only(['index']);
     Route::apiResource('chapters.apu-materials', ChapterApuMaterialController::class)->only(['index']);
     Route::apiResource('chapters.apu-labor-prices', ChapterApuLaborPriceController::class)->only(['index']);
+    
+    Route::apiResource('apu-activities.apus', ApuActivityApuController::class)->only(['index']);
+    Route::apiResource('apus', ApuController::class)->only(['store']);
 });

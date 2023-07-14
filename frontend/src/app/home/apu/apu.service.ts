@@ -15,4 +15,12 @@ export class ApuService {
     return this.http.get(this.API_URL+'apu-internal-chapters');
    }
 
+   saveApu(data){
+    return this.http.post(this.API_URL+'apus', data);
+   }
+
+   getApuSchema(activity_id){
+   
+    return this.http.get(this.API_URL+`apu-activities/${activity_id}/apus`);
+   }
 }

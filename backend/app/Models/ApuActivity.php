@@ -29,4 +29,9 @@ class ApuActivity extends Model
     {
         return $this->belongsTo(Chapter::class);
     }
+
+    public function apu()
+    {
+        return $this->hasOne(Apu::class);
+    }
 }

@@ -89,6 +89,7 @@ export class ApuPage implements OnInit {
 
     console.log(this.apuAcitivityData)
     this.getInternalChapters();
+    this.getApuSchema();
   }
 
   getInternalChapters(){
@@ -155,6 +156,34 @@ export class ApuPage implements OnInit {
     })
     this.rows = [...this.temp];
     console.log(this.temp)
+  }
+
+  getApuSchema(){
+    this.apuService.getApuSchema(this.apuAcitivityData?.id).subscribe((res: any) => {
+      let resData = res?.data;
+      if(resData.length > 0){
+        let data = JSON.parse(resData[0]['schema'])
+
+        this.temp = [...data];
+
+        this.rows = data;
+      }
+    })
+  }
+
+
+  saveApu(){
+    let data = {
+      apu_activity_id: this.apuAcitivityData.id,
+      schema: JSON.stringify(this.rows) 
+    }
+
+    this.apuService.saveApu(data).subscribe(res => {
+      alert("APU guardada")
+    },
+    err => {
+      alert("Error al guardar el APU")
+    })
   }
 
   subTotals = [];
