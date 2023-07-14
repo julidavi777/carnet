@@ -1,7 +1,7 @@
 <!-- apu-material-form.component.html -->
 
-<div class="row">
-  <div class="col-md-11">
+<div class="row d-flex justify-content-md-center mt-5">
+  <div class="col-md-11 ">
     <div class="card">
       <div class="card-header">
         <h1>{{ isEditMode ? 'Editar' : 'Crear' }} Material</h1>
@@ -50,7 +50,7 @@
             <textarea id="reference_link" formControlName="reference_link" class="form-control"></textarea>
           </div>
 
-          <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Actualizar' : 'Guardar' }}</button>
+          <button type="submit" class="btn btn-primary mt-2">{{ isEditMode ? 'Actualizar' : 'Guardar' }}</button>
         </form>
       </div>
     </div>

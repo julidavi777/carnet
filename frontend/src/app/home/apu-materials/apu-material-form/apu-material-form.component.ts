@@ -38,7 +38,7 @@ export class ApuMaterialFormComponent implements OnInit {
 
   createMaterialForm() {
     this.materialForm = this.formBuilder.group({
-      code: ['', Validators.required],
+      code: ['',],
       description: ['', Validators.required],
       unit: ['', Validators.required],
       unit_value: ['', Validators.required],

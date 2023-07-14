@@ -45,6 +45,15 @@
     PROYECTO
   </ng-template>
   <ng-template let-row="row" ngx-datatable-cell-template>
+    {{ row?.customer?.name }}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column name="project" [resizeable]="true" >
+  <ng-template ngx-datatable-header-template>
+    Descripción
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
     {{ row.description }}
   </ng-template>
 </ngx-datatable-column>

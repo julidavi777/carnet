@@ -14,7 +14,28 @@ class ApuLaborPriceController extends Controller
     {
         $apuLaborAnalysisItems = ApuLaborPrice::with('chapter')->get();
 
+
+        $apuLaborAnalysisItems = $apuLaborAnalysisItems->map(function ($item){
+
+
+            $item['unit_value'] = $this->getDefinedValue($item["unit_price_eje_value"], $item["unit_price_bogota_value"], $item["unit_price_medellin_value"]);
+            
+            return $item;
+         });
+
         return response()->json($apuLaborAnalysisItems);
+    }
+
+    public function getDefinedValue($var1, $var2, $var3) {
+        if (isset($var1)) {
+            return $var1;
+        } elseif (isset($var2)) {
+            return $var2;
+        } elseif (isset($var3)) {
+            return $var3;
+        } else {
+            return 0;
+        }
     }
 
     public function show($id)

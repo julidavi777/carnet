@@ -15,7 +15,7 @@
         
   
   
-        <p-button label="Generar PDF" icon="pi pi-file-pdf" iconPos="right" styleClass="p-button-danger" routerLink="form-rol" (click)="onGeneratePdf()" ></p-button>
+        <p-button label="Generar PDF" icon="pi pi-file-pdf" iconPos="right" styleClass="p-button-danger" (click)="onGeneratePdf()" ></p-button>
   
     </div>
     </div>
@@ -31,6 +31,7 @@
       [headerHeight]="50"
       [footerHeight]="50"
       rowHeight="auto"
+      [limit]="100"
       [treeFromRelation]="'manager'"
       [treeToRelation]="'name'"
       [rows]="rows"
@@ -70,7 +71,7 @@
       </ng-template>
     </ngx-datatable-column>
      
-    <ngx-datatable-column name="capitulo" [resizeable]="true" [width]="300" [isTreeColumn]="true">
+    <!-- <ngx-datatable-column name="capitulo" [resizeable]="true" [width]="300" [isTreeColumn]="true">
       <ng-template ngx-datatable-header-template>
         Valor parcial
       </ng-template>
@@ -78,7 +79,7 @@
         por calcular
       </ng-template>
     </ngx-datatable-column>
-     
+      -->
     <!-- <ngx-datatable-column name="capitulo" [resizeable]="true" [width]="300" [isTreeColumn]="true">
       <ng-template ngx-datatable-header-template>
         Total
@@ -93,8 +94,12 @@
         Acciones
       </ng-template>
       <ng-template let-row="row" ngx-datatable-cell-template >
-          <p-button icon="pi pi-plus" iconPos="right"   (click)="addItemAction(row)" data-tooltip="Agregar" data-tooltip-conf="right"></p-button>
-          <p-button icon="pi pi-trash" iconPos="right"   (click)="addItemAction(row)"  data-tooltip="Eliminar" data-tooltip-conf="right"></p-button>
+          <div *ngIf="row.treeStatus === 'disabled'">
+            <p-button icon="pi pi-trash" iconPos="right"   (click)="removeItemAction(row)" styleClass="p-button-danger"  data-tooltip="Eliminar" data-tooltip-conf="right"></p-button>
+          </div>
+          <div *ngIf="row.treeStatus !== 'disabled'">
+            <p-button icon="pi pi-plus" iconPos="right"   (click)="addItemAction(row)" styleClass="p-button-success" data-tooltip="Agregar" data-tooltip-conf="right"></p-button>
+          </div>
       </ng-template>
     </ngx-datatable-column>
      

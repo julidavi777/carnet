@@ -1,35 +1,42 @@
-<div class="card">
-  <div class="card-body">
-    <form [formGroup]="apuToolForm" (ngSubmit)="saveApuTool()">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="description">Descripción</label>
-            <input type="text" class="form-control" id="description" formControlName="description" required>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="unit">Unidad</label>
-            <input type="text" class="form-control" id="unit" formControlName="unit" required>
-          </div>
-        </div>
+<div class="row d-flex justify-content-md-center mt-5">
+  <div class="col-md-11 ">
+    <div class="card">
+      <div class="card-header">
+        <h1>{{ isEditMode ? 'Editar' : 'Crear' }} Herramienta</h1>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="unit_value">Valor de la unidad</label>
-            <input type="number" class="form-control" id="unit_value" formControlName="unit_value" required>
+      <div class="card-body">
+        <form [formGroup]="apuToolForm" (ngSubmit)="saveApuTool()">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="description">Descripción</label>
+                <input type="text" class="form-control" id="description" formControlName="description" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="unit">Unidad</label>
+                <input type="text" class="form-control" id="unit" formControlName="unit" required>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="reference_link">Enlace de referencia</label>
-            <input type="text" class="form-control" id="reference_link" formControlName="reference_link">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="unit_value">Valor de la unidad</label>
+                <input type="number" class="form-control" id="unit_value" formControlName="unit_value" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="reference_link">Enlace de referencia</label>
+                <input type="text" class="form-control" id="reference_link" formControlName="reference_link">
+              </div>
+            </div>
           </div>
-        </div>
+          <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+        </form>
       </div>
-      <button type="submit" class="btn btn-primary">Guardar</button>
-    </form>
+    </div>
   </div>
 </div>

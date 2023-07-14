@@ -54,6 +54,7 @@ export class SupplyApuFormComponent implements OnInit {
 
   createForm() {
     this.formGroup = this.formBuilder.group({
+      id: ['', Validators.required],
       description: ['', Validators.required],
       unit: ['', Validators.required],
       performance_value: ['', Validators.required],
