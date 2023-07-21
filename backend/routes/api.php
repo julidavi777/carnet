@@ -25,6 +25,7 @@ use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\DepartamentoMunicipioController;
 use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProjectManagementController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\UserController;
@@ -125,4 +126,7 @@ Route::group([
     
     Route::apiResource('apu-activities.apus', ApuActivityApuController::class)->only(['index']);
     Route::apiResource('apus', ApuController::class)->only(['store']);
+   
+    Route::post('project_managements', [ProjectManagementController::class, 'storeOrUpdate']);
+    Route::get('commercialOffers/{id}/project_managements', [ProjectManagementController::class, 'showByIdCommercialOffer']);
 });
