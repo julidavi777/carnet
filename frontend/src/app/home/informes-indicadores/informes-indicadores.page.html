@@ -5,10 +5,10 @@
     <ion-title>informes_indicadores</ion-title>
   </ion-toolbar>
 </ion-header> -->
-<button class="button-generate" (click)="generatePDF()">Generar PDF</button>
+<button class="btn btn-danger" (click)="generatePDF()">Generar PDF</button>
 
-<button class="button-create" (click)="createPdf()">Crear PDF Informe</button>
-
+<button class="btn btn-primary ml-2" (click)="createPdf()">Crear PDF Informe</button>
+<br>
 <ion-grid>
   <ion-row>
     <ion-col size="4" class="small-card" [ngClass]="{'expanded': isExpanded}" (click)="isExpanded = !isExpanded">

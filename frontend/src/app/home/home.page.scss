@@ -41,17 +41,13 @@
 /* Estilos para el fondo con el logo */
 .logo-cubikar-background {
   background-image: url('../../assets/icon/Logo_Cubikar_5.png'); /* ruta del logo */
-  background-repeat: no-repeat;
-  background-size: contain;
-  position: fixed;
-  bottom: 50%;
-  right: 50%;
-  transform: translate(50%, 50%);
-  height: 400px;
-  width: 400px;
-  opacity: 0.6; /* opacidad del fondo */
-
+  background-size: cover; /* Adjust image size to cover the entire div */
+  background-position: center; /* Center the image */
+  //opacity: 0.6; /* opacidad del fondo */
+  z-index: -1;
 
 }
+
+
 
 

@@ -4,28 +4,28 @@
       <div class="card-body">
         <h2 class="card-title">{{ isEditMode ? 'Editar Precio de transporte' : 'Crear Precio de transporte' }}</h2>
         <form [formGroup]="transportForm" class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 mb-3">
             <div class="form-group">
               <label for="description">Description</label>
               <input type="text" id="description" class="form-control" formControlName="description">
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 mb-3">
             <div class="form-group">
               <label for="unit">Unit</label>
               <input type="text" id="unit" class="form-control" formControlName="unit">
             </div>
           </div>
-          <div class="col-md-12">
-            <div class="form-group">
+          <div class="col-md-12 mb-3">
+            <div class="form-group  mb-3">
               <label for="unit_price_eje_value">Unit Price Eje Value</label>
               <input type="number" id="unit_price_eje_value" class="form-control" formControlName="unit_price_eje_value">
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
               <label for="unit_price_bogota_value">Unit Price Bogota Value</label>
               <input type="number" id="unit_price_bogota_value" class="form-control" formControlName="unit_price_bogota_value">
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
               <label for="unit_price_medellin_value">Unit Price Medellin Value</label>
               <input type="number" id="unit_price_medellin_value" class="form-control" formControlName="unit_price_medellin_value">
             </div>

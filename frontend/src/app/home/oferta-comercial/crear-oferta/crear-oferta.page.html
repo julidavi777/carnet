@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container card">
   <p class="h2 my-3"><b>Crear oferta comercial</b>.</p>
-  <form [formGroup]="offersForm" (ngSubmit)="onSubmit()" class="formu">
+  <form [formGroup]="offersForm" (ngSubmit)="onSubmit()" class="card-body">
     <div class="row">
       <div class="mb-3 form-group col-md-2">
         <label class="form-label" for="">Sede:</label>
@@ -375,48 +375,51 @@
         ></button>
       </div>
       <div class="modal-body">
-        <div class="mb-3 form-group col-md-8">
-          <label class="form-label" for="validation01">Lugar visita</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="visit_place"
-          />
-        </div>
+        <div class="row">
 
-        <div class="mb-3 form-group col-md-6">
-          <label class="form-label" for="validation09"
-            >Fecha visita *
-          </label>
-          <input
-            type="date"
-            class="form-control"
-            formControlName="visit_date"
-            id="validation09"
-            placeholder="Seleccione"
-          />
-        </div>
-
-        <div class="mb-3 form-group col-md-8">
-          <label class="form-label" for="validation01"
-            >Persona que atiende</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            formControlName="person_attending"
-          />
-        </div>
-
-        <div class="mb-3 form-group col-md-8">
-          <label class="form-label" for="validation01"
-            >Número de contacto</label
-          >
-          <input
-            type="number"
-            class="form-control"
-            formControlName="phone_number_person_attending"
-          />
+          <div class="mb-3 form-group col-md-6">
+            <label class="form-label" for="validation01">Lugar visita</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="visit_place"
+            />
+          </div>
+  
+          <div class="mb-3 form-group col-md-6">
+            <label class="form-label" for="validation09"
+              >Fecha visita *
+            </label>
+            <input
+              type="date"
+              class="form-control"
+              formControlName="visit_date"
+              id="validation09"
+              placeholder="Seleccione"
+            />
+          </div>
+  
+          <div class="mb-3 form-group col-md-12">
+            <label class="form-label" for="validation01"
+              >Persona que atiende</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              formControlName="person_attending"
+            />
+          </div>
+  
+          <div class="mb-3 form-group col-md-12">
+            <label class="form-label" for="validation01"
+              >Número de contacto</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              formControlName="phone_number_person_attending"
+            />
+          </div>
         </div>
       </div>
       <div class="modal-footer">

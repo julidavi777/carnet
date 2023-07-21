@@ -1,17 +1,30 @@
 
-<p-menubar [model]="items" class="p-menubar my-navbar" >
-  <ng-template pTemplate="start">
-    <div class="my-logo">
-      <img src="assets/icon/Logo_Cbk_1.png" height="50" class="mr-2">
-    </div>
-  </ng-template>
-  <ng-template pTemplate="end" >
-    <button (click)="logout()" pButton icon="pi pi-power-off" pTooltip="Cerrar sesión" tooltipPosition="bottom" class="my-logout-btn"></button>
-  </ng-template>
-</p-menubar>
 
+<div style="width: 100%;">
+  <p-menubar style="width: 100%;">
+    <ng-template pTemplate="start">
+      <div class="my-logo">
+        <img src="assets/icon/Logo_Cbk_1.png" height="50" class="ml-2">
+      </div>
+    </ng-template>
+    <ng-template pTemplate="end" >
+      <button (click)="logout()" pButton icon="pi pi-power-off" pTooltip="Cerrar sesión" tooltipPosition="bottom" class="my-logout-btn"></button>
+    </ng-template>
+  </p-menubar>
+</div>
+<br>
+
+<div class="logo-cubikar-background">
+  <div class="row  " >
+    <div class="col-2">
+      <p-panelMenu [model]="items" ></p-panelMenu>
+    </div>
+    <div class="col-10" style="opacity: .98;">
+      <router-outlet ></router-outlet>
+    </div>
+  </div>
+</div>
 <!-- <router-outlet class="logo-cubikar-background" ></router-outlet> -->
-<router-outlet ></router-outlet>
 
 <!-- <div class="logo-cubikar-background" > -->
   <!-- <img class="logo " src="../../assets/icon/Logo_Cubikar_5.png" > -->

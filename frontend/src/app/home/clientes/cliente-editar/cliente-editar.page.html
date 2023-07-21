@@ -1,7 +1,7 @@
 
-<div class="container">
-  <p class="h2 my-3"><b>Editar Cliente</b></p>
-  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="formu">
+<div class="container card">
+  <p class="h2 my-3"><b>Editar cliente</b></p>
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="card-body">
     <div class="row">
       <div class="mb-3 form-group col-md-4" >
         <label for="identification_type" class="form-label">Tipo de documento *</label>
@@ -83,23 +83,23 @@
 
 
         <div class="col-md-3">
-          <button type="button"  for="contacto1" data-bs-toggle="modal" data-bs-target="#contacto1">
+          <button type="button" class="btn btn-primary" for="contacto1" data-bs-toggle="modal" data-bs-target="#contacto1">
             Contacto comercial 1
           </button>
         </div> <br>
 
         <div class="col-md-3">
-          <button type="button" for="contacto2" data-bs-toggle="modal" data-bs-target="#contacto2">
+          <button type="button" class="btn btn-primary"for="contacto2" data-bs-toggle="modal" data-bs-target="#contacto2">
             Contacto comercial 2 </button>
           </div><br>
 
           <div class="col-md-3">
-            <button type="button" for="" data-bs-toggle="modal" data-bs-target="#contacto3">
+            <button type="button" class="btn btn-primary"for="" data-bs-toggle="modal" data-bs-target="#contacto3">
               Contacto Facturación</button>
             </div><br>
 
             <div class="col-md-3">
-              <button type="button" for="" data-bs-toggle="modal" data-bs-target="#contacto4">
+              <button type="button" class="btn btn-primary"for="" data-bs-toggle="modal" data-bs-target="#contacto4">
                 Contacto Pagos / Tesoreria</button>
               </div><br>
 

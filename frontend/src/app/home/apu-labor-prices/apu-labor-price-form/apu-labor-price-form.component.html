@@ -2,9 +2,9 @@
   <div class="col-md-11 ">
     <div class="card">
       <div class="card-body">
-        <h2 class="card-title">Labor Price Form</h2>
+        <h2 class="card-title">Formulario de precios mano de obra</h2>
         <form [formGroup]="laborPriceForm" (ngSubmit)="saveLaborPrice()">
-          <div class="row">
+          <div class="row mb-3">
             <div class="col-md-6">
               <div class="form-group">
                 <label>Description</label>
@@ -18,7 +18,7 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row mb-3">
             <div class="col-md-6">
               <div class="form-group">
                 <label>Unit Price Eje Value</label>
@@ -32,7 +32,7 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row mb-3">
             <div class="col-md-6">
               <div class="form-group">
                 <label>Unit Price Medellin Value</label>
@@ -40,7 +40,7 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row mb-3">
             <ion-item class="col-md-6">
               <ion-label >Capitulo</ion-label>
               <ionic-selectable

@@ -10,6 +10,8 @@ import {MenubarModule} from 'primeng/menubar';
 import {ButtonModule} from 'primeng/button';
 import {TooltipModule} from 'primeng/tooltip';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { PanelMenuModule } from 'primeng/panelmenu';
+
 
 @NgModule({
   imports: [
@@ -20,7 +22,8 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     MenubarModule,
     ButtonModule,
     TooltipModule,
-    NgxPermissionsModule.forChild()
+    NgxPermissionsModule.forChild(),
+    PanelMenuModule
   ],
   declarations: [HomePage]
 })

@@ -1,7 +1,7 @@
 
-<div class="container">
+<div class="container card">
   <p class="h2 my-3"><b>Crear Cliente</b></p>
-  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="formu">
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="card-body">
     <div class="row">
       <div class="mb-3 form-group col-md-4" >
         <label for="identification_type" class="form-label">Tipo de documento *</label>
@@ -89,23 +89,23 @@
 
 
         <div class="col-md-3">
-          <button type="button"  (click)="openContactModal(1)">
+          <button type="button"  (click)="openContactModal(1)" class="btn btn-primary">
             Contacto comercial 1
           </button>
         </div> <br>
 
         <div class="col-md-3">
-          <button type="button" (click)="openContactModal(2)">
+          <button type="button" (click)="openContactModal(2)" class="btn btn-primary">
             Contacto comercial 2 </button>
           </div><br>
 
           <div class="col-md-3">
-            <button type="button" (click)="openContactModal(3)">
+            <button type="button" (click)="openContactModal(3)" class="btn btn-primary">
               Contacto Facturación</button>
             </div><br>
 
             <div class="col-md-3">
-              <button type="button" (click)="openContactModal(4)">
+              <button type="button" (click)="openContactModal(4)" class="btn btn-primary">
                 Contacto Pagos / Tesoreria</button>
               </div><br>
 
