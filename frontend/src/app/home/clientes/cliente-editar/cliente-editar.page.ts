@@ -4,6 +4,8 @@ import { ClienteEditarService } from './cliente-editar.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { CommonService } from 'src/app/services/common.service';
+import { FormContactoComponent } from '../components/form-contacto/form-contacto.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cliente-editar',
@@ -114,6 +116,7 @@ export class ClienteEditarPage implements OnInit {
     private clienteEditarService: ClienteEditarService,
     private router: Router,
     private commonService: CommonService,
+    public modalController: ModalController
   ) { }
 
   async ngOnInit() {
@@ -259,7 +262,13 @@ export class ClienteEditarPage implements OnInit {
         this.registeredSuccessfully = true;
         setTimeout(() => {
           this.registeredSuccessfully = false;
-        }, 3000);
+          this.formContacto1.reset();
+          this.formContacto2.reset();
+          this.formContactoFacturacion.reset();
+          this.formContactoPagos.reset();
+          this.customerForm.reset();
+          this.router.navigate(['home/clientes/clientes-list']);
+        }, 2000);
 
     }, (err: any) => {
 
@@ -414,10 +423,11 @@ export class ClienteEditarPage implements OnInit {
   departamentoChange(event, id_modal: number = 0) {
     let municipio_id = event.value.id;
 
-    if(id_modal === 0) {   
+     if(id_modal === 0) {   
       this.customerForm.controls['municipio'].reset()
       this.customerForm.controls['municipio'].disable();
     }
+    /*
     if(id_modal === 1){
       this.formContacto1.controls['municipio_id'].reset()
       this.formContacto1.controls['municipio_id'].disable();
@@ -433,7 +443,7 @@ export class ClienteEditarPage implements OnInit {
     if(id_modal === 4){
       this.formContactoPagos.controls['municipio_id'].reset()
       this.formContactoPagos.controls['municipio_id'].disable();
-    }
+    } */
     
     /* this.mylookupservice.getResults(event.query).then(data => {
         this.results = data;
@@ -472,6 +482,60 @@ export class ClienteEditarPage implements OnInit {
     console.log("this.formContactoPagos.value")
     console.log(this.formContactoPagos.value)
   }
+
+  async openContactModal(contact_type_id){
+    var patchData = null;
+    if(contact_type_id == 1){
+      if(this.hasDefinedProp(this.formContacto1.value)){
+        patchData = this.formContacto1.value;
+      }
+    }
+    if(contact_type_id == 2){
+      if(this.hasDefinedProp(this.formContacto2.value)){
+        patchData = this.formContacto2.value;
+      }
+    }
+    if(contact_type_id == 3){
+      if(this.hasDefinedProp(this.formContactoFacturacion.value)){
+        patchData = this.formContactoFacturacion.value;
+      }
+    }
+    if(contact_type_id == 4){
+      if(this.hasDefinedProp(this.formContactoPagos.value)){
+        patchData = this.formContactoPagos.value;
+      }
+    }
+    const modal = await this.modalController.create({
+      component: FormContactoComponent,
+      cssClass: 'my-custom-modal-css',
+      backdropDismiss: false,
+      componentProps: {
+        contact_type_id,
+        departamentos_param: this.departamentos,
+        patchData
+      }
+    });
+    modal.onDidDismiss()
+    .then((res) => {
+      if(res['data']['formValue']) {
+        if(contact_type_id == 1 && this.hasDefinedProp(res['data']['formValue'])){
+          this.formContacto1.patchValue(res['data']['formValue'])
+        }
+        if(contact_type_id == 2 && this.hasDefinedProp(res['data']['formValue'])){
+          this.formContacto2.patchValue(res['data']['formValue'])
+        }
+        if(contact_type_id == 3 && this.hasDefinedProp(res['data']['formValue'])){
+          this.formContactoFacturacion.patchValue(res['data']['formValue'])
+        }
+        if(contact_type_id == 4 && this.hasDefinedProp(res['data']['formValue'])){
+          this.formContactoPagos.patchValue(res['data']['formValue'])
+        }
+      }
+    });
+    return await modal.present();
+  }
+
+
 
   hasDefinedProp(obj) {
     let a = Object.keys(obj)

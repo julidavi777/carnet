@@ -18,11 +18,8 @@ class CustomerController extends ApiController
      */
     public function index()
     {
-        $customers = Customer::get();
-        $customers = $customers->map(function ($customer){
-            $customer->customersContacts;
-            return $customer;
-        })->sortBy('name')->values();
+        $customers = Customer::with('customersContacts')->get()->sortBy('name')->values();
+  
         return $this->showAll($customers);
     }
 
@@ -406,7 +403,7 @@ class CustomerController extends ApiController
             return $this->showAll($customers);
         }
 
-        $customers = Customer::where('identification', 'ilike', '%'.$paramValue.'%')->
+        $customers = Customer::with('customersContacts')->where('identification', 'ilike', '%'.$paramValue.'%')->
                                orWhere('name', 'ilike', '%'.$paramValue.'%')->
                                orWhere('surname', 'ilike', '%'.$paramValue.'%')->
                                orWhere('razon_social', 'ilike', '%'.$paramValue.'%')->
