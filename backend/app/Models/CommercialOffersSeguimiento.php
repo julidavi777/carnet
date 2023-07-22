@@ -16,14 +16,20 @@ class CommercialOffersSeguimiento extends Model
         'probability'
     ];
 
+    
+    protected $casts = [
+        
+        'created_at' => 'datetime:Y-m-d H:m:s'
+        
+    ];
+
     public function commercial_offer()
     {
         return $this->belongsTo(CommercialOffer::class);
     }
-
-    protected $casts = [
-  
-        'created_at' => 'datetime:Y-m-d H:m:s'
-
-    ];
+    
+    public function commercial_offers_seguimiento_files()
+    {
+        return $this->hasMany(CommercialOffersSeguimientoFile::class);
+    }
 }

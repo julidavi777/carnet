@@ -1,0 +1,90 @@
+
+<ion-header *ngIf="isModalMode">
+  <ion-toolbar class="ion-header-custom">
+    <ion-title style="    margin-left: 20px;">Archivos adjuntos para este seguimiento</ion-title>
+      <ion-button style="background-color: #da3136;
+      margin: 0px 15px;" slot="end" (click)="dismiss()" color="danger">
+        <ion-icon slot="start" name="close"></ion-icon>
+        cerrar
+      </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+
+<div *ngIf="!isModalMode" class="mb-3 form-group col-md-12">
+  <ion-label>Archivos para este seguimiento</ion-label>
+</div>
+
+<div class="row" *ngIf="!isModalMode">
+  <div class="col-md-6">
+    <!-- <input  class="form-control" *ngIf="showSelectFileVerificacion" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" > -->
+    <input #fileInput class="form-control" type="file" placeholder="Anexe requisitos" (change)="onFileSelected($event)" accept=".docx, .jpeg, .png, .pdf, .xlsx, .zip, .rar, .dwg">
+  </div>
+  <div class="col-md-6">
+    <p-button (click)="addFile()" [disabled]="actualFileSelected === null" label="Small" styleClass="p-button-sm"  label="Agregar archivo" ></p-button>
+<!--         <p-button label="Small" styleClass="p-button-sm" *ngIf="showSelectFileVerificacion" label="Agregar archivo" ></p-button>
+-->      </div>
+</div>
+
+
+<ngx-datatable
+    class="material mt-2"
+    [rows]="files"
+    [headerHeight]="70"
+    [footerHeight]="70"
+    rowHeight="auto"
+    [limit]="10"
+    [scrollbarH]="true"
+    columnMode="force"
+    >
+    <ngx-datatable-column name="identification_type" [resizeable]="true"  [width]="400">
+      <ng-template ngx-datatable-header-template>
+        Nombre archivo:
+      </ng-template>
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <div *ngIf="row?.name;else templateName">
+          {{row?.name}}
+
+        </div>
+        <ng-template #templateName>
+          <p ><a class="link-opacity-75" [href]="row?.file?.server_hash_name | formatUrl" target="_blank">{{row?.file?.original_name}}</a></p>
+        </ng-template>
+      </ng-template>
+    </ngx-datatable-column>
+
+
+    <ngx-datatable-column *ngIf="!isModalMode" name="identification" [resizeable]="true"  [width]="300">
+      <ng-template ngx-datatable-header-template>
+        Peso:
+      </ng-template>
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.size | formatFileSize}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <!-- <ngx-datatable-column *ngIf="isModalMode" name="identification" [resizeable]="true"  [width]="300">
+      <ng-template ngx-datatable-header-template>
+        Estado:
+      </ng-template>
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.status}}
+      </ng-template>
+    </ngx-datatable-column> -->
+
+
+    <ngx-datatable-column  *ngIf="!isModalMode"  name="acciones" [resizeable]="false"  [width]="200">
+      <ng-template ngx-datatable-header-template>
+        Acciones:
+      </ng-template>
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <ion-buttons class="grid-container" style="margin-left: 10px;" >
+          <!-- (click)="editCustomer(row)"  -->
+          <ion-button  *ngIf="!isModalMode" (click)="deleteFile(row.id)"  style="color: #ff0707" data-tooltip="Eliminar" data-tooltip-conf="right">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+
+        </ion-buttons>
+      </ng-template>
+    </ngx-datatable-column>
+
+    </ngx-datatable>

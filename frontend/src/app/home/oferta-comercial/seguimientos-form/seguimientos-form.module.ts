@@ -11,6 +11,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { ButtonModule } from 'primeng/button';
 import { ProbabilityPipe } from './pipes/probability.pipe';
+import { SeguimientosFilesComponent } from './seguimientos-files/seguimientos-files.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,6 @@ import { ProbabilityPipe } from './pipes/probability.pipe';
     PipesModule,
     ButtonModule
   ],
-  declarations: [SeguimientosFormPage, ProbabilityPipe],
+  declarations: [SeguimientosFormPage, SeguimientosFilesComponent, ProbabilityPipe],
 })
 export class SeguimientosFormPageModule {}

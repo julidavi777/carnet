@@ -1,5 +1,5 @@
 <div class="container">
-  <p class="h2 my-3">Seguimientos</p>
+  <p class="h2 my-3">Seguimientos registrados</p>
 
   <form class="formu" [formGroup]="seguimientosForm" (ngSubmit)="onSubmitSeguimientosForm()">
     <div class="row">
@@ -28,6 +28,7 @@
         </div>
       </div>
 
+
       <div class="mb-3 form-group col-md-5">
         <label class="form-label" for="">Observaciones: *</label>
         <textarea  formControlName="description" class="form-control" rows="2" cols="50">
@@ -37,15 +38,26 @@
           <small  style="color: #ef4444;">Este campo no puede estar vació</small>
         </div>
       </div>
+      
+      <br *ngIf="showSelectFileVerificacion">
 
       
-      <div class="col-md-2" style="    display: flex;gap: 10px;     margin-top: 30px; ">
-        <p-button  type="submit" icon="pi pi-plus" label="Guardar"  styleClass="p-button-success "></p-button>
-      </div>
+      
+      
+      
     </div>
+    <app-seguimientos-files 
+        *ngIf="showSelectFileVerificacion"
+        (newFileEvent)="newFileEventChild($event)"
+        ></app-seguimientos-files>
+
+    <div class="col-md-2" style="    display: flex;gap: 10px;     margin-top: 30px; ">
+      <p-button  type="submit" icon="pi pi-plus" label="Guardar datos"  styleClass="p-button-success "></p-button>
+    </div>
+    
 
     <div class="mb-3 form-group col-md-12">
-      <ion-label>Seguimientos</ion-label>
+      <ion-label>Seguimientos registrados</ion-label>
     </div>
 
     <ngx-datatable
@@ -95,7 +107,19 @@
       </ng-template>
     </ngx-datatable-column>
 
+    <ngx-datatable-column name="identification_type" [resizeable]="true">
+      <ng-template ngx-datatable-header-template>
+        Archivos adjuntos:
+      </ng-template>
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <p-button (onClick)="showFilesOnModal(row)" icon="pi pi-folder" [styleClass]="row?.commercial_offers_seguimiento_files.length === 0 ? 'p-button-rounded p-button-danger': 'p-button-rounded p-button-success'"></p-button>
+      </ng-template>
+    </ngx-datatable-column>
+
     </ngx-datatable>
+
+    
+
   </form>
 
 
