@@ -60,7 +60,7 @@ export class CotizacionesPage implements OnInit {
   }
 
   openGestionProyectos(row){
-    this.router.navigate(['home/gestionar-proyectos']);
+    this.router.navigate(['home/gestionar-proyectos'], {queryParams: {id: row.id}});
   }
 
 

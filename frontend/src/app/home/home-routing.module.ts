@@ -109,10 +109,28 @@ const routes: Routes = [
         path: 'apu-activities',
         loadChildren: () => import('./apu-activities/apu-activities.module').then( m => m.ApuActivitiesPageModule)
       },
-    
-    
+      {
+        path: 'apu-materials',
+        loadChildren: () => import('./apu-materials/apu-materials.module').then( m => m.ApuMaterialModule)
+      },
+      {
+        path: 'apu-tools',
+        loadChildren: () => import('./apu-tools/apu-tools.module').then( m => m.ApuToolsPageModule)
+      },
+      {
+        path: 'apu-transport-prices',
+        loadChildren: () => import('./apu-transport-prices/apu-transport-prices.module').then( m => m.ApuTransportPricesPageModule)
+      },
+      {
+        path: 'apu-labor-prices',
+        loadChildren: () => import('./apu-labor-prices/apu-labor-prices.module').then( m => m.ApuLaborPricesPageModule)
+      },
     ]
   },
+  
+  
+
+
 
 
 

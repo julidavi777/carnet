@@ -4,14 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Chapter extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
-    protected $fillable = ['no', 'sequential', 'chapter'];
+    protected $fillable = ['sequential', 'name'];
 
-    protected $dates = ['deleted_at'];
+    public function apuActivities()
+    {
+        return $this->hasMany(ApuActivity::class);
+    }
 
+    public function apuMaterials()
+    {
+        return $this->hasMany(ApuMaterial::class);
+    }
+
+    public function apuLaborPrices()
+    {
+        return $this->hasMany(ApuLaborPrice::class);
+    }
 }

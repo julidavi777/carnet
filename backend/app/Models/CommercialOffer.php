@@ -93,6 +93,11 @@ class CommercialOffer extends Model
         return $this->hasMany(CommercialOffersSeguimiento::class)->orderByDesc('id');
     }
 
+    public function project_management()
+    {
+        return $this->hasOne(ProjectManagement::class);
+    }
+
     /**
 
     * The attributes that should be mutated to dates.

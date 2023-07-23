@@ -5,14 +5,24 @@
 export let projectNewData: Object[] = [
     {
         TaskID: 1,
-        TaskName: 'Product concept',
-        StartDate: new Date('04/02/2019'),
-        EndDate: new Date('04/21/2019'),
+        TaskName: 'Tarea general ejemplo',
+        StartDate: new Date('04/02/2023'),
+        EndDate: new Date('04/21/2023'),
         subtasks: [
-            { TaskID: 2, TaskName: 'Defining the product and its usage', StartDate: new Date('04/02/2019'), Duration: 3, Progress: 30 },
-            { TaskID: 3, TaskName: 'Defining target audience', StartDate: new Date('04/02/2019'), Duration: 3 },
+            { TaskID: 2, TaskName: 'Subtarea 1', StartDate: new Date('04/02/2023'), Duration: 3, Progress: 30 },
+            { TaskID: 3, TaskName: 'Subtarea 2', StartDate: new Date('04/02/2023'), Duration: 3 },
+        ]
+    },
+    {
+        TaskID: 1,
+        TaskName: 'Product concept',
+        StartDate: new Date('04/02/2023'),
+        EndDate: new Date('04/21/2023'),
+        subtasks: [
+            { TaskID: 2, TaskName: 'Defining the product and its usage', StartDate: new Date('04/02/2023'), Duration: 3, Progress: 30 },
+            { TaskID: 3, TaskName: 'Defining target audience', StartDate: new Date('04/02/2023'), Duration: 3 },
             {
-                TaskID: 4, TaskName: 'Prepare product sketch and notes', StartDate: new Date('04/02/2019'), Duration: 2,
+                TaskID: 4, TaskName: 'Prepare product sketch and notes', StartDate: new Date('04/02/2023'), Duration: 2,
                 Predecessor: '2', Progress: 30
             },
         ]
@@ -67,7 +77,7 @@ export let projectNewData: Object[] = [
     },
     {
         TaskID: 13,
-        TaskName: 'Product design and development',
+        TaskName: 'Product design and developmentttt',
         StartDate: new Date('04/04/2019'),
         EndDate: new Date('04/21/2019'),
         subtasks: [

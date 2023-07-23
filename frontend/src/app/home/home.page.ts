@@ -141,14 +141,29 @@ export class HomePage {
             routerLink: ['chapters']
         },
         {
-            label:'Administrar insumos',
-            icon:'pi pi-fw pi-lock',
-            routerLink: ['supplies']
-        },
-        {
             label:'Administrar actividades',
             icon:'pi pi-fw pi-lock',
             routerLink: ['apu-activities']
+        },
+        {
+            label:'Administrar materiales',
+            icon:'pi pi-fw pi-lock',
+            routerLink: ['apu-materials']
+        },
+        {
+            label:'Administrar herramientas',
+            icon:'pi pi-fw pi-lock',
+            routerLink: ['apu-tools']
+        },
+        {
+            label:'Administrar precios transporte',
+            icon:'pi pi-fw pi-lock',
+            routerLink: ['apu-transport-prices']
+        },
+        {
+            label:'Administrar precios mano de obra',
+            icon:'pi pi-fw pi-lock',
+            routerLink: ['apu-labor-prices']
         },
         /* {
             label:'APU',

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar class="ion-header-custom">
-    <ion-title style="    margin-left: 20px;">Formulario insumo</ion-title>
+    <ion-title style="    margin-left: 20px;">Formulario item {{internalChapterChoosed?.name}}</ion-title>
       <ion-button style="background-color: #da3136;
       margin: 0px 15px;" slot="end" (click)="dismiss()" color="danger">
         <ion-icon slot="start" name="close"></ion-icon>
@@ -9,8 +9,39 @@
   </ion-toolbar>
 </ion-header>
 
-<div class="row">
+<form class="row" [formGroup]="formGroup" (ngSubmit)="onAddItem()">
+
   <div class="col-6">
+    <ion-item>
+      <ion-label >Item</ion-label>
+      <ionic-selectable
+        [items]="items"
+        itemValueField="id"
+        itemTextField="description"
+        [canSearch]="true"
+        (onChange)="onChangeItem($event)"
+        >
+      </ionic-selectable>
+    </ion-item>
+  </div>
+
+  <ion-item class="col-6">
+    <ion-label position="floating">Descripción</ion-label>
+    <ion-input formControlName="description"></ion-input>
+  </ion-item>
+  <ion-item class="col-6">
+    <ion-label position="floating">Unidad</ion-label>
+    <ion-input formControlName="unit"></ion-input>
+  </ion-item>
+  <ion-item class="col-6">
+    <ion-label position="floating">Rendimiento</ion-label>
+    <ion-input formControlName="performance_value"></ion-input>
+  </ion-item>
+  <ion-item class="col-6">
+    <ion-label position="floating">Valor unitario</ion-label>
+    <ion-input formControlName="unit_value"></ion-input>
+  </ion-item>
+  <!-- <div class="col-6">
     <ion-item>
       <ion-label >Capitulo</ion-label>
       <ionic-selectable
@@ -33,8 +64,10 @@
         >
       </ionic-selectable>
     </ion-item>
-  </div>
-</div>
-<br>
-<button class="btn btn-primary">Agregar</button>
+  </div> -->
+  <br>
+  <button class="btn btn-primary" type="submit" [disabled]="this.formGroup.invalid">Agregar item</button>
+</form>
+
+
 

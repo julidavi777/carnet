@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { projectNewData } from './data';
+import { GestionarProyectosService } from '../gestionar-proyectos.service';
 
 @Component({
   selector: 'app-gantt-syncfusion',
@@ -9,8 +10,8 @@ import { projectNewData } from './data';
 export class GanttSyncfusionComponent implements OnInit {
 
 
-  
-  constructor() { }
+  @Input() commercial_offer_id: string | null;
+
   public data: object[];
   public taskSettings: object;
   public columns: object[];
@@ -20,8 +21,18 @@ export class GanttSyncfusionComponent implements OnInit {
   public toolbar: string[];
   public editSettings: object;
 
+  constructor(
+    private gestionarProyectosService: GestionarProyectosService
+  ) { }
+
   public ngOnInit(): void {
-      this.data = projectNewData;
+      console.log(this.commercial_offer_id)
+      this.gestionarProyectosService.getProjectManagementByCommercialOfferId(this.commercial_offer_id).subscribe((res: any) => {
+       this.data = res['data'];
+      }, err => {
+        alert("error al obtener los datos del gantt")
+      })
+      this.data = []
       this.taskSettings = {
           id: 'TaskID',
           name: 'TaskName',
@@ -40,8 +51,8 @@ export class GanttSyncfusionComponent implements OnInit {
           { field: 'Progress' },
           { field: 'Predecessor' }
       ];
-      this.projectStartDate = new Date('03/24/2019');
-      this.projectEndDate = new Date('07/06/2019');
+      this.projectStartDate = new Date('01/01/2023');
+      this.projectEndDate = new Date('12/31/2023');
       this.labelSettings = {
           leftLabel: 'TaskName',
       };
@@ -59,5 +70,20 @@ export class GanttSyncfusionComponent implements OnInit {
   created(): void {
     console.log("created");
   }
+
+  saveChanges() {
+    console.log(this.data);
+
+    let data2 = {
+      gantt_schema: this.data,
+      commercial_offer_id: this.commercial_offer_id
+    }
+    this.gestionarProyectosService.saveProjectManagement(data2).subscribe((res:any) => {
+      alert("Información del gantt guardada exitosamente")
+    },er => {
+      alert("error al guardar la información del gantt")
+    })
+  }
+  
 
 }

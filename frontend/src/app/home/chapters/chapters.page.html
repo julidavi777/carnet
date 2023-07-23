@@ -1,6 +1,6 @@
 
 
-<div class="justify-content-md-center formu">
+<div class="justify-content-md-center">
   <div class="row">
     <div class="col-1">
     </div>
@@ -30,14 +30,14 @@
   [loadingIndicator]="loadingIndicator"
   columnMode="force">
   
-  <ngx-datatable-column name="no" [resizeable]="true" [width]="100">
+  <!-- <ngx-datatable-column name="no" [resizeable]="true" [width]="100">
     <ng-template ngx-datatable-header-template>
       No
     </ng-template>
     <ng-template let-row="row" ngx-datatable-cell-template>
       {{ row.no }}
     </ng-template>
-  </ngx-datatable-column>
+  </ngx-datatable-column> -->
   
   <ngx-datatable-column name="consecutivo" [resizeable]="true" [width]="150">
     <ng-template ngx-datatable-header-template>
@@ -53,7 +53,7 @@
       Capítulo
     </ng-template>
     <ng-template let-row="row" ngx-datatable-cell-template>
-      {{ row.chapter }}
+      {{ row.name }}
     </ng-template>
   </ngx-datatable-column>
 

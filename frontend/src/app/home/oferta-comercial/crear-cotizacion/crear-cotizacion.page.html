@@ -1,8 +1,8 @@
 
-<div class="container">
+<div class="container card">
   <p class="h2 my-3">Cotización</p>
 
-  <form class="formu" [formGroup]="cotizacionForm" (ngSubmit)="onSubmit()">
+  <form  [formGroup]="cotizacionForm" (ngSubmit)="onSubmit()" class="card-body">
     <div class="row" *ngIf="!isCreating">
 
       <div class="mb-3 form-group col-md-12">

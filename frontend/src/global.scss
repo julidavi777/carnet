@@ -29,20 +29,24 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: 'Public Sans', sans-serif;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400&display=swap');
 
 @import 'theme/tooltipDefect.scss';
 
 
-.form-control:disabled {
-    background-color: #a7aeb6 !important;
+
+/* .form-control:disabled {
+    background-color: #2b3035 !important;
     opacity: 1;
 }
 
 .form-select:disabled {
-    background-color: #a7aeb6 !important;
+    background-color: #2b3035 !important;
     opacity: 1;
-}
+} */
 
 .ngx-datatable .datatable-body .datatable-body-row>div{
     border-bottom: 1px solid #c1c1c1;

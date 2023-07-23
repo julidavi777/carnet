@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrearCotizacionService } from '../crear-cotizacion/crear-cotizacion.service';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/services/global.service';
 import { SeguimientosFormService } from './seguimientos-form.service';
+import { ModalController } from '@ionic/angular';
+import { SeguimientosFilesComponent } from './seguimientos-files/seguimientos-files.component';
 
 @Component({
   selector: 'app-seguimientos-form',
@@ -31,18 +33,24 @@ export class SeguimientosFormPage implements OnInit {
     description: new FormControl('', [Validators.required]),
     probability: new FormControl('', [Validators.required]),
   })
-  
+
+  isBringingDataFromDatabase: boolean = false;
+  showSelectFileVerificacion: boolean = false;
+  files = [];
+
   constructor(
     private crearCotizacionService: CrearCotizacionService,
     private router: Router,
     public globalService: GlobalService,
-    private seguimientosFormService: SeguimientosFormService
+    private seguimientosFormService: SeguimientosFormService,
+    public modalController: ModalController
   ) { }
 
   ngOnInit() {
     this.probabilities = this.seguimientosFormService.probabilities;
 
     let dataCommercialOffer = this.crearCotizacionService.dataCommercialOffer;
+ 
     if(dataCommercialOffer){
       this.commercial_offer_id = dataCommercialOffer.id;
     }else{
@@ -51,6 +59,15 @@ export class SeguimientosFormPage implements OnInit {
     this.statusOptionsSeguimiento = this.crearCotizacionService.statusOptionsSeguimiento;
 
     this.getSeguimientos();
+
+    this.seguimientosForm.get('status').valueChanges.subscribe((value: any) => {
+      console.log('name has changed:', value)
+      if(value == 2){
+        this.showSelectFileVerificacion = true;
+      }else{
+        this.showSelectFileVerificacion = false;
+      }
+    });
   }
 
   get status () { return this.seguimientosForm.get('status') }
@@ -72,14 +89,39 @@ export class SeguimientosFormPage implements OnInit {
     }
 
     if(this.seguimientosForm.valid){
-      console.log(this.seguimientosForm.value)
+
+      if(this.showSelectFileVerificacion && this.files.length == 0){
+        alert("por favor seleccionar al menos un archivo")
+        return;
+      }
+
+      const formData = new FormData();
+
+      let files_length: any = this.files.length;
+      formData.append('files_length', files_length );
+
+      if(files_length > 0){
+        this.files.forEach((file, index) => {
+          formData.append('file_'+index, file.file);
+        })
+      }
+
+      formData.append('status', this.seguimientosForm.value.status );
+      formData.append('description', this.seguimientosForm.value.description );
+      formData.append('probability', this.seguimientosForm.value.probability );
+      formData.append('commercial_offer_id', this.commercial_offer_id.toString() );
+
 
       let data = {
         ...this.seguimientosForm.value,
-        commercial_offer_id: this.commercial_offer_id
+        commercial_offer_id: this.commercial_offer_id,
+        files: this.showSelectFileVerificacion ? this.files : []
       }
 
-      this.crearCotizacionService.saveCommercialOffersSeguimientos(data).subscribe((res: any) => {
+      console.log(data)
+
+
+      this.crearCotizacionService.saveCommercialOffersSeguimientos(formData).subscribe((res: any) => {
         alert("Seguimiento registrado")
         this.getSeguimientos();
         this.seguimientosForm.reset();
@@ -88,4 +130,33 @@ export class SeguimientosFormPage implements OnInit {
       });
     }
   }
+
+  newFileEventChild($event){
+    console.log($event)
+    this.files = $event;
+  }
+
+
+  async  showFilesOnModal(seguimiento){
+    console.log(seguimiento);
+
+    if(seguimiento?.commercial_offers_seguimiento_files.length == 0){
+      alert("este seguimiento no tiene archivos registrados")
+      return;
+    }
+
+    const modal = await this.modalController.create({
+      component: SeguimientosFilesComponent,
+      cssClass: 'my-custom-modal-css',
+      backdropDismiss: false,
+      componentProps: {
+        filesToPatch: seguimiento?.commercial_offers_seguimiento_files
+      }
+    });
+    return await modal.present();
+
+  }
+
+ 
+
 }

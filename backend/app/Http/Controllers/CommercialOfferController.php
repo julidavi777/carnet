@@ -7,6 +7,7 @@ use App\Models\CommercialOffer;
 use App\Models\CommercialOffersCotization;
 use App\Models\CommercialOffersManagement;
 use App\Models\CommercialOffersManagementFile;
+use App\Models\CommercialOffersSeguimiento;
 use App\Models\CommercialOffersVisit;
 use App\Models\Customer;
 use App\Models\User;
@@ -353,6 +354,15 @@ class CommercialOfferController extends ApiController
                     
                 
                 ]);
+
+                //default seguimiento
+                CommercialOffersSeguimiento::create([
+                    'status' => "1",
+                    'description' => "ABIERTA",
+                    'commercial_offer_id' => $createdCommercialOffer['id'],
+                    'probability' => null,
+                ]);
+
 
                 //save visit data
                 if(

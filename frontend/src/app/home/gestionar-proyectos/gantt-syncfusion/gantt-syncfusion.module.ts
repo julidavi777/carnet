@@ -18,6 +18,7 @@ import {
 
 
 import { GanttAllModule } from '@syncfusion/ej2-angular-gantt';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   declarations: [GanttSyncfusionComponent],
@@ -30,6 +31,7 @@ import { GanttAllModule } from '@syncfusion/ej2-angular-gantt';
     TextBoxAllModule,
     NumericTextBoxAllModule,
     MultiSelectAllModule,
+    ButtonModule
   ],
   exports: [GanttSyncfusionComponent],
 })

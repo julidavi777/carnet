@@ -1,0 +1,96 @@
+<div class="justify-content-md-center formu">
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-3">
+      <p class="fs-3 my-3">Lista de Materiales</p>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-3 mb-3">
+      <p-button label="Agregar" icon="pi pi-plus" iconPos="right" routerLink="form-rol" class="mb-3" routerLink="/home/apu-materials/create"></p-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <ngx-datatable
+        class="material mt-2"
+        [rows]="materials"
+        [headerHeight]="70"
+        [footerHeight]="70"
+        rowHeight="auto"
+        [limit]="10"
+        [scrollbarH]="true"
+        [loadingIndicator]="loadingIndicator"
+      >
+        <!-- <ngx-datatable-column name="code" [resizeable]="true" [width]="300">
+          <ng-template ngx-datatable-header-template>
+            Código:
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.code }}
+          </ng-template>
+        </ngx-datatable-column> -->
+      
+        <ngx-datatable-column name="description" [resizeable]="true" [width]="500">
+          <ng-template ngx-datatable-header-template>
+            Descripción:
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.description }}
+          </ng-template>
+        </ngx-datatable-column>
+      
+        <ngx-datatable-column name="unit" [resizeable]="true" [width]="200">
+          <ng-template ngx-datatable-header-template>
+            Unidad:
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.unit }}
+          </ng-template>
+        </ngx-datatable-column>
+      
+        <ngx-datatable-column name="unit_value" [resizeable]="true" [width]="200">
+          <ng-template ngx-datatable-header-template>
+            Valor Unidad:
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.unit_value }}
+          </ng-template>
+        </ngx-datatable-column>
+      
+        <ngx-datatable-column name="reference_link" [resizeable]="true" [width]="500">
+          <ng-template ngx-datatable-header-template>
+            Enlace de Referencia:
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <a [href]="row.reference_link" target="_blank" >{{ row.reference_link }}</a> 
+          </ng-template>
+        </ngx-datatable-column>
+      
+        <ngx-datatable-column name="chapter_id" [resizeable]="true" [width]="200">
+          <ng-template ngx-datatable-header-template>
+            Capítulo:
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.chapter?.name }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="chapter_id" [resizeable]="true" [width]="200">
+          <ng-template ngx-datatable-header-template>
+            Acciones
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <button routerLink="/home/apu-materials/edit/{{ row.id }}" class="btn btn-warning">Editar</button>
+      
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+    <div class="col-1"></div>
+  </div>

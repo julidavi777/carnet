@@ -45,6 +45,7 @@ export class ChaptersPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((res) => {
+      this.ngOnInit();
       
     });
     return await modal.present();

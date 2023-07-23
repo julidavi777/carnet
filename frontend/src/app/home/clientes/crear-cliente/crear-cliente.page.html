@@ -1,7 +1,7 @@
 
-<div class="container">
+<div class="container card">
   <p class="h2 my-3"><b>Crear Cliente</b></p>
-  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="formu">
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="card-body">
     <div class="row">
       <div class="mb-3 form-group col-md-4" >
         <label for="identification_type" class="form-label">Tipo de documento *</label>
@@ -89,23 +89,23 @@
 
 
         <div class="col-md-3">
-          <button type="button"  (click)="openContactModal(1)">
+          <button type="button"  (click)="openContactModal(1)" class="btn btn-primary">
             Contacto comercial 1
           </button>
         </div> <br>
 
         <div class="col-md-3">
-          <button type="button" (click)="openContactModal(2)">
+          <button type="button" (click)="openContactModal(2)" class="btn btn-primary">
             Contacto comercial 2 </button>
           </div><br>
 
           <div class="col-md-3">
-            <button type="button" (click)="openContactModal(3)">
+            <button type="button" (click)="openContactModal(3)" class="btn btn-primary">
               Contacto Facturación</button>
             </div><br>
 
             <div class="col-md-3">
-              <button type="button" (click)="openContactModal(4)">
+              <button type="button" (click)="openContactModal(4)" class="btn btn-primary">
                 Contacto Pagos / Tesoreria</button>
               </div><br>
 
@@ -144,17 +144,17 @@
 
       <div class="mb-3 form-group col-md-6">
         <label for="validation07" class="form-label">RUT *</label>
-        <input type="file" class="form-control"   formControlName="rut_file_field" (change)="onFileChange($event, 'rut_file_field')" id="validation07" placeholder="" required>
+        <input type="file" class="form-control"   formControlName="rut_file_field" (change)="onFileChange($event, 'rut_file_field')" id="validation07" placeholder="" accept=".doc, .docx, .jpg, .png, .pdf">
       </div>
 
       <div class="mb-3 form-group col-md-6">
         <label for="validation08" class="form-label">Cámara de comercio</label>
-        <input type="file" class="form-control" formControlName="camara_commerce_file_field" (change)="onFileChange($event, 'camara_commerce_file_field')" id="validation08" placeholder="Cargue archivo" required>
+        <input type="file" class="form-control" formControlName="camara_commerce_file_field" (change)="onFileChange($event, 'camara_commerce_file_field')" id="validation08" placeholder="Cargue archivo" accept=".doc, .docx, .jpg, .png, .pdf">
       </div>
 
       <div class="mb-3 form-group col-md-6">
         <label for="validation09" class="form-label">Declaración de renta</label>
-        <input type="file" class="form-control" formControlName="income_statement_file_field" (change)="onFileChange($event, 'income_statement_file_field')" id="validation09" placeholder="Cargue archivo" required>
+        <input type="file" class="form-control" formControlName="income_statement_file_field" (change)="onFileChange($event, 'income_statement_file_field')" id="validation09" placeholder="Cargue archivo" accept=".doc, .docx, .jpg, .png, .pdf">
       </div>
 
       <div class="mb-3 form-group col-md-6">

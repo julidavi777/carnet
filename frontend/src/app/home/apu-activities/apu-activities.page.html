@@ -36,7 +36,7 @@
     CIUDAD
   </ng-template>
   <ng-template let-row="row" ngx-datatable-cell-template>
-    {{ row.city }}
+    {{ row?.customer?.municipio?.name }}
   </ng-template>
 </ngx-datatable-column>
 
@@ -45,7 +45,16 @@
     PROYECTO
   </ng-template>
   <ng-template let-row="row" ngx-datatable-cell-template>
-    {{ row.project }}
+    {{ row?.customer?.name }}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column name="project" [resizeable]="true" >
+  <ng-template ngx-datatable-header-template>
+    Descripción
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{ row.description }}
   </ng-template>
 </ngx-datatable-column>
 
@@ -54,25 +63,25 @@
     CAP
   </ng-template>
   <ng-template let-row="row" ngx-datatable-cell-template>
-    {{ row.capacity }}
+    {{ row.cap }}
   </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column name="description" [resizeable]="true" [width]="300" >
+<!-- <ngx-datatable-column name="description" [resizeable]="true" [width]="300" >
   <ng-template ngx-datatable-header-template>
     DESCRIPCION
   </ng-template>
   <ng-template let-row="row" ngx-datatable-cell-template>
     {{ row.description }}
   </ng-template>
-</ngx-datatable-column>
+</ngx-datatable-column> -->
 
 <ngx-datatable-column name="unit" [resizeable]="true" >
   <ng-template ngx-datatable-header-template>
     UNIDAD
   </ng-template>
   <ng-template let-row="row" ngx-datatable-cell-template>
-    {{ row.unit }}
+    {{ row.unit | unit}}
   </ng-template>
 </ngx-datatable-column>
 
@@ -90,7 +99,16 @@
     VR. UNITARIO
   </ng-template>
   <ng-template let-row="row" ngx-datatable-cell-template>
-    {{ row.unit_price }}
+    {{ row.unit_value }}
+  </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column name="unit_price" [resizeable]="true" >
+  <ng-template ngx-datatable-header-template>
+    Capitulo
+  </ng-template>
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{ row.chapter.name }}
   </ng-template>
 </ngx-datatable-column>
 
@@ -99,7 +117,7 @@
     Accciones
   </ng-template>
   <ng-template let-row="row" ngx-datatable-cell-template>
-    <p-button (click)="onCreateApu(row.id)" icon="pi pi-dollar" styleClass="p-button-rounded p-button-success" pTooltip="Crear APU" tooltipPosition="bottom"></p-button>
+    <p-button (click)="onCreateApu(row)" icon="pi pi-dollar" styleClass="p-button-rounded p-button-success" pTooltip="Crear APU" tooltipPosition="bottom"></p-button>
   </ng-template>
 </ngx-datatable-column>
 

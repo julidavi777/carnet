@@ -12,11 +12,11 @@
     <div class="col-1"></div>
     <div class="col-10">
       <div class=" d-flex flex-row gap-2 mb-3">
-        <p-button label="Agregar insumo" icon="pi pi-plus" iconPos="right" routerLink="form-rol" (click)="openCreateForm()" ></p-button>
+        
   
   
-        <p-button label="Generar PDF" icon="pi pi-file-pdf" iconPos="right" styleClass="p-button-danger" routerLink="form-rol" (click)="onGeneratePdf()" ></p-button>
-  
+        <p-button label="Generar PDF" icon="pi pi-file-pdf" iconPos="right" styleClass="p-button-danger" (click)="onGeneratePdf()" ></p-button>
+        <p-button label="Guardar APU" icon="pi pi-save" iconPos="right"   (click)="saveApu()" styleClass="p-button-success" data-tooltip="guardar apu estructura" data-tooltip-conf="right"></p-button>
     </div>
     </div>
     <div class="col-1"></div>
@@ -31,60 +31,75 @@
       [headerHeight]="50"
       [footerHeight]="50"
       rowHeight="auto"
+      [limit]="100"
       [treeFromRelation]="'manager'"
       [treeToRelation]="'name'"
       [rows]="rows"
       (treeAction)="onTreeAction($event)"
     >
-    <ngx-datatable-column name="capitulo" [resizeable]="true" [width]="300" [isTreeColumn]="true">
+    <ngx-datatable-column name="capitulo" [resizeable]="true" [width]="500" [isTreeColumn]="true">
       <ng-template ngx-datatable-header-template>
-        Insumo
+        Descripción
       </ng-template>
       <ng-template let-row="row" ngx-datatable-cell-template >
-        {{ row.name }}
+        {{ row?.name ? row.name : row.description }}
       </ng-template>
     </ngx-datatable-column>
     
     <ngx-datatable-column name="capitulo" [resizeable]="true" [width]="300" [isTreeColumn]="true">
       <ng-template ngx-datatable-header-template>
-        Tipo
+        Unidad
       </ng-template>
       <ng-template let-row="row" ngx-datatable-cell-template >
-        {{ row.type }}
+        {{ row.unit }}
       </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="capitulo" [resizeable]="true" [width]="300" [isTreeColumn]="true">
       <ng-template ngx-datatable-header-template>
-        Un
+        Rendimiento
       </ng-template>
       <ng-template let-row="row" ngx-datatable-cell-template >
-        {{ row.un }}
+        {{ row.performance_value }}
       </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="capitulo" [resizeable]="true" [width]="300" [isTreeColumn]="true">
       <ng-template ngx-datatable-header-template>
-        Cantidad
+        Valor unitario
       </ng-template>
       <ng-template let-row="row" ngx-datatable-cell-template >
-        {{ row.cant }}
+        {{ row.unit_value }}
       </ng-template>
     </ngx-datatable-column>
      
-    <ngx-datatable-column name="capitulo" [resizeable]="true" [width]="300" [isTreeColumn]="true">
+    <!-- <ngx-datatable-column name="capitulo" [resizeable]="true" [width]="300" [isTreeColumn]="true">
       <ng-template ngx-datatable-header-template>
-        Unitario
+        Valor parcial
       </ng-template>
       <ng-template let-row="row" ngx-datatable-cell-template >
-        {{ row.unitario }}
+        por calcular
       </ng-template>
     </ngx-datatable-column>
-     
-    <ngx-datatable-column name="capitulo" [resizeable]="true" [width]="300" [isTreeColumn]="true">
+      -->
+    <!-- <ngx-datatable-column name="capitulo" [resizeable]="true" [width]="300" [isTreeColumn]="true">
       <ng-template ngx-datatable-header-template>
         Total
       </ng-template>
       <ng-template let-row="row" ngx-datatable-cell-template >
         {{ row.total }}
+      </ng-template>
+    </ngx-datatable-column> -->
+
+    <ngx-datatable-column name="capitulo" [resizeable]="true" [width]="400" [isTreeColumn]="true">
+      <ng-template ngx-datatable-header-template>
+        Acciones
+      </ng-template>
+      <ng-template let-row="row" ngx-datatable-cell-template >
+          <div *ngIf="row.treeStatus === 'disabled'">
+            <p-button icon="pi pi-trash" iconPos="right"   (click)="removeItemAction(row)" styleClass="p-button-danger"  data-tooltip="Eliminar" data-tooltip-conf="right"></p-button>
+          </div>
+          <div *ngIf="row.treeStatus !== 'disabled'">
+            <p-button icon="pi pi-plus" iconPos="right"   (click)="addItemAction(row)" styleClass="p-button-success" data-tooltip="Agregar" data-tooltip-conf="right"></p-button>
+          </div>
       </ng-template>
     </ngx-datatable-column>
      
@@ -93,5 +108,4 @@
     </div>
     <div class="col-1"></div>
   </div>
-
 </div>
