@@ -55,25 +55,73 @@
     </div>
     <div class="row" >
       <div class="mb-3 form-group col-md-6">
-        <label class="form-label" for="">Valor cotizado</label>
-        <input type="text" class="form-control" currencyMask   formControlName="valor_cotizado" id=""  [options]="{ prefix: '$ ', thousands: '.', decimal: ',',precision: 0 }">
+        <label class="form-label" for="">Sub total</label>
+        <input type="text" class="form-control" currencyMask formControlName="valor_cotizado" id="subTotalInput"
+          [options]="{ prefix: '$ ', thousands: '.', decimal: ',',precision: 0 }" >
         <div *ngIf="globalService.isFieldInvalid(valor_cotizado, 'required')">
-          <small style="color: #ef4444;">Este campo no puede estar vació</small>
+          <small style="color: #ef4444;">Este campo no puede estar vacío</small>
         </div>
       </div>
 
-            <!-- Modal -->
-                <!-- Button trigger modal -->
-               <!--  <button
-                type="button"
-                class="col-md-4"
-                for="validation09"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                >
-                Calcular AIU + IVA
-              </button> -->
-              <br />
+      <table class="bordered-table">
+        <tr>
+          <th class="small-header">Concepto</th>
+          <th class="small-header">Porcentaje</th>
+          <th class="medium-input">Valor</th>
+        </tr>
+        <tr>
+          <td class="small-header">Administración</td>
+          <td>
+            <input type="number" class="form-control small-input" id="admin_porcentaje" [(ngModel)]="adminPorcentaje"
+    >
+          </td>
+          <td>
+            <input type="text" id="admin_valor" class="form-control medium-input" [value]="adminValor" readonly>
+          </td>
+        </tr>
+        <tr>
+          <td class="small-header">Utilidad</td>
+          <td>
+            <input type="number" id="utilidad_porcentaje" class="form-control small-input" [(ngModel)]="utilidadPorcentaje"
+          >
+          </td>
+          <td>
+            <input type="text" id="utilidad_valor" class="form-control medium-input" [value]="utilidadValor" readonly>
+          </td>
+        </tr>
+        <tr>
+          <td class="small-header">Imprevisto</td>
+          <td>
+            <input type="number" id="imprevisto_porcentaje" class="form-control small-input" [(ngModel)]="imprevistoPorcentaje"
+              >
+          </td>
+          <td>
+            <input type="text" id="imprevisto_valor" class="form-control medium-input" [value]="imprevistoValor" readonly>
+          </td>
+        </tr>
+        <tr>
+          <td class="small-header">IVA</td>
+          <td>
+            <input type="number" id="iva_porcentaje" class="form-control small-input" [(ngModel)]="ivaPorcentaje"
+>
+          </td>
+          <td>
+            <input type="text" id="iva_valor" class="form-control medium-input" [value]="ivaValor" readonly>
+          </td>
+        </tr>
+        <tr>
+          <td class="small-header">Total</td>
+
+          <td colspan="2">
+            <input type="text" class="form-control medium-input" currencyMask formControlName="valor_cotizado" id="totalInput"
+              [options]="{ prefix: '$ ', thousands: '.', decimal: ',',precision: 0 }" [value]="totalValor" readonly>
+          </td>
+        </tr>
+      </table>
+
+      <br>
+      <br>
+      <br>
 
 
 

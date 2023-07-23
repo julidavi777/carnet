@@ -119,4 +119,38 @@
   transition: border-color 0.3s ease;
 }
 
+.bordered-table {
+  border-collapse: collapse;
+  width: 80%;
+}
+
+.bordered-table th, .bordered-table td {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.small-input {
+  width: 80px;
+  font-size: 12px;
+}
+
+.medium-input {
+  width: 250px;
+  font-size: 12px;
+}
+
+
+
+.small-header {
+  width: 10px;
+  font-size: 12px;
+}
+.medium-header {
+  width: 50px;
+  font-size: 12px;
+}
+
+
+
+
 

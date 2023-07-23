@@ -20,7 +20,7 @@ export class CrearCotizacionPage implements OnInit {
 
     @Input() isCreating: boolean = false;
     @Input() parentFormGroup;
-    
+
     items: any[] = [];
 
     selectedFile: string = '';
@@ -31,12 +31,16 @@ export class CrearCotizacionPage implements OnInit {
     isEditing: boolean = false;
 
     cotizationsList: any = [];
-    subtotal: number;
-    admin: number;
-    imprevisto: number;
-    utilidad: number;
-    iva: number;
-    total: number;
+    adminPorcentaje: number = 0;
+  utilidadPorcentaje: number = 0;
+  imprevistoPorcentaje: number = 0;
+  ivaPorcentaje: number = 0;
+
+  adminValor: number = 0;
+  utilidadValor: number = 0;
+  imprevistoValor: number = 0;
+  ivaValor: number = 0;
+  totalValor: number = 0;
 
     cotizacionForm: any = new FormGroup({
       sede: new FormControl(''),
@@ -112,7 +116,7 @@ export class CrearCotizacionPage implements OnInit {
     if(this.isCreating){
       this.addChildFormGroup();
     }
-   
+
   }
 
   addChildFormGroup(): void {
@@ -137,7 +141,7 @@ export class CrearCotizacionPage implements OnInit {
 
         let data = {
             ...this.cotizacionForm.value,
-            cotizacion_file: this.cotizacionForm.get('cotizacion_file').value 
+            cotizacion_file: this.cotizacionForm.get('cotizacion_file').value
          }
 
         delete data.cotizacion_file_field;
@@ -220,9 +224,7 @@ export class CrearCotizacionPage implements OnInit {
 
 
 
-  calcularTotal() {
-    this.total = this.subtotal + this.admin + this.imprevisto + this.utilidad + (this.subtotal * this.iva / 100);
-  }
+
 
   getBase64(file) {
 
@@ -241,5 +243,38 @@ export class CrearCotizacionPage implements OnInit {
     })
  }
 
+//  calcularSubtotal() {
+//   this.subTotal = parseFloat((<HTMLInputElement>document.getElementById('subTotalInput')).value);
+//   this.calcularValores();
+// }
 
+
+// calcularValor(concepto: string) {
+//   const porcentaje = parseFloat((<HTMLInputElement>document.getElementById(`${concepto}_porcentaje`)).value);
+//   switch (concepto) {
+//     case 'admin':
+//       this.adminPorcentaje = porcentaje;
+//       break;
+//     case 'utilidad':
+//       this.utilidadPorcentaje = porcentaje;
+//       break;
+//     case 'imprevisto':
+//       this.imprevistoPorcentaje = porcentaje;
+//       break;
+//     case 'iva':
+//       this.ivaPorcentaje = porcentaje;
+//       break;
+//   }
+//   this.calcularValores();
 }
+// calcularValores() {
+//   this.adminValor = this.subTotal * (this.adminPorcentaje / 100);
+//   this.utilidadValor = this.subTotal * (this.utilidadPorcentaje / 100);
+//   this.imprevistoValor = this.subTotal * (this.imprevistoPorcentaje / 100);
+//   this.ivaValor = this.utilidadValor * (this.ivaPorcentaje / 100);
+//   this.totalValor = this.subTotal + this.adminValor + this.utilidadValor + this.imprevistoValor + this.ivaValor;
+// }
+
+
+
+
