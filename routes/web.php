@@ -23,6 +23,9 @@ Route::middleware('preventHistory')->group(function()
     {
         Route::get('/', [InscripcionesController::class, 'index'])
             ->name('inscripciones.inicio');
+
+        Route::get('jugadores', [InscripcionesController::class, 'getListaJugadores'])
+            ->name('inscripciones.lista.jugadores');
     });
 
     require __DIR__.'/auth.php';

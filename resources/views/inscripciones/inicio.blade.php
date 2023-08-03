@@ -162,168 +162,161 @@
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col" class="p-4">
-                                        <div class="flex items-center">
-                                            <input id="checkbox-all" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="checkbox-all" class="sr-only">checkbox</label>
-                                        </div>
+                                    <th scope="col" class="px-6 py-3">
+                                        Documento de identidad
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Product name
+                                        Nombres
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Color
+                                        Apellidos
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Category
+                                        Género
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Price
+                                        Nacionalidad
+                                    </th>
+                                    <th scope="col" class="px-6 py-3" colspan="2">
+                                        País y ciudad de residencia
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Club
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Fecha nacimiento
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Action
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td class="w-4 p-4">
-                                        <div class="flex items-center">
-                                            <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="checkbox-table-1" class="sr-only">checkbox</label>
-                                        </div>
-                                    </td>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Apple MacBook Pro 17"
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        Silver
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Laptop
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $2999
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td class="w-4 p-4">
-                                        <div class="flex items-center">
-                                            <input id="checkbox-table-2" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="checkbox-table-2" class="sr-only">checkbox</label>
-                                        </div>
-                                    </td>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Microsoft Surface Pro
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        White
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Laptop PC
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $1999
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td class="w-4 p-4">
-                                        <div class="flex items-center">
-                                            <input id="checkbox-table-3" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="checkbox-table-3" class="sr-only">checkbox</label>
-                                        </div>
-                                    </td>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Magic Mouse 2
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        Black
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Accessories
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $99
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td class="w-4 p-4">
-                                        <div class="flex items-center">
-                                            <input id="checkbox-table-3" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="checkbox-table-3" class="sr-only">checkbox</label>
-                                        </div>
-                                    </td>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Apple Watch
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        Silver
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Accessories
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $179
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td class="w-4 p-4">
-                                        <div class="flex items-center">
-                                            <input id="checkbox-table-3" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="checkbox-table-3" class="sr-only">checkbox</label>
-                                        </div>
-                                    </td>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        iPad
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        Gold
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Tablet
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $699
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td class="w-4 p-4">
-                                        <div class="flex items-center">
-                                            <input id="checkbox-table-3" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="checkbox-table-3" class="sr-only">checkbox</label>
-                                        </div>
-                                    </td>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Apple iMac 27"
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        Silver
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        PC Desktop
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $3999
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    </td>
-                                </tr>
+
+                            <tbody id="table-tbody">
+                                @push('scripts')
+                                    <script>
+                                        /*
+                                        const options = {
+                                            method: "GET",
+                                            headers: {
+                                                "Content-Type": "application/json"
+                                            },
+                                        };
+                                        */
+                                        let ruta = "{{ route('inscripciones.lista.jugadores') }}";
+
+                                        fetch(ruta)
+                                        .then(response => response.json())
+                                        .then(jugadores => {
+                                            let datos_jugadores = eval(jugadores);
+
+                                            createTBody(datos_jugadores);
+                                        });
+
+                                        function createTBody(lista_judadores)
+                                        {
+                                            lista_judadores.forEach(jugador => {
+                                                const tabla_tbody = document.getElementById('table-tbody');
+                                                const tbody_tr = document.createElement('tr');
+    
+                                                tbody_tr.classList.add('bg-white', 'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600');
+
+                                                // c15_jugador_id
+                                                const tbody_th_c15_jugador_id = document.createElement('th');
+
+                                                tbody_th_c15_jugador_id.classList.add('px-6', 'py-4', 'font-medium', 'text-gray-900', 'whitespace-nowrap', 'dark:text-white');
+                                                tbody_th_c15_jugador_id.setAttribute('scope', 'row');
+                                                tbody_th_c15_jugador_id.textContent = jugador.c15_jugador_id;
+
+
+                                                tbody_tr.appendChild(tbody_th_c15_jugador_id);
+
+                                                // c15_jugador_nombres
+                                                const tbody_td_c15_jugador_nombres = document.createElement('td');
+
+                                                tbody_td_c15_jugador_nombres.classList.add('px-6', 'py-4');
+                                                tbody_td_c15_jugador_nombres.textContent = jugador.c15_jugador_nombres;
+
+                                                tbody_tr.appendChild(tbody_td_c15_jugador_nombres);
+
+                                                // c15_jugador_apellidos
+                                                const tbody_td_c15_jugador_apellidos = document.createElement('td');
+
+                                                tbody_td_c15_jugador_apellidos.classList.add('px-6', 'py-4');
+                                                tbody_td_c15_jugador_apellidos.textContent = jugador.c15_jugador_apellidos;
+
+                                                tbody_tr.appendChild(tbody_td_c15_jugador_apellidos);
+
+                                                // c15_jugador_genero
+                                                const tbody_td_c15_jugador_genero = document.createElement('td');
+
+                                                tbody_td_c15_jugador_genero.classList.add('px-6', 'py-4');
+                                                tbody_td_c15_jugador_genero.textContent = jugador.c15_jugador_genero;
+
+                                                tbody_tr.appendChild(tbody_td_c15_jugador_genero);
+
+                                                // c15_jugador_nacionalidad
+                                                const tbody_td_c15_jugador_nacionalidad = document.createElement('td');
+
+                                                tbody_td_c15_jugador_nacionalidad.classList.add('px-6', 'py-4');
+                                                tbody_td_c15_jugador_nacionalidad.textContent = jugador.c15_jugador_nacionalidad;
+
+                                                tbody_tr.appendChild(tbody_td_c15_jugador_nacionalidad);
+
+                                                // c15_jugador_pais_residencia
+                                                const tbody_td_c15_jugador_pais_residencia = document.createElement('td');
+
+                                                tbody_td_c15_jugador_pais_residencia.classList.add('px-6', 'py-4');
+                                                tbody_td_c15_jugador_pais_residencia.textContent = jugador.c15_jugador_pais_residencia;
+
+                                                tbody_tr.appendChild(tbody_td_c15_jugador_pais_residencia);
+
+                                                // c15_jugador_ciudad_residencia
+                                                const tbody_td_c15_jugador_ciudad_residencia = document.createElement('td');
+
+                                                tbody_td_c15_jugador_ciudad_residencia.classList.add('px-6', 'py-4');
+                                                tbody_td_c15_jugador_ciudad_residencia.textContent = jugador.c15_jugador_ciudad_residencia;
+
+                                                tbody_tr.appendChild(tbody_td_c15_jugador_ciudad_residencia);
+
+                                                //c15_jugador_club_id
+                                                const tbody_td_c15_jugador_club_id = document.createElement('td');
+
+                                                tbody_td_c15_jugador_club_id.classList.add('px-6', 'py-4');
+                                                tbody_td_c15_jugador_club_id.textContent = jugador.c15_jugador_club_id;
+
+                                                tbody_tr.appendChild(tbody_td_c15_jugador_club_id);
+
+                                                //c15_jugador_fecha_nacimiento
+                                                const tbody_td_c15_jugador_fecha_nacimiento = document.createElement('td');
+
+                                                tbody_td_c15_jugador_fecha_nacimiento.classList.add('px-6', 'py-4');
+                                                tbody_td_c15_jugador_fecha_nacimiento.textContent = jugador.c15_jugador_fecha_nacimiento;
+
+                                                tbody_tr.appendChild(tbody_td_c15_jugador_fecha_nacimiento);
+
+                                                // Actions
+                                                const tbody_td_acciones = document.createElement('td');
+
+                                                tbody_td_acciones.classList.add('px-6', 'py-4');
+
+                                                // Editar
+                                                const td_editar = document.createElement('a');
+
+                                                td_editar.classList.add('font-medium', 'text-blue-600', 'dark:text-blue-500', 'hover:underline');
+
+                                                td_editar.textContent = 'Editar';
+                                                td_editar.setAttribute('href', '#');
+
+                                                tbody_td_acciones.appendChild(td_editar);
+
+                                                tbody_tr.appendChild(tbody_td_acciones);
+
+                                                tabla_tbody.appendChild(tbody_tr);
+                                            });
+                                        }
+                                    </script>
+                                @endpush
                             </tbody>
                         </table>
                     </div>
