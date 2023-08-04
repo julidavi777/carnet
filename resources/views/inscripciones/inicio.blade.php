@@ -162,32 +162,32 @@
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-4 py-3">
                                         Documento de identidad
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-4 py-3">
                                         Nombres
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-4 py-3">
                                         Apellidos
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-4 py-3">
                                         Género
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-4 py-3">
                                         Nacionalidad
                                     </th>
-                                    <th scope="col" class="px-6 py-3" colspan="2">
+                                    <th scope="col" class="px-4 py-3" colspan="2">
                                         País y ciudad de residencia
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-4 py-3">
                                         Club
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-4 py-3">
                                         Fecha nacimiento
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Action
+                                    <th scope="col" class="px-4 py-3">
+                                        Acciones
                                     </th>
                                 </tr>
                             </thead>
@@ -195,126 +195,12 @@
                             <tbody id="table-tbody">
                                 @push('scripts')
                                     <script>
-                                        /*
-                                        const options = {
-                                            method: "GET",
-                                            headers: {
-                                                "Content-Type": "application/json"
-                                            },
-                                        };
-                                        */
                                         let ruta = "{{ route('inscripciones.lista.jugadores') }}";
 
-                                        fetch(ruta)
-                                        .then(response => response.json())
+                                        getData(ruta)
                                         .then(jugadores => {
-                                            let datos_jugadores = eval(jugadores);
-
-                                            createTBody(datos_jugadores);
+                                            createTBody(jugadores);
                                         });
-
-                                        function createTBody(lista_judadores)
-                                        {
-                                            lista_judadores.forEach(jugador => {
-                                                const tabla_tbody = document.getElementById('table-tbody');
-                                                const tbody_tr = document.createElement('tr');
-    
-                                                tbody_tr.classList.add('bg-white', 'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600');
-
-                                                // c15_jugador_id
-                                                const tbody_th_c15_jugador_id = document.createElement('th');
-
-                                                tbody_th_c15_jugador_id.classList.add('px-6', 'py-4', 'font-medium', 'text-gray-900', 'whitespace-nowrap', 'dark:text-white');
-                                                tbody_th_c15_jugador_id.setAttribute('scope', 'row');
-                                                tbody_th_c15_jugador_id.textContent = jugador.c15_jugador_id;
-
-
-                                                tbody_tr.appendChild(tbody_th_c15_jugador_id);
-
-                                                // c15_jugador_nombres
-                                                const tbody_td_c15_jugador_nombres = document.createElement('td');
-
-                                                tbody_td_c15_jugador_nombres.classList.add('px-6', 'py-4');
-                                                tbody_td_c15_jugador_nombres.textContent = jugador.c15_jugador_nombres;
-
-                                                tbody_tr.appendChild(tbody_td_c15_jugador_nombres);
-
-                                                // c15_jugador_apellidos
-                                                const tbody_td_c15_jugador_apellidos = document.createElement('td');
-
-                                                tbody_td_c15_jugador_apellidos.classList.add('px-6', 'py-4');
-                                                tbody_td_c15_jugador_apellidos.textContent = jugador.c15_jugador_apellidos;
-
-                                                tbody_tr.appendChild(tbody_td_c15_jugador_apellidos);
-
-                                                // c15_jugador_genero
-                                                const tbody_td_c15_jugador_genero = document.createElement('td');
-
-                                                tbody_td_c15_jugador_genero.classList.add('px-6', 'py-4');
-                                                tbody_td_c15_jugador_genero.textContent = jugador.c15_jugador_genero;
-
-                                                tbody_tr.appendChild(tbody_td_c15_jugador_genero);
-
-                                                // c15_jugador_nacionalidad
-                                                const tbody_td_c15_jugador_nacionalidad = document.createElement('td');
-
-                                                tbody_td_c15_jugador_nacionalidad.classList.add('px-6', 'py-4');
-                                                tbody_td_c15_jugador_nacionalidad.textContent = jugador.c15_jugador_nacionalidad;
-
-                                                tbody_tr.appendChild(tbody_td_c15_jugador_nacionalidad);
-
-                                                // c15_jugador_pais_residencia
-                                                const tbody_td_c15_jugador_pais_residencia = document.createElement('td');
-
-                                                tbody_td_c15_jugador_pais_residencia.classList.add('px-6', 'py-4');
-                                                tbody_td_c15_jugador_pais_residencia.textContent = jugador.c15_jugador_pais_residencia;
-
-                                                tbody_tr.appendChild(tbody_td_c15_jugador_pais_residencia);
-
-                                                // c15_jugador_ciudad_residencia
-                                                const tbody_td_c15_jugador_ciudad_residencia = document.createElement('td');
-
-                                                tbody_td_c15_jugador_ciudad_residencia.classList.add('px-6', 'py-4');
-                                                tbody_td_c15_jugador_ciudad_residencia.textContent = jugador.c15_jugador_ciudad_residencia;
-
-                                                tbody_tr.appendChild(tbody_td_c15_jugador_ciudad_residencia);
-
-                                                //c15_jugador_club_id
-                                                const tbody_td_c15_jugador_club_id = document.createElement('td');
-
-                                                tbody_td_c15_jugador_club_id.classList.add('px-6', 'py-4');
-                                                tbody_td_c15_jugador_club_id.textContent = jugador.c15_jugador_club_id;
-
-                                                tbody_tr.appendChild(tbody_td_c15_jugador_club_id);
-
-                                                //c15_jugador_fecha_nacimiento
-                                                const tbody_td_c15_jugador_fecha_nacimiento = document.createElement('td');
-
-                                                tbody_td_c15_jugador_fecha_nacimiento.classList.add('px-6', 'py-4');
-                                                tbody_td_c15_jugador_fecha_nacimiento.textContent = jugador.c15_jugador_fecha_nacimiento;
-
-                                                tbody_tr.appendChild(tbody_td_c15_jugador_fecha_nacimiento);
-
-                                                // Actions
-                                                const tbody_td_acciones = document.createElement('td');
-
-                                                tbody_td_acciones.classList.add('px-6', 'py-4');
-
-                                                // Editar
-                                                const td_editar = document.createElement('a');
-
-                                                td_editar.classList.add('font-medium', 'text-blue-600', 'dark:text-blue-500', 'hover:underline');
-
-                                                td_editar.textContent = 'Editar';
-                                                td_editar.setAttribute('href', '#');
-
-                                                tbody_td_acciones.appendChild(td_editar);
-
-                                                tbody_tr.appendChild(tbody_td_acciones);
-
-                                                tabla_tbody.appendChild(tbody_tr);
-                                            });
-                                        }
                                     </script>
                                 @endpush
                             </tbody>
@@ -325,4 +211,121 @@
             </div>
         </div>
     </div>
+    <script>
+        async function createTBody(judadores)
+        {
+            judadores.forEach(jugador => {
+                const tabla_tbody = document.getElementById('table-tbody');
+                const tbody_tr = document.createElement('tr');
+
+                tbody_tr.classList.add('bg-white', 'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600');
+
+                // c15_jugador_id
+                const tbody_th_jugador_documento = document.createElement('th');
+
+                tbody_th_jugador_documento.classList.add('px-4', 'py-4', 'font-medium', 'text-gray-900', 'whitespace-nowrap', 'dark:text-white');
+                tbody_th_jugador_documento.setAttribute('scope', 'row');
+                tbody_th_jugador_documento.textContent = jugador.documento;
+
+
+                tbody_tr.appendChild(tbody_th_jugador_documento);
+
+                // c15_jugador_nombres
+                tbodyTD(jugador.nombres, tbody_tr);
+
+                // c15_jugador_apellidos
+                tbodyTD(jugador.apellidos, tbody_tr);
+
+                // c15_jugador_genero
+                tbodyTD(jugador.genero, tbody_tr);
+
+                // c15_jugador_nacionalidad
+                tbodyTD(jugador.nacionalidad, tbody_tr);
+
+                // c15_jugador_pais_residencia
+                tbodyTD(jugador.pais_residencia, tbody_tr);
+
+                // c15_jugador_ciudad_residencia
+                tbodyTD(jugador.ciudad_residencia, tbody_tr);
+
+                // c10_club_nombre
+                tbodyTD(jugador.club, tbody_tr);
+
+                //c15_jugador_fecha_nacimiento
+                tbodyTD(jugador.fecha_nacimiento, tbody_tr);
+
+                // Actions
+                const tbody_td_acciones = document.createElement('td');
+
+                tbody_td_acciones.classList.add('flex', 'flex-col', 'px-5', 'py-4');
+
+                // Editar
+                btnAcciones('Editar', tbody_td_acciones);
+
+                btnAcciones('Eliminar', tbody_td_acciones);
+
+                tbody_tr.appendChild(tbody_td_acciones);
+
+                tabla_tbody.appendChild(tbody_tr);
+            });
+        }
+
+        function tbodyTD(dato_judador = '', tbody_tr)
+        {
+            const tbody_td = document.createElement('td');
+
+            tbody_td.classList.add('px-4', 'py-4');
+            tbody_td.textContent = dato_judador;
+
+            tbody_tr.appendChild(tbody_td);
+        }
+
+        function btnAcciones(accion = '', tbody_td_acciones)
+        {
+            const td_btn = document.createElement('button');
+
+            if(accion === 'Editar')
+                td_btn.classList.add('font-medium', 'text-blue-600', 'dark:text-blue-500', 'hover:underline');
+            else
+                td_btn.classList.add('font-medium', 'text-red-600', 'dark:text-red-500', 'hover:underline');
+
+            td_btn.textContent = accion;
+            //td_btn.setAttribute('href', '#');
+
+            tbody_td_acciones.appendChild(td_btn);
+        }
+
+        async function getData(ruta = "")
+        {
+            /*
+                const options = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                };
+            */
+            const response = await fetch(ruta);
+            let lista_judadores = [];
+            let jugadores = await response.json();
+            
+            jugadores = JSON.parse(jugadores);
+
+            jugadores.forEach(jugador => {
+                lista_judadores.push({
+                    documento:  jugador.c15_jugador_id,
+                    nombres:    jugador.c15_jugador_nombres,
+                    apellido:    jugador.c15_jugador_apellidos,
+                    genero: jugador.c15_jugador_genero,
+                    nacionalidad:   jugador.c15_jugador_nacionalidad,
+                    pais_residencia: jugador.c15_jugador_pais_residencia,
+                    ciudad_residencia:   jugador.c15_jugador_ciudad_residencia,
+                    club: jugador.c10_club_nombre,
+                    fecha_nacimiento:    jugador.c15_jugador_fecha_nacimiento
+                });
+            });
+
+            return lista_judadores;
+        }
+    </script>
 </x-app-layout>
