@@ -23,20 +23,20 @@
                         Inscribir jugador
                     </x-flowbite.button>
                     
-                    <x-flowbite.modal :idModal="'inscribirUsuario'">
+                    <x-flowbite.modal :idModal="'inscribirUsuario'" data-modal-backdrop="static">
                         <x-slot name="tituloModal">
                             Inscribir jugador
                         </x-slot>
 
                         <x-slot name="cuerpoModal">
-                            <form class="h-80 overflow-y-auto">
+                            <form id="formulario-jugador" class="h-80 overflow-y-auto">
                                 <div class="grid gap-6 mb-6 px-10 md:grid-cols-2">
                                     <div class="mb-2">
                                         <x-flowbite.label for="numero-identificacion">
                                             Número de identificacion <span>*</span> 
                                         </x-flowbite.label>
                                         
-                                        <x-flowbite.input type="number" :id="'numero-identificacion'" required/>
+                                        <x-flowbite.input type="number" :id="'documento'" required/>
                                     </div>
         
                                     <div class="mb-2">
@@ -45,7 +45,7 @@
                                         </x-flowbite.label>
         
                                         <x-flowbite.input datepicker datepicker-format="dd/mm/yyyy" type="text" 
-                                            :id="'fecha-nacimiento'" placeholder="dd/mm/aaaa" required/>
+                                            :id="'fecha_nacimiento'" placeholder="dd/mm/aaaa" required/>
                                     </div>
 
                                     @push('scripts')
@@ -61,11 +61,11 @@
                                     </div>
 
                                     <div class="mb-2">
-                                        <x-flowbite.label for="apellidos">
+                                        <x-flowbite.label for="apellido">
                                             Apellidos <span>*</span> 
                                         </x-flowbite.label>
                                         
-                                        <x-flowbite.input type="text" :id="'apellidos'" required/>
+                                        <x-flowbite.input type="text" :id="'apellido'" required/>
                                     </div>
 
                                     <div class="mb-2">
@@ -74,7 +74,7 @@
                                         </x-flowbite.label>
         
                                         <x-flowbite.select :id="'genero'" required>
-                                            <option selected>-- Seleccione --</option>
+                                            <option value="0" selected>-- Seleccione --</option>
                                             <option value="M" >Masculino</option>
                                             <option value="F" >Femenino</option>
                                         </x-flowbite.select>                         
@@ -100,7 +100,7 @@
                                             @push('scripts')
                                                 <script>
                                                     //const prefijo_pais = "+";
-                                                    let pais = document.getElementById('pais-residencia'); 
+                                                    let pais = document.getElementById('pais_residencia'); 
                                                     let selected = pais.selectedOptions;
                                                     let pais_defecto = selected[0].label;
         
@@ -151,7 +151,7 @@
                                 Crear
                             </x-flowbite.button>
 
-                            <x-flowbite.button data-modal-hide="inscribirUsuario" type="button" :color="'gray'">
+                            <x-flowbite.button class="close-modal" data-modal-hide="inscribirUsuario" type="button" :color="'gray'">
                                 Cancelar
                             </x-flowbite.button>
                         </x-slot>
@@ -210,6 +210,99 @@
                 </div>
             </div>
         </div>
+        @push('scripts')
+            <script>
+                fetch( "{{ route('inscripciones.data.jugador') }}?" + new URLSearchParams({
+                    documento: '1014883487'
+                }).toString() )
+                .then(response => {
+                    //console.log(response.json()); // curiosamente retorna una promesa, por eso se necesita del then para acceder al mensaje
+                    if(response.ok)
+                        return response.json().then( jugador => JSON.parse(jugador)[0] );
+
+                    return response.json().then( mensaje => { throw new Error(mensaje.documento) } );
+                })
+                .then(jugador => {
+
+                    if(!jugador)
+                    {
+                        alert('El documento no se encuentra registrado.');
+                        return 1;
+                    }
+
+                    let datos_jugador = organizarDatosJugador( jugador );
+
+                    // set the modal menu element
+                    const targetEl = document.getElementById('inscribirUsuario');
+                    //const formulario = document.getElementById('formulario-jugador');
+
+                    const lista_inputs = document.getElementsByClassName('formulario-input');
+                    const lista_selects = document.getElementsByClassName('formulario-select');
+
+                    const options = {
+                        //placement: 'bottom-right',
+                        backdrop: 'static',
+                        //backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
+                        closable: true,
+                        onHide: () => {
+                            Array.from(lista_inputs).forEach((elemento, key) => {
+                                console.log(elemento.value);
+                                elemento.value = '';
+                                console.log(elemento.value);
+                            });
+
+                            Array.from(lista_selects).forEach((elemento, key) => {
+                                console.log(elemento.value);
+                                elemento.value = 0;
+                                console.log(elemento.value);
+                            });
+                        },
+                        onShow: () => {
+                            Array.from(lista_inputs).forEach(function(elemento, key) {
+                                elemento.value = datos_jugador[elemento.id];
+                            });
+
+                            Array.from(lista_selects).forEach((elemento, key) => {
+                                elemento.value = datos_jugador[elemento.id];
+                            });
+                        }
+                    };
+
+                    const modal = new Modal(targetEl, options);
+
+                    modal.show();
+
+                    const closeModal = document.getElementsByClassName('close-modal');
+
+                    Array.from(closeModal).forEach((elemento, key) => {
+                        elemento.addEventListener('click', () => {
+                            modal.hide();
+                        });
+                    });
+
+                    //console.log(lista_inputs, lista_selects);
+                })
+                .catch(error => {
+                    alert(error);
+                    console.error(error);
+                });
+
+                function organizarDatosJugador (jugador)
+                {
+                    return {
+                        documento:  jugador.c15_jugador_id,
+                        nombres:    jugador.c15_jugador_nombres,
+                        apellido:    jugador.c15_jugador_apellidos,
+                        genero: jugador.c15_jugador_genero,
+                        nacionalidad:   jugador.c15_jugador_nacionalidad,
+                        pais_residencia: jugador.c15_jugador_pais_residencia,
+                        ciudad_residencia:   jugador.c15_jugador_ciudad_residencia,
+                        club: jugador.c15_jugador_club_id,
+                        fecha_nacimiento:    jugador.c15_jugador_fecha_nacimiento
+                    }
+                }
+            </script>
+        @endpush
     </div>
     <script>
         async function createTBody(judadores)

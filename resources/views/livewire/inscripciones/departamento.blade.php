@@ -1,11 +1,11 @@
 <div>
-    <x-flowbite.label for="departamento-residencia">
+    <x-flowbite.label for="departamento_residencia">
         Departamento <span>*</span> 
     </x-flowbite.label>
 
     
-    <x-flowbite.select :id="'departamento-residencia'" wire:model="departamento" required >
-        <option>-- Seleccione -- </option>
+    <x-flowbite.select :id="'departamento_residencia'" wire:model="departamento" required >
+        <option value="0">-- Seleccione -- </option>
 
         @foreach ($departamentos as $item)
             <option value="{{ $item->departamento }}">
@@ -14,7 +14,7 @@
         @endforeach
     </x-flowbite.select>
 
-    <div wire:loading.delay wire:target="departamento" class="mt-4">
+    <div wire:loading.delay wire:target="departamento">
         <x-load-button> 
             Cargando municipios ... 
         </x-load-button>
@@ -22,7 +22,7 @@
 
     @push('scripts')
         <script>
-            document.getElementById('departamento-residencia').addEventListener('change', ()=>{
+            document.getElementById('departamento_residencia').addEventListener('change', ()=>{
                 Livewire.emit('eliminar-municipios')
             });
         </script>

@@ -6,7 +6,7 @@
 
     <x-flowbite.select :id="'club'" required>
 
-        <option>-- Seleccione --</option>
+        <option value="0">-- Seleccione --</option>
 
         @foreach ($clubes as $club)
             <option value="{{ $club->c10_club_id }}">{{ $club->c10_club_nombre }}</option>
