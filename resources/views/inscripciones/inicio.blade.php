@@ -61,11 +61,11 @@
                                     </div>
 
                                     <div class="mb-2">
-                                        <x-flowbite.label for="apellido">
+                                        <x-flowbite.label for="apellidos">
                                             Apellidos <span>*</span> 
                                         </x-flowbite.label>
                                         
-                                        <x-flowbite.input type="text" :id="'apellido'" required/>
+                                        <x-flowbite.input type="text" :id="'apellidos'" required/>
                                     </div>
 
                                     <div class="mb-2">
@@ -155,7 +155,6 @@
                         </x-slot>
                     </x-flowbite.modal>
 
-
                     <div class="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -172,10 +171,7 @@
                                     <th scope="col" class="px-4 py-3">
                                         Género
                                     </th>
-                                    <th scope="col" class="px-4 py-3">
-                                        Nacionalidad
-                                    </th>
-                                    <th scope="col" class="px-4 py-3" colspan="2">
+                                    <th scope="col" class="px-4 py-3" colspan="3">
                                         País y ciudad de residencia
                                     </th>
                                     <th scope="col" class="px-4 py-3">
@@ -244,15 +240,13 @@
                         closable: true,
                         onHide: () => {
                             Array.from(lista_inputs).forEach((elemento, key) => {
-                                console.log(elemento.value);
+                                //console.log(elemento.value);
                                 elemento.value = '';
-                                console.log(elemento.value);
                             });
 
                             Array.from(lista_selects).forEach((elemento, key) => {
-                                console.log(elemento.value);
-                                elemento.value = 0;
-                                console.log(elemento.value);
+                                if(elemento.id != 'pais_residencia')
+                                    elemento.value = 0;
                             });
                         },
                         onShow: () => {
@@ -290,7 +284,7 @@
                     return {
                         documento:  jugador.c15_jugador_id,
                         nombres:    jugador.c15_jugador_nombres,
-                        apellido:    jugador.c15_jugador_apellidos,
+                        apellidos:    jugador.c15_jugador_apellidos,
                         genero: jugador.c15_jugador_genero,
                         nacionalidad:   jugador.c15_jugador_nacionalidad,
                         pais_residencia: jugador.c15_jugador_pais_id,
@@ -331,11 +325,11 @@
                 // c15_jugador_genero
                 tbodyTD(jugador.genero, tbody_tr);
 
-                // c15_jugador_nacionalidad
-                tbodyTD(jugador.nacionalidad, tbody_tr);
-
                 // c15_jugador_pais_residencia
                 tbodyTD(jugador.pais_residencia, tbody_tr);
+
+                // c15_jugador_departamento_residencia
+                tbodyTD(jugador.departamento_residencia, tbody_tr);
 
                 // c15_jugador_ciudad_residencia
                 tbodyTD(jugador.ciudad_residencia, tbody_tr);
@@ -407,12 +401,12 @@
                 lista_judadores.push({
                     documento:  jugador.c15_jugador_id,
                     nombres:    jugador.c15_jugador_nombres,
-                    apellido:    jugador.c15_jugador_apellidos,
+                    apellidos:    jugador.c15_jugador_apellidos,
                     genero: jugador.c15_jugador_genero,
-                    nacionalidad:   jugador.c15_jugador_nacionalidad,
-                    pais_residencia: jugador.c15_jugador_pais_residencia,
-                    ciudad_residencia:   jugador.c15_jugador_ciudad_residencia,
-                    club: jugador.c10_club_nombre,
+                    pais_residencia: jugador.c15_jugador_pais,
+                    departamento_residencia: jugador.c15_jugador_departamento,
+                    ciudad_residencia:   jugador.c15_jugador_municipio,
+                    club: jugador.c15_club_nombre,
                     fecha_nacimiento:    jugador.c15_jugador_fecha_nacimiento
                 });
             });

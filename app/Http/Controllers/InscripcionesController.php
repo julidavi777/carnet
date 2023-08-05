@@ -19,7 +19,13 @@ class InscripcionesController extends Controller
          * Relacionar en producción las tablas clubes con jugador
          */
         $jugadores = DB::table('t15_jugadores')
-            ->join('t10_clubes', 'c10_club_id', 'c15_jugador_club_id')
+            ->select('c15_jugador_id', 'c15_jugador_fecha_nacimiento', 'c15_jugador_nombres', 'c15_jugador_apellidos', 
+                'c15_jugador_genero', 'c.c10_club_nombre AS c15_club_nombre', 'c15_jugador_responsable_id', 
+                'p.pais_id AS c15_jugador_pais', 'd.nombre AS c15_jugador_departamento', 'm.nombre AS c15_jugador_municipio')
+            ->join('t10_clubes AS c', 'c10_club_id', 'c15_jugador_club_id')
+            ->join('paises AS p', 'pais_id', 'c15_jugador_pais_id')
+            ->leftJoin('departamentos AS d', 'd.id' , 'c15_jugador_departamento_id')
+            ->leftJoin('municipios AS m', 'm.id' , 'c15_jugador_departamento_id')
             ->limit(5)
             ->get()
             ->toJson();
