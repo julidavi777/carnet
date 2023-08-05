@@ -191,10 +191,131 @@
                                     <script>
                                         let ruta = "{{ route('inscripciones.lista.jugadores') }}";
 
+                                        async function createTBody(judadores)
+                                        {
+                                            judadores.forEach(jugador => {
+                                                const tabla_tbody = document.getElementById('table-tbody');
+                                                const tbody_tr = document.createElement('tr');
+
+                                                tbody_tr.classList.add('bg-white', 'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600');
+
+                                                // c15_jugador_id
+                                                const tbody_th_jugador_documento = document.createElement('th');
+
+                                                tbody_th_jugador_documento.classList.add('px-4', 'py-4', 'font-medium', 'text-gray-900', 'whitespace-nowrap', 'dark:text-white');
+                                                tbody_th_jugador_documento.setAttribute('scope', 'row');
+                                                tbody_th_jugador_documento.textContent = jugador.documento;
+
+
+                                                tbody_tr.appendChild(tbody_th_jugador_documento);
+
+                                                // c15_jugador_nombres
+                                                tbodyTD(jugador.nombres, tbody_tr);
+
+                                                // c15_jugador_apellidos
+                                                tbodyTD(jugador.apellidos, tbody_tr);
+
+                                                // c15_jugador_genero
+                                                tbodyTD(jugador.genero, tbody_tr);
+
+                                                // c15_jugador_pais_residencia
+                                                tbodyTD(jugador.pais_residencia, tbody_tr);
+
+                                                // c15_jugador_departamento_residencia
+                                                tbodyTD(jugador.departamento_residencia, tbody_tr);
+
+                                                // c15_jugador_ciudad_residencia
+                                                tbodyTD(jugador.ciudad_residencia, tbody_tr);
+
+                                                // c10_club_nombre
+                                                tbodyTD(jugador.club, tbody_tr);
+
+                                                //c15_jugador_fecha_nacimiento
+                                                tbodyTD(jugador.fecha_nacimiento, tbody_tr);
+
+                                                // Actions
+                                                const tbody_td_acciones = document.createElement('td');
+
+                                                tbody_td_acciones.classList.add('flex', 'flex-col', 'px-5', 'py-4');
+
+                                                // Editar
+                                                btnAcciones('Editar', jugador.documento, tbody_td_acciones);
+
+                                                btnAcciones('Eliminar', jugador.documento, tbody_td_acciones);
+
+                                                tbody_tr.appendChild(tbody_td_acciones);
+
+                                                tabla_tbody.appendChild(tbody_tr);
+
+                                            });
+                                        }
+
+                                        async function getData(ruta = "")
+                                        {
+                                            /*
+                                                const options = {
+                                                    method: "POST",
+                                                    headers: {
+                                                        "Content-Type": "application/json"
+                                                    },
+                                                };
+                                            */
+                                            const response = await fetch(ruta);
+                                            let lista_judadores = [];
+                                            let jugadores = await response.json();
+                                            
+                                            jugadores = JSON.parse(jugadores);
+
+                                            jugadores.forEach(jugador => {
+                                                lista_judadores.push({
+                                                    documento:  jugador.c15_jugador_id,
+                                                    nombres:    jugador.c15_jugador_nombres,
+                                                    apellidos:    jugador.c15_jugador_apellidos,
+                                                    genero: jugador.c15_jugador_genero,
+                                                    pais_residencia: jugador.c15_jugador_pais,
+                                                    departamento_residencia: jugador.c15_jugador_departamento,
+                                                    ciudad_residencia:   jugador.c15_jugador_municipio,
+                                                    club: jugador.c15_club_nombre,
+                                                    fecha_nacimiento:    jugador.c15_jugador_fecha_nacimiento
+                                                });
+                                            });
+
+                                            return lista_judadores;
+                                        }
+
+                                        async function getDataJugador(ruta = "")
+                                        {
+                                            const response = await fetch(ruta);
+
+                                            if(response.ok)
+                                                return response.json().then( jugador => JSON.parse(jugador)[0] );
+
+                                            return response.json().then( mensaje => { throw new Error(mensaje.documento) } );
+                                        }
+
                                         getData(ruta)
                                         .then(jugadores => {
                                             createTBody(jugadores);
+
+                                            let btnEditar = document.getElementsByClassName('btnEditar');
+
+                                            Array.from(btnEditar).forEach((elemento, key) => {
+
+                                                elemento.addEventListener('click', () => {
+
+                                                    getDataJugador(elemento.dataset.jugadorHref)
+                                                    .then( jugador => {
+                                                        organizarDatosModal(jugador);
+                                                    })
+                                                    .catch(error => {
+                                                        alert(error);
+                                                        console.error(error);
+                                                    });
+                                                });
+
+                                            });
                                         });
+
                                     </script>
                                 @endpush
                             </tbody>
@@ -204,214 +325,129 @@
                 </div>
             </div>
         </div>
-        @push('scripts')
-            <script>
-                fetch( "{{ route('inscripciones.data.jugador') }}?" + new URLSearchParams({
-                    documento: '1014883487'
-                }).toString() )
-                .then(response => {
-                    //console.log(response.json()); // curiosamente retorna una promesa, por eso se necesita del then para acceder al mensaje
-                    if(response.ok)
-                        return response.json().then( jugador => JSON.parse(jugador)[0] );
-
-                    return response.json().then( mensaje => { throw new Error(mensaje.documento) } );
-                })
-                .then(jugador => {
-
-                    if(!jugador)
-                    {
-                        alert('El documento no se encuentra registrado.');
-                        return 1;
-                    }
-
-                    let datos_jugador = organizarDatosJugador( jugador );
-
-                    // set the modal menu element
-                    const targetEl = document.getElementById('inscribirUsuario');
-                    //const formulario = document.getElementById('formulario-jugador');
-
-                    const lista_inputs = document.getElementsByClassName('formulario-input');
-                    const lista_selects = document.getElementsByClassName('formulario-select');
-
-                    const options = {
-                        //placement: 'bottom-right',
-                        backdrop: 'static',
-                        //backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
-                        closable: true,
-                        onHide: () => {
-                            Array.from(lista_inputs).forEach((elemento, key) => {
-                                //console.log(elemento.value);
-                                elemento.value = '';
-                            });
-
-                            Array.from(lista_selects).forEach((elemento, key) => {
-                                if(elemento.id != 'pais_residencia')
-                                    elemento.value = 0;
-                            });
-                        },
-                        onShow: () => {
-                            Array.from(lista_inputs).forEach(function(elemento, key) {
-                                elemento.value = datos_jugador[elemento.id];
-                            });
-
-                            Array.from(lista_selects).forEach((elemento, key) => {
-                                elemento.value = (datos_jugador[elemento.id] || 0);
-                            });
-                        }
-                    };
-
-                    const modal = new Modal(targetEl, options);
-
-                    modal.show();
-
-                    const closeModal = document.getElementsByClassName('close-modal');
-
-                    Array.from(closeModal).forEach((elemento, key) => {
-                        elemento.addEventListener('click', () => {
-                            modal.hide();
-                        });
-                    });
-
-                    //console.log(lista_inputs, lista_selects);
-                })
-                .catch(error => {
-                    alert(error);
-                    console.error(error);
-                });
-
-                function organizarDatosJugador (jugador)
-                {
-                    return {
-                        documento:  jugador.c15_jugador_id,
-                        nombres:    jugador.c15_jugador_nombres,
-                        apellidos:    jugador.c15_jugador_apellidos,
-                        genero: jugador.c15_jugador_genero,
-                        nacionalidad:   jugador.c15_jugador_nacionalidad,
-                        pais_residencia: jugador.c15_jugador_pais_id,
-                        departamento_residencia: jugador.c15_jugador_departamento_id,
-                        ciudad_residencia:   jugador.c15_jugador_municipio_id,
-                        club: jugador.c15_jugador_club_id,
-                        fecha_nacimiento:    jugador.c15_jugador_fecha_nacimiento
-                    }
-                }
-            </script>
-        @endpush
     </div>
-    <script>
-        async function createTBody(judadores)
-        {
-            judadores.forEach(jugador => {
-                const tabla_tbody = document.getElementById('table-tbody');
-                const tbody_tr = document.createElement('tr');
+    @push('scripts')
+        <script>
+            function tbodyTD(dato_judador = '', tbody_tr)
+            {
+                const tbody_td = document.createElement('td');
 
-                tbody_tr.classList.add('bg-white', 'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600');
+                tbody_td.classList.add('px-4', 'py-4');
+                tbody_td.textContent = dato_judador;
 
-                // c15_jugador_id
-                const tbody_th_jugador_documento = document.createElement('th');
+                tbody_tr.appendChild(tbody_td);
+            }
 
-                tbody_th_jugador_documento.classList.add('px-4', 'py-4', 'font-medium', 'text-gray-900', 'whitespace-nowrap', 'dark:text-white');
-                tbody_th_jugador_documento.setAttribute('scope', 'row');
-                tbody_th_jugador_documento.textContent = jugador.documento;
+            function btnAcciones(accion = '', documento, tbody_td_acciones)
+            {
+                const td_btn = document.createElement('button');
 
+                if(accion === 'Editar')
+                    td_btn.classList.add('btn' + accion, 'font-medium', 'text-blue-600', 'dark:text-blue-500', 'hover:underline');
+                else
+                    td_btn.classList.add('btn' + accion, 'font-medium', 'text-red-600', 'dark:text-red-500', 'hover:underline');
 
-                tbody_tr.appendChild(tbody_th_jugador_documento);
+                td_btn.textContent = accion;
+                td_btn.setAttribute('data-jugador-href', "{{ route('inscripciones.data.jugador') }}?documento="+documento);
 
-                // c15_jugador_nombres
-                tbodyTD(jugador.nombres, tbody_tr);
+                tbody_td_acciones.appendChild(td_btn);
+            }
+        </script>
+    @endpush
 
-                // c15_jugador_apellidos
-                tbodyTD(jugador.apellidos, tbody_tr);
-
-                // c15_jugador_genero
-                tbodyTD(jugador.genero, tbody_tr);
-
-                // c15_jugador_pais_residencia
-                tbodyTD(jugador.pais_residencia, tbody_tr);
-
-                // c15_jugador_departamento_residencia
-                tbodyTD(jugador.departamento_residencia, tbody_tr);
-
-                // c15_jugador_ciudad_residencia
-                tbodyTD(jugador.ciudad_residencia, tbody_tr);
-
-                // c10_club_nombre
-                tbodyTD(jugador.club, tbody_tr);
-
-                //c15_jugador_fecha_nacimiento
-                tbodyTD(jugador.fecha_nacimiento, tbody_tr);
-
-                // Actions
-                const tbody_td_acciones = document.createElement('td');
-
-                tbody_td_acciones.classList.add('flex', 'flex-col', 'px-5', 'py-4');
-
-                // Editar
-                btnAcciones('Editar', tbody_td_acciones);
-
-                btnAcciones('Eliminar', tbody_td_acciones);
-
-                tbody_tr.appendChild(tbody_td_acciones);
-
-                tabla_tbody.appendChild(tbody_tr);
-            });
-        }
-
-        function tbodyTD(dato_judador = '', tbody_tr)
-        {
-            const tbody_td = document.createElement('td');
-
-            tbody_td.classList.add('px-4', 'py-4');
-            tbody_td.textContent = dato_judador;
-
-            tbody_tr.appendChild(tbody_td);
-        }
-
-        function btnAcciones(accion = '', tbody_td_acciones)
-        {
-            const td_btn = document.createElement('button');
-
-            if(accion === 'Editar')
-                td_btn.classList.add('font-medium', 'text-blue-600', 'dark:text-blue-500', 'hover:underline');
-            else
-                td_btn.classList.add('font-medium', 'text-red-600', 'dark:text-red-500', 'hover:underline');
-
-            td_btn.textContent = accion;
-            //td_btn.setAttribute('href', '#');
-
-            tbody_td_acciones.appendChild(td_btn);
-        }
-
-        async function getData(ruta = "")
-        {
+    @push('scripts')
+        <script>
             /*
-                const options = {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                };
-            */
-            const response = await fetch(ruta);
-            let lista_judadores = [];
-            let jugadores = await response.json();
-            
-            jugadores = JSON.parse(jugadores);
+            fetch( "{{ route('inscripciones.data.jugador') }}?" + new URLSearchParams({
+                documento: '1014883487'
+            }).toString() )
+            .then(response => {
+                //console.log(response.json()); // curiosamente retorna una promesa, por eso se necesita del then para acceder al mensaje
+                if(response.ok)
+                    return response.json().then( jugador => JSON.parse(jugador)[0] );
 
-            jugadores.forEach(jugador => {
-                lista_judadores.push({
+                return response.json().then( mensaje => { throw new Error(mensaje.documento) } );
+            })
+            .then(jugador => {
+                organizarDatosModal(jugador);
+            })
+            .catch(error => {
+                alert(error);
+                console.error(error);
+            });
+            */
+            function organizarDatosModal(jugador)
+            {
+                if(!jugador)
+                {
+                    alert('El documento no se encuentra registrado.');
+                    return 1;
+                }
+
+                let datos_jugador = organizarDatosJugador( jugador );
+
+                // set the modal menu element
+                const targetEl = document.getElementById('inscribirUsuario');
+                //const formulario = document.getElementById('formulario-jugador');
+
+                const lista_inputs = document.getElementsByClassName('formulario-input');
+                const lista_selects = document.getElementsByClassName('formulario-select');
+
+                const options = {
+                    //placement: 'bottom-right',
+                    backdrop: 'static',
+                    //backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
+                    closable: true,
+                    onHide: () => {
+                        Array.from(lista_inputs).forEach((elemento, key) => {
+                            //console.log(elemento.value);
+                            elemento.value = '';
+                        });
+
+                        Array.from(lista_selects).forEach((elemento, key) => {
+                            if(elemento.id != 'pais_residencia')
+                                elemento.value = 0;
+                        });
+                    },
+                    onShow: () => {
+                        Array.from(lista_inputs).forEach(function(elemento, key) {
+                            elemento.value = datos_jugador[elemento.id];
+                        });
+
+                        Array.from(lista_selects).forEach((elemento, key) => {
+                            elemento.value = (datos_jugador[elemento.id] || 0);
+                        });
+                    }
+                };
+
+                const modal = new Modal(targetEl, options);
+
+                modal.show();
+
+                const closeModal = document.getElementsByClassName('close-modal');
+
+                Array.from(closeModal).forEach((elemento, key) => {
+                    elemento.addEventListener('click', () => {
+                        modal.hide();
+                    });
+                });
+            }
+
+            function organizarDatosJugador (jugador)
+            {
+                return {
                     documento:  jugador.c15_jugador_id,
                     nombres:    jugador.c15_jugador_nombres,
                     apellidos:    jugador.c15_jugador_apellidos,
                     genero: jugador.c15_jugador_genero,
-                    pais_residencia: jugador.c15_jugador_pais,
-                    departamento_residencia: jugador.c15_jugador_departamento,
-                    ciudad_residencia:   jugador.c15_jugador_municipio,
-                    club: jugador.c15_club_nombre,
+                    nacionalidad:   jugador.c15_jugador_nacionalidad,
+                    pais_residencia: jugador.c15_jugador_pais_id,
+                    departamento_residencia: jugador.c15_jugador_departamento_id,
+                    ciudad_residencia:   jugador.c15_jugador_municipio_id,
+                    club: jugador.c15_jugador_club_id,
                     fecha_nacimiento:    jugador.c15_jugador_fecha_nacimiento
-                });
-            });
-
-            return lista_judadores;
-        }
-    </script>
+                }
+            }
+        </script>
+    @endpush
 </x-app-layout>
