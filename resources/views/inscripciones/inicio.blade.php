@@ -132,13 +132,11 @@
                                         </div>
 
                                         <div id="solo-colombia" class="col-span-2 grid grid-cols-2 gap-6">
-                                            <div>
-                                                <livewire:inscripciones.departamento />
-                                            </div>
-            
-                                            <div>
-                                                <livewire:inscripciones.municipio />
-                                            </div>
+
+                                            <livewire:inscripciones.departamento />
+
+                                            <livewire:inscripciones.municipio />
+
                                         </div>
                                     </div>
 

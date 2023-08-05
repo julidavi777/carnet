@@ -8,7 +8,7 @@ use App\Services\Inscripciones\DepartamentoMunicipioService;
 class Departamento extends Component
 {
     public $departamentos;
-    public $departamento;
+    public $departamentoId;
 
     public function render()
     {
@@ -17,8 +17,8 @@ class Departamento extends Component
         return view('livewire.inscripciones.departamento');
     }
 
-    public function updatedDepartamento()
+    public function updatedDepartamentoId()
     {
-        $this->emit('departamento', $this->departamento);
+        $this->emit('departamento', $this->departamentoId);
     }
 }

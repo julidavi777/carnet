@@ -7,8 +7,9 @@ use App\Services\Inscripciones\DepartamentoMunicipioService;
 
 class Municipio extends Component
 {
-    public $municipios = [];
-    public $view_select = false;
+    public $municipios;
+    public $departamento;
+    public $view_select;
 
     protected $listeners = [
         'departamento' => 'setDepartamento',

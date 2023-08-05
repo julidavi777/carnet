@@ -3,22 +3,18 @@
         Departamento <span>*</span> 
     </x-flowbite.label>
 
-    
-    <x-flowbite.select :id="'departamento_residencia'" wire:model="departamento" required >
+    <x-flowbite.select :id="'departamento_residencia'" wire:model="departamentoId" required >
         <option value="0">-- Seleccione -- </option>
 
         @foreach ($departamentos as $item)
-            <option value="{{ $item->departamento }}">
-                {{ $item->departamento }}
-            </option>
-        @endforeach
-    </x-flowbite.select>
 
-    <div wire:loading.delay wire:target="departamento">
-        <x-load-button> 
-            Cargando municipios ... 
-        </x-load-button>
-    </div>
+            <option value="{{ $item->id }}">
+                {{ $item->nombre }}
+            </option>
+
+        @endforeach
+
+    </x-flowbite.select>
 
     @push('scripts')
         <script>
