@@ -12,6 +12,114 @@
                 }
             </style>
         @endpush
+        @push('scripts')
+            <script>
+                async function createTBody(judadores)
+                {
+                    judadores.forEach(jugador => {
+                        const tabla_tbody = document.getElementById('table-tbody');
+                        const tbody_tr = document.createElement('tr');
+
+                        tbody_tr.classList.add('bg-white', 'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600');
+
+                        // c15_jugador_id
+                        const tbody_th_jugador_documento = document.createElement('th');
+
+                        tbody_th_jugador_documento.classList.add('px-4', 'py-4', 'font-medium', 'text-gray-900', 'whitespace-nowrap', 'dark:text-white');
+                        tbody_th_jugador_documento.setAttribute('scope', 'row');
+                        tbody_th_jugador_documento.textContent = jugador.documento;
+
+
+                        tbody_tr.appendChild(tbody_th_jugador_documento);
+
+                        // c15_jugador_nombres
+                        tbodyTD(jugador.nombres, tbody_tr);
+
+                        // c15_jugador_apellidos
+                        tbodyTD(jugador.apellidos, tbody_tr);
+
+                        // c15_jugador_genero
+                        tbodyTD(jugador.genero, tbody_tr);
+
+                        // c15_jugador_pais_residencia
+                        tbodyTD(jugador.pais_residencia, tbody_tr);
+
+                        // c15_jugador_departamento_residencia
+                        tbodyTD(jugador.departamento_residencia, tbody_tr);
+
+                        // c15_jugador_ciudad_residencia
+                        tbodyTD(jugador.ciudad_residencia, tbody_tr);
+
+                        // c10_club_nombre
+                        tbodyTD(jugador.club, tbody_tr);
+
+                        //c15_jugador_fecha_nacimiento
+                        tbodyTD(jugador.fecha_nacimiento, tbody_tr);
+
+                        // Actions
+                        const tbody_td_acciones = document.createElement('td');
+
+                        tbody_td_acciones.classList.add('flex', 'flex-col', 'px-5', 'py-4');
+
+                        // Editar
+                        btnAcciones('Editar', jugador.documento, tbody_td_acciones);
+
+                        btnAcciones('Eliminar', jugador.documento, tbody_td_acciones);
+
+                        tbody_tr.appendChild(tbody_td_acciones);
+
+                        tabla_tbody.appendChild(tbody_tr);
+
+                    });
+                }
+
+                async function getListaJuadores(ruta = "")
+                {
+                    /*
+                        const options = {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                        };
+                    */
+                    const response = await fetch(ruta);
+                    let lista_judadores = [];
+                    let jugadores = await response.json();
+                    
+                    jugadores = JSON.parse(jugadores);
+
+                    jugadores.forEach(jugador => {
+                        lista_judadores.push({
+                            documento:  jugador.c15_jugador_id,
+                            nombres:    jugador.c15_jugador_nombres,
+                            apellidos:    jugador.c15_jugador_apellidos,
+                            genero: jugador.c15_jugador_genero,
+                            pais_residencia: jugador.c15_jugador_pais,
+                            departamento_residencia: jugador.c15_jugador_departamento,
+                            ciudad_residencia:   jugador.c15_jugador_municipio,
+                            club: jugador.c15_club_nombre,
+                            fecha_nacimiento:    jugador.c15_jugador_fecha_nacimiento
+                        });
+                    });
+
+                    return lista_judadores;
+                }
+
+                async function getDataJugador(documento)
+                {
+                    const response = await fetch("{{ route('inscripciones.data.jugador') }}?" + new URLSearchParams({
+                            documento: documento
+                        }).toString());
+
+                    if(response.ok)
+                        return response.json().then( jugador => JSON.parse(jugador)[0] );
+
+                    return response.json().then( mensaje => { throw new Error(mensaje.documento) } );
+                }
+            </script>
+        @endpush
+
         <div class="max-w-max mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -19,7 +127,7 @@
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
                     <!-- Modal toggle -->
-                    <x-flowbite.button data-modal-target="inscribirUsuario" data-modal-toggle="inscribirUsuario" type="button">
+                    <x-flowbite.button class="mb-6" data-modal-target="inscribirUsuario" data-modal-toggle="inscribirUsuario" type="button">
                         Inscribir jugador
                     </x-flowbite.button>
                     
@@ -31,14 +139,51 @@
                         <x-slot name="cuerpoModal">
                             <form id="formulario-jugador" class="h-80 overflow-y-auto">
                                 <div class="grid gap-6 mb-6 px-10 md:grid-cols-2">
-                                    <div class="mb-2">
+
+                                    <div class="mb-2" x-data="documento">
+
                                         <x-flowbite.label for="numero-identificacion">
                                             Número de identificacion <span>*</span> 
                                         </x-flowbite.label>
                                         
-                                        <x-flowbite.input type="number" :id="'documento'" required/>
+                                        <x-flowbite.input type="number" x-bind="setDocumentoJugador" x-model.number.lazy="documento_jugador" :id="'documento'" required/>
+
+                                        {{-- buscando a: <span x-bind="getDocumentoJugador"></span> --}}
                                     </div>
-        
+
+                                    @push('scripts')
+                                        <script>
+                                            document.addEventListener('alpine:init', () => {
+                                                Alpine.data('documento', () => ({
+                                                    documento_jugador: '',
+                                        
+                                                    setDocumentoJugador: 
+                                                    {
+                                                        ['@keyup.enter']()
+                                                        {
+                                                            getDataJugador(this.documento_jugador)
+                                                            .then(jugador => {
+                                                                organizarDatosModal(jugador);
+                                                            })
+                                                            .catch(error => {
+                                                                alert(error);
+                                                                console.error(error);
+                                                            });
+                                                        }
+                                                    },
+
+                                                    getDocumentoJugador: 
+                                                    {
+                                                        ['x-text']()
+                                                        {
+                                                            return this.documento_jugador;
+                                                        }
+                                                    }
+                                                }))
+                                            })
+                                        </script>
+                                    @endpush
+
                                     <div class="mb-2">
                                         <x-flowbite.label for="fecha-nacimiento">
                                             Fecha nacimiento <span>*</span> 
@@ -187,116 +332,25 @@
                             </thead>
 
                             <tbody id="table-tbody">
+
                                 @push('scripts')
                                     <script>
-                                        let ruta = "{{ route('inscripciones.lista.jugadores') }}";
+                                        lista_judadores();
 
-                                        async function createTBody(judadores)
+                                        function lista_judadores()
                                         {
-                                            judadores.forEach(jugador => {
-                                                const tabla_tbody = document.getElementById('table-tbody');
-                                                const tbody_tr = document.createElement('tr');
+                                            let ruta = "{{ route('inscripciones.lista.jugadores') }}";
 
-                                                tbody_tr.classList.add('bg-white', 'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600');
+                                            getListaJuadores(ruta)
+                                            .then(jugadores => {
+                                                createTBody(jugadores);
 
-                                                // c15_jugador_id
-                                                const tbody_th_jugador_documento = document.createElement('th');
-
-                                                tbody_th_jugador_documento.classList.add('px-4', 'py-4', 'font-medium', 'text-gray-900', 'whitespace-nowrap', 'dark:text-white');
-                                                tbody_th_jugador_documento.setAttribute('scope', 'row');
-                                                tbody_th_jugador_documento.textContent = jugador.documento;
-
-
-                                                tbody_tr.appendChild(tbody_th_jugador_documento);
-
-                                                // c15_jugador_nombres
-                                                tbodyTD(jugador.nombres, tbody_tr);
-
-                                                // c15_jugador_apellidos
-                                                tbodyTD(jugador.apellidos, tbody_tr);
-
-                                                // c15_jugador_genero
-                                                tbodyTD(jugador.genero, tbody_tr);
-
-                                                // c15_jugador_pais_residencia
-                                                tbodyTD(jugador.pais_residencia, tbody_tr);
-
-                                                // c15_jugador_departamento_residencia
-                                                tbodyTD(jugador.departamento_residencia, tbody_tr);
-
-                                                // c15_jugador_ciudad_residencia
-                                                tbodyTD(jugador.ciudad_residencia, tbody_tr);
-
-                                                // c10_club_nombre
-                                                tbodyTD(jugador.club, tbody_tr);
-
-                                                //c15_jugador_fecha_nacimiento
-                                                tbodyTD(jugador.fecha_nacimiento, tbody_tr);
-
-                                                // Actions
-                                                const tbody_td_acciones = document.createElement('td');
-
-                                                tbody_td_acciones.classList.add('flex', 'flex-col', 'px-5', 'py-4');
-
-                                                // Editar
-                                                btnAcciones('Editar', jugador.documento, tbody_td_acciones);
-
-                                                btnAcciones('Eliminar', jugador.documento, tbody_td_acciones);
-
-                                                tbody_tr.appendChild(tbody_td_acciones);
-
-                                                tabla_tbody.appendChild(tbody_tr);
-
+                                                configBtnAcciones();
                                             });
                                         }
 
-                                        async function getData(ruta = "")
+                                        function configBtnAcciones()
                                         {
-                                            /*
-                                                const options = {
-                                                    method: "POST",
-                                                    headers: {
-                                                        "Content-Type": "application/json"
-                                                    },
-                                                };
-                                            */
-                                            const response = await fetch(ruta);
-                                            let lista_judadores = [];
-                                            let jugadores = await response.json();
-                                            
-                                            jugadores = JSON.parse(jugadores);
-
-                                            jugadores.forEach(jugador => {
-                                                lista_judadores.push({
-                                                    documento:  jugador.c15_jugador_id,
-                                                    nombres:    jugador.c15_jugador_nombres,
-                                                    apellidos:    jugador.c15_jugador_apellidos,
-                                                    genero: jugador.c15_jugador_genero,
-                                                    pais_residencia: jugador.c15_jugador_pais,
-                                                    departamento_residencia: jugador.c15_jugador_departamento,
-                                                    ciudad_residencia:   jugador.c15_jugador_municipio,
-                                                    club: jugador.c15_club_nombre,
-                                                    fecha_nacimiento:    jugador.c15_jugador_fecha_nacimiento
-                                                });
-                                            });
-
-                                            return lista_judadores;
-                                        }
-
-                                        async function getDataJugador(ruta = "")
-                                        {
-                                            const response = await fetch(ruta);
-
-                                            if(response.ok)
-                                                return response.json().then( jugador => JSON.parse(jugador)[0] );
-
-                                            return response.json().then( mensaje => { throw new Error(mensaje.documento) } );
-                                        }
-
-                                        getData(ruta)
-                                        .then(jugadores => {
-                                            createTBody(jugadores);
-
                                             let btnEditar = document.getElementsByClassName('btnEditar');
 
                                             Array.from(btnEditar).forEach((elemento, key) => {
@@ -312,10 +366,34 @@
                                                         console.error(error);
                                                     });
                                                 });
+                                            });
+
+                                            let btnEliminar = document.getElementsByClassName('btnEliminar');
+
+                                            Array.from(btnEliminar).forEach((elemento, key) => {
+
+                                                elemento.addEventListener('click', () => {
+
+                                                    let documento = elemento.dataset.jugadorHref;
+
+                                                    if(!confirm(`¿Está seguro de eliminar el siguiente documento: ${ documento }?`))
+                                                        return;
+
+                                                    alert('eliminado');
+                                                        /*
+                                                        getDataJugador()
+                                                        .then( jugador => {
+                                                            organizarDatosModal(jugador);
+                                                        })
+                                                        .catch(error => {
+                                                            alert(error);
+                                                            console.error(error);
+                                                        });
+                                                        */
+                                                });
 
                                             });
-                                        });
-
+                                        }
                                     </script>
                                 @endpush
                             </tbody>
@@ -348,7 +426,7 @@
                     td_btn.classList.add('btn' + accion, 'font-medium', 'text-red-600', 'dark:text-red-500', 'hover:underline');
 
                 td_btn.textContent = accion;
-                td_btn.setAttribute('data-jugador-href', "{{ route('inscripciones.data.jugador') }}?documento="+documento);
+                td_btn.setAttribute('data-jugador-href', documento);
 
                 tbody_td_acciones.appendChild(td_btn);
             }
@@ -357,33 +435,8 @@
 
     @push('scripts')
         <script>
-            /*
-            fetch( "{{ route('inscripciones.data.jugador') }}?" + new URLSearchParams({
-                documento: '1014883487'
-            }).toString() )
-            .then(response => {
-                //console.log(response.json()); // curiosamente retorna una promesa, por eso se necesita del then para acceder al mensaje
-                if(response.ok)
-                    return response.json().then( jugador => JSON.parse(jugador)[0] );
-
-                return response.json().then( mensaje => { throw new Error(mensaje.documento) } );
-            })
-            .then(jugador => {
-                organizarDatosModal(jugador);
-            })
-            .catch(error => {
-                alert(error);
-                console.error(error);
-            });
-            */
             function organizarDatosModal(jugador)
             {
-                if(!jugador)
-                {
-                    alert('El documento no se encuentra registrado.');
-                    return 1;
-                }
-
                 let datos_jugador = organizarDatosJugador( jugador );
 
                 // set the modal menu element

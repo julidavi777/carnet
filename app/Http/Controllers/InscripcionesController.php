@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InscripcionesController extends Controller
 {
@@ -26,7 +27,7 @@ class InscripcionesController extends Controller
             ->join('paises AS p', 'pais_id', 'c15_jugador_pais_id')
             ->leftJoin('departamentos AS d', 'd.id' , 'c15_jugador_departamento_id')
             ->leftJoin('municipios AS m', 'm.id' , 'c15_jugador_departamento_id')
-            ->limit(5)
+            ->where('c15_jugador_responsable_id', Auth::id())
             ->get()
             ->toJson();
 
