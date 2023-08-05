@@ -18,7 +18,7 @@
 
     @push('scripts')
         <script>
-            document.getElementById('departamento_residencia').addEventListener('change', ()=>{
+            document.getElementById('departamento_residencia').addEventListener('change', () => {
                 Livewire.emit('eliminar-municipios')
             });
         </script>

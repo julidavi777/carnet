@@ -261,7 +261,7 @@
                             });
 
                             Array.from(lista_selects).forEach((elemento, key) => {
-                                elemento.value = datos_jugador[elemento.id];
+                                elemento.value = (datos_jugador[elemento.id] || 0);
                             });
                         }
                     };
@@ -293,8 +293,9 @@
                         apellido:    jugador.c15_jugador_apellidos,
                         genero: jugador.c15_jugador_genero,
                         nacionalidad:   jugador.c15_jugador_nacionalidad,
-                        pais_residencia: jugador.c15_jugador_pais_residencia,
-                        ciudad_residencia:   jugador.c15_jugador_ciudad_residencia,
+                        pais_residencia: jugador.c15_jugador_pais_id,
+                        departamento_residencia: jugador.c15_jugador_departamento_id,
+                        ciudad_residencia:   jugador.c15_jugador_municipio_id,
                         club: jugador.c15_jugador_club_id,
                         fecha_nacimiento:    jugador.c15_jugador_fecha_nacimiento
                     }
