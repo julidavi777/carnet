@@ -25,7 +25,7 @@
                         // c15_jugador_id
                         const tbody_th_jugador_documento = document.createElement('th');
 
-                        tbody_th_jugador_documento.classList.add('px-4', 'py-4', 'font-medium', 'text-gray-900', 'whitespace-nowrap', 'dark:text-white');
+                        tbody_th_jugador_documento.classList.add('text-right', 'px-4', 'py-4', 'font-medium', 'text-gray-900', 'whitespace-nowrap', 'dark:text-white');
                         tbody_th_jugador_documento.setAttribute('scope', 'row');
                         tbody_th_jugador_documento.textContent = jugador.documento;
 
@@ -63,7 +63,9 @@
 
                         // Editar
                         btnAcciones('Editar', jugador.documento, tbody_td_acciones);
-
+                        // Inscribir
+                        btnAcciones('Inscribir', jugador.documento, tbody_td_acciones);
+                        // Eliminar
                         btnAcciones('Eliminar', jugador.documento, tbody_td_acciones);
 
                         tbody_tr.appendChild(tbody_td_acciones);
@@ -368,6 +370,29 @@
                                                 });
                                             });
 
+                                            let btnInscribir = document.getElementsByClassName('btnInscribir');
+
+                                            Array.from(btnInscribir).forEach((elemento, key) => {
+
+                                                elemento.addEventListener('click', () => {
+
+                                                    let documento = elemento.dataset.jugadorHref;
+
+                                                    alert(`jugador con documento : ${ documento } inscrito correctamente.`);
+                                                        /*
+                                                        getDataJugador()
+                                                        .then( jugador => {
+                                                            organizarDatosModal(jugador);
+                                                        })
+                                                        .catch(error => {
+                                                            alert(error);
+                                                            console.error(error);
+                                                        });
+                                                        */
+                                                });
+
+                                            });
+
                                             let btnEliminar = document.getElementsByClassName('btnEliminar');
 
                                             Array.from(btnEliminar).forEach((elemento, key) => {
@@ -376,7 +401,7 @@
 
                                                     let documento = elemento.dataset.jugadorHref;
 
-                                                    if(!confirm(`¿Está seguro de eliminar el siguiente documento: ${ documento }?`))
+                                                    if(!confirm(`¿Está seguro de eliminar al jugador con el siguiente documento: ${ documento }?`))
                                                         return;
 
                                                     alert('eliminado');
@@ -421,9 +446,11 @@
                 const td_btn = document.createElement('button');
 
                 if(accion === 'Editar')
-                    td_btn.classList.add('btn' + accion, 'font-medium', 'text-blue-600', 'dark:text-blue-500', 'hover:underline');
-                else
-                    td_btn.classList.add('btn' + accion, 'font-medium', 'text-red-600', 'dark:text-red-500', 'hover:underline');
+                    td_btn.classList.add('btn' + accion, 'mb-1', 'font-medium', 'text-blue-600', 'dark:text-blue-500', 'hover:underline');
+                else if(accion === 'Inscribir')
+                    td_btn.classList.add('btn' + accion, 'mb-1', 'font-medium', 'text-green-600', 'dark:text-green-500', 'hover:underline');
+                else if(accion === 'Eliminar')
+                    td_btn.classList.add('btn' + accion, 'mb-1', 'font-medium', 'text-red-600', 'dark:text-red-500', 'hover:underline');
 
                 td_btn.textContent = accion;
                 td_btn.setAttribute('data-jugador-href', documento);
