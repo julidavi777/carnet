@@ -54,6 +54,35 @@ export class HomePage {
             ]
         },
 
+        {
+          label:'Gestión Humana',
+          icon:'pi pi-id-card',
+          items:[
+              {
+                  label:'Empleados',
+
+                  icon:'pi pi-fw pi-users',
+
+
+                  routerLink: ['users']
+
+              },
+              {
+                separator:true
+              },
+              {
+                  label:'Roles',
+
+                  icon:'pi pi-fw pi-id-card',
+
+
+                  routerLink: ['roles']
+
+              },
+
+          ]
+      },
+
       {
           label:'Clientes',
           icon:'pi pi-fw pi-user',
@@ -132,37 +161,37 @@ export class HomePage {
 
   {
     label:'Presupuesto general',
-    icon:'pi pi-fw pi-database',
+    icon:'pi pi-server',
 
     items:[
         {
             label:'Administrar capitulación',
-            icon:'pi pi-fw pi-lock',
+            icon:'pi pi-book',
             routerLink: ['chapters']
         },
         {
             label:'Administrar actividades',
-            icon:'pi pi-fw pi-lock',
+            icon:'pi pi-sort-alpha-down',
             routerLink: ['apu-activities']
         },
         {
             label:'Administrar materiales',
-            icon:'pi pi-fw pi-lock',
+            icon:'pi pi-th-large',
             routerLink: ['apu-materials']
         },
         {
             label:'Administrar herramientas',
-            icon:'pi pi-fw pi-lock',
+            icon:'pi pi-wrench',
             routerLink: ['apu-tools']
         },
         {
             label:'Administrar precios transporte',
-            icon:'pi pi-fw pi-lock',
+            icon:'pi pi-fw pi-truck',
             routerLink: ['apu-transport-prices']
         },
         {
             label:'Administrar precios mano de obra',
-            icon:'pi pi-fw pi-lock',
+            icon:'pi pi-thumbs-up',
             routerLink: ['apu-labor-prices']
         },
         /* {
@@ -188,7 +217,7 @@ export class HomePage {
     ] */
 
     this.permissionsService.loadPermissions(permissions);
-  
+
 
     /* ADMIN */
     if(!permissions.includes('admin')){
