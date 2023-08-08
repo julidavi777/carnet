@@ -148,12 +148,13 @@ export class ApuPage implements OnInit {
   }
 
   removeItemAction(row: any){
-    console.log(row)
-    this.temp = this.temp.filter((item) => {
-      if(row.id !== item.id && row.internal_chapter_id == row.internal_chapter_id){
+
+    let itemIndex = this.temp.findIndex((item) => {
+      if(row.id == item.id && item.internal_chapter_id == row.internal_chapter_id){
         return item;
       }
     })
+    this.temp.splice(itemIndex, 1);
     this.rows = [...this.temp];
     console.log(this.temp)
   }
@@ -161,9 +162,13 @@ export class ApuPage implements OnInit {
   getApuSchema(){
     this.apuService.getApuSchema(this.apuAcitivityData?.id).subscribe((res: any) => {
       let resData = res?.data;
+      resData = resData.filter(e => {
+        if(e){
+          return e
+        }
+      })
       if(resData.length > 0){
         let data = JSON.parse(resData[0]['schema'])
-
         this.temp = [...data];
 
         this.rows = data;
