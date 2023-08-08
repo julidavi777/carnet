@@ -58,5 +58,5 @@ function getSoloColombia(pais)
 
     solo_colombia.classList.add(div_class_property);
 
-    console.log(pais, solo_colombia.className);
+    //console.log(pais, solo_colombia.className);
 }

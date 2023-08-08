@@ -65,7 +65,8 @@ function getSoloColombia(pais) {
 
   solo_colombia.classList.remove('visible') || solo_colombia.classList.remove('invisible');
   solo_colombia.classList.add(div_class_property);
-  console.log(pais, solo_colombia.className);
+
+  //console.log(pais, solo_colombia.className);
 }
 
 /***/ }),
@@ -168,8 +169,8 @@ function _organizarDatosEnModal3() {
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          datos_jugador = _classPrivateMethodGet(this, _organizarDatosJugador, _organizarDatosJugador2).call(this, jugador); // set the modal menu element este modal debería ser global
-          targetEl = document.getElementById('inscribirUsuario'); //const formulario = document.getElementById('formulario-jugador');
+          datos_jugador = _classPrivateMethodGet(this, _organizarDatosJugador, _organizarDatosJugador2).call(this, jugador); // Esta variable debería ser global
+          targetEl = document.getElementById('inscribirUsuario');
           lista_inputs = document.getElementsByClassName('formulario-input');
           lista_selects = document.getElementsByClassName('formulario-select');
           options = {
