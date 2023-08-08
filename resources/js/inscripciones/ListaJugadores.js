@@ -1,6 +1,6 @@
 import Jugador from './DataJugador';
 
-export default class ListaJugadores extends Jugador
+export default class ListaJugadores
 {
     ruta;
 
@@ -35,13 +35,11 @@ export default class ListaJugadores extends Jugador
         */
         const response = await fetch(ruta);
         let lista_judadores = [];
-        let jugadores = await response.json();
+        let jugadores = await response.json().then(jugadores => JSON.parse(jugadores));
 
         if (!response.ok)
             return response.json().then(mensaje => { throw new Error('Error en el servidor =>' + mensaje) });
 
-        jugadores = response.json().then(jugadores => JSON.parse(jugadores));
-    
         jugadores.forEach(jugador => {
 
             lista_judadores.push({

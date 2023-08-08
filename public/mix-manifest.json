@@ -2,7 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/js/flowbite.js": "/js/flowbite.js",
     "/js/datepicker.js": "/js/datepicker.js",
-    "/js/inscripciones/jugador.js": "/js/inscripciones/jugador.js",
+    "/js/inscripciones/Jugador.js": "/js/inscripciones/Jugador.js",
     "/css/flowbite.css": "/css/flowbite.css",
     "/css/app.css": "/css/app.css"
 }

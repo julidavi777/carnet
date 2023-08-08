@@ -1,3 +1,10 @@
+/** 
+ * Función que se usa dos veces para hacer lo mismo, se puede optimizar:
+ * 
+ *  1) Se usa para obtener los datos cuando da click en el botó de editar.
+ *  2) Se usa cuando se consulta el jugador en el input de documento en el modal.
+*/
+
 export default class DataJugador
 {
     documento;
@@ -40,9 +47,8 @@ export default class DataJugador
     {
         let datos_jugador = this.#organizarDatosJugador(jugador);
 
-        // set the modal menu element este modal debería ser global
+        // Esta variable debería ser global
         const targetEl = document.getElementById('inscribirUsuario');
-        //const formulario = document.getElementById('formulario-jugador');
 
         const lista_inputs = document.getElementsByClassName('formulario-input');
         const lista_selects = document.getElementsByClassName('formulario-select');

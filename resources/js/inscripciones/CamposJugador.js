@@ -1,27 +1,4 @@
-/** 
- * Función que se usa dos veces para hacer lo mismo, se puede optimizar:
- * 
- *  1) Se usa para obtener los datos cuando da click en el botó de editar.
- *  2) Se usa cuando se consulta el jugador en el input de documento en el modal.
-*/
 import Jugador from './DataJugador';
-
-import ListaJugadores from './ListaJugadores';
-
-// Diseño de fechas
-import 'flowbite/dist/datepicker';
-
-/** 
- * INICIO - Listado jugadores
-*/
-
-const jugadores = new ListaJugadores();
-
-jugadores.listadoJugadores;
-
-/** 
- * FIN - Listado jugadores
-*/
 
 /**
  * INICIO - Campos del modal

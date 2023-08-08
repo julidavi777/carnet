@@ -168,7 +168,7 @@
     </div>
 
     @push('scripts')
-        <script src="{{ asset('js/inscripciones/jugador.js') }}"></script>
+        <script src="{{ asset('js/inscripciones/Jugador.js') }}"></script>
     @endpush
 
 </x-app-layout>
