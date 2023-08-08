@@ -1,24 +1,15 @@
+import Jugador from './DataJugador';
 /** 
  * Función que se usa dos veces para hacer lo mismo, se puede optimizar:
  * 
  *  1) Se usa para obtener los datos cuando da click en el botó de editar.
  *  2) Se usa cuando se consulta el jugador en el input de documento en el modal.
 */
-async function getDataJugador(documento) 
+function getDataJugador(documento)
 {
-    /*
-    const response = await fetch(route('inscripciones.data.jugador') + "?" + new URLSearchParams({
-        documento: documento
-    }).toString());
-    */
-    const response = await fetch(route('inscripciones.data.jugador', {
-        documento: documento
-    }));
+    const getDatosJugador = new Jugador(documento);
 
-    if (response.ok)
-        return response.json().then(jugador => JSON.parse(jugador)[0]);
-
-    return response.json().then(mensaje => { throw new Error(mensaje.documento) });
+    getDatosJugador.datosJugador;
 }
 
 /** 
@@ -161,18 +152,10 @@ function configBtnAcciones()
     Array.from(btnEditar).forEach((elemento, key) => {
 
         elemento.addEventListener('click', () => {
-
             /**
              * Se repite por primera vez.
              */
-            getDataJugador(elemento.dataset.jugadorHref)
-                .then(jugador => {
-                    organizarDatosModal(jugador);
-                })
-                .catch(error => {
-                    alert(error);
-                    console.error(error);
-                });
+            getDataJugador(elemento.dataset.jugadorHref);
         });
     });
 
@@ -243,80 +226,6 @@ lista_judadores();
  * FIN - Funciones que solo se usa dentro de la función lista_judadores
 */
 
-/** 
- * INICIO - Funciones que solo se usa dentro del modal
-*/
-function organizarDatosJugador (jugador)
-{
-    return {
-        documento: jugador.c15_jugador_id,
-        nombres: jugador.c15_jugador_nombres,
-        apellidos: jugador.c15_jugador_apellidos,
-        genero: jugador.c15_jugador_genero,
-        nacionalidad: jugador.c15_jugador_nacionalidad,
-        pais_residencia: jugador.c15_jugador_pais_id,
-        departamento_residencia: jugador.c15_jugador_departamento_id,
-        ciudad_residencia: jugador.c15_jugador_municipio_id,
-        club: jugador.c15_jugador_club_id,
-        fecha_nacimiento: jugador.c15_jugador_fecha_nacimiento
-    }
-}
-
-function organizarDatosModal(jugador)
-{
-    let datos_jugador = organizarDatosJugador(jugador);
-
-    // set the modal menu element
-    const targetEl = document.getElementById('inscribirUsuario');
-    //const formulario = document.getElementById('formulario-jugador');
-
-    const lista_inputs = document.getElementsByClassName('formulario-input');
-    const lista_selects = document.getElementsByClassName('formulario-select');
-
-    const options = {
-        //placement: 'bottom-right',
-        backdrop: 'static',
-        //backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
-        closable: true,
-        onHide: () => {
-            Array.from(lista_inputs).forEach((elemento, key) => {
-                //console.log(elemento.value);
-                elemento.value = '';
-            });
-
-            Array.from(lista_selects).forEach((elemento, key) => {
-                if (elemento.id != 'pais_residencia')
-                    elemento.value = 0;
-            });
-        },
-        onShow: () => {
-            Array.from(lista_inputs).forEach(function (elemento, key) {
-                elemento.value = datos_jugador[elemento.id];
-            });
-
-            Array.from(lista_selects).forEach((elemento, key) => {
-                elemento.value = (datos_jugador[elemento.id] || 0);
-            });
-        }
-    };
-
-    const modal = new Modal(targetEl, options);
-
-    modal.show();
-
-    const closeModal = document.getElementsByClassName('close-modal');
-
-    Array.from(closeModal).forEach((elemento, key) => {
-        elemento.addEventListener('click', () => {
-            modal.hide();
-        });
-    });
-}
-
-/** 
- * FIN - Funciones que solo se usa dentro del modal
-*/
-
 /**
  * INICIO - Campos del modal
  */
@@ -335,14 +244,7 @@ document.addEventListener('alpine:init', () => {
         {
             ['@keyup.enter']()
             {
-                getDataJugador(this.documento_jugador)
-                .then(jugador => {
-                    organizarDatosModal(jugador);
-                })
-                .catch(error => {
-                    alert(error);
-                    console.error(error);
-                });
+                getDataJugador(this.documento_jugador);
             }
         },
         /*
