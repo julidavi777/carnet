@@ -7,6 +7,18 @@ export default class DataJugador
         this.documento = documento;
     }
 
+    get datosJugador()
+    {
+        this.#obtenerJugador()
+            .then(jugador => {
+                this.#organizarDatosEnModal(jugador);
+            })
+            .catch(error => {
+                alert(error);
+                console.error(error);
+            });
+    }
+
     async #obtenerJugador()
     {
         /*
@@ -73,18 +85,6 @@ export default class DataJugador
                 modal.hide();
             });
         });
-    }
-
-    get datosJugador()
-    {
-        this.#obtenerJugador()
-            .then(jugador => {
-                this.#organizarDatosEnModal(jugador);
-            })
-            .catch(error => {
-                alert(error);
-                console.error(error);
-            });
     }
 
     #organizarDatosJugador(jugador)

@@ -3565,7 +3565,6 @@ function configBtnAcciones() {
 
 function lista_judadores() {
   var ruta = route('inscripciones.lista.jugadores');
-  console.log(ruta);
   getListaJuadores(ruta).then(function (jugadores) {
     // Función asíncrona
     createTBody(jugadores);

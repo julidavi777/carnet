@@ -210,7 +210,6 @@ function configBtnAcciones()
 
 function lista_judadores() {
     let ruta = route('inscripciones.lista.jugadores');
-    console.log(ruta);
 
     getListaJuadores(ruta)
         .then(jugadores => {
