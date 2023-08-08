@@ -60,4 +60,41 @@ class InscripcionesController extends Controller
 
         return response()->json($jugador);
     }
+
+    protected function asignarJugador(Request $request)
+    {
+        //dd($request->all());
+        $validated = $request->validate([
+            'documento' => [ 'required', 'numeric' ],
+            'nombres' => [ 'required', 'string' ],
+            'apellidos' => [ 'required', 'string' ],
+            'genero' => [ 'required', 'string', 'size:1' ],
+            'club' => [ 'required', 'numeric', 'min:2' ],
+            'nacionalidad' => [ 'required', 'string', 'max:15' ],
+            'fecha_nacimiento' => [ 'nullable', 'date_format:Y-m-d' ],
+            'pais_residencia' => [ 'nullable', 'string', 'size:3' ],
+            'departamento_residencia' => [ 'nullable', 'numeric', 'min:2' ],
+            'municipio_residencia' => [ 'nullable', 'numeric', 'min:4' ]
+        ]);
+
+        $campos_insert['c15_jugador_id'] = $validated['documento'];
+        $campos_insert['c15_jugador_apellidos'] = $validated['apellidos'];
+        $campos_insert['c15_jugador_nombres'] = $validated['nombres'];
+        $campos_insert['c15_jugador_genero'] = $validated['genero'];
+        $campos_insert['c15_jugador_nacionalidad'] = $validated['nacionalidad'];
+        $campos_insert['c15_jugador_club_id'] = $validated['club'];
+        $campos_insert['c15_jugador_fecha_nacimiento'] = $validated['fecha_nacimiento'];
+        $campos_insert['c15_jugador_responsable_id'] = Auth::id();
+        $campos_insert['c15_jugador_departamento_id'] = $validated['departamento_residencia'];
+        $campos_insert['c15_jugador_municipio_id'] = $validated['municipio_residencia'];
+        $campos_insert['c15_jugador_pais_id'] = $validated['pais_residencia'];
+
+        DB::table('t15_jugadores')
+        ->updateOrInsert(
+            [ 'c15_jugador_id' => $campos_insert['c15_jugador_id'] ],
+            $campos_insert
+        );
+
+        return back()->with('success_jugador', 'Se ha asignado/actualizado el jugador correctamente');
+    }
 }
