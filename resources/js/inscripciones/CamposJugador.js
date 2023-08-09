@@ -1,5 +1,5 @@
 import Jugador from './DataJugador';
-
+import 'flowbite/dist/datepicker';
 /**
  * INICIO - Campos del modal
  */
