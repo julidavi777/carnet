@@ -14,9 +14,9 @@ document.addEventListener('alpine:init', () => {
         {
             ['@keyup.enter']()
             {
-                const getDatosJugador = new Jugador(this.documento_jugador);
+                let jugador = new Jugador(this.documento_jugador);
 
-                getDatosJugador.datosJugador;
+                jugador.datosJugador;
             }
         },
         /*

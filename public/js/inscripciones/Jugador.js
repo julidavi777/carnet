@@ -27,8 +27,8 @@ document.addEventListener('alpine:init', function () {
     return {
       documento_jugador: '',
       setDocumentoJugador: _defineProperty({}, '@keyup.enter', function keyupEnter() {
-        var getDatosJugador = new _DataJugador__WEBPACK_IMPORTED_MODULE_0__["default"](this.documento_jugador);
-        getDatosJugador.datosJugador;
+        var jugador = new _DataJugador__WEBPACK_IMPORTED_MODULE_0__["default"](this.documento_jugador);
+        jugador.datosJugador;
       })
       /*
       getDocumentoJugador: 
@@ -189,9 +189,10 @@ function _organizarDatosEnModal3() {
             },
             onShow: function onShow() {
               Array.from(lista_inputs).forEach(function (elemento, key) {
-                elemento.value = datos_jugador[elemento.id];
+                if (elemento.id == 'documento_anterior') elemento.value = "".concat(datos_jugador['documento']);else elemento.value = datos_jugador[elemento.id];
               });
               Array.from(lista_selects).forEach(function (elemento, key) {
+                //console.log(datos_jugador, elemento.id, datos_jugador[elemento.id]);
                 elemento.value = datos_jugador[elemento.id] || 0;
               });
             }
@@ -269,7 +270,24 @@ var ListaJugadores = /*#__PURE__*/function () {
     _classPrivateMethodInitSpec(this, _createTBody);
     _classPrivateMethodInitSpec(this, _obtenerListaJugadores);
     _defineProperty(this, "ruta", void 0);
+    _defineProperty(this, "organizarFrases", void 0);
     this.ruta = route('inscripciones.lista.jugadores');
+
+    // https://flexiple.com/javascript/javascript-capitalize-first-letter/
+    this.organizarFrases = function (campo_dato_jugador) {
+      //split the above string into an array of strings 
+      //whenever a blank space is encountered
+      var letras = campo_dato_jugador.split(" ");
+
+      //loop through each element of the array and capitalize the first letter.
+      for (var i = 0; i < letras.length; i++) {
+        letras[i] = letras[i].charAt(0).toUpperCase() + letras[i].slice(1).toLowerCase();
+      }
+
+      //Join all the elements of the array back into a string 
+      //using a blankspace as a separator 
+      return letras.join(" ");
+    };
   }
   _createClass(ListaJugadores, [{
     key: "listadoJugadores",
@@ -471,8 +489,8 @@ function _tbodyTD2() {
   var dato_judador = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var tbody_tr = arguments.length > 1 ? arguments[1] : undefined;
   var tbody_td = document.createElement('td');
-  tbody_td.classList.add('px-4', 'py-4');
-  tbody_td.textContent = dato_judador;
+  tbody_td.classList.add('px-4', 'py-4', 'whitespace-nowrap');
+  tbody_td.textContent = this.organizarFrases(dato_judador);
   tbody_tr.appendChild(tbody_td);
 }
 function _btnAcciones2() {

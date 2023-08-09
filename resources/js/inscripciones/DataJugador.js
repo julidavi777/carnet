@@ -71,10 +71,14 @@ export default class DataJugador
             },
             onShow: () => {
                 Array.from(lista_inputs).forEach(function (elemento, key) {
-                    elemento.value = datos_jugador[elemento.id];
+                    if(elemento.id == 'documento_anterior')
+                        elemento.value = `${ datos_jugador['documento'] }`;
+                    else
+                        elemento.value = datos_jugador[elemento.id];
                 });
 
                 Array.from(lista_selects).forEach((elemento, key) => {
+                    //console.log(datos_jugador, elemento.id, datos_jugador[elemento.id]);
                     elemento.value = (datos_jugador[elemento.id] || 0);
                 });
             }

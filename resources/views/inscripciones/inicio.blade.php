@@ -39,12 +39,12 @@
 
                     <!-- Modal toggle -->
                     <x-flowbite.button class="mb-6" data-modal-target="inscribirUsuario" data-modal-toggle="inscribirUsuario" type="button">
-                        Asignar jugador
+                        Asignar/Actualizar jugador
                     </x-flowbite.button>
                     
                     <x-flowbite.modal :idModal="'inscribirUsuario'" data-modal-backdrop="static">
                         <x-slot name="tituloModal">
-                            Asignar jugador
+                            Asignación/Actualización jugador
                         </x-slot>
 
                         <x-slot name="cuerpoModal">
@@ -53,6 +53,8 @@
                                 @csrf
 
                                 <div class="grid gap-6 mb-6 px-10 md:grid-cols-2">
+
+                                    <input type="hidden" name="documento_anterior" class="formulario-input" id="documento_anterior" value="0">
 
                                     <div class="mb-2" x-data="documento">
 
@@ -133,17 +135,14 @@
 
                                 </div>
                             </form>
-
+                            {{-- El jugador ya se encuentra asignado al usuario responsable: id --}}
                             @push('scripts')
                                 <script>
-                                    let form_jugador = document.getElementById('formulario-jugador');
+                                    const form_jugador = document.getElementById('formulario-jugador');
+                                    const button_form = document.getElementById('btn-formulario-jugador')
 
-                                    form_jugador.addEventListener('submit', (e) => {
-
-                                        //e.preventDefault();
-
+                                    button_form.addEventListener('click', (e) => {
                                         //fetch(route(''))
-
                                         form_jugador.submit();
                                     });
                                 </script>
@@ -151,7 +150,7 @@
                         </x-slot>
 
                         <x-slot name="footerModal">
-                            <x-flowbite.button type="submit" form="formulario-jugador">
+                            <x-flowbite.button type="button" id="btn-formulario-jugador" form="formulario-jugador">
                                 Crear
                             </x-flowbite.button>
 
@@ -163,31 +162,31 @@
 
                     <div class="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
 
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <table class="w-full overflow-x-auto text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col" class="px-4 py-3">
+                                    <th scope="col" class="px-4 py-3 whitespace-nowrap text-right">
                                         Documento de identidad
                                     </th>
-                                    <th scope="col" class="px-4 py-3">
+                                    <th scope="col" class="px-4 py-3 whitespace-nowrap">
                                         Nombres
                                     </th>
-                                    <th scope="col" class="px-4 py-3">
+                                    <th scope="col" class="px-4 py-3 whitespace-nowrap">
                                         Apellidos
                                     </th>
-                                    <th scope="col" class="px-4 py-3">
+                                    <th scope="col" class="px-4 py-3 whitespace-nowrap">
                                         Género
                                     </th>
-                                    <th scope="col" class="px-4 py-3" colspan="3">
+                                    <th scope="col" class="px-4 py-3 whitespace-nowrap text-center" colspan="3">
                                         País y ciudad de residencia
                                     </th>
-                                    <th scope="col" class="px-4 py-3">
+                                    <th scope="col" class="px-4 py-3 whitespace-nowrap">
                                         Club
                                     </th>
-                                    <th scope="col" class="px-4 py-3">
+                                    <th scope="col" class="px-4 py-3 whitespace-nowrap">
                                         Fecha nacimiento
                                     </th>
-                                    <th scope="col" class="px-4 py-3">
+                                    <th scope="col" class="px-4 py-3 whitespace-nowrap text-center">
                                         Acciones
                                     </th>
                                 </tr>

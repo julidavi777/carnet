@@ -3,10 +3,28 @@ import Jugador from './DataJugador';
 export default class ListaJugadores
 {
     ruta;
+    organizarFrases;
 
     constructor()
     {
         this.ruta = route('inscripciones.lista.jugadores');
+
+        // https://flexiple.com/javascript/javascript-capitalize-first-letter/
+        this.organizarFrases = (campo_dato_jugador) => {
+            //split the above string into an array of strings 
+            //whenever a blank space is encountered
+            let letras = campo_dato_jugador.split(" ");
+
+            //loop through each element of the array and capitalize the first letter.
+            for (var i = 0; i < letras.length; i++)
+            {
+                letras[i] = letras[i].charAt(0).toUpperCase() + letras[i].slice(1).toLowerCase() ;
+            }
+
+            //Join all the elements of the array back into a string 
+            //using a blankspace as a separator 
+            return letras.join(" ");
+        };
     }
 
     get listadoJugadores()
@@ -192,8 +210,8 @@ export default class ListaJugadores
     {
         const tbody_td = document.createElement('td');
 
-        tbody_td.classList.add('px-4', 'py-4');
-        tbody_td.textContent = dato_judador;
+        tbody_td.classList.add('px-4', 'py-4', 'whitespace-nowrap');
+        tbody_td.textContent = this.organizarFrases(dato_judador);
 
         tbody_tr.appendChild(tbody_td);
     }

@@ -65,6 +65,7 @@ class InscripcionesController extends Controller
     {
         //dd($request->all());
         $validated = $request->validate([
+            'documento_anterior' => [ 'nullable', 'numeric' ],
             'documento' => [ 'required', 'numeric' ],
             'nombres' => [ 'required', 'string' ],
             'apellidos' => [ 'required', 'string' ],
@@ -77,7 +78,18 @@ class InscripcionesController extends Controller
             'municipio_residencia' => [ 'nullable', 'numeric', 'min:4' ]
         ]);
 
-        $campos_insert['c15_jugador_id'] = $validated['documento'];
+        $is_created = false;
+
+        if($validated['documento_anterior'] == 0 
+            || $validated['documento_anterior'] == $validated['documento'] )
+        {
+            $is_created = false;
+            $campos_insert['c15_jugador_id'] = $validated['documento'];
+        }else{
+            $is_created = true;
+            $campos_insert['c15_jugador_id'] = $validated['documento_anterior'];
+        }
+
         $campos_insert['c15_jugador_apellidos'] = $validated['apellidos'];
         $campos_insert['c15_jugador_nombres'] = $validated['nombres'];
         $campos_insert['c15_jugador_genero'] = $validated['genero'];
@@ -91,7 +103,7 @@ class InscripcionesController extends Controller
 
         DB::table('t15_jugadores')
         ->updateOrInsert(
-            [ 'c15_jugador_id' => $campos_insert['c15_jugador_id'] ],
+            [ 'c15_jugador_id' => ($is_created) ? $validated['documento_anterior'] : $validated['documento'] ],
             $campos_insert
         );
 
