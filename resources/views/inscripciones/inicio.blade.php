@@ -236,16 +236,16 @@
                                         Documento de identidad
                                     </th>
                                     <th scope="col" class="px-4 py-3 whitespace-nowrap">
-                                        Nombres
+                                        Apellidos
                                     </th>
                                     <th scope="col" class="px-4 py-3 whitespace-nowrap">
-                                        Apellidos
+                                        Nombres
                                     </th>
                                     <th scope="col" class="px-4 py-3 whitespace-nowrap">
                                         Género
                                     </th>
-                                    <th scope="col" class="px-4 py-3 whitespace-nowrap text-center" colspan="3">
-                                        País y ciudad de residencia
+                                    <th scope="col" class="px-4 py-3 whitespace-nowrap">
+                                        Dpto. y Mpio. de residencia
                                     </th>
                                     <th scope="col" class="px-4 py-3 whitespace-nowrap">
                                         Club
@@ -253,7 +253,8 @@
                                     <th scope="col" class="px-4 py-3 whitespace-nowrap">
                                         Fecha nacimiento
                                     </th>
-                                    <th scope="col" class="px-4 py-3 whitespace-nowrap sticky top-0 right-0 text-center">
+                                    <th scope="col" class="px-4 py-3 whitespace-nowrap text-center">
+                                        {{-- clase que fija la columna -> sticky top-0 right-0 --}}
                                         Acciones
                                     </th>
                                 </tr>

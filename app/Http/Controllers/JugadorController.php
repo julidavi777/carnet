@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Livewire\Inscripciones\Departamento;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\Inscripciones\DepartamentoMunicipioService;
 
-class InscripcionesController extends Controller
+class JugadorController extends Controller
 {
     public function index()
     {
@@ -30,6 +29,7 @@ class InscripcionesController extends Controller
             ->leftJoin('departamentos AS d', 'd.id' , 'c15_jugador_departamento_id')
             ->leftJoin('municipios AS m', 'm.id' , 'c15_jugador_municipio_id')
             ->where('c15_jugador_responsable_id', Auth::id())
+            ->orderBy('c15_jugador_apellidos')
             ->get()
             ->toJson();
 
@@ -43,7 +43,7 @@ class InscripcionesController extends Controller
         ], 
         [
             'documento.required' => 'El campo es requerido',
-            'documento.numeric' => 'El campo debe ser un numérico'
+            'documento.numeric' => 'El campo debe ser numérico'
         ]);
 
         if($validator->fails()){
@@ -116,5 +116,34 @@ class InscripcionesController extends Controller
     protected function getMunicipios($departamento)
     {
         return response()->json(DepartamentoMunicipioService::getMunicipios($departamento));
+    }
+
+    protected function deleteJugador(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'documento' => 'required|numeric'
+        ], 
+        [
+            'documento.required' => 'El campo es requerido',
+            'documento.numeric' => 'El campo debe ser numérico'
+        ]);
+
+        if($validator->fails()){
+            return response()->json(
+                $validator->errors()
+            , 400);
+        }
+
+        $validated = $validator->validated();
+
+        DB::table('t15_jugadores')
+        ->where('c15_jugador_id', $validated['documento'])
+        ->update([
+            'c15_jugador_responsable_id' => null
+        ]);
+
+        return response()->json([
+            'message' => 'Eliminado correctamente'
+        ]);
     }
 }

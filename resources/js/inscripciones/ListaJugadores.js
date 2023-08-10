@@ -96,23 +96,17 @@ export default class ListaJugadores
 
             tbody_tr.appendChild(tbody_th_jugador_documento);
 
-            // c15_jugador_nombres
-            this.#tbodyTD(jugador.nombres, tbody_tr);
-
             // c15_jugador_apellidos
             this.#tbodyTD(jugador.apellidos, tbody_tr);
+
+            // c15_jugador_nombres
+            this.#tbodyTD(jugador.nombres, tbody_tr);
 
             // c15_jugador_genero
             this.#tbodyTD(jugador.genero, tbody_tr);
 
-            // c15_jugador_pais_residencia
-            this.#tbodyTD(jugador.pais_residencia, tbody_tr);
-
             // c15_jugador_departamento_residencia
-            this.#tbodyTD(jugador.departamento_residencia, tbody_tr);
-
-            // c15_jugador_ciudad_residencia
-            this.#tbodyTD(jugador.ciudad_residencia, tbody_tr);
+            this.#tbodyTD(jugador.departamento_residencia, tbody_tr, jugador.ciudad_residencia);
 
             // c10_club_nombre
             this.#tbodyTD(jugador.club, tbody_tr);
@@ -128,8 +122,10 @@ export default class ListaJugadores
             // Editar
             this.#btnAcciones('Editar', jugador.documento, tbody_td_acciones);
 
+            /*
             // Inscribir
             this.#btnAcciones('Inscribir', jugador.documento, tbody_td_acciones);
+            */
 
             // Eliminar
             this.#btnAcciones('Eliminar', jugador.documento, tbody_td_acciones);
@@ -156,28 +152,30 @@ export default class ListaJugadores
                 getDatosJugador.datosJugador;
             });
         });
-    
-        let btnInscribir = document.getElementsByClassName('btnInscribir');
-    
-        Array.from(btnInscribir).forEach((elemento, key) => {
-    
-            elemento.addEventListener('click', () => {
-    
-                let documento = elemento.dataset.jugadorHref;
-    
-                alert(`jugador con documento : ${documento} inscrito correctamente.`);
-                /*
-                    getDataJugador()
-                    .then( jugador => {
-                        organizarDatosModal(jugador);
-                    })
-                    .catch(error => {
-                        alert(error);
-                        console.error(error);
-                    });
-                */
+
+        /*
+            let btnInscribir = document.getElementsByClassName('btnInscribir');
+        
+            Array.from(btnInscribir).forEach((elemento, key) => {
+        
+                elemento.addEventListener('click', () => {
+        
+                    let documento = elemento.dataset.jugadorHref;
+        
+                    alert(`jugador con documento : ${documento} inscrito correctamente.`);
+                    /*
+                        getDataJugador()
+                        .then( jugador => {
+                            organizarDatosModal(jugador);
+                        })
+                        .catch(error => {
+                            alert(error);
+                            console.error(error);
+                        });
+                    /
+                });
             });
-        });
+        */
     
         let btnEliminar = document.getElementsByClassName('btnEliminar');
     
@@ -189,29 +187,36 @@ export default class ListaJugadores
     
                 if (!confirm(`¿Está seguro de eliminar al jugador con el siguiente documento: ${documento}?`))
                     return;
-    
-                alert('eliminado');
-                /*
-                    getDataJugador()
-                    .then( jugador => {
-                        organizarDatosModal(jugador);
-                    })
-                    .catch(error => {
-                        alert(error);
-                        console.error(error);
-                    });
-                */
+
+                fetch( route('jugador.eliminar', { documento: documento }) )
+                .then(async response => { 
+                    if(response.ok)
+                        return await response.json();
+
+                    const mensaje = await response.json();
+                    throw new Error(mensaje.documento[0]);
+                })
+                .then(mensaje => {
+                    alert(mensaje.message);
+
+                    location.reload();
+                })
+                .catch(error => {
+                    alert(error);
+                });
+                
             });
     
         });
     }
 
-    #tbodyTD(dato_judador = '', tbody_tr)
+    #tbodyTD(dato_judador = '', tbody_tr, municipio = false)
     {
         const tbody_td = document.createElement('td');
+        let contenido = (municipio) ? (dato_judador + ' - ' + municipio) : dato_judador;
 
         tbody_td.classList.add('px-4', 'py-4', 'whitespace-nowrap');
-        tbody_td.textContent = this.organizarFrases(dato_judador);
+        tbody_td.textContent = this.organizarFrases(contenido);
 
         tbody_tr.appendChild(tbody_td);
     }

@@ -417,23 +417,17 @@ function _createTBody3() {
             tbody_th_jugador_documento.textContent = jugador.documento;
             tbody_tr.appendChild(tbody_th_jugador_documento);
 
-            // c15_jugador_nombres
-            _classPrivateMethodGet(_this2, _tbodyTD, _tbodyTD2).call(_this2, jugador.nombres, tbody_tr);
-
             // c15_jugador_apellidos
             _classPrivateMethodGet(_this2, _tbodyTD, _tbodyTD2).call(_this2, jugador.apellidos, tbody_tr);
+
+            // c15_jugador_nombres
+            _classPrivateMethodGet(_this2, _tbodyTD, _tbodyTD2).call(_this2, jugador.nombres, tbody_tr);
 
             // c15_jugador_genero
             _classPrivateMethodGet(_this2, _tbodyTD, _tbodyTD2).call(_this2, jugador.genero, tbody_tr);
 
-            // c15_jugador_pais_residencia
-            _classPrivateMethodGet(_this2, _tbodyTD, _tbodyTD2).call(_this2, jugador.pais_residencia, tbody_tr);
-
             // c15_jugador_departamento_residencia
-            _classPrivateMethodGet(_this2, _tbodyTD, _tbodyTD2).call(_this2, jugador.departamento_residencia, tbody_tr);
-
-            // c15_jugador_ciudad_residencia
-            _classPrivateMethodGet(_this2, _tbodyTD, _tbodyTD2).call(_this2, jugador.ciudad_residencia, tbody_tr);
+            _classPrivateMethodGet(_this2, _tbodyTD, _tbodyTD2).call(_this2, jugador.departamento_residencia, tbody_tr, jugador.ciudad_residencia);
 
             // c10_club_nombre
             _classPrivateMethodGet(_this2, _tbodyTD, _tbodyTD2).call(_this2, jugador.club, tbody_tr);
@@ -443,13 +437,15 @@ function _createTBody3() {
 
             // Acciones
             var tbody_td_acciones = document.createElement('td');
-            tbody_td_acciones.classList.add('sticky', 'flex', 'flex-col', 'px-5', 'py-4');
+            tbody_td_acciones.classList.add('flex', 'flex-col', 'px-5', 'py-4');
 
             // Editar
             _classPrivateMethodGet(_this2, _btnAcciones, _btnAcciones2).call(_this2, 'Editar', jugador.documento, tbody_td_acciones);
 
+            /*
             // Inscribir
-            _classPrivateMethodGet(_this2, _btnAcciones, _btnAcciones2).call(_this2, 'Inscribir', jugador.documento, tbody_td_acciones);
+            this.#btnAcciones('Inscribir', jugador.documento, tbody_td_acciones);
+            */
 
             // Eliminar
             _classPrivateMethodGet(_this2, _btnAcciones, _btnAcciones2).call(_this2, 'Eliminar', jugador.documento, tbody_td_acciones);
@@ -468,10 +464,10 @@ function _configBtnAcciones2() {
   return _configBtnAcciones3.apply(this, arguments);
 }
 function _configBtnAcciones3() {
-  _configBtnAcciones3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-    var btnEditar, btnInscribir, btnEliminar;
-    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-      while (1) switch (_context3.prev = _context3.next) {
+  _configBtnAcciones3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+    var btnEditar, btnEliminar;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
         case 0:
           btnEditar = document.getElementsByClassName('btnEditar');
           Array.from(btnEditar).forEach(function (elemento, key) {
@@ -483,55 +479,90 @@ function _configBtnAcciones3() {
               getDatosJugador.datosJugador;
             });
           });
-          btnInscribir = document.getElementsByClassName('btnInscribir');
-          Array.from(btnInscribir).forEach(function (elemento, key) {
-            elemento.addEventListener('click', function () {
-              var documento = elemento.dataset.jugadorHref;
-              alert("jugador con documento : ".concat(documento, " inscrito correctamente."));
-              /*
-                  getDataJugador()
-                  .then( jugador => {
-                      organizarDatosModal(jugador);
-                  })
-                  .catch(error => {
-                      alert(error);
-                      console.error(error);
+
+          /*
+              let btnInscribir = document.getElementsByClassName('btnInscribir');
+          
+              Array.from(btnInscribir).forEach((elemento, key) => {
+          
+                  elemento.addEventListener('click', () => {
+          
+                      let documento = elemento.dataset.jugadorHref;
+          
+                      alert(`jugador con documento : ${documento} inscrito correctamente.`);
+                      /*
+                          getDataJugador()
+                          .then( jugador => {
+                              organizarDatosModal(jugador);
+                          })
+                          .catch(error => {
+                              alert(error);
+                              console.error(error);
+                          });
+                      /
                   });
-              */
-            });
-          });
+              });
+          */
           btnEliminar = document.getElementsByClassName('btnEliminar');
           Array.from(btnEliminar).forEach(function (elemento, key) {
             elemento.addEventListener('click', function () {
               var documento = elemento.dataset.jugadorHref;
               if (!confirm("\xBFEst\xE1 seguro de eliminar al jugador con el siguiente documento: ".concat(documento, "?"))) return;
-              alert('eliminado');
-              /*
-                  getDataJugador()
-                  .then( jugador => {
-                      organizarDatosModal(jugador);
-                  })
-                  .catch(error => {
-                      alert(error);
-                      console.error(error);
-                  });
-              */
+              fetch(route('jugador.eliminar', {
+                documento: documento
+              })).then( /*#__PURE__*/function () {
+                var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(response) {
+                  var mensaje;
+                  return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+                    while (1) switch (_context3.prev = _context3.next) {
+                      case 0:
+                        if (!response.ok) {
+                          _context3.next = 4;
+                          break;
+                        }
+                        _context3.next = 3;
+                        return response.json();
+                      case 3:
+                        return _context3.abrupt("return", _context3.sent);
+                      case 4:
+                        _context3.next = 6;
+                        return response.json();
+                      case 6:
+                        mensaje = _context3.sent;
+                        throw new Error(mensaje.documento[0]);
+                      case 8:
+                      case "end":
+                        return _context3.stop();
+                    }
+                  }, _callee3);
+                }));
+                return function (_x3) {
+                  return _ref.apply(this, arguments);
+                };
+              }()).then(function (mensaje) {
+                alert(mensaje.message);
+                location.reload();
+              })["catch"](function (error) {
+                alert(error);
+              });
             });
           });
-        case 6:
+        case 4:
         case "end":
-          return _context3.stop();
+          return _context4.stop();
       }
-    }, _callee3);
+    }, _callee4);
   }));
   return _configBtnAcciones3.apply(this, arguments);
 }
 function _tbodyTD2() {
   var dato_judador = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var tbody_tr = arguments.length > 1 ? arguments[1] : undefined;
+  var municipio = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var tbody_td = document.createElement('td');
+  var contenido = municipio ? dato_judador + ' - ' + municipio : dato_judador;
   tbody_td.classList.add('px-4', 'py-4', 'whitespace-nowrap');
-  tbody_td.textContent = this.organizarFrases(dato_judador);
+  tbody_td.textContent = this.organizarFrases(contenido);
   tbody_tr.appendChild(tbody_td);
 }
 function _btnAcciones2() {
