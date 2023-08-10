@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Livewire\Inscripciones\Departamento;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\Inscripciones\DepartamentoMunicipioService;
 
 class InscripcionesController extends Controller
 {
@@ -26,7 +28,7 @@ class InscripcionesController extends Controller
             ->join('t10_clubes AS c', 'c10_club_id', 'c15_jugador_club_id')
             ->join('paises AS p', 'pais_id', 'c15_jugador_pais_id')
             ->leftJoin('departamentos AS d', 'd.id' , 'c15_jugador_departamento_id')
-            ->leftJoin('municipios AS m', 'm.id' , 'c15_jugador_departamento_id')
+            ->leftJoin('municipios AS m', 'm.id' , 'c15_jugador_municipio_id')
             ->where('c15_jugador_responsable_id', Auth::id())
             ->get()
             ->toJson();
@@ -84,10 +86,10 @@ class InscripcionesController extends Controller
             || $validated['documento_anterior'] == $validated['documento'] )
         {
             $is_created = false;
-            $campos_insert['c15_jugador_id'] = $validated['documento'];
+            $campos_insert['c15_jugador_id'] = $validated['documento_anterior'];
         }else{
             $is_created = true;
-            $campos_insert['c15_jugador_id'] = $validated['documento_anterior'];
+            $campos_insert['c15_jugador_id'] = $validated['documento'];
         }
 
         $campos_insert['c15_jugador_apellidos'] = $validated['apellidos'];
@@ -99,7 +101,8 @@ class InscripcionesController extends Controller
         $campos_insert['c15_jugador_responsable_id'] = Auth::id();
         $campos_insert['c15_jugador_departamento_id'] = $validated['departamento_residencia'];
         $campos_insert['c15_jugador_municipio_id'] = $validated['municipio_residencia'];
-        $campos_insert['c15_jugador_pais_id'] = $validated['pais_residencia'];
+        $campos_insert['c15_jugador_pais_id'] = 'COL';
+        //$campos_insert['c15_jugador_pais_id'] = $validated['pais_residencia'];
 
         DB::table('t15_jugadores')
         ->updateOrInsert(
@@ -108,5 +111,10 @@ class InscripcionesController extends Controller
         );
 
         return back()->with('success_jugador', 'Se ha asignado/actualizado el jugador correctamente');
+    }
+
+    protected function getMunicipios($departamento)
+    {
+        return response()->json(DepartamentoMunicipioService::getMunicipios($departamento));
     }
 }

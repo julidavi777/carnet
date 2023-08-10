@@ -113,7 +113,28 @@ var DataJugador = /*#__PURE__*/function () {
     _classPrivateMethodInitSpec(this, _organizarDatosEnModal);
     _classPrivateMethodInitSpec(this, _obtenerJugador);
     _defineProperty(this, "documento", void 0);
+    _defineProperty(this, "organizarFrases", void 0);
+    _defineProperty(this, "deleteOptions", void 0);
     this.documento = documento;
+    this.deleteOptions = function (selectBox) {
+      while (selectBox.options.length > 0) {
+        selectBox.remove(0);
+      }
+    };
+    this.organizarFrases = function (palabra) {
+      //split the above string into an array of strings 
+      //whenever a blank space is encountered
+      var letras = palabra.split(" ");
+
+      //loop through each element of the array and capitalize the first letter.
+      for (var i = 0; i < letras.length; i++) {
+        letras[i] = letras[i].charAt(0).toUpperCase() + letras[i].slice(1).toLowerCase();
+      }
+
+      //Join all the elements of the array back into a string 
+      //using a blankspace as a separator 
+      return letras.join(" ");
+    };
   }
   _createClass(DataJugador, [{
     key: "datosJugador",
@@ -168,6 +189,7 @@ function _organizarDatosEnModal2(_x) {
 }
 function _organizarDatosEnModal3() {
   _organizarDatosEnModal3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(jugador) {
+    var _this2 = this;
     var datos_jugador, targetEl, lista_inputs, lista_selects, options, modal, closeModal;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
@@ -195,7 +217,22 @@ function _organizarDatosEnModal3() {
                 if (elemento.id == 'documento_anterior') elemento.value = "".concat(datos_jugador['documento']);else elemento.value = datos_jugador[elemento.id];
               });
               Array.from(lista_selects).forEach(function (elemento, key) {
-                //console.log(datos_jugador, elemento.id, datos_jugador[elemento.id]);
+                //console.log( elemento.id, datos_jugador[elemento.id], datos_jugador );
+                if (elemento.id == 'departamento_residencia') {
+                  fetch(route('inscripciones.municipios.jugador', [datos_jugador['departamento_residencia']])).then(function (data) {
+                    return data.json();
+                  }).then(function (municipios) {
+                    var selectMunicipio = document.getElementById('municipio_residencia');
+                    _this2.deleteOptions(selectMunicipio);
+                    JSON.parse(municipios).forEach(function (municipio) {
+                      var optionSelectMunicipio = document.createElement('option');
+                      if (municipio.id == datos_jugador['municipio_residencia']) optionSelectMunicipio.selected = true;
+                      optionSelectMunicipio.value = municipio.id;
+                      optionSelectMunicipio.text = _this2.organizarFrases(municipio.nombre);
+                      selectMunicipio.appendChild(optionSelectMunicipio);
+                    });
+                  });
+                }
                 elemento.value = datos_jugador[elemento.id] || 0;
               });
             }
@@ -225,7 +262,7 @@ function _organizarDatosJugador2(jugador) {
     nacionalidad: jugador.c15_jugador_nacionalidad,
     pais_residencia: jugador.c15_jugador_pais_id,
     departamento_residencia: jugador.c15_jugador_departamento_id,
-    ciudad_residencia: jugador.c15_jugador_municipio_id,
+    municipio_residencia: jugador.c15_jugador_municipio_id,
     club: jugador.c15_jugador_club_id,
     fecha_nacimiento: jugador.c15_jugador_fecha_nacimiento
   };
@@ -406,7 +443,7 @@ function _createTBody3() {
 
             // Acciones
             var tbody_td_acciones = document.createElement('td');
-            tbody_td_acciones.classList.add('flex', 'flex-col', 'px-5', 'py-4');
+            tbody_td_acciones.classList.add('sticky', 'flex', 'flex-col', 'px-5', 'py-4');
 
             // Editar
             _classPrivateMethodGet(_this2, _btnAcciones, _btnAcciones2).call(_this2, 'Editar', jugador.documento, tbody_td_acciones);

@@ -32,6 +32,9 @@ Route::middleware('preventHistory')->group(function()
 
         Route::post('asignar', [InscripcionesController::class, 'asignarJugador'])
             ->name('inscripciones.asignar.jugador');
+
+        Route::get('municipios/{departamento}', [InscripcionesController::class, 'getMunicipios'])
+            ->name('inscripciones.municipios.jugador');
     });
 
     require __DIR__.'/auth.php';

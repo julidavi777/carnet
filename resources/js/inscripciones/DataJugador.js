@@ -8,10 +8,34 @@
 export default class DataJugador
 {
     documento;
+    organizarFrases;
+    deleteOptions;
 
     constructor(documento)
     {
         this.documento = documento;
+
+        this.deleteOptions = (selectBox) => {
+            while (selectBox.options.length > 0) {
+                selectBox.remove(0);
+            }
+        }
+
+        this.organizarFrases = (palabra) => {
+            //split the above string into an array of strings 
+            //whenever a blank space is encountered
+            let letras = palabra.split(" ");
+
+            //loop through each element of the array and capitalize the first letter.
+            for (var i = 0; i < letras.length; i++)
+            {
+                letras[i] = letras[i].charAt(0).toUpperCase() + letras[i].slice(1).toLowerCase() ;
+            }
+
+            //Join all the elements of the array back into a string 
+            //using a blankspace as a separator 
+            return letras.join(" ");
+        };
     }
 
     get datosJugador()
@@ -70,6 +94,7 @@ export default class DataJugador
                 });
             },
             onShow: () => {
+
                 Array.from(lista_inputs).forEach(function (elemento, key) {
                     if(elemento.id == 'documento_anterior')
                         elemento.value = `${ datos_jugador['documento'] }`;
@@ -78,7 +103,32 @@ export default class DataJugador
                 });
 
                 Array.from(lista_selects).forEach((elemento, key) => {
-                    //console.log(datos_jugador, elemento.id, datos_jugador[elemento.id]);
+                    //console.log( elemento.id, datos_jugador[elemento.id], datos_jugador );
+                    if(elemento.id == 'departamento_residencia')
+                    {
+                        fetch( route('inscripciones.municipios.jugador', [ datos_jugador['departamento_residencia'] ] ))
+                        .then(data => data.json())
+                        .then(municipios => {
+                            const selectMunicipio = document.getElementById('municipio_residencia');
+
+                            this.deleteOptions(selectMunicipio);
+                            
+                            JSON.parse(municipios).forEach(municipio => {
+
+                                const optionSelectMunicipio = document.createElement('option');
+
+                                if(municipio.id == datos_jugador['municipio_residencia'] )
+                                    optionSelectMunicipio.selected = true;
+
+                                optionSelectMunicipio.value = municipio.id;
+                                optionSelectMunicipio.text = this.organizarFrases(municipio.nombre);
+
+                                selectMunicipio.appendChild(optionSelectMunicipio);
+                            });
+
+                        });
+                    }
+
                     elemento.value = (datos_jugador[elemento.id] || 0);
                 });
             }
@@ -107,7 +157,7 @@ export default class DataJugador
             nacionalidad: jugador.c15_jugador_nacionalidad,
             pais_residencia: jugador.c15_jugador_pais_id,
             departamento_residencia: jugador.c15_jugador_departamento_id,
-            ciudad_residencia: jugador.c15_jugador_municipio_id,
+            municipio_residencia: jugador.c15_jugador_municipio_id,
             club: jugador.c15_jugador_club_id,
             fecha_nacimiento: jugador.c15_jugador_fecha_nacimiento
         }

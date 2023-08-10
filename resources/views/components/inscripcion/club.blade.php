@@ -9,7 +9,7 @@
         <option value="0">-- Seleccione --</option>
 
         @foreach ($clubes as $club)
-            <option value="{{ $club->c10_club_id }}">{{ $club->c10_club_nombre }}</option>
+            <option value="{{ $club->c10_club_id }}">{{ ucfirst( strtolower( $club->c10_club_nombre ) ) }}</option>
         @endforeach
 
     </x-flowbite.select> 

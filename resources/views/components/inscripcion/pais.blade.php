@@ -3,7 +3,7 @@
         Pais residencia <span>*</span> 
     </x-flowbite.label>
 
-    <x-flowbite.select :id="'pais_residencia'" required>
+    <x-flowbite.select :id="'pais_residencia'" disabled>
 
         <option>-- Seleccione --</option>
 

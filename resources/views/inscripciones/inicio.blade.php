@@ -123,14 +123,81 @@
                                             <x-inscripcion.pais />
 
                                         </div>
-
+                                        
                                         <div id="solo-colombia" class="col-span-2 grid grid-cols-2 gap-6">
-
                                             <livewire:inscripciones.departamento />
 
-                                            <livewire:inscripciones.municipio />
-
+                                            <div>
+                                                {{-- Care about people's approval and you will be their prisoner. --}}
+                                                <x-flowbite.label for="municipio_residencia">
+                                                    Municipio <span>*</span>
+                                                </x-flowbite.label>
+                                        
+                                                <x-flowbite.select :id="'municipio_residencia'" required>
+                                        
+                                                    <option value="0" selected>-- Seleccione --</option>
+                                        
+                                                </x-flowbite.select>
+                                            </div>
+                                            {{--
+                                            <x-load-button id="load_municipio" class="mt-6">
+                                                Cargando municipios ...
+                                            </x-load-button>
+                                            --}}
                                         </div>
+
+                                        @push('scripts')
+                                        <script>
+                                            let organizarFrases = (palabra) => {
+                                                //split the above string into an array of strings 
+                                                //whenever a blank space is encountered
+                                                let letras = palabra.split(" ");
+
+                                                //loop through each element of the array and capitalize the first letter.
+                                                for (var i = 0; i < letras.length; i++)
+                                                {
+                                                    letras[i] = letras[i].charAt(0).toUpperCase() + letras[i].slice(1).toLowerCase() ;
+                                                }
+
+                                                //Join all the elements of the array back into a string 
+                                                //using a blankspace as a separator 
+                                                return letras.join(" ");
+                                            };
+
+                                            const departamento = document.getElementById('departamento_residencia');
+
+                                            departamento.addEventListener('change', () => {
+                                                
+                                                fetch( route('inscripciones.municipios.jugador', [ departamento.value ] ))
+                                                .then(data => data.json())
+                                                .then(municipios => {
+                                                
+                                                    const selectMunicipio = document.getElementById('municipio_residencia');
+                                                    
+                                                    removeAllOptions(selectMunicipio);
+                                                
+                                                    JSON.parse(municipios).forEach(municipio => {
+                                                        const optionSelectMunicipio = document.createElement('option');
+                                                        
+                                                        optionSelectMunicipio.value = municipio.id;
+                                                        optionSelectMunicipio.text = organizarFrases(municipio.nombre);
+                                                        
+                                                        selectMunicipio.appendChild(optionSelectMunicipio);
+                                                    });
+                                                
+                                                });
+                                            });
+                                                
+                                            function removeAllOptions(selectBox)
+                                            {
+                                                while (selectBox.options.length > 0)
+                                                {
+                                                    selectBox.remove(0);
+                                                }
+                                            }
+                                                            
+                                        </script>
+                                        @endpush
                                     </div>
 
                                 </div>
@@ -151,7 +218,7 @@
 
                         <x-slot name="footerModal">
                             <x-flowbite.button type="button" id="btn-formulario-jugador" form="formulario-jugador">
-                                Crear
+                                Enviar
                             </x-flowbite.button>
 
                             <x-flowbite.button class="close-modal" data-modal-hide="inscribirUsuario" type="button" :color="'gray'">
@@ -162,7 +229,7 @@
 
                     <div class="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
 
-                        <table class="w-full overflow-x-auto text-sm text-left text-gray-500 dark:text-gray-400">
+                        <table class="w-full relative overflow-x-auto text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-4 py-3 whitespace-nowrap text-right">
@@ -186,7 +253,7 @@
                                     <th scope="col" class="px-4 py-3 whitespace-nowrap">
                                         Fecha nacimiento
                                     </th>
-                                    <th scope="col" class="px-4 py-3 whitespace-nowrap text-center">
+                                    <th scope="col" class="px-4 py-3 whitespace-nowrap sticky top-0 right-0 text-center">
                                         Acciones
                                     </th>
                                 </tr>

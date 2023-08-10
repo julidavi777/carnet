@@ -16,9 +16,4 @@ class Departamento extends Component
 
         return view('livewire.inscripciones.departamento');
     }
-
-    public function updatedDepartamentoId()
-    {
-        $this->emit('departamento', $this->departamentoId);
-    }
 }
