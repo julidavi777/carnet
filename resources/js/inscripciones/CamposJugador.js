@@ -14,7 +14,7 @@ document.addEventListener('alpine:init', () => {
         {
             ['@keyup.enter']()
             {
-                let jugador = new Jugador(this.documento_jugador);
+                let jugador = new Jugador(this.documento_jugador, 1);
 
                 jugador.datosJugador;
             }

@@ -147,7 +147,7 @@ export default class ListaJugadores
                 /**
                  * Se repite por primera vez.
                  */
-                const getDatosJugador = new Jugador(elemento.dataset.jugadorHref);
+                const getDatosJugador = new Jugador(elemento.dataset.jugadorHref, 0);
 
                 getDatosJugador.datosJugador;
             });

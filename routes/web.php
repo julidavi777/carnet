@@ -26,7 +26,7 @@ Route::middleware('preventHistory')->group(function () {
         Route::get('lista-jugadores', [JugadorController::class, 'getListaJugadores'])
             ->name('inscripciones.lista.jugadores');
 
-        Route::get('datos-jugados', [JugadorController::class, 'getDataJugador'])
+        Route::get('datos-jugador', [JugadorController::class, 'getDataJugador'])
             ->name('inscripciones.data.jugador');
 
         Route::get('municipios/{departamento}', [JugadorController::class, 'getMunicipios'])

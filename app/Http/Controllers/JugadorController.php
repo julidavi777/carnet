@@ -39,11 +39,14 @@ class JugadorController extends Controller
     public function getDataJugador(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'documento' => 'required|numeric'
+            'documento' => 'required|numeric',
+            'is_input_form' => 'required|boolean'
         ], 
         [
             'documento.required' => 'El campo es requerido',
-            'documento.numeric' => 'El campo debe ser numérico'
+            'documento.numeric' => 'El campo debe ser numérico',
+            'is_input_form.required' => 'Error ...',
+            'is_input_form.boolean' => 'Error ...'
         ]);
 
         if($validator->fails()){
@@ -55,12 +58,25 @@ class JugadorController extends Controller
         $validated = $validator->validated();
 
         $jugador = DB::table('t15_jugadores')
-            //->join('t10_clubes', 'c10_club_id', 'c15_jugador_club_id')
-            ->where('c15_jugador_id', $validated['documento'])
-            ->get()
-            ->toJson();
+        //->join('t10_clubes', 'c10_club_id', 'c15_jugador_club_id')
+        ->where('c15_jugador_id', $validated['documento']);
 
-        return response()->json($jugador);
+        if((int)$validated['is_input_form'] == 1) // count($jugador->toArray()) == 1
+        {
+            $jugador->where('c15_jugador_responsable_id', Auth::id());
+
+            if ($jugador->get()->count() == 0)
+
+                return response()->json(
+                    [
+                        'error' => 'El jugador ya se encuentra asignado a un responsable, 
+                            contactese con el administrador'
+                    ],
+                    400
+                );
+        }
+
+        return response()->json($jugador->get()->toJson());
     }
 
     protected function asignarJugador(Request $request)
@@ -80,15 +96,40 @@ class JugadorController extends Controller
             'municipio_residencia' => [ 'nullable', 'numeric', 'min:4' ]
         ]);
 
-        $is_created = false;
-
-        if($validated['documento_anterior'] == 0 
-            || $validated['documento_anterior'] == $validated['documento'] )
+        if($validated['documento_anterior'] == 0)
         {
-            $is_created = false;
+            $check_responsable = DB::table('t15_jugadores')
+            ->select('c15_jugador_responsable_id as responsable')
+            ->where('c15_jugador_id', $validated['documento'])
+            ->get()
+            ->toArray();
+
+            if(Auth::id() !== $check_responsable[0]->responsable)
+                return back()->withErrors([
+                    'Error' => 'El jugador ya se encuentra asignado a un responsable, 
+                    por favor, contactese con un administrador.'
+                ]);
+
+            $campos_insert['c15_jugador_id'] = $validated['documento'];
+        }
+
+        if($validated['documento_anterior'] == $validated['documento'] )
+        {
             $campos_insert['c15_jugador_id'] = $validated['documento_anterior'];
-        }else{
-            $is_created = true;
+        }
+        else
+        {
+            $check_responsable = DB::table('t15_jugadores')
+            ->where('c15_jugador_id', $validated['documento'])
+            ->get()
+            ->count();
+
+            if($check_responsable > 0)
+                return back()->withErrors([
+                    'Error' => 'El documento ya se encuentra registrado y no es posible cambiarlo,
+                        por favor, contactese con un administrador.'
+                ]);
+
             $campos_insert['c15_jugador_id'] = $validated['documento'];
         }
 
@@ -106,7 +147,7 @@ class JugadorController extends Controller
 
         DB::table('t15_jugadores')
         ->updateOrInsert(
-            [ 'c15_jugador_id' => ($is_created) ? $validated['documento_anterior'] : $validated['documento'] ],
+            [ 'c15_jugador_id' => $campos_insert['c15_jugador_id'] ],
             $campos_insert
         );
 

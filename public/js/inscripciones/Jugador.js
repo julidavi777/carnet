@@ -29,7 +29,7 @@ document.addEventListener('alpine:init', function () {
     return {
       documento_jugador: '',
       setDocumentoJugador: _defineProperty({}, '@keyup.enter', function keyupEnter() {
-        var jugador = new _DataJugador__WEBPACK_IMPORTED_MODULE_0__["default"](this.documento_jugador);
+        var jugador = new _DataJugador__WEBPACK_IMPORTED_MODULE_0__["default"](this.documento_jugador, 1);
         jugador.datosJugador;
       })
       /*
@@ -107,14 +107,16 @@ var _organizarDatosJugador = /*#__PURE__*/new WeakSet();
  *  2) Se usa cuando se consulta el jugador en el input de documento en el modal.
 */
 var DataJugador = /*#__PURE__*/function () {
-  function DataJugador(documento) {
+  function DataJugador(documento, is_input_form) {
     _classCallCheck(this, DataJugador);
     _classPrivateMethodInitSpec(this, _organizarDatosJugador);
     _classPrivateMethodInitSpec(this, _organizarDatosEnModal);
     _classPrivateMethodInitSpec(this, _obtenerJugador);
     _defineProperty(this, "documento", void 0);
+    _defineProperty(this, "isInputForm", void 0);
     _defineProperty(this, "organizarFrases", void 0);
     _defineProperty(this, "deleteOptions", void 0);
+    this.isInputForm = is_input_form;
     this.documento = documento;
     this.deleteOptions = function (selectBox) {
       while (selectBox.options.length > 0) {
@@ -161,7 +163,8 @@ function _obtenerJugador3() {
         case 0:
           _context.next = 2;
           return fetch(route('inscripciones.data.jugador', {
-            documento: this.documento
+            documento: this.documento,
+            is_input_form: this.isInputForm
           }));
         case 2:
           response = _context.sent;
@@ -174,7 +177,7 @@ function _obtenerJugador3() {
           }));
         case 5:
           return _context.abrupt("return", response.json().then(function (mensaje) {
-            throw new Error(mensaje.documento);
+            throw new Error(mensaje.error || mensaje.documento);
           }));
         case 6:
         case "end":
@@ -475,7 +478,7 @@ function _configBtnAcciones3() {
               /**
                * Se repite por primera vez.
                */
-              var getDatosJugador = new _DataJugador__WEBPACK_IMPORTED_MODULE_0__["default"](elemento.dataset.jugadorHref);
+              var getDatosJugador = new _DataJugador__WEBPACK_IMPORTED_MODULE_0__["default"](elemento.dataset.jugadorHref, 0);
               getDatosJugador.datosJugador;
             });
           });

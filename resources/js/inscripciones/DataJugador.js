@@ -8,11 +8,13 @@
 export default class DataJugador
 {
     documento;
+    isInputForm;
     organizarFrases;
     deleteOptions;
 
-    constructor(documento)
+    constructor(documento, is_input_form)
     {
+        this.isInputForm = is_input_form;
         this.documento = documento;
 
         this.deleteOptions = (selectBox) => {
@@ -59,13 +61,17 @@ export default class DataJugador
             }).toString());
         */
         const response = await fetch(route('inscripciones.data.jugador', {
-            documento: this.documento
+            documento: this.documento,
+            is_input_form: this.isInputForm
         }));
 
         if (response.ok)
             return response.json().then(jugador => JSON.parse(jugador)[0] );
 
-        return response.json().then(mensaje => { throw new Error(mensaje.documento) });
+        return response.json().then(mensaje => {
+
+            throw new Error(mensaje.error || mensaje.documento);
+        });
     }
 
     async #organizarDatosEnModal(jugador)
