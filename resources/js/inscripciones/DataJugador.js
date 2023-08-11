@@ -42,7 +42,8 @@ export default class DataJugador
     {
         this.#obtenerJugador()
             .then(jugador => {
-                this.#organizarDatosEnModal(jugador);
+                if(jugador)
+                    this.#organizarDatosEnModal(jugador);
             })
             .catch(error => {
                 alert(error);

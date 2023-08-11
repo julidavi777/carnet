@@ -141,7 +141,7 @@ var DataJugador = /*#__PURE__*/function () {
     get: function get() {
       var _this = this;
       _classPrivateMethodGet(this, _obtenerJugador, _obtenerJugador2).call(this).then(function (jugador) {
-        _classPrivateMethodGet(_this, _organizarDatosEnModal, _organizarDatosEnModal2).call(_this, jugador);
+        if (jugador) _classPrivateMethodGet(_this, _organizarDatosEnModal, _organizarDatosEnModal2).call(_this, jugador);
       })["catch"](function (error) {
         alert(error);
         console.error(error);
