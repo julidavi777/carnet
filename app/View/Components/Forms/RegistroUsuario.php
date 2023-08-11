@@ -3,9 +3,12 @@
 namespace App\View\Components\Forms;
 
 use Illuminate\View\Component;
+use App\Services\Usuarios\RegistroService;
 
 class RegistroUsuario extends Component
 {
+    public $torneos;
+
     /**
      * Create a new component instance.
      *
@@ -13,7 +16,7 @@ class RegistroUsuario extends Component
      */
     public function __construct()
     {
-        //
+        $this->torneos = json_decode(RegistroService::getTorneos());
     }
 
     /**
