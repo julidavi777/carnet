@@ -20,49 +20,51 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" class="mt-5" action="{{ route('login') }}">
-            @csrf
-
-            <!-- Document 
-                 <div class="mb-6">
-                 <x-input id="documento" class="block w-full" type="text"
-                 name="documento" :value="old('documento')" placeholder="{{__('Document')}}"
-                 required /> -->
-            <div class="mb-6">
-                <x-input id="email" class="block w-full" type="text"
-                         name="email" :value="old('email')" placeholder="{{__('Email')}}"
-                         required />
-
-            </div>
-            <!-- Password -->
-            <div class="relative">
-                <x-input id="password" class="block w-full" type="password"
-                         name="password" placeholder="{{__('messages.pwd')}}"
-                         required autocomplete="current-password" :pwd="true" />
-            </div>
-            <div class="flex justify-center mt-5">
-                <x-button>
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-
-            <!-- Remember Me && Forgot you password -->
-            <div class="block mt-6 mb-2 text-center text-xs opacity-80">
-                {{--
-                <label for="remember_me">
-                    <input id="remember_me" type="checkbox" class="border-gray-300 text-blue-450 shadow-sm focus:border-blue-350 focus:ring focus:ring-blue-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm">{{ __('Remember me') }}</span>
-                </label>
-                --}}
-                <div class="">
-                    @if (Route::has('password.request'))
-                        <a class="text-sm hover:text-gray-500" href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
-                        </a>
-                    @endif
+        <div class="px-8">
+            <form method="POST" class="mt-5" action="{{ route('login') }}">
+                @csrf
+    
+                <!-- Document 
+                     <div class="mb-6">
+                     <x-input id="documento" class="block w-full" type="text"
+                     name="documento" :value="old('documento')" placeholder="{{__('Document')}}"
+                     required /> -->
+                <div class="mb-6">
+                    <x-input id="email" class="block w-full" type="text"
+                             name="email" :value="old('email')" placeholder="{{__('Email')}}"
+                             required />
+    
                 </div>
-            </div>
-        </form>
+                <!-- Password -->
+                <div class="mb-6 relative">
+                    <x-input id="password" class="block w-full" type="password"
+                             name="password" placeholder="{{__('messages.pwd')}}"
+                             required autocomplete="current-password" :pwd="true" />
+                </div>
+                <div class="flex justify-center mt-5">
+                    <x-button>
+                        {{ __('Log in') }}
+                    </x-button>
+                </div>
+    
+                <!-- Remember Me && Forgot you password -->
+                <div class="block mt-6 mb-2 text-center text-xs opacity-80">
+                    {{--
+                    <label for="remember_me">
+                        <input id="remember_me" type="checkbox" class="border-gray-300 text-blue-450 shadow-sm focus:border-blue-350 focus:ring focus:ring-blue-200 focus:ring-opacity-50" name="remember">
+                        <span class="ml-2 text-sm">{{ __('Remember me') }}</span>
+                    </label>
+                    --}}
+                    <div class="">
+                        @if (Route::has('password.request'))
+                            <a class="text-sm hover:text-gray-500" href="{{ route('password.request') }}">
+                                {{ __('Forgot your password?') }}
+                            </a>
+                        @endif
+                    </div>
+                </div>
+            </form>
+        </div>
     </x-auth-card>
     <script>
         function mostrarPwd(){
