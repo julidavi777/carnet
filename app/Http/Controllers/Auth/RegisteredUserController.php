@@ -33,16 +33,35 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $error_mensajes = [
+            'legal_id.required' => 'El documento es requerido',
+            'legal_id.numeric' => 'El documento debe ser numérico',
+            'legal_id.digits_between' => 'El documento debe tener entre 5 y 12 dígitos',
+
+            'phone_number.required' => 'El número de contacto es requerido',
+            'phone_number.numeric' => 'El número de contacto debe ser numérico',
+            'phone_number.digits_between' => 'El número de contacto debe tener entre 7 y 10 dígitos',
+
+            'torneo_seleccionado.numeric' => 'Error en el torneo',
+            'torneo_seleccionado.digits_between' => 'Error en el torneo',
+        ];
+
+        $validated = $request->validate([
+            'legal_id' => ['required', 'numeric', 'digits_between:5,12'],
             'name' => ['required', 'string', 'max:255'],
+            'phone_number' => ['required', 'numeric', 'digits_between:7,10'],
+            'torneo_seleccionado' => ['nullable', 'numeric', 'digits_between:1,2'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        ], $error_mensajes);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'legal_id' => $validated['legal_id'],
+            'phone_number' => $validated['phone_number'],
+            'id_torneo_seleccionado' => $validated['id_torneo_seleccionado'] ?? null,
         ]);
 
         event(new Registered($user));
