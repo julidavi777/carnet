@@ -12,11 +12,25 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
+            <!-- Documento Identidad -->
+            <div class="mt-4">
+                <x-label for="legal_id" :value="__('Documento Identidad')" />
+
+                <x-input id="legal_id" class="block w-full" type="number" name="legal_id" :value="old('legal_id')" required autofocus />
+            </div>
+
             <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name')" />
+            <div class="mt-4">
+                <x-label for="name" :value="__('Nombre completo')" />
 
                 <x-input id="name" class="block w-full" type="text" name="name" :value="old('name')" required autofocus />
+            </div>
+
+            <!-- Teléfono -->
+            <div class="mt-4">
+                <x-label for="phone_number" :value="__('Número de contacto')" />
+
+                <x-input id="phone_number" class="block w-full" type="text" name="phone_number" :value="old('phone_number')" required autofocus />
             </div>
 
             <!-- Email Address -->
