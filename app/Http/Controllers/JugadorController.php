@@ -63,9 +63,9 @@ class JugadorController extends Controller
 
         if((int)$validated['is_input_form'] == 1) // count($jugador->toArray()) == 1
         {
-            $jugador->where('c15_jugador_responsable_id', Auth::id());
+            $jugador->whereNotNull('c15_jugador_responsable_id');
 
-            if ($jugador->get()->count() == 0)
+            if ($jugador->get()->count() > 0)
 
                 return response()->json(
                     [
