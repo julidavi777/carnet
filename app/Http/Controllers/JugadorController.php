@@ -57,23 +57,28 @@ class JugadorController extends Controller
 
         $validated = $validator->validated();
 
+        // SELECT * FROM t15_jugadores
+        // WHERE c15_jugador_id = :documento
         $jugador = DB::table('t15_jugadores')
-        //->join('t10_clubes', 'c10_club_id', 'c15_jugador_club_id')
         ->where('c15_jugador_id', $validated['documento']);
 
         if((int)$validated['is_input_form'] == 1) // count($jugador->toArray()) == 1
         {
-            $jugador->whereNotNull('c15_jugador_responsable_id');
+            $found_responsable = $jugador->get();
 
-            if ($jugador->get()->count() > 0)
-
-                return response()->json(
-                    [
-                        'error' => 'El jugador ya se encuentra asignado a un responsable, 
+            if($found_responsable->count() > 0)
+            {
+                // AND c15_jugador_responsable_id IS NOT NULL
+                $jugador->whereNotNull('c15_jugador_responsable_id')->get();
+    
+                if($jugador->count() > 0 && $jugador->toArray()[0]->c15_jugador_responsable_id !== Auth::id())
+                    return response()->json(
+                        [
+                            'error' => 'El jugador ya se encuentra asignado a un responsable, 
                             contactese con el administrador'
-                    ],
-                    400
-                );
+                        ],
+                    400);
+            }
         }
 
         return response()->json($jugador->get()->toJson());
