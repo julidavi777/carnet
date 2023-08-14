@@ -11,6 +11,7 @@ export default class DataJugador
     isInputForm;
     organizarFrases;
     deleteOptions;
+    isObjectEmpty;
 
     constructor(documento, is_input_form)
     {
@@ -38,14 +39,33 @@ export default class DataJugador
             //using a blankspace as a separator 
             return letras.join(" ");
         };
+
+        this.isObjectEmpty = (objectName) => {
+            return JSON.stringify(objectName) === "{}";
+          };
+          
     }
 
     get datosJugador()
     {
         this.#obtenerJugador()
             .then(jugador => {
-                if(jugador)
+                if(!this.isObjectEmpty(jugador))
+                {
                     this.#organizarDatosEnModal(jugador);
+                }
+                else
+                {
+                    Array.from(document.getElementsByClassName('formulario-input')).forEach((elemento, key) => {
+                        if(key > 1)
+                            elemento.value = '';
+                    });
+    
+                    Array.from(document.getElementsByClassName('formulario-select')).forEach((elemento, key) => {
+                        if (elemento.id != 'pais_residencia')
+                            elemento.value = 0;
+                    });
+                }
             })
             .catch(error => {
                 alert(error);
@@ -66,7 +86,7 @@ export default class DataJugador
         }));
 
         if (response.ok)
-            return response.json().then(jugador => JSON.parse(jugador)[0] );
+            return response.json().then(jugador => jugador );
 
         return response.json().then(mensaje => {
 

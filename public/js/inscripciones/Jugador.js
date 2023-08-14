@@ -116,6 +116,7 @@ var DataJugador = /*#__PURE__*/function () {
     _defineProperty(this, "isInputForm", void 0);
     _defineProperty(this, "organizarFrases", void 0);
     _defineProperty(this, "deleteOptions", void 0);
+    _defineProperty(this, "isObjectEmpty", void 0);
     this.isInputForm = is_input_form;
     this.documento = documento;
     this.deleteOptions = function (selectBox) {
@@ -137,13 +138,25 @@ var DataJugador = /*#__PURE__*/function () {
       //using a blankspace as a separator 
       return letras.join(" ");
     };
+    this.isObjectEmpty = function (objectName) {
+      return JSON.stringify(objectName) === "{}";
+    };
   }
   _createClass(DataJugador, [{
     key: "datosJugador",
     get: function get() {
       var _this = this;
       _classPrivateMethodGet(this, _obtenerJugador, _obtenerJugador2).call(this).then(function (jugador) {
-        if (jugador) _classPrivateMethodGet(_this, _organizarDatosEnModal, _organizarDatosEnModal2).call(_this, jugador);
+        if (!_this.isObjectEmpty(jugador)) {
+          _classPrivateMethodGet(_this, _organizarDatosEnModal, _organizarDatosEnModal2).call(_this, jugador);
+        } else {
+          Array.from(document.getElementsByClassName('formulario-input')).forEach(function (elemento, key) {
+            if (key > 1) elemento.value = '';
+          });
+          Array.from(document.getElementsByClassName('formulario-select')).forEach(function (elemento, key) {
+            if (elemento.id != 'pais_residencia') elemento.value = 0;
+          });
+        }
       })["catch"](function (error) {
         alert(error);
         console.error(error);
@@ -173,7 +186,7 @@ function _obtenerJugador3() {
             break;
           }
           return _context.abrupt("return", response.json().then(function (jugador) {
-            return JSON.parse(jugador)[0];
+            return jugador;
           }));
         case 5:
           return _context.abrupt("return", response.json().then(function (mensaje) {
