@@ -64,7 +64,7 @@ export class HomePage {
                   icon:'pi pi-fw pi-users',
 
 
-                  routerLink: ['users']
+                  routerLink: ['employee-registration']
 
               },
               {

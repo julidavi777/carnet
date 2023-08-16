@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'generador-informes-pdf',
     loadChildren: () => import('./generador-informes-pdf/generador-informes-pdf.module').then( m => m.GeneradorInformesPdfPageModule)
   },
+  {
+    path: 'employee-registration',
+    loadChildren: () => import('./employee-registration/employee-registration.module').then( m => m.EmployeeRegistrationPageModule)
+  },
 
   // {
   //   path: 'gestionar-proyectos',
