@@ -20,7 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule),
         canActivate: [AdminAccessGuard]
       },
-
+      {
+        path: 'employees',
+        loadChildren: () => import('./employees/employees.module').then( m => m.EmployeesPageModule),
+      },
 
       {
         path: 'clientes',
