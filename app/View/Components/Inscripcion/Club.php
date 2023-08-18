@@ -8,14 +8,15 @@ use App\Services\Inscripciones\ClubService;
 class Club extends Component
 {
     public $clubes;
+    public $clases;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($clases = '')
     {
-        //
+        $this->clases = $clases;
         $this->clubes = json_decode(ClubService::getClub());
     }
 

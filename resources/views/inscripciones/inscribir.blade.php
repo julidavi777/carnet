@@ -14,10 +14,12 @@
                 <div class="p-6 bg-white border-b border-gray-200">
 
                     <x-flowbite.label for="torneo-inscripciones">
-                        Torneo {{-- <span>*</span>  --}}
+                        Torneo  <span>*</span>  
                     </x-flowbite.label>
 
-                    <x-forms.inscripciones torneo-id='torneo-inscripciones'  />
+                    <x-forms.inscripciones torneo-id='torneo-inscripciones' torneo-abierto='true' />
+
+                    <x-inscripcion.club clases='border-none' />
 
                     <button>Agregar</button>
                 </div>

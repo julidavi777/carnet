@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Usuarios;
+namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 
@@ -15,10 +15,8 @@ class TorneosService
         if($is_open)
             $torneos->where('c20_torneo_estado', 'A');
         
-        $torneos->orderBy('c20_torneo_edicion')->get();
+        $torneos->orderBy('c20_torneo_edicion');
 
-        dd($torneos);
-
-        return $torneos->toJson();
+        return $torneos->get()->toJson();
     }
 }

@@ -4,7 +4,7 @@
         Club <span>*</span> 
     </x-flowbite.label>
 
-    <x-flowbite.select :id="'club'" required>
+    <x-flowbite.select :id="'club'"  class="{{ $clases }}" required>
 
         <option value="0">-- Seleccione --</option>
 
