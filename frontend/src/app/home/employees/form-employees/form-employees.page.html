@@ -5,6 +5,7 @@
       <div class="mb-3 col-md-6">
         <label for="name" class="form-label">Nombres *</label>
         <input
+        value="julian"
           type="text"
           class="form-control"
           placeholder="Jose"
@@ -16,6 +17,7 @@
       <div class="mb-3 col-md-6">
         <label for="surname" class="form-label">Apellido *</label>
         <input
+        value="anturi"
           type="text"
           class="form-control"
           id="surname"
@@ -27,6 +29,7 @@
       <div class="mb-3 col-md-6">
         <label for="id-card" class="form-label">Número de documento *</label>
         <input
+        value="julian"
           value="3116257241"
           type="text"
           class="form-control"
@@ -55,6 +58,7 @@
           id="email"
           placeholder="ejemplo@gmail.com"
           formControlName="email"
+          value="julian.david897@gmail.com"
         />
       </div>
 
@@ -91,98 +95,116 @@
           formControlName="position"
         />
       </div>
+      //Files
+        <div class="row">
 
-        <div class="mb-3 form-group col-md-12">
-          <label for="cv_file_field" class="form-label">Hoja de vida *</label>
+          <div class="mb-3 form-group col-md-3">
+            <label for="cv_file" class="form-label">Hoja de vida *</label>
+            <input
+            type="file"
+            class="form-control"
+            formControlName="cv_file"
+            (change)="onFileChange($event, 'cv_file')"
+            id="cv_file"
+            accept=".doc, .docx, .jpg, .png, .pdf"
+            />
+          </div>
+        <div class="mb-3 form-group col-md-3">
+          <label for="medical_exam_file" class="form-label">Examen médico *</label>
+          <input
+          type="file"
+          class="form-control"
+            formControlName="medical_exam_file"
+            (change)="onFileChange($event, 'medical_exam_file')"
+            id="medical_exam_file"
+            accept=".doc, .docx, .jpg, .png, .pdf"
+            />
+          </div>
+          
+          <div class="mb-3 form-group col-md-3">
+          <label for="followup_letter_file" class="form-label">Carta de seguimiento *</label>
           <input
             type="file"
             class="form-control"
-            formControlName="cv_file_field"
-            (change)="onFileChange($event, 'cv_file_field')"
-            id="cv_file_field"
+            formControlName="followup_letter_file"
+            (change)="onFileChange($event, 'followup_letter_file')"
+            id="followup_letter_file"
             accept=".doc, .docx, .jpg, .png, .pdf"
           />
         </div>
-        <div class="mb-3 form-group col-md-12">
-          <label for="medical_exam_file_field" class="form-label">Examen médico *</label>
+        <div class="mb-3 form-group col-md-3">
+          <label for="history_file" class="form-label">Antecedentes *</label>
           <input
-            type="file"
-            class="form-control"
-            formControlName="medical_exam_file_field"
-            (change)="onFileChange($event, 'medical_exam_file_field')"
-            id="medical_exam_file_field"
-            accept=".doc, .docx, .jpg, .png, .pdf"
+          type="file"
+          class="form-control"
+          formControlName="history_file"
+          (change)="onFileChange($event, 'history_file')"
+          id="history_file"
+          accept=".doc, .docx, .jpg, .png, .pdf"
           />
         </div>
-
-        <div class="mb-3 form-group col-md-12">
-          <label for="followup_letter_file_field" class="form-label">Carta de seguimiento *</label>
-          <input
-            type="file"
-            class="form-control"
-            formControlName="followup_letter_file_field"
-            (change)="onFileChange($event, 'followup_letter_file_field')"
-            id="followup_letter_file_field"
-            accept=".doc, .docx, .jpg, .png, .pdf"
-          />
-        </div>
-        <div class="mb-3 form-group col-md-12">
-          <label for="history_file_field" class="form-label">Antecedentes *</label>
-          <input
-            type="file"
-            class="form-control"
-            formControlName="history_file_field"
-            (change)="onFileChange($event, 'history_file_field')"
-            id="history_file_field"
-            accept=".doc, .docx, .jpg, .png, .pdf"
-          />
-        </div>
-        <div class="mb-3 form-group col-md-12">
-          <label for="study_stands_file_field" class="form-label"
-            >Soporte de estudio *</label
+        <div class="mb-3 form-group col-md-3">
+          <label for="study_stands_file" class="form-label"
+          >Soporte de estudio *</label
           >
           <input
-            type="file"
-            class="form-control"
-            formControlName="study_stands_file_field"
-            (change)="onFileChange($event, 'study_stands_file_field')"
-            id="study_stands_file_field"
-            accept=".doc, .docx, .jpg, .png, .pdf"
+          type="file"
+          class="form-control"
+          formControlName="study_stands_file"
+          (change)="onFileChange($event, 'study_stands_file')"
+          id="study_stands_file"
+          accept=".doc, .docx, .jpg, .png, .pdf"
           />
         </div>
-        <div class="mb-3 form-group col-md-12">
-          <label for="id_card_file_field" class="form-label"
-            >Documento de identidad*</label
+        <div class="mb-3 form-group col-md-3">
+          <label for="id_card_file" class="form-label"
+          >Documento de identidad*</label
           >
           <input
-            type="file"
-            class="form-control"
-            formControlName="id_card_file_field"
-            (change)="onFileChange($event, 'id_card_file_field')"
-            id="id_card_file_field"
-            accept=".doc, .docx, .jpg, .png, .pdf"
+          type="file"
+          class="form-control"
+          formControlName="id_card_file"
+          (change)="onFileChange($event, 'id_card_file')"
+          id="id_card_file"
+          accept=".doc, .docx, .jpg, .png, .pdf"
           />
         </div>
-        <div class="mb-3 form-group col-md-12">
-          <label for="work_certificate_file_field" class="form-label"
+        <div class="mb-3 form-group col-md-3">
+          <label for="work_certificate_file" class="form-label"
             >Certificado laboral *</label
-          >
+            >
           <input
             type="file"
             class="form-control"
-            formControlName="work_certificate_file_field"
-            (change)="onFileChange($event, 'work_certificate_file_field')"
-            id="work_certificate_file_field"
+            formControlName="work_certificate_file"
+            (change)="onFileChange($event, 'work_certificate_file')"
+            id="work_certificate_file"
             accept=".doc, .docx, .jpg, .png, .pdf"
-          />
+            />
         </div>
-
-      <p-button
+        <div class="mb-3 form-group col-md-3">
+          <label for="military_passbook_file"  #photoInput class="form-label"
+          >Libreta militar *</label
+          >
+          <input
+          type="file"
+          class="form-control"
+          formControlName="military_passbook_file"
+          (change)="onFileChange($event, 'military_passbook_file')"
+          id="military_passbook_file"
+          accept=".doc, .docx, .jpg, .png, .pdf"
+          />
+          <img [src]="'assets/icon/foto.png'" class="img-fluid" alt="No image">
+        </div>
+      </div>
+        
+        <p-button
         [label]="isEditingData ? 'Editar' :'Guardar'"
         [disabled]="!employeeForm.valid"
         type="submit"
         [loading]="isSavingData"
       ></p-button>
+
 
       <p-toast position="bottom-center" key="successMessage"></p-toast>
       <p-toast position="bottom-center" key="errorMessage"></p-toast>

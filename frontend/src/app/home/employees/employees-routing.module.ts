@@ -9,7 +9,7 @@ const routes: Routes = [
     component: EmployeesPage
   },
   {
-    path: 'form-employee',
+    path: 'form-employees',
     loadChildren: () => import('./form-employees/form-employees.module').then( m => m.FormEmployeePageModule)
   }
 ];

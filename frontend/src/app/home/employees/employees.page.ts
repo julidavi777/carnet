@@ -36,19 +36,18 @@ export class EmployeesPage implements OnInit {
   }
 
   editEmployee(row: any){
+    console.log(row);
     this.router.navigate(['home/employees/form-employees']);
 
-    //ADD ROLE ID
-    if(row['roles'].length > 0){
-      row['role_id'] = row['roles'][0]['id'];
-    }
-    console.log(row);
+
     this.EmployeesService.dataEmployee = row;
   }
 
+  //Delete method for Employees
   deleteEmployee(id){
     //console.log(id);
     this.confirmDelete(id);
+ 
 
   }
 

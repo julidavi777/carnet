@@ -36,7 +36,7 @@ export class CrearClientePage implements OnInit {
 
 
   formContacto1: any = new FormGroup({
-     name: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
     phone_number: new FormControl('', [Validators.required]),
     telephone_number: new FormControl('', [Validators.required]),
     telephone_number_ext: new FormControl(''),
@@ -47,7 +47,7 @@ export class CrearClientePage implements OnInit {
   });
 
   formContacto2: any = new FormGroup({
-     name: new FormControl(''),
+    name: new FormControl(''),
     phone_number: new FormControl(''),
     telephone_number: new FormControl(''),
     telephone_number_ext: new FormControl(''),
@@ -58,7 +58,7 @@ export class CrearClientePage implements OnInit {
   });
 
   formContactoFacturacion: any = new FormGroup({
-     name: new FormControl(''),
+    name: new FormControl(''),
     phone_number: new FormControl(''),
     telephone_number: new FormControl(''),
     telephone_number_ext: new FormControl(''),

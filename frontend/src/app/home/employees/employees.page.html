@@ -7,7 +7,7 @@
         label="Agregar"
         icon="pi pi-plus"
         iconPos="right"
-        routerLink="form-employee"
+        routerLink="form-employees"
         class="mb-3"
       ></p-button>
     </div>
@@ -73,22 +73,21 @@
         >
           <ng-template ngx-datatable-header-template> Acciones: </ng-template>
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <ion-buttons class="grid-container" style="margin-left: 10px">
+            <ion-buttons class="grid-container " >
               <ion-button
-                (click)="editEmployee(row)"
-                style="color: #ffc107"
+                class="danger"
+                (click)="editEmployee(row.id)"
                 data-tooltip="Editar"
                 data-tooltip-conf="right"
               >
-                <ion-icon name="pencil"></ion-icon>
+                <ion-icon class="text-warning" name="pencil"></ion-icon>
               </ion-button>
               <ion-button
-                (click)="deleteEmployee(row.id)"
-                style="color: #dc3545"
+              (click)="deleteEmployee(row.id)"
                 data-tooltip="Eliminar"
                 data-tooltip-conf="left"
               >
-                <ion-icon name="trash"></ion-icon>
+                <ion-icon class="text-danger" name="trash"></ion-icon>
               </ion-button>
             </ion-buttons>
           </ng-template>
