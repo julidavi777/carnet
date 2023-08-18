@@ -7,14 +7,17 @@ use Illuminate\View\Component;
 class Inscripciones extends Component
 {
     public $torneoId;
+    public $clases;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($torneoId)
+    public function __construct($torneoId, $clases = '')
     {
         $this->torneoId = $torneoId;
+        $this->clases = $clases;
     }
 
     /**

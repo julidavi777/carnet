@@ -39,13 +39,8 @@
 
                     @auth
                         <!-- Torneos -->
-                        {{-- <x-forms.registro-usuario /> --}}
+                        <x-forms.inscripciones torneo-id='torneo-historial' clases='mr-8' />
 
-                        <x-flowbite.select :id="'cambioTorneo'" class="mr-8 border-none" required>
-
-                            <option value="0" selected>--  --</option>
-
-                        </x-flowbite.select>
                     @endauth
 
                     <x-dropdown align="right" width="48">
