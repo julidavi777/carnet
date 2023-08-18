@@ -23,14 +23,16 @@ class EmployeeFactory extends Factory
             'address'=> $this->generateRandomAddress(),
             'phone' => random_int(3000000000,3229999999),
             'email' => $this->faker->unique()->safeEmail(),
+            'position' =>$this->generateRandomPosition(),
             'cv_file'=>Str::random(10),
-            
             'medical_exam_file'=>Str::random(10),
-            'followup_stands_file'=>Str::random(10),
+            'followup_letter_file'=>Str::random(10),
             'history_file'=>Str::random(10),
             'study_stands_file'=>Str::random(10),
             'id_card_file'=>Str::random(10),
             'work_certificate_file'=>Str::random(10),
+            'military_passbook_file'=>Str::random(10),
+            
         ];
     }
     private function generateRandomAddress()
@@ -47,5 +49,8 @@ class EmployeeFactory extends Factory
         return "$street, $city, $state $zip";
     }
 
-
+    private function generateRandomPosition(){
+        $positions = ['Director', 'Manager', 'Assistant Manager', 'Assistant Director'];
+        return $positions[array_rand($positions)];
+    }
 }

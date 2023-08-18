@@ -23,15 +23,29 @@ class Employee extends Model
         'address',
         'phone',
         'email',
+        'position',
         'cv_file',
         'medical_exam_file',
-        'followup_stands_file',
+        'followup_letter_file',
         'history_file',
         'study_stands_file',
         'id_card_file',
         'work_certificate_file',
-
+        'military_passbook_file'
     ];
 
-   
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
