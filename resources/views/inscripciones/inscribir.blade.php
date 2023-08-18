@@ -12,7 +12,14 @@
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <x-forms.registro-usuario />
+
+                    <x-flowbite.label for="torneo-inscripciones">
+                        Torneo {{-- <span>*</span>  --}}
+                    </x-flowbite.label>
+
+                    <x-forms.inscripciones torneo-id='torneo-inscripciones'  />
+
+                    <button>Agregar</button>
                 </div>
             </div>
         </div>
