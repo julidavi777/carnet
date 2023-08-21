@@ -7,7 +7,7 @@
     <div class="py-12">
         <div class="max-w-max mx-auto sm:px-6 lg:px-8">
             
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="flex bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <!-- Validation Errors -->
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -22,6 +22,11 @@
                     <x-forms.inscripciones-categorias categoria-id='inscripciones-categoria' clases='mt-4' />
 
                     <button>Agregar</button>
+                </div>
+
+                <div class="p-6 bg-white border-b border-gray-200">
+
+                    
                 </div>
             </div>
         </div>
