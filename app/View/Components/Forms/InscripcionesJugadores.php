@@ -3,9 +3,11 @@
 namespace App\View\Components\Forms;
 
 use Illuminate\View\Component;
+use App\Services\Usuarios\JugadorService;
 
 class InscripcionesJugadores extends Component
 {
+    public $listaJugadores;
     /**
      * Create a new component instance.
      *
@@ -13,7 +15,7 @@ class InscripcionesJugadores extends Component
      */
     public function __construct()
     {
-        //
+        $this->listaJugadores = json_decode(JugadorService::getListaUsuarios());
     }
 
     /**
