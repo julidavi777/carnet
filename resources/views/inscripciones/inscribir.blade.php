@@ -10,6 +10,9 @@
             <!-- Validation Errors -->
             <x-inscripcion.validacion-inscripcion :errors="$errors" />
 
+            <!-- Success messages -->
+            <x-inscripcion.success-alert />
+
             <div class="flex bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
                 {{-- <x-auth-validation-errors class="mb-4" :errors="$errors" /> --}}

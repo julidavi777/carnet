@@ -13,7 +13,7 @@ class TorneosService
         $torneos->select('c20_torneo_id', 'c20_torneo_edicion', 'c20_torneo_estado');
 
         if($is_open)
-            $torneos->where('c20_torneo_estado', 'A');
+            $torneos->where('c20_torneo_estado', 'I');
         
         $torneos->orderBy('c20_torneo_edicion');
 
