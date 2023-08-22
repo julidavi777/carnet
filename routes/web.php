@@ -46,6 +46,9 @@ Route::middleware('preventHistory')->group(function () {
 
             Route::get('/', [InscripcionesController::class, 'index'])
             ->name('inscripciones.registro');
+
+            Route::post('/registro', [InscripcionesController::class, 'inscribir'])
+            ->name('inscripciones.inscripcion');
         });
     });
 

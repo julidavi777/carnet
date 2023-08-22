@@ -1,5 +1,5 @@
 <div>
-    <x-flowbite.select :id="'select_jugador'" class="border-none" required>
+    <x-flowbite.select :id="'jugador_inscripcion'" class="border-none" required>
 
         <option value="0">---  Seleccionar  ----</option>
 
