@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-
+const httpHeaders = new HttpHeaders()
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeesService {
+
   readonly API_URL = environment.baseUrl;
 
   constructor(
@@ -18,7 +19,7 @@ export class EmployeesService {
   }
 
   registerEmployee(data: any){
-    return this.http.post(this.API_URL+'employees', data);
+    return this.http.post(this.API_URL+'employees', data, {'headers':{'Content-Type': "multipart/form-data"}} );
   }
 
   updateEmployee(data: any, id: any){

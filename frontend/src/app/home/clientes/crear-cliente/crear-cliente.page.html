@@ -144,7 +144,7 @@
 
       <div class="mb-3 form-group col-md-6">
         <label for="validation07" class="form-label">RUT *</label>
-        <input type="file" class="form-control"   formControlName="rut_file_field" (change)="onFileChange($event, 'rut_file_field')" id="validation07" placeholder="" accept=".doc, .docx, .jpg, .png, .pdf">
+      <!--   <input type="file" class="form-control"   formControlName="rut_file_field" (change)="onFileChange($event, 'rut_file_field')" id="validation07" placeholder="" accept=".doc, .docx, .jpg, .png, .pdf"> -->
       </div>
 
       <div class="mb-3 form-group col-md-6">
@@ -164,7 +164,7 @@
         <img src="assets/icon/5a1a5de62a55e.jpg"width="80" height="80" (click)="logoInput.click()"> -->
 
         <br>
-        <input type="file" class="form-control d-none"  formControlName="cliente_logo_field" (change)="onFileSelected($event)" #photoInput accept="image/png, image/jpeg" id="validation09" placeholder="Seleccione" >
+        <input type="file" class="form-control d-none"  formControlName="cliente_logo_field" (change)="onFileSelected($event)" #photoInput accept="image/png, image/jpeg"  placeholder="Seleccione" >
         <img [src]="selectedFile || 'assets/icon/foto.png'" class="img-fluid" alt="No image"
         (click)="photoInput.click()">
 

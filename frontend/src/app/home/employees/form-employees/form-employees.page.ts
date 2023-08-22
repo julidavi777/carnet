@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder,ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 // import { GLOBAL} from '
 import { MessageService } from 'primeng/api';
 import { RolesService } from '../../roles/roles.service';
@@ -16,6 +16,14 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class FormEmployeePage implements OnInit, OnDestroy {
+  @ViewChild('medicalExamInput') medicalExamInput: any;
+  @ViewChild('cvInput') cvInput: any;
+  @ViewChild('followupLetterInput') followupLetterInput: any;
+  @ViewChild('historyInput') historyInput: any;
+  @ViewChild('studyStandsInput') studyStandsInput: any;
+  @ViewChild('idCardInput') idCardInput: any;
+  @ViewChild('workCertificateInput') workCertificateInput: any;
+  @ViewChild('militaryPassbookInput') militaryPassbookInput: any;
   selectedFiles = [];
   showPassword = false;
   isSavingData = false;
@@ -36,25 +44,25 @@ export class FormEmployeePage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.employeeForm = this.fb.group({
-      name:                   new FormControl('', [Validators.required]),
-      surname:                new FormControl('', [Validators.required]),
-      email:                  new FormControl('', [Validators.required, Validators.email]),
-      id_card:                new FormControl('', [Validators.required,]),
-      type_id:                new FormControl('', [Validators.required,]),
-      address:                new FormControl('', [Validators.required]),
-      phone:                  new FormControl('', [Validators.required]),
-      position:               new FormControl('', [Validators.required]),
-      cv_file:                new FormControl('', [Validators.required]),
-      medical_exam_file:      new FormControl('', [Validators.required]),
-      followup_letter_file:   new FormControl('', [Validators.required]),
-      history_file:           new FormControl('', [Validators.required]),
-      study_stands_file:      new FormControl('', [Validators.required]),
-      id_card_file:           new FormControl('', [Validators.required]),
-      work_certificate_file:  new FormControl('', [Validators.required]), 
-      military_passbook_file: new FormControl('', [Validators.required]), 
-      
+      name: new FormControl('', [Validators.required]),
+      surname: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      id_card: new FormControl('', [Validators.required,]),
+      type_id: new FormControl('', [Validators.required,]),
+      address: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required]),
+      position: new FormControl('', [Validators.required]),
+      cv_file: new FormControl('', [Validators.required]),
+      medical_exam_file: new FormControl('', [Validators.required]),
+      followup_letter_file: new FormControl('', [Validators.required]),
+      history_file: new FormControl('', [Validators.required]),
+      study_stands_file: new FormControl('', [Validators.required]),
+      id_card_file: new FormControl('', [Validators.required]),
+      work_certificate_file: new FormControl('', [Validators.required]),
+      military_passbook_file: new FormControl('', [Validators.required]),
+
     });
-    
+
 
 
 
@@ -64,39 +72,40 @@ export class FormEmployeePage implements OnInit, OnDestroy {
 
       this.employeeForm.patchValue(this.EmployeesService.dataEmployee)
     }
-   
+
   }
 
   uploadFiles(data: any) {
 
-    if(this.selectedFiles.length === 0) {
-      return 
+    if (this.selectedFiles.length === 0) {
+      return
     }
     const formData = new FormData();
     for (const file of this.selectedFiles) {
       formData.append('files', file, file.name);
     }
   }
-  
-  sendFile(){
-    this.EmployeesService.registerEmployee(this.selectedFiles).subscribe(
-      response=>{
-        if(response){ {
-          console.log(response);
-        }
-      }
-      error=>{
-        console.log(error);
-      }
-    });
-  }
-  
 
- onSubmit() {
+  sendFile() {
+    this.EmployeesService.registerEmployee(this.selectedFiles).subscribe(
+      response => {
+        if (response) {
+          {
+            console.log(response);
+          }
+        }
+        error => {
+          console.log(error);
+        }
+      });
+  }
+
+
+  onSubmit() {
     const formData = new FormData();
-    console.log('FormData =', formData);
+    console.log(formData);
     console.log(this.employeeForm.value);
-    
+
     formData.append('name', this.employeeForm.get('name').value);
     formData.append('surname', this.employeeForm.get('surname').value);
     formData.append('id_card', this.employeeForm.get('id_card').value);
@@ -106,7 +115,7 @@ export class FormEmployeePage implements OnInit, OnDestroy {
     formData.append('email', this.employeeForm.get('email').value);
     formData.append('position', this.employeeForm.get('position').value);
 
-    
+
 
     this.isSavingData = true;
     alert('saving data done!');
@@ -115,11 +124,11 @@ export class FormEmployeePage implements OnInit, OnDestroy {
       this.registerEmployee();
       return;
     }
-      alert('OnsubmitSuccessfully. Update');
+    alert('OnsubmitSuccessfully. Update');
 
     //UPDATING
     let data = { ...this.employeeForm.value }
-   
+
     this.updateEmployee(data);
 
   }
@@ -162,30 +171,63 @@ export class FormEmployeePage implements OnInit, OnDestroy {
   successMessage(email_confirmation = null) {
     let confirm_notification = email_confirmation ? 'Se ha agregado el Empleado correctamente.' : 'Se ha agregado el Empleado correctamente(false)';
     this.messageService.add({ key: 'successMessage', severity: 'success', summary: 'Éxito', detail: `Empleado ${this.isEditingData ? 'actualizado' : 'registrado'}` + confirm_notification });
-  }  errorMessage() {
+  } errorMessage() {
     this.messageService.add({ key: 'errorMessage', severity: 'error', summary: 'Error', detail: `Empleado no ${this.isEditingData ? 'actualizado' : 'registrado'}` });
   }
 
   ngOnDestroy() {
     this.EmployeesService.dataEmployee = null;
   }
- 
+
 
   onFileChange(event: any, name_field: string) {
-    if(name_field === 'type_id'){
+    if (name_field === 'type_id') {
       const selectedValue = event.target.value
       this.employeeForm.patchValue({ type_id: selectedValue })
-      return 
+      return
     }
     console.log(event.target.files)
-    const files= event.target.files
+    const files = event.target.files
     console.log(files);
-    
-    if(files.length > 0) {
+
+    if (files.length > 0) {
       const file = files[0];
       const formData = new FormData();
       formData.append(name_field, file);
       this.uploadFiles(formData);
     }
   }
+  //files
+
+  openCvInput() {
+    this.cvInput.nativeElement.click();
+  }
+  openMedicalExamInput() {
+    this.medicalExamInput.nativeElement.click();
+  }
+  openFollowupLetterInput() {
+    this.followupLetterInput.nativeElement.click();
+  }
+  openHistoryInput() {
+    this.historyInput.nativeElement.click();
+  }
+  openStudyStandsInput() {
+    this.studyStandsInput.nativeElement.click();
+  }
+  openIdCardInput() {
+    this.idCardInput.nativeElement.click();
+  }
+  openWorkCertificateInput() {
+    this.workCertificateInput.nativeElement.click();
+  }
+  openMilitaryPassbookInput() {
+    this.militaryPassbookInput.nativeElement.click();
+  }
+
+
+
+
+
+
+
 }
