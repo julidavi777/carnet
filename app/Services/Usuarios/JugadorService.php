@@ -19,4 +19,22 @@ class JugadorService
 
         return $query->get()->toJson();
     }
+
+    public static function getNombreJugador($jugador_id)
+    {
+        $nombre_jugador = DB::table('t15_jugadores')
+            ->select('c15_jugador_nombres AS nombres', 'c15_jugador_apellidos AS apellidos')
+            ->where('c15_jugador_id', $jugador_id)
+            ->first();
+
+        return $nombre_jugador->nombres. ' '. $nombre_jugador->apellidos;
+    }
+
+    public static function verifyJugadorInscripcion($jugador_id, $categoria):bool
+    {
+        return DB::table('t19_inscripciones')
+        ->where('c19_inscripcion_jugador_id', $jugador_id)
+        ->where('c19_inscripcion_jugador_categoria_id', $categoria)
+        ->exists();
+    }
 }

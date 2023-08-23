@@ -4,12 +4,71 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Services\Inscripciones\CategoriasService;
+use App\Services\Usuarios\JugadorService;
 
 class InscripcionesController extends Controller
 {
     public function index()
     {
-        return view('inscripciones.inscribir');
+        $lista_jugadores = json_decode(JugadorService::getListaUsuarios());
+        $lista_jugadores_inscritos = [];
+
+        foreach($lista_jugadores as $jugador)
+        {
+            $inscripciones = DB::table('t19_inscripciones')
+            ->where('c19_inscripcion_jugador_id', $jugador->c15_jugador_id)
+            ->where('c19_inscripcion_pagada', 'F')
+            ->whereNull('c19_inscripcion_id_control_pagos')
+            ->get()->toArray();
+
+            if(!empty($inscripciones))
+                $lista_jugadores_inscritos[] = $inscripciones;
+        }
+
+        $data = [];
+
+        if(count($lista_jugadores_inscritos) > 0)
+        {
+            foreach($lista_jugadores_inscritos as $datos_jugador)
+            {
+                $tabla_inscripciones['torneo_id'] = $datos_jugador[0]->c19_inscripcion_torneo_id;
+                $tabla_inscripciones['jugador_id'] = $datos_jugador[0]->c19_inscripcion_jugador_id;
+                $tabla_inscripciones['is_inscripcion_pagada'] = $datos_jugador[0]->c19_inscripcion_pagada;
+                $subtotal = 0;
+
+                if(count($datos_jugador) > 1)
+                {
+                    foreach($datos_jugador as $player)
+                    {
+                        $tabla_inscripciones['categoria'][$player->c19_inscripcion_jugador_categoria_id] = $player->c19_inscripcion_valor;
+                        $subtotal += $player->c19_inscripcion_valor;
+                    }
+                }
+                else
+                {
+                    $tabla_inscripciones['categoria'][$datos_jugador[0]->c19_inscripcion_jugador_categoria_id] = $datos_jugador[0]->c19_inscripcion_valor;
+                    $subtotal = (int)$datos_jugador[0]->c19_inscripcion_valor;
+                }
+
+                $tabla_inscripciones['subtotal'] = $subtotal;
+
+                $data[] = $tabla_inscripciones;
+
+                unset($tabla_inscripciones);
+            }
+
+            $total = 0;
+
+            foreach($data as $item)
+            {
+                $total += $item['subtotal'];
+            }
+
+            $data[] = $total;
+        }
+
+        return view('inscripciones.inscribir', compact('data'));
     }
 
     protected function inscribir(Request $request)
@@ -43,17 +102,35 @@ class InscripcionesController extends Controller
         }
 
         if(count($mensaje_error) > 0)
-        {
             return back()->withInput()->withErrors($mensaje_error);
-        }
 
+        /**
+         * Se verifica primero que el jugador no esté inscrito en alguna categoria en las inscripciones
+         */
         for($j = 0; $j <= $total_categorias - 1; $j++)
         {
+            $existe_jugador = JugadorService::verifyJugadorInscripcion($validated['jugador_inscripcion'], $validated['categoria_inscripcion'][$j]);
+
+            if($existe_jugador)
+            {
+                $nombre_jugador = JugadorService::getNombreJugador($validated['jugador_inscripcion']);
+                $nombre_categoria = CategoriasService::getNombreCategoria($validated['categoria_inscripcion'][$j]);
+
+                return back()->withInput()->withErrors("El jugador (". $nombre_jugador. ") ya se encuentra agregado en la categoría (". $nombre_categoria. ").");
+            }
+        }
+
+        for($k = 0; $k <= $total_categorias - 1; $k++)
+        {
+            $costo = CategoriasService::getCostoCategoria($validated['categoria_inscripcion'][$k]);
+
             DB::table('t19_inscripciones')->insert([
                 'c19_inscripcion_torneo_id' => $validated['torneo_inscripcion'],
                 'c19_inscripcion_jugador_id' => $validated['jugador_inscripcion'],
-                'c19_inscripcion_jugador_categoria_id' => $validated['categoria_inscripcion'][$j],
-                'c19_inscripcion_pagada' => 'F'
+                'c19_inscripcion_jugador_categoria_id' => $validated['categoria_inscripcion'][$k],
+                'c19_inscripcion_pagada' => 'F',
+                'c19_inscripcion_valor' => $costo,
+                'c19_inscripcion_estado' => 'F'
             ]);
         }
 
