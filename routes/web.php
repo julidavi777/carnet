@@ -49,6 +49,9 @@ Route::middleware('preventHistory')->group(function () {
 
             Route::post('/registro', [InscripcionesController::class, 'inscribir'])
             ->name('inscripciones.inscripcion');
+
+            Route::get('/delete', [ InscripcionesController::class, 'eliminar'])
+            ->name('inscripciones.delete');
         });
     });
 

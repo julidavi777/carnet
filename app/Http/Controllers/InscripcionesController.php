@@ -6,69 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Services\Inscripciones\CategoriasService;
 use App\Services\Usuarios\JugadorService;
+use Exception;
 
 class InscripcionesController extends Controller
 {
     public function index()
     {
-        $lista_jugadores = json_decode(JugadorService::getListaUsuarios());
-        $lista_jugadores_inscritos = [];
+        $data_inscripciones = $this->getJugadoresInscritos();
 
-        foreach($lista_jugadores as $jugador)
-        {
-            $inscripciones = DB::table('t19_inscripciones')
-            ->where('c19_inscripcion_jugador_id', $jugador->c15_jugador_id)
-            ->where('c19_inscripcion_pagada', 'F')
-            ->whereNull('c19_inscripcion_id_control_pagos')
-            ->get()->toArray();
-
-            if(!empty($inscripciones))
-                $lista_jugadores_inscritos[] = $inscripciones;
-        }
-
-        $data = [];
-
-        if(count($lista_jugadores_inscritos) > 0)
-        {
-            foreach($lista_jugadores_inscritos as $datos_jugador)
-            {
-                $tabla_inscripciones['torneo_id'] = $datos_jugador[0]->c19_inscripcion_torneo_id;
-                $tabla_inscripciones['jugador_id'] = $datos_jugador[0]->c19_inscripcion_jugador_id;
-                $tabla_inscripciones['is_inscripcion_pagada'] = $datos_jugador[0]->c19_inscripcion_pagada;
-                $subtotal = 0;
-
-                if(count($datos_jugador) > 1)
-                {
-                    foreach($datos_jugador as $player)
-                    {
-                        $tabla_inscripciones['categoria'][$player->c19_inscripcion_jugador_categoria_id] = $player->c19_inscripcion_valor;
-                        $subtotal += $player->c19_inscripcion_valor;
-                    }
-                }
-                else
-                {
-                    $tabla_inscripciones['categoria'][$datos_jugador[0]->c19_inscripcion_jugador_categoria_id] = $datos_jugador[0]->c19_inscripcion_valor;
-                    $subtotal = (int)$datos_jugador[0]->c19_inscripcion_valor;
-                }
-
-                $tabla_inscripciones['subtotal'] = $subtotal;
-
-                $data[] = $tabla_inscripciones;
-
-                unset($tabla_inscripciones);
-            }
-
-            $total = 0;
-
-            foreach($data as $item)
-            {
-                $total += $item['subtotal'];
-            }
-
-            $data[] = $total;
-        }
-
-        return view('inscripciones.inscribir', compact('data'));
+        return view('inscripciones.inscribir', compact('data_inscripciones'));
     }
 
     protected function inscribir(Request $request)
@@ -135,5 +81,82 @@ class InscripcionesController extends Controller
         }
 
         return back()->with('success', 'Se ha agregado el jugador a la lista de inscripciones correctamente.');
+    }
+
+    protected function eliminar(Request $request)
+    {
+        // PENDIENTE VALIDACIÓN REQUEST
+        try{
+            DB::table('t19_inscripciones')
+            ->where('c19_inscripcion_torneo_id', $request['torneo_id'])
+            ->where('c19_inscripcion_jugador_id', $request['jugador_id'])
+            ->delete();
+        }catch(Exception $e){
+            return back()->withErrors('Error inesperado al eliminar el jugador, por favor contáctese con un administrador');
+        }
+
+        return back()->with('success', 'Se ha eliminado el jugador de la lista correctamente.');
+    }
+
+    private function getJugadoresInscritos()
+    {
+        $lista_jugadores = json_decode(JugadorService::getListaUsuarios());
+        $lista_jugadores_inscritos = [];
+
+        foreach($lista_jugadores as $jugador)
+        {
+            $inscripciones = DB::table('t19_inscripciones')
+            ->where('c19_inscripcion_jugador_id', $jugador->c15_jugador_id)
+            ->where('c19_inscripcion_pagada', 'F')
+            ->whereNull('c19_inscripcion_id_control_pagos')
+            ->get()->toArray();
+
+            if(!empty($inscripciones))
+                $lista_jugadores_inscritos[] = $inscripciones;
+        }
+
+        $data = [];
+
+        if(count($lista_jugadores_inscritos) > 0)
+        {
+            foreach($lista_jugadores_inscritos as $datos_jugador)
+            {
+                $tabla_inscripciones['torneo_id'] = $datos_jugador[0]->c19_inscripcion_torneo_id;
+                $tabla_inscripciones['jugador_id'] = $datos_jugador[0]->c19_inscripcion_jugador_id;
+                $tabla_inscripciones['is_inscripcion_pagada'] = $datos_jugador[0]->c19_inscripcion_pagada;
+                $subtotal = 0;
+
+                if(count($datos_jugador) > 1)
+                {
+                    foreach($datos_jugador as $player)
+                    {
+                        $tabla_inscripciones['categoria'][$player->c19_inscripcion_jugador_categoria_id] = $player->c19_inscripcion_valor;
+                        $subtotal += $player->c19_inscripcion_valor;
+                    }
+                }
+                else
+                {
+                    $tabla_inscripciones['categoria'][$datos_jugador[0]->c19_inscripcion_jugador_categoria_id] = $datos_jugador[0]->c19_inscripcion_valor;
+                    $subtotal = (int)$datos_jugador[0]->c19_inscripcion_valor;
+                }
+
+                $tabla_inscripciones['subtotal'] = $subtotal;
+
+                $data[] = $tabla_inscripciones;
+
+                unset($tabla_inscripciones);
+            }
+
+            $total = 0;
+
+            foreach($data as $item)
+            {
+                $total += $item['subtotal'];
+            }
+
+            $data[] = $total;
+        }
+
+        return $data;
     }
 }

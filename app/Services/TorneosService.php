@@ -19,4 +19,14 @@ class TorneosService
 
         return $torneos->get()->toJson();
     }
+
+    public static function getNombreTorneo($id_torneo)
+    {
+        $torneo = DB::table('t20_torneos')
+        ->select('c20_torneo_edicion AS nombre')
+        ->where('c20_torneo_id', $id_torneo)
+        ->first();
+
+        return $torneo->nombre;
+    }
 }
