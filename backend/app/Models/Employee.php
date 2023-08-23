@@ -31,7 +31,9 @@ class Employee extends Model
         'study_stands_file',
         'id_card_file',
         'work_certificate_file',
-        'military_passbook_file'
+        'military_passbook_file',
+        'exam_expiration',
+        'contract_expiration'
     ];
 
     public function getJWTIdentifier()

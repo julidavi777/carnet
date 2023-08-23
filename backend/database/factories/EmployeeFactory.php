@@ -32,7 +32,8 @@ class EmployeeFactory extends Factory
             'id_card_file'=>Str::random(10),
             'work_certificate_file'=>Str::random(10),
             'military_passbook_file'=>Str::random(10),
-            
+            'exam_expiration'=>$this->faker->dateTimeBetween('now', '+2 weeks' )->format('d-m-Y'),
+            'contract_expiration'=>$this->faker->dateTimeBetween('now', '+2 weeks')->format('d-m-Y')         
         ];
     }
     private function generateRandomAddress()

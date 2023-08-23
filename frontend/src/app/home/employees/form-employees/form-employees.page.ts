@@ -52,6 +52,7 @@ export class FormEmployeePage implements OnInit, OnDestroy {
       address: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       position: new FormControl('', [Validators.required]),
+      exam_expiration: new FormControl('', [Validators.required]),
       cv_file: new FormControl('', [Validators.required]),
       medical_exam_file: new FormControl('', [Validators.required]),
       followup_letter_file: new FormControl('', [Validators.required]),
@@ -114,6 +115,8 @@ export class FormEmployeePage implements OnInit, OnDestroy {
     formData.append('phone', this.employeeForm.get('phone').value);
     formData.append('email', this.employeeForm.get('email').value);
     formData.append('position', this.employeeForm.get('position').value);
+    formData.append('exam_expiration', this.employeeForm.get('exam_expiration').value);
+    formData.append('contract_expiration', this.employeeForm.get('contract_expiration').value);
 
 
 

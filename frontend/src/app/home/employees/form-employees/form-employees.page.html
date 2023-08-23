@@ -17,6 +17,7 @@
           placeholder="Jose"
           required
           formControlName="name"
+          id="name"
         />
       </div>
 
@@ -82,6 +83,7 @@
           formControlName="address"
         />
       </div>
+
       <div class="mb-3 col-md-6">
         <label for="phone" class="form-label">Teléfono *</label>
         <input
@@ -94,7 +96,7 @@
         />
       </div>
       <div class="mb-3 col-md-6">
-        <label for="phone" class="form-label">Cargo *</label>
+        <label for="position" class="form-label">Cargo *</label>
         <input
           type="text"
           class="form-control"
@@ -104,16 +106,38 @@
           formControlName="position"
         />
       </div>
+      <div class="mb-3 col-md-6">
+        <label for="exam_expiration" class="form-label"
+          >Vencimiento de examen
+        </label>
+        <input
+          type="date"
+          class="form-control"
+          id="exam_expiration"
+          required
+          formControlName="exam_expiration"
+        />
+      </div>
+      <div class="mb-3 col-md-6">
+        <label for="contract_expiration" class="form-label"
+          >Vencimiento de contrato
+        </label>
+        <input
+          type="date"
+          class="form-control"
+          id="contract_expiration"
+          required
+          formControlName="contract_expiration"
+        />
+      </div>
       <h3>Cargar documentos</h3>
       <hr />
       <div class="row">
         <div class="mb-3 form-group col-md-3">
-          <label for="cv_file" #cvInput class="form-label"
-            >Hoja de vida
-          </label>
+          <label for="cv_file" #cvInput class="form-label">Hoja de vida </label>
           <input
             type="file"
-            class="form-control"
+            class="form-control d-none"
             formControlName="cv_file"
             (change)="onFileChange($event,  'cv_file')"
             #cvInput
@@ -137,7 +161,7 @@
           </label>
           <input
             type="file"
-            class="form-control"
+            class="form-control d-none"
             formControlName="medical_exam_file"
             (change)="onFileChange($event, 'medical_exam_file')"
             #medicalExamInput
@@ -156,12 +180,15 @@
           />
         </div>
         <div class="mb-3 form-group col-md-3">
-          <label for="followup_letter_file" #followupLetterInput class="form-label"
+          <label
+            for="followup_letter_file"
+            #followupLetterInput
+            class="form-label"
             >Carta de seguimiento
           </label>
           <input
             type="file"
-            class="form-control"
+            class="form-control d-none"
             formControlName="followup_letter_file"
             (change)="onFileChange($event, 'followup_letter_file')"
             #followupLetterInput
@@ -185,7 +212,7 @@
           </label>
           <input
             type="file"
-            class="form-control"
+            class="form-control d-none"
             formControlName="history_file"
             (change)="onFileChange($event, 'history_file')"
             #historyInput
@@ -209,7 +236,7 @@
           </label>
           <input
             type="file"
-            class="form-control"
+            class="form-control d-none"
             formControlName="study_stands_file"
             (change)="onFileChange($event, 'study_stands_file')"
             #studyStandsInput
@@ -233,7 +260,7 @@
           >
           <input
             type="file"
-            class="form-control"
+            class="form-control d-none"
             formControlName="id_card_file"
             (change)="onFileChange($event, 'id_card_file')"
             #idCardInput
@@ -252,13 +279,16 @@
           />
         </div>
         <div class="mb-3 form-group col-md-3">
-          <label for="work_certificate_file" #workCertificateInput class="form-label"
+          <label
+            for="work_certificate_file"
+            #workCertificateInput
+            class="form-label"
             >Certificado laboral
           </label>
 
           <input
             type="file"
-            class="form-control"
+            class="form-control d-none"
             formControlName="work_certificate_file"
             (change)="onFileChange($event, 'work_certificate_file')"
             #workCertificateInput
@@ -277,13 +307,16 @@
           />
         </div>
         <div class="mb-3 form-group col-md-3">
-          <label for="military_passbook_file" #militaryPassbookInput class="form-label"
+          <label
+            for="military_passbook_file"
+            #militaryPassbookInput
+            class="form-label"
             >Libreta militar
           </label>
 
           <input
             type="file"
-            class="form-control"
+            class="form-control d-none"
             formControlName="military_passbook_file"
             (change)="onFileChange($event, 'military_passbook_file')"
             #militaryPassbookInput

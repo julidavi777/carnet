@@ -31,6 +31,9 @@ class CreateEmployeesTable extends Migration
             $table->string('id_card_file')->nullable();
             $table->string('work_certificate_file')->nullable();
             $table->string('military_passbook_file')->nullable();
+            $table->date('exam_expiration')->nullable();
+            $table->date('contract_expiration')->nullable();
+            
             $table->timestamps();
     
         });

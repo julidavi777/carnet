@@ -32,7 +32,9 @@ class EmployeeSeeder extends Seeder
             'study_stands_file'=> 'thisString',
             'id_card_file'=> 'thisString',
             'work_certificate_file'=> 'thisString',
-            'military_passbook_file'=>'thisString'
+            'military_passbook_file'=>'thisString',
+            'exam_expiration'=>'28/08/2023',
+            'contract_expiration'=>'28/08/2023',
     
         ]);
    
