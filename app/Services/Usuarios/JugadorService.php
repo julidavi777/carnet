@@ -35,6 +35,7 @@ class JugadorService
         return DB::table('t19_inscripciones')
         ->where('c19_inscripcion_jugador_id', $jugador_id)
         ->where('c19_inscripcion_jugador_categoria_id', $categoria)
+        ->where('c19_inscripcion_pagada', 'F')
         ->exists();
     }
 }

@@ -7,14 +7,50 @@ use Illuminate\Support\Facades\DB;
 use App\Services\Inscripciones\CategoriasService;
 use App\Services\Usuarios\JugadorService;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class InscripcionesController extends Controller
 {
     public function index()
     {
+        $lista_pagos = $this->getListaPagos();
         $data_inscripciones = $this->getJugadoresInscritos();
 
-        return view('inscripciones.inscribir', compact('data_inscripciones'));
+        return view('inscripciones.inscribir', compact('lista_pagos', 'data_inscripciones'));
+    }
+
+    protected function setPago(Request $request)
+    {
+        $tabla_inscripciones = DB::table('t19_inscripciones');
+
+        $inscripciones = $tabla_inscripciones
+        ->select('c19_inscripcion_torneo_id AS torneo_id', 'c19_inscripcion_id_control_pagos AS pago_id')
+        ->where('c19_inscripcion_torneo_id', $request['torneo_id'])
+        ->whereNull('c19_inscripcion_id_control_pagos')
+        ->get()->toArray();
+
+        $pago_id = DB::table('t19_control_pagos')->insertGetId([
+            'c19_control_pagos_torneo_id' => $request['torneo_id'],
+            'c19_control_pagos_responsable_id' => $request['responsable_id'],
+            'c19_control_pagos_valor' => $request['valor'],
+            'c19_control_pagos_estado' => $request['estado'],
+        ], 'c19_control_pagos_id');
+
+        foreach($inscripciones as $inscripcion)
+        {
+            $inscripcion->pago_id = $pago_id;
+
+            $tabla_inscripciones
+            ->where('c19_inscripcion_torneo_id', $inscripcion->torneo_id)
+            ->update([
+                'c19_inscripcion_id_control_pagos' => $inscripcion->pago_id
+            ]);
+        }
+
+        return back()->with([
+            'success' => 'Copia o guarda el siguiente código que se usará como referencia de pago en la pasarela de pagos: '. $pago_id,
+            'url' => 'https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=9283&searchedCategoryId=&searchedAgreementName=VALUES%20THROUGH%20SPORT%20COLOMBIA'
+        ]);
     }
 
     protected function inscribir(Request $request)
@@ -158,5 +194,14 @@ class InscripcionesController extends Controller
         }
 
         return $data;
+    }
+
+    private function getListaPagos()
+    {
+        $lista = DB::table('t19_control_pagos')
+        ->where('c19_control_pagos_responsable_id', Auth::id())
+        ->get()->toArray();
+
+        return $lista;
     }
 }

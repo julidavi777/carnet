@@ -52,6 +52,9 @@ Route::middleware('preventHistory')->group(function () {
 
             Route::get('/delete', [ InscripcionesController::class, 'eliminar'])
             ->name('inscripciones.delete');
+
+            Route::post('/pago', [ InscripcionesController::class, 'setPago'])
+            ->name('inscripciones.pago');
         });
     });
 

@@ -6,10 +6,11 @@ use Illuminate\View\Component;
 use App\Services\TorneosService;
 use App\Services\Usuarios\JugadorService;
 use App\Services\Inscripciones\CategoriasService;
+use Illuminate\Support\Facades\Auth;
 
 class InscripcionesTablaJugadores extends Component
 {
-    public $datos;
+    public $data_inscripcion;
     public $datos_tabla;
     /**
      * Create a new component instance.
@@ -18,8 +19,24 @@ class InscripcionesTablaJugadores extends Component
      */
     public function __construct($datos)
     {
-        $this->datos = $datos;
-        $this->datos_tabla = $this->getDatosTabla($this->datos);
+        $data_inscripcion = [];
+
+        foreach($datos as $dato)
+        {
+            if(!is_array($dato))
+            {
+                $data_inscripcion['valor'] = $dato;
+                continue;
+            }
+
+            $data_inscripcion['torneo_id'] = $dato['torneo_id'];
+            $data_inscripcion['responsable_id'] = Auth::id();
+            $data_inscripcion['estado'] = $dato['is_inscripcion_pagada'];
+        }
+
+        $this->data_inscripcion =$data_inscripcion;
+
+        $this->datos_tabla = $this->getDatosTabla($datos);
     }
 
     /**

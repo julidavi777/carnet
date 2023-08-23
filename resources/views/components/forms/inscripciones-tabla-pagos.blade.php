@@ -16,13 +16,26 @@
             <th scope="col" class="px-6 py-4">Valor pagado</th>
         </thead>
         <tbody>
-            <tr>
-                <td class="px-6 py-4">Yisus</td>
-                <td class="px-6 py-4">Heaven</td>
-                <td class="px-6 py-4">$ 2.000.000</td>
-                <td class="px-6 py-4">mediano</td>
-                <td class="px-6 py-4">$ 2.000.000</td>
-            </tr>
+            @if(!empty($datos_tabla))
+                @foreach ($datos_tabla as $datos)
+                    <tr>
+                        <td class="px-6 py-4">{{ $datos['torneo_id'] }}</td>
+                        <td class="px-6 py-4">{{ $datos['responsable_id'] }}</td>
+                        <td class="px-6 py-4">$ {{ $datos['valor'] }}</td>
+                        <td class="px-6 py-4">
+
+                            <div class="flex items-center">
+                                @if($datos['pago_estado'] !== 'A')
+                                    <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Pendiente
+                                @else
+                                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Aprobado
+                                @endif
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">$ {{ $datos['valor_pagado'] ?? 0 }}</td>
+                    </tr>
+                @endforeach
+            @endif
         </tbody>
     </table>
 </div>

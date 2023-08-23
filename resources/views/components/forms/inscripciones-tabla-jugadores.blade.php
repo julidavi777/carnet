@@ -5,6 +5,11 @@
             <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
                 A continuación, se listan los jugadores que están inscritos y el monto total a pagar, 
                 el administrador verificará que el pago se haya efectuado correctamente.
+                POR FAVOR LEER Y TENER EN CUENTA EL 
+                <a href="{{ asset('storage/instructivo.png') }}" target="_blank" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
+                    SIGUIENTE INSTRUCTIVO
+                </a> 
+                ANTES DE PASAR AL PAGO
             </p>
         </caption>
         <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
@@ -23,13 +28,23 @@
                     @if(!is_array($data))
 
                         <tfoot>
-                            <tr class="font-semibold text-gray-900 dark:text-white">
-                                <th scope="row" class="px-6 py-3 text-base" colspan="3">Total</th>
-                                <td class="px-6 py-3">$ {{ number_format($data) }}</td>
-                                <td class="">
-                                    <x-flowbite.button>Pasar al pago</x-flowbite.button>
-                                </td>
-                            </tr>
+                            <form action="{{ route('inscripciones.pago') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="torneo_id" value="{{ $data_inscripcion['torneo_id'] }}">
+                                <input type="hidden" name="responsable_id" value="{{ $data_inscripcion['responsable_id'] }}">
+                                <input type="hidden" name="estado" value="{{ $data_inscripcion['estado'] }}">
+                                <input type="hidden" name="valor" value="{{ $data_inscripcion['valor'] }}">
+
+                                <tr class="font-semibold text-gray-900 dark:text-white">
+                                    <th scope="row" class="px-6 py-3 text-base" colspan="3">Total</th>
+                                    <td class="px-6 py-3">$ {{ number_format($data) }}</td>
+                                    <td class="">
+                                        <x-flowbite.button type="submit" :color="'green'">
+                                            Pasar al pago
+                                        </x-flowbite.button>
+                                    </td>
+                                </tr>
+                            </form>
                         </tfoot>
 
                     @else
