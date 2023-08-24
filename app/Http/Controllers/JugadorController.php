@@ -88,11 +88,11 @@ class JugadorController extends Controller
             'nombres' => [ 'required', 'string' ],
             'apellidos' => [ 'required', 'string' ],
             'genero' => [ 'required', 'string', 'size:1' ],
-            'club' => [ 'required', 'numeric', 'min:2' ],
+            'club' => [ 'required', 'numeric' ],
             'nacionalidad' => [ 'required', 'string', 'max:15' ],
             'fecha_nacimiento' => [ 'nullable', 'date_format:Y-m-d' ],
             'pais_residencia' => [ 'nullable', 'string', 'size:3' ],
-            'departamento_residencia' => [ 'nullable', 'numeric', 'min:2' ],
+            'departamento_residencia' => [ 'nullable', 'numeric' ],
             'municipio_residencia' => [ 'nullable', 'numeric', 'min:4' ]
         ]);
 
@@ -101,15 +101,16 @@ class JugadorController extends Controller
             $check_responsable = DB::table('t15_jugadores')
             ->select('c15_jugador_responsable_id as responsable')
             ->where('c15_jugador_id', $validated['documento'])
-            ->get()
-            ->toArray();
+            ->first();
 
-            if(Auth::id() !== $check_responsable[0]->responsable)
-                return back()->withErrors([
-                    'Error' => 'El jugador ya se encuentra asignado a un responsable, 
-                    por favor, contactese con un administrador.'
-                ]);
-
+            if(!empty($check_responsable))
+            {
+                if(Auth::id() !== $check_responsable->responsable)
+                    return back()->withErrors([
+                        'Error' => 'El jugador ya se encuentra asignado a un responsable, 
+                        por favor, contactese con un administrador.'
+                    ]);
+            }
             $campos_insert['c15_jugador_id'] = $validated['documento'];
         }
 
@@ -121,10 +122,9 @@ class JugadorController extends Controller
         {
             $check_responsable = DB::table('t15_jugadores')
             ->where('c15_jugador_id', $validated['documento'])
-            ->get()
-            ->count();
+            ->exists();
 
-            if($check_responsable > 0)
+            if($check_responsable)
                 return back()->withErrors([
                     'Error' => 'El documento ya se encuentra registrado y no es posible cambiarlo,
                         por favor, contactese con un administrador.'
