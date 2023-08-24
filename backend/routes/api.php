@@ -23,6 +23,7 @@ use App\Http\Controllers\CustomerApuActivityController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\DepartamentoMunicipioController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProjectManagementController;
@@ -47,6 +48,7 @@ Route::post('register',  [AuthController::class, 'register']);
 Route::post('logout',  [AuthController::class, 'logout']);
 Route::get('verifyAccount',  [AuthController::class, 'verifyAccount']);
 Route::get('testRoute',  [AuthController::class, 'test']);
+Route::get('testview',  [EmployeeController::class, 'test']);
 
 
 Route::group([
@@ -54,12 +56,16 @@ Route::group([
 ], function ($router) {
     Route::post('me',  [AuthController::class, 'me']);
 
-    Route::get('users',  [UserController::class, 'index']);
     //USERS
-
+    Route::get('users',  [UserController::class, 'index']);
+    
     Route::put('users/{user_id}',  [UserController::class, 'update']);
     Route::delete('users/{user_id}',  [UserController::class, 'destroy']);
-
+    //EMPLOYEE
+    Route::get('employees',  [EmployeeController::class, 'index']);
+    Route::delete('employees/{employee_id}',  [EmployeeController::class, 'destroy']);
+    Route::patch('employees/{employee_id}',  [EmployeeController::class, 'update']);
+    Route::post('employees',  [EmployeeController::class, 'store']);
     //ROLES
     Route::get('roles', [RoleController::class, 'index']);
     Route::post('roles', [RoleController::class, 'store']);

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { FormEmployeePage } from './form-employees.page';
 
 const routes: Routes = [
@@ -8,6 +7,7 @@ const routes: Routes = [
     path: '',
     component: FormEmployeePage
   }
+
 ];
 
 @NgModule({

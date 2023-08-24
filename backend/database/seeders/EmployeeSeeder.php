@@ -20,17 +20,21 @@ class EmployeeSeeder extends Seeder
             'name' => 'Eugenio',
             'surname'=> 'Arbelaez',
             'id_card'=> '1222536',
-            'email' => 'eu88@gmail.com',
             'type_id'=> 'CC',
             'address'=> 'thisString',
             'phone'=> '3122253600',
+            'email' => 'eu88@gmail.com',
+            'position'=>'manager',
             'cv_file'=> 'thisString',
             'medical_exam_file'=> 'thisString',
-            'followup_stands_file'=> 'thisString',
+            'followup_letter_file'=> 'thisString',
             'history_file'=> 'thisString',
             'study_stands_file'=> 'thisString',
             'id_card_file'=> 'thisString',
             'work_certificate_file'=> 'thisString',
+            'military_passbook_file'=>'thisString',
+            'exam_expiration'=>'28/08/2023',
+            'contract_expiration'=>'28/08/2023',
     
         ]);
    
