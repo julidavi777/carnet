@@ -63,7 +63,7 @@
     {{-- Modal para las ver los jugadores asociados a los pagos --}}
     <!-- Main modal -->
     <div id="defaultModal" tabindex="-1" aria-hidden="{{ $ariaHidden }}" class="{{ $backdropClasses }} {{ $showModal }} ">
-        <div class="relative w-full max-w-2xl max-h-full">
+        <div class="relative w-full max-w-4xl max-h-full">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <!-- Modal header -->
@@ -82,20 +82,49 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <div class="p-6 space-y-6">
-                    @if(count($jugadores) > 0)
-                        @foreach ($jugadores as $jugador)
-                            Nombre jugador: {{ $jugador->nombre_jugador }} <br>
-                            Documento jugador: {{ $jugador->id_jugador }} <br>
-                            Categoría: {{ $jugador->nombre_categoria }} <br>
-                            Costo inscripción: {{ $jugador->valor_inscripcion }} <br>
-                            Género: {{ $jugador->genero }} <br>
-                            Club: {{ $jugador->club }} <br>
-                            Ranking: {{ $jugador->ranking }} <br>
-                            Lugar de residencia: ( {{ $jugador->pais }} - {{ $jugador->depto }} - {{ $jugador->ciudad }} ) <br>
-                            <hr>
-                        @endforeach
-                    @endif
+                <div class="p-6 space-y-6 overflow-x-auto">
+                    <table class="w-auto relative text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                            <th scope="col" class="px-6 py-4">Nombre jugador</th>
+                            <th scope="col" class="px-6 py-4">Documento jugador</th>
+                            <th scope="col" class="px-6 py-4">Categoría</th>
+                            <th scope="col" class="px-6 py-4">Género</th>
+                            <th scope="col" class="px-6 py-4">Club</th>
+                            <th scope="col" class="px-6 py-4">Ranking</th>
+                            <th scope="col" class="px-6 py-4">Lugar de residencia</th>
+                        </thead>
+                        <tbody>
+                            @if(count($jugadores) > 0)
+
+                                @foreach ($jugadores as $jugador)
+                                    <tr>
+                                        <td class="px-6 py-4">
+                                            {{ $jugador->id_jugador }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ ucfirst( strtolower($jugador->nombre_jugador) ) }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ ucfirst( strtolower($jugador->nombre_categoria) ) }} ($ {{ number_format($jugador->valor_inscripcion) }} )
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $jugador->genero }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ ucfirst( strtolower($jugador->club) ) }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ number_format($jugador->ranking) }}
+                                            
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            ( {{ ucfirst( strtolower($jugador->pais) ) }} - {{ ucfirst( strtolower($jugador->depto) ) }} - {{ ucfirst( strtolower($jugador->ciudad) ) }} )
+                                        </td>
+                                    <tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -103,7 +132,7 @@
                         {{-- data-modal-hide="defaultModal" --}}
                         wire:click="closeModal"
                         type="button" class="text-center text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                        Decline
+                        Cerrar modal
                     </button>
                 </div>
             </div>

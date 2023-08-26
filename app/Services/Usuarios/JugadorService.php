@@ -45,7 +45,7 @@ class JugadorService
             ->where('id_pagos', $id_pago)
             ->get()
             ->toJson();
-        
+
         return $jugadores;
     }
 }
