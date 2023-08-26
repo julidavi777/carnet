@@ -5,7 +5,11 @@ import { LoginResponse } from './interfaces/LoginResponse.interface';
 import { LoginService } from './login.service';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { LocalStorageEncryptService } from '../services/local-storage-encrypt.service';
+/* import {MatDialog} from '@angular/material/dialog';
+import { ApiService } from '../home/alerts/contracts-to-expire/api.service';
+import { AlertModalComponent } from '../home/alerts/contracts-to-expire/alert-modal-component'; // Asegúrate de importar el componente del modal
 
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -22,6 +26,8 @@ export class LoginPage implements OnInit {
   });
 
   constructor(
+/*     private apiService:ApiService,
+    private dialog:MatDialog, */
     private loginService: LoginService,
     private router: Router,
     private permissionsService: NgxPermissionsService,

@@ -36,6 +36,8 @@ class Employee extends Model
         'contract_expiration'
     ];
 
+    protected $dates = ['contracts_expires_at','medical_expires_at'];
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

@@ -64,12 +64,7 @@ export class HomePage {
                   icon:'pi pi-fw pi-users',
 
 
- frontend
                   routerLink: ['employees']
-
-                  
-master
-
               },
               {
                 separator:true

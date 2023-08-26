@@ -1,0 +1,5 @@
+ <h2>Alerta de Exámenes y Contratos Cercanos a Expirar</h2>
+<ul>
+  <li *ngFor="let exam of data.exams">Examen {{ exam.name }} expira en {{ exam.daysLeft }} días</li>
+  <li *ngFor="let contract of data.contracts">Contrato {{ contract.id }} expira en {{ contract.daysLeft }} días</li>
+</ul> 
