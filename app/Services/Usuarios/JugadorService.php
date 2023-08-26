@@ -38,4 +38,14 @@ class JugadorService
         ->where('c19_inscripcion_pagada', 'F')
         ->exists();
     }
+
+    public static function getListaJugadoresInscritos($id_pago)
+    {
+        $jugadores = DB::table('v_t19_inscripciones')
+            ->where('id_pagos', $id_pago)
+            ->get()
+            ->toJson();
+        
+        return $jugadores;
+    }
 }

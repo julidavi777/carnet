@@ -2028,6 +2028,9 @@ select {
 .leading-9 {
   line-height: 2.25rem;
 }
+.leading-relaxed {
+  line-height: 1.625;
+}
 .leading-tight {
   line-height: 1.25;
 }
@@ -2301,6 +2304,10 @@ select {
 .hover\:underline:hover {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
+}
+.hover\:no-underline:hover {
+  -webkit-text-decoration-line: none;
+          text-decoration-line: none;
 }
 .focus\:z-10:focus {
   z-index: 10;

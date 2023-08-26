@@ -35,13 +35,31 @@
                         </td>
                         <td class="px-6 py-4">$ {{ $datos['valor_pagado'] ?? 0 }}</td>
                         <td class="flex flex-col px-5 py-4">
-                            <a href="" class="btnEliminar mb-1 font-medium text-blue-600 dark:text-blue-500 hover:underline">
+
+                            <!-- Modal toggle -->
+                            <button 
+                                data-modal-target="defaultModal" 
+                                data-modal-toggle="defaultModal" 
+                                data-modal-pago-id="{{ $datos['id_pago'] }}" 
+                                class="mb-1 font-medium text-blue-600 dark:text-blue-500 hover:underline" 
+                                type="button"
+                            >
                                 Ver detalle
-                            </a>
+                            </button>
+  
                         </td>
                     </tr>
                 @endforeach
             @endif
         </tbody>
+        @push('scripts')
+            <script>
+                Livewire.on('postAdded', postId => {
+
+                    alert('A post was added with the id of: ' + postId);
+
+                })
+            </script>
+        @endpush
     </table>
 </div>

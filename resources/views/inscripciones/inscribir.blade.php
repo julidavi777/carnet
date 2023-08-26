@@ -56,7 +56,7 @@
                     <x-forms.inscripciones-tabla-jugadores :datos="$data_inscripciones" />
 
                     {{-- Tabla para las inscripciones y que hayan realizado el pago --}}
-                    <x-forms.inscripciones-tabla-pagos :datos="$lista_pagos" />
+                    <livewire:lista-pagos-component :datos="$lista_pagos" />
                 </div>
             </div>
         </div>
