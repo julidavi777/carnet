@@ -39,10 +39,6 @@
     
                                 <!-- Modal toggle -->
                                 <button 
-                                    @if(!$ariaHidden)
-                                        data-modal-target="defaultModal" 
-                                        data-modal-toggle="defaultModal"
-                                    @endif
                                     class="mb-1 font-medium text-blue-600 dark:text-blue-500 hover:underline" 
                                     type="button"
                                     wire:click="$emit('showJugadores', {{ $datos['id_pago'] }})"
@@ -53,6 +49,13 @@
                             </td>
                         </tr>
                     @endforeach
+                @else
+                    <tfoot>
+                        <tr class="font-semibold text-gray-900 dark:text-white">
+                            <th scope="row" class="px-6 py-3 text-base"></th>
+                            <td class="px-6 py-3" colspan="4">No hay liste de pagos en la tabla por el momento.</td>
+                        </tr>
+                    </tfoot>
                 @endif
             </tbody>
         </table>
