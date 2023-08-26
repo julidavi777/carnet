@@ -36,8 +36,9 @@ class InscripcionesTablaPagos extends Component
 
         foreach($pagos as $pago)
         {
+            $tabla['id_pago'] = $pago->c19_control_pagos_id;
             $tabla['torneo_id'] = ucfirst(strtolower(TorneosService::getNombreTorneo($pago->c19_control_pagos_torneo_id)));
-            $tabla['responsable_id'] = ucfirst(strtolower(DB::table('users')->where('id', Auth::id())->pluck('name')->first()));
+            //$tabla['responsable_id'] = ucfirst(strtolower(DB::table('users')->where('id', Auth::id())->pluck('name')->first()));
             $tabla['valor'] = number_format($pago->c19_control_pagos_valor);
             $tabla['pago_estado'] = $pago->c19_control_pagos_estado;
             $tabla['valor_pagado'] = number_format($pago->c19_control_pagos_valor_pagado) ?? 0;

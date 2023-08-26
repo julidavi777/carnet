@@ -6,7 +6,7 @@
                 A continuación, se listan los jugadores que están inscritos y el monto total a pagar, 
                 el administrador verificará que el pago se haya efectuado correctamente.
                 POR FAVOR LEER Y TENER EN CUENTA EL 
-                <a href="{{ asset('storage/instructivo.png') }}" target="_blank" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
+                <a href="{{ asset('storage/Instrucciones Formato de pago TYV.png') }}" target="_blank" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
                     SIGUIENTE INSTRUCTIVO
                 </a> 
                 ANTES DE PASAR AL PAGO

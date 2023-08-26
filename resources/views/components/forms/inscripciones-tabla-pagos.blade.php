@@ -10,17 +10,18 @@
         </caption>
         <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
             <th scope="col" class="px-6 py-4">Torneo</th>
-            <th scope="col" class="px-6 py-4">Responsable</th>
+            <th scope="col" class="px-6 py-4">ID Pago</th>
             <th scope="col" class="px-6 py-4">Total</th>
             <th scope="col" class="px-6 py-4">Estado</th>
             <th scope="col" class="px-6 py-4">Valor pagado</th>
+            <th scope="col" class="px-6 py-4">Acción</th>
         </thead>
         <tbody>
             @if(!empty($datos_tabla))
                 @foreach ($datos_tabla as $datos)
                     <tr>
                         <td class="px-6 py-4">{{ $datos['torneo_id'] }}</td>
-                        <td class="px-6 py-4">{{ $datos['responsable_id'] }}</td>
+                        <td class="px-6 py-4">{{ $datos['id_pago'] }}</td>
                         <td class="px-6 py-4">$ {{ $datos['valor'] }}</td>
                         <td class="px-6 py-4">
 
@@ -33,6 +34,11 @@
                             </div>
                         </td>
                         <td class="px-6 py-4">$ {{ $datos['valor_pagado'] ?? 0 }}</td>
+                        <td class="flex flex-col px-5 py-4">
+                            <a href="" class="btnEliminar mb-1 font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                Ver detalle
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
             @endif
