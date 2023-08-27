@@ -48,34 +48,9 @@ class User extends Authenticatable
     ];
 
 
-    protected $dates = ['deleted_at'];
+    public function setPasswordAttribute(string $password){
+        $this->attributes['password'] = bcrypt($password);
 
-
-    /**
-     * Get the commercial offers for the customer.
-     */
-    public function commercialOffers()
-    {
-        return $this->hasMany(CommercialOffer::class, 'responsable_id');
     }
 
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
 }

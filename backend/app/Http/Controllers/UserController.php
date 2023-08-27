@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Authenticatable
 {
+    public function showLogin(){
+        return view('auth.login');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -156,12 +159,12 @@ class UserController extends Authenticatable
     //     return $this->showOne($user);
     // }
 }
-
+/* 
     public function destroy($id)
     {
 
             User::destroy($id);
 
-        return redirect('users')->with('msg', 'El usuario se ha borrado exitosamente' );
-    }
-}
+        return redirect('/')->with('msg', 'El usuario se ha borrado exitosamente' );
+    } */
+
