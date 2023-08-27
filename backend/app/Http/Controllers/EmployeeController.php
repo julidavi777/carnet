@@ -78,13 +78,7 @@ class EmployeeController extends Controller
             'military_passbook_file' => 'required'
         ]);
     }
-    public function test()
-    {
-        return response()->json([
-            "status" => true,
-            "message" => "created sucessfully"
-        ], 201);
-    }
+
     public function create()
     {
         return view('employees.create');

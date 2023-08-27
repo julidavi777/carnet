@@ -32,7 +32,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\LoginController; 
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,21 +45,34 @@ use App\Http\Controllers\LoginController;
 */
 
 //AUTH
- Route::get('register', [RegisterController::class, 'show']);
- Route::post('register', [RegisterController::class, 'register']);
- Route::post('login', [LoginController::class, 'login']);
- Route::get('login', [LoginController::class, 'show']);
- Route::post('logout', [LoginController::class, 'logout']);
+Route::get('register', [RegisterController::class, 'show']);
+Route::post('register', [RegisterController::class, 'register']);
+Route::post('login', [LoginController::class, 'login']);
+Route::get('login', [LoginController::class, 'show']);
+Route::post('logout', [LoginController::class, 'logout']);
 
-//Employees
- Route::get('employees',  [EmployeeController::class, 'index']);
-Route::get('employees/create',  [EmployeeController::class, 'create']);
-Route::post('employees',  [EmployeeController::class, 'store']);
-Route::delete('employees/{employee_id}',  [EmployeeController::class, 'destroy']);
-Route::patch('employees/{employee_id}',  [EmployeeController::class, 'update']);
-Route::patch('/employees/{employee}', 'EmployeeController@update');
+Route::middleware(['auth.custom'])->group(function () {
+    //EMPLOYEES ROUTES
+    Route::get('/employee', 'EmployeeController@index')->name('employee.index');
+    Route::get('employees',  [EmployeeController::class, 'index']);
+    Route::get('employees/create',  [EmployeeController::class, 'create']);
+    Route::post('employees',  [EmployeeController::class, 'store']);
+    Route::delete('employees/{employee_id}',  [EmployeeController::class, 'destroy']);
+    Route::patch('employees/{employee_id}',  [EmployeeController::class, 'update']);
+    Route::patch('/employees/{employee}', 'EmployeeController@update');
+    Route::get('employees/{employee_id}',  [EmployeeController::class, 'edit']);
 
-Route::get('employees/{employee_id}',  [EmployeeController::class, 'edit']); 
+});
+
+//users
+Route::get('users',  [UserController::class, 'index']);
+Route::get('users/create',  [UserController::class, 'create']);
+Route::post('users',  [UserController::class, 'store']);
+Route::delete('users/{user_id}',  [UserController::class, 'destroy']);
+Route::patch('users/{user_id}',  [UserController::class, 'update']);
+Route::get('users/{user_id}',  [UserController::class, 'edit']);
+
+
 
 
 
