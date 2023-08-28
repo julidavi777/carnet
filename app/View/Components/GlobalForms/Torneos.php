@@ -1,11 +1,11 @@
 <?php
 
-namespace App\View\Components\Forms;
+namespace App\View\Components\GlobalForms;
 
 use Illuminate\View\Component;
-use App\Services\Usuarios\RegistroService;
+use App\Services\TorneosService;
 
-class RegistroUsuario extends Component
+class Torneos extends Component
 {
     public $torneos;
 
@@ -16,7 +16,7 @@ class RegistroUsuario extends Component
      */
     public function __construct()
     {
-        $this->torneos = json_decode(RegistroService::getTorneos());
+        $this->torneos = json_decode(TorneosService::getTorneos(true));
     }
 
     /**
@@ -26,6 +26,6 @@ class RegistroUsuario extends Component
      */
     public function render()
     {
-        return view('components.forms.registro-usuario');
+        return view('components.global-forms.torneos');
     }
 }

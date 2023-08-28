@@ -35,7 +35,7 @@
                 </div>
     
                 <!-- Torneos -->
-                <x-forms.registro-usuario />
+                <x-global-forms.torneos />
     
                 <!-- Email Address -->
                 <div class="mt-4">
