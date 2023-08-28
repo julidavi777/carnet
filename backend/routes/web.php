@@ -51,7 +51,7 @@ Route::post('login', [LoginController::class, 'login']);
 Route::get('login', [LoginController::class, 'show']);
 Route::post('logout', [LoginController::class, 'logout']);
 
-//Route::middleware(['auth.custom'])->group(function () {
+Route::middleware(['auth.custom'])->group(function () {
     //EMPLOYEES ROUTES
     Route::get('/employee', 'EmployeeController@index')->name('employee.index');
     Route::get('employees',  [EmployeeController::class, 'index']);
@@ -61,14 +61,7 @@ Route::post('logout', [LoginController::class, 'logout']);
     Route::patch('employees/{employee_id}',  [EmployeeController::class, 'update']);
     Route::get('employees/{employee_id}',  [EmployeeController::class, 'edit']);
 
-//});
-
-// Roles 
-Route::get('roles',  [RoleController::class, 'index']);
-
-// Clients
-Route::get('customers/create',  [CustomerController::class, 'create']);
-
+});
 
 //users
 Route::get('users',  [UserController::class, 'index']);
