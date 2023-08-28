@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class EmployeeController extends Controller
 {
@@ -19,13 +20,73 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+/**********************************************************INDEX***************************************************************************** */
+
+
 
     public function index(Request $request)
     {
-        $employees = Employee::all();
-        //   return response()->json($employees);
-        return view('employees.index', compact('employees'));
+       // Obtener empleados normales
+       $message= '';
+       $employees = Employee::all();
+
+       // Obtener empleados cuyos contratos o exámenes médicos expiran en 5 días o menos
+       $expiringEmployees = Employee::where(function ($query) {
+           $query->whereDate('contract_expiration', '<=', Carbon::now()->addDays(5))
+               ->orWhereDate('exam_expiration', '<=', Carbon::now()->addDays(5));
+       })->get();
+   
+       // Generar el contenido del mensaje
+  
+       foreach ($expiringEmployees as $employee) {
+     /*    if ($employee->contract_expiration <= Carbon::now()->addDays(5)) {
+            $message .= "Contrato expira el {$employee->contract_expiration->format('d/m/Y')}\n";
+        }
+        if ($employee->exam_expiration <= Carbon::now()->addDays(5)) {
+            $message .= "Examen médico expira el {$employee->exam_expiration->format('d/m/Y')}\n";
+        } */
+        if ($employee->exam_expiration instanceof Carbon && $employee->exam_expiration <= Carbon::now()->addDays(5)) {
+            $message .= "Examen médico expira el {$employee->exam_expiration->format('d/m/Y')}\n";
+            return 'hola mundo';
+        }
+
+           // Genera el mensaje como se mencionó anteriormente en el ejemplo
+           // $expirationMessage .= ...
+       }
+   
+       return view('employees.index', compact('employees', 'message'));
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /***************************************************************END INDEX************************************************************************ */
+
+
+
     public function store(Request $request)
     {
         $data = $request->all();
@@ -79,6 +140,33 @@ class EmployeeController extends Controller
         ]);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function create()
     {
         return view('employees.create');
@@ -102,66 +190,83 @@ class EmployeeController extends Controller
         return view('employees.edit', compact('employee'));
     }
 
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Employee  $employee
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
+        $employee = Employee::findOrFail($id);
+    
         $formFields = [
             'name' => 'required|string|max:80',
             'surname' => 'required|string|max:80',
-            'id_card'=>'required|string',
-            'type_id'=>'required|string',
-            'address'=>'required|string',
-            'phone'=>'required',
-            'email'=>'required|email',
-            'position'=>'required|string',
-            'cv_file'=>'required|string',
-            'medical_exam_file'=>'required|string',
-            'followup_letter_file'=>'required|string',
-            'history_file'=>'required|string',
-            'study_stands_file'=>'required|string',
-            'id_card_file'=>'required|string',
-            'work_certificate_file'=>'required|string',
-            'military_passbook_file'=>'required|string',
-            'exam_expiration'=>'required|date',
-            'contract_expiration'=>'required|date'
+            'id_card' =>'required',
+            'type_id' =>'required',
+            'address' =>'required',
+            'phone' =>'required',
+            'email' =>'required',
+            'position' =>'required',
+            'cv_file' =>'required',
+            'medical_exam_file' =>'required',
+            'followup_letter_file' =>'required',
+            'history_file' =>'required',
+            'study_stands_file' =>'required',
+            'id_card_file' =>'required',
+            'work_certificate_file' =>'required',
+            'military_passbook_file' =>'required',
+            'exam_expiration' =>'required',
+            'contract_expiration'=>'required'
         ];
-
-        $error = [
-            'name.required' => 'El nombre es requerido, no debe contener mas de 80 caracteres',
-            'surname.required' => 'El apellido es requerido y no debe ser mayor a 80 caracteres',
-            'id_card'=>'El id_card es requerido',
-            'type_id'=>'El type_id es requerido',
-            'address'=>'El address es requerido',
-            'phone'=>'El phone es requerido',
-            'email'=>'El email es requerido',
-            'position'=>'El position es requerido',
-            'cv_file'=>'El cv_file es requerido',
-            'medical_exam_file'=>'El medical_exam_file es requerido',
-            'followup_letter_file'=>'El followup_letter_file es requerido',
-            'history_file'=>'El history_file es requerido',
-            'study_stands_file'=>'El study_stands_file es requerido',
-            'id_card_file'=>'El id_card_file es requerido',
-            'work_certificate_file'=>'El work_certificate_file es requerido',
-            'military_passbook_file'=>'El military_passbook_file es requerido',
-            'exam_expiration'=>'El exam_expiration es requerido',
-            'contract_expiration'=>'El contract_expiration es requerido'
-           
+    
+        $errorMessages = [
+            'name' => 'el nombre  es requerido',
+            'surname' => 'el Apellido  es requerido',
+            'id_card' =>'el documento de identidad es requerido',
+            'type_id' =>'el tipo de documento es requerido',
+            'address' =>'la dirección es requerido',
+            'phone' =>'el phone es requerido',
+            'email' =>'el email es requerido',
+            'position' =>'el position es requerido',
+            'cv_file' =>'el cv_file es requerido',
+            'medical_exam_file' =>'el medical_exam_file es requerido',
+            'followup_letter_file' =>'el followup_letter_file es requerido',
+            'history_file' =>'el history_file es requerido',
+            'study_stands_file' =>'el study_stands_file es requerido',
+            'id_card_file' =>'el id_card_file es requerido',
+            'work_certificate_file' =>'el work_certificate_file es requerido',
+            'military_passbook_file' =>'el military_passbook_file es requerido',
+            'exam_expiration' =>'el exam_expiration es requerido',
+            'contract_expiration'=>'el contract_expiratio es requerido'
         ];
-
-        $this->validate($request, $formFields, $error);
-        $employee = request()->except(['_token', '_method']);
-
-        // if ($request->hasFile('front')) {
-        //     $formFields = ['front' => 'required|max:8000|mimes:jpg,png,jpeg,webp',];
-        //     $error = ['required' => 'La portada es requerida'];
-
-        //     $employees = Employee::findOrFail($id);
-        //     Storage::delete(['public/', $employees->front]);
-        //     $employee['front'] = $request->file('front')->store('uploads', 'public');
-        // }
-
-
-        Employee::where('id', '=', $id)->update($employee);
-        $employees = Employee::findOrFail($id);
+    
+        $this->validate($request, $formFields, $errorMessages);
+    
+        $adjuntableFields = [
+            'cv_file',
+            'medical_exam_file',
+            'followup_letter_file',
+            'history_file',
+            'study_stands_file',
+            'id_card_file',
+            'work_certificate_file',
+            'military_passbook_file',
+        ];
+        foreach ($adjuntableFields as $field) {
+            if ($request->hasFile($field)) {
+                // Eliminar archivo antiguo si existe
+                Storage::delete('public/' . $employee->$field);
+                // Subir nuevo archivo
+                $updatedData[$field] = $request->file($field)->store('employees', 'public');
+            }
+        }
+      
+        // Actualizar el registro de empleado
+        $updatedData = $request->except(['_token', '_method']);
+        $employee->update($updatedData);
         return redirect('employees')->with('msg', 'El empleado se ha editado correctamente');
     }
 

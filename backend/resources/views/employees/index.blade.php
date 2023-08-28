@@ -17,6 +17,12 @@
         </div>
         </div>
         @endif
+        @if($message)
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <h4>Alerta de Expiraciones</h4>
+        {!! nl2br(e($message)) !!}
+    </div>
+@endif
         <tr>
             <!-- Encabezados de las columnas -->
             <th>Nombres</th>

@@ -59,7 +59,6 @@ Route::middleware(['auth.custom'])->group(function () {
     Route::post('employees',  [EmployeeController::class, 'store']);
     Route::delete('employees/{employee_id}',  [EmployeeController::class, 'destroy']);
     Route::patch('employees/{employee_id}',  [EmployeeController::class, 'update']);
-    Route::patch('/employees/{employee}', 'EmployeeController@update');
     Route::get('employees/{employee_id}',  [EmployeeController::class, 'edit']);
 
 });
