@@ -10,6 +10,7 @@ class CategoriasService
     {
         $clubes = DB::table('t11_categorias')
             ->select('c11_categoria_id', 'c11_categoria_nombre', 'c11_costo_inscripcion')
+            ->orderBy('c11_categoria_nombre')
             ->get();
 
         return $clubes->toJson();

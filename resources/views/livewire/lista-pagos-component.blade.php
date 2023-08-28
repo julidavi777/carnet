@@ -99,13 +99,13 @@
                                 @foreach ($jugadores as $jugador)
                                     <tr>
                                         <td class="px-6 py-4">
-                                            {{ $jugador->id_jugador }}
-                                        </td>
-                                        <td class="px-6 py-4">
                                             {{ ucfirst( strtolower($jugador->nombre_jugador) ) }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ ucfirst( strtolower($jugador->nombre_categoria) ) }} ($ {{ number_format($jugador->valor_inscripcion) }} )
+                                            {{ $jugador->id_jugador }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ ucfirst( strtolower($jugador->nombre_categoria) ) }} - ${{ number_format($jugador->valor_inscripcion) }}
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $jugador->genero }}
@@ -118,7 +118,7 @@
                                             
                                         </td>
                                         <td class="px-6 py-4">
-                                            ( {{ ucfirst( strtolower($jugador->pais) ) }} - {{ ucfirst( strtolower($jugador->depto) ) }} - {{ ucfirst( strtolower($jugador->ciudad) ) }} )
+                                            {{ ucfirst( strtolower($jugador->depto) ) }} - {{ ucfirst( strtolower($jugador->ciudad) ) }}
                                         </td>
                                     <tr>
                                 @endforeach

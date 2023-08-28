@@ -89,11 +89,11 @@ class JugadorController extends Controller
             'apellidos' => [ 'required', 'string' ],
             'genero' => [ 'required', 'string', 'size:1' ],
             'club' => [ 'required', 'numeric' ],
-            'nacionalidad' => [ 'required', 'string', 'max:15' ],
+            'nacionalidad' => [ 'required', 'string' ],
             'fecha_nacimiento' => [ 'nullable', 'date_format:Y-m-d' ],
             'pais_residencia' => [ 'nullable', 'string', 'size:3' ],
             'departamento_residencia' => [ 'nullable', 'numeric' ],
-            'municipio_residencia' => [ 'nullable', 'numeric', 'min:4' ]
+            'municipio_residencia' => [ 'nullable', 'numeric' ]
         ]);
 
         if($validated['documento_anterior'] == 0)

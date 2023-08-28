@@ -91,16 +91,14 @@
                     <div class="residencia col-span-2 grid grid-cols-2 gap-6">
 
                         <div class="mb-2">
-                            <x-flowbite.label for="nacionalidad">
-                                Nacionalidad <span>*</span> 
-                            </x-flowbite.label>
-                            
-                            <x-flowbite.input type="text" :id="'nacionalidad'" required/>
+
+                            <x-inscripcion.pais :titulo="'Nacionalidad'" :id="'nacionalidad'" />
+
                         </div>
 
                         <div class="mb-2">
 
-                            <x-inscripcion.pais />
+                            <x-inscripcion.pais :titulo="'Pais residencia'" :id="'pais_residencia'" is-pais="true" />
 
                         </div>
                         

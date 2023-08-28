@@ -11,16 +11,9 @@
             <x-flowbite.input type="number" :id="'torneo'" placeholder="ej: 123" value="{{ old('torneo') }}" required/>
         </div>
         <div class="mr-2 flex-auto">
-            <x-flowbite.label for="categoria">
-                Categoría 
-            </x-flowbite.label>
 
-            <x-flowbite.select :id="'categoria'" required>
-                <option value="1" {{ old('categoria') == 1 ? 'selected' : '' }} >Bola Roja</option>
-                <option value="2" {{ old('categoria') == 2 ? 'selected' : '' }} >Bola Naranja</option>
-                <option value="3" {{ old('categoria') == 3 ? 'selected' : '' }} >Bola Amarilla</option>
-                <option value="4" {{ old('categoria') == 4 ? 'selected' : '' }} >Bola Verde</option>
-            </x-flowbite.select>
+            <x-global-forms.categorias />
+
         </div>
         <div class="mr-2 flex-auto">
             <x-flowbite.label for="genero">
@@ -55,7 +48,7 @@
             </x-flowbite.select>
         </div>
         <div class="mt-5 w-48 text-center">
-            <x-flowbite.button type="button">
+            <x-flowbite.button type="submit">
                     Recuperar datos
             </x-flowbite.button>
 
