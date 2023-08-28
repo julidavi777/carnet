@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class CustomerController extends Controller
+class CustomerController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -18,14 +18,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //$customers = Customer::with('customersContacts')->get()->sortBy('name')->values();
-        //return $this->showAll($customers);
-    }
-
-    public function create()
-    {
-        $client = Customer::all();
-        return view('customers.create');
+        $customers = Customer::with('customersContacts')->get()->sortBy('name')->values();
+  
+        return $this->showAll($customers);
     }
 
     /**
