@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 
-class RoleController extends ApiController
+class RoleController extends Controller
 {
 
     /**
@@ -18,8 +18,10 @@ class RoleController extends ApiController
      */
     public function index()
     {
-        $roles = Role::with('permissions')->whereNotIn('name', ['admin'])->orderBy('name')->get();
-        return $this->showAll($roles);
+        //$roles = Role::with('permissions')->whereNotIn('name', ['admin'])->orderBy('name')->get();
+        //return $this->showAll($roles);
+        $roles = Role::all();
+        return view('roles.index');
     }
 
     /**

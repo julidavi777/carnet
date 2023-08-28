@@ -47,8 +47,8 @@
             Administración
           </button>
           <ul class="dropdown-menu dropdown-menu-dark mx-auto w-100">
-            <li><a class="dropdown-item" href="/users">Usuarios</a></li>
-            <li><a class="dropdown-item" href="/roles">Roles</a></li>
+            <li><a class="dropdown-item" href="{{url('/users')}}">Usuarios</a></li>
+            <li><a class="dropdown-item" href="{{url('/roles')}}">Roles</a></li>
           </ul>
         </div>
         <div class="dropdown mb-2">
@@ -56,8 +56,8 @@
             Gestión Humana
           </button>
           <ul class="dropdown-menu dropdown-menu-dark mx-auto w-100">
-            <li><a class="dropdown-item" href="/employees">Empleados</a></li>
-            <li><a class="dropdown-item" href="/roles">Roles</a></li>
+            <li><a class="dropdown-item" href="{{url('employees')}}">Empleados</a></li>
+            <li><a class="dropdown-item" href="{{url('roles')}}">Roles</a></li>
           </ul>
         </div>
         <div class="dropdown mb-2">
@@ -65,8 +65,8 @@
             Clientes
           </button>
           <ul class="dropdown-menu dropdown-menu-dark mx-auto w-100">
-            <li><a class="dropdown-item" href="client/create">Crear Clientes</a></li>
-            <li><a class="dropdown-item" href="client">Clientes</a></li>
+            <li><a class="dropdown-item" href="{{url('customers/create')}}">Crear Clientes</a></li>
+            <li><a class="dropdown-item" href="{{url('customers')}}">Clientes</a></li>
           </ul>
         </div>
         <div class="dropdown mb-2">
@@ -75,10 +75,10 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-dark mx-auto w-100">
             <li>
-              <a class="dropdown-item" href="oportunity/create">Crear Oportunidad </a>
+              <a class="dropdown-item" href="{{url('oportunity/create')}}">Crear Oportunidad </a>
             </li>
             <li>
-              <a class="dropdown-item" href="oportunities">Oportunidades Comerciales</a>
+              <a class="dropdown-item" href="{{url('oportunities')}}">Oportunidades Comerciales</a>
             </li>
           </ul>
         </div>
@@ -88,7 +88,7 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-dark mx-auto w-100">
             <li>
-              <a class="dropdown-item" href="selled">Historico de venta</a>
+              <a class="dropdown-item" href="{{url('selled')}}">Historico de venta</a>
             </li>
           </ul>
         </div>
