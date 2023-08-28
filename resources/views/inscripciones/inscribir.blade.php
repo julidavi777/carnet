@@ -32,8 +32,8 @@
                             Torneo
                         </x-flowbite.label>
     
-                        <x-forms.inscripciones torneo-id='torneo_inscripcion' torneo-abierto='true' required />
-    
+                        <x-global-forms.torneos torneo-id='torneo_inscripcion' :torneo-abierto="true" :is-register="false" clases="border-none" required />
+
                         <x-flowbite.label class="mt-4" for="jugador_inscripcion">
                             jugador
                         </x-flowbite.label>

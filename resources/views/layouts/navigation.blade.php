@@ -37,11 +37,8 @@
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
 
-                    @auth
-                        <!-- Torneos -->
-                        <x-forms.inscripciones torneo-id='torneo-historial' clases='mr-8' />
-
-                    @endauth
+                    <!-- TORNEOS -->
+                    <x-global-forms.torneos torneo-id="torneo_seleccionado" :torneo-abierto="false" :is-register="false" clases="mr-4 w-44 border-none" />
 
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">

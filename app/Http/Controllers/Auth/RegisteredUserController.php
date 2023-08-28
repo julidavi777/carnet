@@ -50,7 +50,7 @@ class RegisteredUserController extends Controller
             'legal_id' => ['required', 'numeric', 'digits_between:5,12'],
             'name' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'numeric', 'digits_between:7,10'],
-            'torneo_seleccionado' => ['nullable', 'numeric', 'digits_between:1,2'],
+            'torneo_seleccionado' => ['nullable', 'numeric'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], $error_mensajes);
@@ -61,7 +61,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($validated['password']),
             'legal_id' => $validated['legal_id'],
             'phone_number' => $validated['phone_number'],
-            'id_torneo_seleccionado' => $validated['id_torneo_seleccionado'] ?? null,
+            'id_torneo_seleccionado' => (isset($validated['torneo_seleccionado'])) ? $validated['torneo_seleccionado'] : null,
         ]);
 
         event(new Registered($user));

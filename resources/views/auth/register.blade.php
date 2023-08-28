@@ -35,7 +35,9 @@
                 </div>
     
                 <!-- Torneos -->
-                <x-global-forms.torneos />
+                <x-label class="mt-4 mb-2" for="torneo_seleccionado" :value="__('Torneos')" />
+
+                <x-global-forms.torneos torneo-id='torneo_seleccionado' :torneo-abierto="true" :is-register="true" clases='mb-2' />
     
                 <!-- Email Address -->
                 <div class="mt-4">
