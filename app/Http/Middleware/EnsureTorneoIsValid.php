@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class EnsureChangeTorneo
+class EnsureTorneoIsValid
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,6 @@ class EnsureChangeTorneo
      */
     public function handle(Request $request, Closure $next)
     {
-        dd($request->all());
         return $next($request);
     }
 }
