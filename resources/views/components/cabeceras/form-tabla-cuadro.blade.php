@@ -7,8 +7,23 @@
             <x-flowbite.label for="torneo">
                 Torneo 
             </x-flowbite.label>
-             
-            <x-flowbite.input type="number" :id="'torneo'" placeholder="ej: 123" value="{{ old('torneo') }}" required/>
+            
+            <input type="hidden" name="torneo" id="torneo" value="{{ old('torneo') }}">
+            <x-flowbite.input type="text" :id="'torneo_text'" value="{{ old('torneo_text') }}" readonly />
+
+            @push('scripts')
+                <script>
+                    const torneo_select = document.getElementById('torneo_seleccionado');
+                    const torneo_hidden = document.getElementById('torneo');
+                    const torneo_input = document.getElementById('torneo_text');
+
+                    if(torneo_select.value != 0)
+                    {
+                        torneo_hidden.value = torneo_select.value;
+                        torneo_input.value = torneo_select.selectedOptions[0].text;
+                    }
+                </script>
+            @endpush
         </div>
         <div class="mr-2 flex-auto">
 
