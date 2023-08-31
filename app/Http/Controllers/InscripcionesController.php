@@ -6,13 +6,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Services\Inscripciones\CategoriasService;
 use App\Services\Usuarios\JugadorService;
-use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Exception;
 
 class InscripcionesController extends Controller
 {
     public function index()
     {
+        $permiso = Gate::inspect('puede-inscribir');
+
+        if(!$permiso->allowed())
+            return redirect()
+            ->route('inscripciones.inicio')
+            ->withErrors('Acción no autorizada, el torneo debe estar abierto para inscripciones');
+
         $lista_pagos = $this->getListaPagos();
         $data_inscripciones = $this->getJugadoresInscritos();
 

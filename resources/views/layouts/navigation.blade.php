@@ -18,9 +18,11 @@
                             {{ __('Administrar jugadores') }}
                         </x-nav-link>
 
-                        <x-nav-link :href="route('inscripciones.registro')" :active="request()->routeIs('inscripciones.registro')">
-                            {{ __('Inscripciones') }}
-                        </x-nav-link>
+                        @can('puede-inscribir')
+                            <x-nav-link :href="route('inscripciones.registro')" :active="request()->routeIs('inscripciones.registro')">
+                                {{ __('Inscripciones') }}
+                            </x-nav-link>
+                        @endcan
                     @endauth
 
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -40,6 +42,36 @@
                     <!-- TORNEOS -->
                     <x-global-forms.torneos torneo-id="torneo_seleccionado" :torneo-abierto="false" :is-register="false" clases="mr-4 w-44 border-none" />
 
+                    @auth
+                        @push('scripts')
+                            <script>
+                                const torneo_auth = document.getElementById('torneo_seleccionado');
+
+                                torneo_auth.addEventListener('change', () => {
+                                    let id_torneo = torneo_auth.value;
+
+                                    fetch( route('torneo.change', { id: id_torneo }) )
+                                    .then(async response => {
+                                        if(response.ok)
+                                            return response.ok;
+
+                                        const mensaje = await response.json();
+                                        throw new Error(mensaje.message);
+                                    })
+                                    .then(isOk => {
+                                        location.reload();
+                                    })
+                                    .catch(error => {
+                                        alert(error);
+                                        console.error(error);
+                                    });
+                                });
+
+                            </script>
+                        @endpush
+                    @endauth
+
+                    <!-- Config Perfil -->
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
@@ -102,9 +134,11 @@
                     {{ __('Administrar jugadores') }}
                 </x-responsive-nav-link>
 
-                <x-responsive-nav-link :href="route('inscripciones.registro')" :active="request()->routeIs('inscripciones.registro')">
-                    {{ __('Inscripciones') }}
-                </x-responsive-nav-link>
+                @can('puede-inscribir')
+                    <x-responsive-nav-link :href="route('inscripciones.registro')" :active="request()->routeIs('inscripciones.registro')">
+                        {{ __('Inscripciones') }}
+                    </x-responsive-nav-link>
+                @endcan
             @endauth
 
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">

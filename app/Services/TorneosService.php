@@ -29,4 +29,15 @@ class TorneosService
 
         return $torneo->nombre;
     }
+
+    public static function getTorneoInfo($id_torneo)
+    {
+        $torneo = DB::table('t20_torneos')
+        ->select('c20_torneo_id AS id', 'c20_torneo_edicion AS nombre', 'c20_torneo_estado AS estado', 
+                'c20_torneo_fecha_ini AS inicio', 'c20_torneo_fecha_fin AS fin')
+        ->where('c20_torneo_id', $id_torneo)
+        ->first();
+        
+        return $torneo;
+    }
 }

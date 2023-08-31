@@ -5,6 +5,7 @@ use App\Http\Controllers\GruposRoundRobinController;
 use App\Http\Controllers\CuadrosPrincipalesController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\InscripcionesController;
+use Illuminate\Support\Facades\Auth;
 
 Route::middleware('preventHistory')->group(function () {
     Route::get('/', [GruposRoundRobinController::class, 'index'])
@@ -18,6 +19,28 @@ Route::middleware('preventHistory')->group(function () {
 
     Route::post('/cuadros-principales', [CuadrosPrincipalesController::class, 'getCuadrosPrincipales'])
         ->name('cuadros.principales');
+
+    Route::get('change-torneo/{id}', function($id)  
+    {
+        try
+        {
+            $user = Auth::user();
+            $user->torneo_id = $id;
+    
+            $user->save();
+        }
+        catch(Exception $e)
+        {
+            return response()->json([
+                'message' => 'Ha ocurrido un error inesperado',
+            ], 400);
+        }
+
+        return response()->json([
+            'success' => 'ok'
+        ], 200);
+
+    })->name('torneo.change');
 
     Route::middleware(['auth', 'verified'])->group(function () {
 

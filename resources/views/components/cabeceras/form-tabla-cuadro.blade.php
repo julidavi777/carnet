@@ -23,10 +23,12 @@
                         torneo_input.value = torneo_select.selectedOptions[0].text;
                     }
 
+
                     torneo_select.addEventListener('change', () => {
                         torneo_hidden.value = torneo_select.value;
                         torneo_input.value = torneo_select.selectedOptions[0].text;
                     });
+
                 </script>
             @endpush
         </div>

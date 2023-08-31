@@ -28,11 +28,21 @@
 
                     <form action="{{ route('inscripciones.inscripcion') }}" method="post" id="inscripciones-jugador">
                         @csrf
-                        <x-flowbite.label for="torneo_inscripcion">
+                        <x-flowbite.label for="torneo_select_inscripcion">
                             Torneo
                         </x-flowbite.label>
     
-                        <x-global-forms.torneos torneo-id='torneo_inscripcion' :torneo-abierto="true" :is-register="false" clases="border-none" required />
+                        <input type="hidden" name="torneo_inscripcion" id="torneo_inscripcion">
+                        <x-global-forms.torneos torneo-id='torneo_select_inscripcion' :torneo-abierto="true" :is-register="false" clases="border-none" :is-read-only="true" />
+
+                        @push('scripts')
+                            <script>
+                                const torneo_select_inscripcion = document.getElementById('torneo_select_inscripcion');
+                                const torneo_real = document.getElementById('torneo_inscripcion');
+
+                                torneo_real.value = torneo_select_inscripcion.value;
+                            </script>
+                        @endpush
 
                         <x-flowbite.label class="mt-4" for="jugador_inscripcion">
                             jugador

@@ -49,6 +49,11 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 
     public function getTorneoSeleccionadoAttribute()
     {
-        return $this->id_torneo_seleccionado;
+        return (!empty($this->id_torneo_seleccionado) ? $this->id_torneo_seleccionado : 0);
+    }
+
+    public function setTorneoIdAttribute(int $id_torneo)
+    {
+        $this->id_torneo_seleccionado = $id_torneo;
     }
 }
