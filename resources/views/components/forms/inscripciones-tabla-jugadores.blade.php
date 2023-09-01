@@ -9,7 +9,11 @@
                 <a href="{{ asset('storage/Instrucciones Formato de pago TYV.png') }}" target="_blank" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
                     SIGUIENTE INSTRUCTIVO
                 </a> 
-                ANTES DE PASAR AL PAGO
+                ANTES DE PASAR AL 
+                <a href="https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=9283&searchedCategoryId=&searchedAgreementName=VALUES%20THROUGH%20SPORT%20COLOMBIA"
+                    target="_blank" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
+                    PAGO 
+                </a>
             </p>
         </caption>
         <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">

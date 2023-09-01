@@ -20,13 +20,19 @@ Route::middleware('preventHistory')->group(function () {
     Route::post('/cuadros-principales', [CuadrosPrincipalesController::class, 'getCuadrosPrincipales'])
         ->name('cuadros.principales');
 
-    Route::get('change-torneo/{id}', function($id)  
+    Route::get('change-torneo/{id}', function(int $id)  
     {
         try
         {
             $user = Auth::user();
             $user->torneo_id = $id;
-    
+
+            // Si el Editor de código le muestra que hay un error, no lo es,
+            // ya que la variable Auth retorna un modelo Eloquent 
+            // donde el método $user->save() está, solo que el Editor de código 
+            // por alguna razón muestra error. 
+            //
+            // Y si no le muestra nada mano mejor.
             $user->save();
         }
         catch(Exception $e)

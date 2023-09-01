@@ -12,13 +12,6 @@
 
             <!-- Success messages -->
             <x-inscripcion.success-alert />
-            @if(session('url'))
-                INGRESA A LA SIGUIENTE
-                <a href="{{ session('url') }}" target="_blank" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
-                    PASARELA DE PAGOS
-                </a> 
-                PARA REALIZAR EL COBRO
-            @endif
 
             <div class="flex bg-white overflow-hidden shadow-sm sm:rounded-lg">
 

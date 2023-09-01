@@ -55,10 +55,7 @@ class InscripcionesController extends Controller
             ]);
         }
 
-        return back()->with([
-            'success' => 'Copia o guarda el siguiente código que se usará como referencia de pago en la pasarela de pagos: '. $pago_id,
-            'url' => 'https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=9283&searchedCategoryId=&searchedAgreementName=VALUES%20THROUGH%20SPORT%20COLOMBIA'
-        ]);
+        return back()->with('success', 'Copia o guarda el siguiente código que se usará como referencia de pago en la pasarela de pagos: '. $pago_id);
     }
 
     protected function inscribir(Request $request)
