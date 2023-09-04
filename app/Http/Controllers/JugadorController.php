@@ -96,33 +96,33 @@ class JugadorController extends Controller
             'municipio_residencia' => [ 'nullable', 'numeric' ]
         ]);
 
-        if($validated['documento_anterior'] == 0)
-        {
-            $check_responsable = DB::table('t15_jugadores')
-            ->select('c15_jugador_responsable_id as responsable')
-            ->where('c15_jugador_id', $validated['documento'])
-            ->first();
-
-            if(!empty($check_responsable))
-            {
-                if(Auth::id() !== $check_responsable->responsable)
-                    return back()->withErrors([
-                        'Error' => 'El jugador ya se encuentra asignado a un responsable, 
-                        por favor, contactese con un administrador.'
-                    ]);
-            }
-            $campos_insert['c15_jugador_id'] = $validated['documento'];
-        }
-
         if($validated['documento_anterior'] == $validated['documento'] )
         {
             $campos_insert['c15_jugador_id'] = $validated['documento_anterior'];
         }
+        elseif($validated['documento_anterior'] == 0)
+        {
+            $check_responsable = DB::table('t15_jugadores')
+                ->where('c15_jugador_id', $validated['documento'])
+                ->where('c15_jugador_responsable_id', Auth::id())
+                ->exists();
+
+            if($check_responsable)
+            {
+                return back()->withErrors([
+                    'Error' => 'El jugador ya se encuentra asignado a un responsable, 
+                    por favor, contactese con un administrador.'
+                ]);
+            }
+
+            $campos_insert['c15_jugador_id'] = $validated['documento'];
+        }
         else
         {
             $check_responsable = DB::table('t15_jugadores')
-            ->where('c15_jugador_id', $validated['documento'])
-            ->exists();
+                ->where('c15_jugador_id', $validated['documento'])
+                ->where('c15_jugador_responsable_id', Auth::id())
+                ->exists();
 
             if($check_responsable)
                 return back()->withErrors([
