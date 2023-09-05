@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 {
@@ -46,6 +47,16 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getEmailAttribute()
+    {
+        return Str::lower($this->email);
+    }
+
+    public function setEmailAttribute($email)
+    {
+        $this->attributes['email'] = Str::lower($email);
+    }
 
     public function getTorneoSeleccionadoAttribute()
     {
