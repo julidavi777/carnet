@@ -50,12 +50,12 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 
     public function getEmailAttribute()
     {
-        return Str::lower($this->email);
+        return Str::lower($this->attributes['email']);
     }
 
     public function setEmailAttribute($email)
     {
-        $this->attributes['email'] = Str::lower($email);
+        $this->email = Str::lower($email);
     }
 
     public function getTorneoSeleccionadoAttribute()
