@@ -48,6 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
         'email_verified_at' => 'datetime',
     ];
 
+    /*
     public function getEmailAttribute()
     {
         return Str::lower($this->attributes['email']);
@@ -57,7 +58,7 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     {
         $this->email = Str::lower($email);
     }
-
+    */
     public function getTorneoSeleccionadoAttribute()
     {
         return (!empty($this->id_torneo_seleccionado) ? $this->id_torneo_seleccionado : 0);

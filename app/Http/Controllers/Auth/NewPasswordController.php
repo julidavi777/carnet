@@ -20,6 +20,9 @@ class NewPasswordController extends Controller
      */
     public function create(Request $request)
     {
+        $email = Str::lower($request->input('email'));
+        $request->merge([ 'email' => $email ]);
+
         return view('auth.reset-password', ['request' => $request]);
     }
 
@@ -38,6 +41,9 @@ class NewPasswordController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        $email = Str::lower($request->input('email'));
+        $request->merge([ 'email' => $email ]);
 
         // Here we will attempt to reset the user's password. If it is successful we
         // will update the password on an actual user model and persist it to the

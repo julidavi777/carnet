@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
@@ -33,6 +34,9 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        $email = Str::lower($request->input('email'));
+        $request->merge([ 'email' => $email ]);
+
         $error_mensajes = [
             'legal_id.required' => 'El documento es requerido',
             'legal_id.numeric' => 'El documento debe ser numérico',
@@ -54,7 +58,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], $error_mensajes);
-
+        //dd($validated['email']);
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
