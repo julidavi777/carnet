@@ -29,31 +29,44 @@ class InscripcionesController extends Controller
 
     protected function setPago(Request $request)
     {
-        $tabla_inscripciones = DB::table('t19_inscripciones');
+        DB::beginTransaction();
 
-        $inscripciones = $tabla_inscripciones
-        ->select('c19_inscripcion_torneo_id AS torneo_id', 'c19_inscripcion_id_control_pagos AS pago_id')
-        ->where('c19_inscripcion_torneo_id', $request['torneo_id'])
-        ->whereNull('c19_inscripcion_id_control_pagos')
-        ->get()->toArray();
-
-        $pago_id = DB::table('t19_control_pagos')->insertGetId([
-            'c19_control_pagos_torneo_id' => $request['torneo_id'],
-            'c19_control_pagos_responsable_id' => $request['responsable_id'],
-            'c19_control_pagos_valor' => $request['valor'],
-            'c19_control_pagos_estado' => $request['estado'],
-        ], 'c19_control_pagos_id');
-
-        foreach($inscripciones as $inscripcion)
+        try
         {
-            $inscripcion->pago_id = $pago_id;
+            $tabla_inscripciones = DB::table('t19_inscripciones');
 
-            $tabla_inscripciones
-            ->where('c19_inscripcion_torneo_id', $inscripcion->torneo_id)
-            ->update([
-                'c19_inscripcion_id_control_pagos' => $inscripcion->pago_id
-            ]);
+            $inscripciones = $tabla_inscripciones
+            ->select('c19_inscripcion_torneo_id AS torneo_id', 'c19_inscripcion_id_control_pagos AS pago_id')
+            ->where('c19_inscripcion_torneo_id', $request['torneo_id'])
+            ->whereNull('c19_inscripcion_id_control_pagos')
+            ->get()->toArray();
+    
+            $pago_id = DB::table('t19_control_pagos')->insertGetId([
+                'c19_control_pagos_torneo_id' => $request['torneo_id'],
+                'c19_control_pagos_responsable_id' => Auth::id(), //$request['responsable_id'],
+                'c19_control_pagos_valor' => $request['valor'],
+                'c19_control_pagos_estado' => $request['estado'],
+            ], 'c19_control_pagos_id');
+    
+            foreach($inscripciones as $inscripcion)
+            {
+                $inscripcion->pago_id = $pago_id;
+    
+                $tabla_inscripciones
+                ->where('c19_inscripcion_torneo_id', $inscripcion->torneo_id)
+                ->update([
+                    'c19_inscripcion_id_control_pagos' => $inscripcion->pago_id
+                ]);
+            }
         }
+        catch(Exception $e)
+        {
+            DB::rollBack();
+
+            return back()->withErrors('Error ------');
+        }
+
+        DB::commit();
 
         return back()->with('success', 'Copia o guarda el siguiente código que se usará como referencia de pago en la pasarela de pagos: '. $pago_id);
     }
@@ -80,6 +93,8 @@ class InscripcionesController extends Controller
 
         $mensaje_error = [];
 
+        DB::beginTransaction();
+
         for($i = 0; $i <= $total_categorias - 1; $i++)
         {
             $validacion_jugador = DB::select("SELECT public.fnc_validar_t19_inscripcion_categoria('". $validated['torneo_inscripcion']. "', '". $validated['categoria_inscripcion'][$i]. "', '". $validated['jugador_inscripcion']. "') AS mensaje_validacion");
@@ -89,7 +104,11 @@ class InscripcionesController extends Controller
         }
 
         if(count($mensaje_error) > 0)
+        {
+            DB::rollBack();
+
             return back()->withInput()->withErrors($mensaje_error);
+        }
 
         /**
          * Se verifica primero que el jugador no esté inscrito en alguna categoria en las inscripciones
@@ -102,6 +121,8 @@ class InscripcionesController extends Controller
             {
                 $nombre_jugador = JugadorService::getNombreJugador($validated['jugador_inscripcion']);
                 $nombre_categoria = CategoriasService::getNombreCategoria($validated['categoria_inscripcion'][$j]);
+
+                DB::rollBack();
 
                 return back()->withInput()->withErrors("El jugador (". $nombre_jugador. ") ya se encuentra agregado en la categoría (". $nombre_categoria. ").");
             }
@@ -121,20 +142,31 @@ class InscripcionesController extends Controller
             ]);
         }
 
+        DB::commit();
+
         return back()->with('success', 'Se ha agregado el jugador a la lista de inscripciones correctamente.');
     }
 
     protected function eliminar(Request $request)
     {
         // PENDIENTE VALIDACIÓN REQUEST
-        try{
+        DB::beginTransaction();
+
+        try
+        {
             DB::table('t19_inscripciones')
             ->where('c19_inscripcion_torneo_id', $request['torneo_id'])
             ->where('c19_inscripcion_jugador_id', $request['jugador_id'])
             ->delete();
-        }catch(Exception $e){
+        }
+        catch(Exception $e)
+        {
+            DB::rollBack();
+
             return back()->withErrors('Error inesperado al eliminar el jugador, por favor contáctese con un administrador');
         }
+
+        DB::commit();
 
         return back()->with('success', 'Se ha eliminado el jugador de la lista correctamente.');
     }
