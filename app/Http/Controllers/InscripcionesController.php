@@ -33,14 +33,6 @@ class InscripcionesController extends Controller
 
         try
         {
-            $tabla_inscripciones = DB::table('t19_inscripciones');
-
-            $inscripciones = $tabla_inscripciones
-            ->select('c19_inscripcion_torneo_id AS torneo_id', 'c19_inscripcion_id_control_pagos AS pago_id')
-            ->where('c19_inscripcion_torneo_id', $request['torneo_id'])
-            ->whereNull('c19_inscripcion_id_control_pagos')
-            ->get()->toArray();
-
             $query = DB::select("SELECT public.fnc_crear_t19_control_pagos_web(". $request['torneo_id']. ", ". Auth::id(). ", ". $request['valor']. ") AS pago_id");
 
             $pago_id = (!empty($query[0]->pago_id)) ? $query[0]->pago_id : 0;
@@ -52,13 +44,20 @@ class InscripcionesController extends Controller
                 return back()->withErrors('Error inesperado en el pago');
             }
             /*
+            $tabla_inscripciones = DB::table('t19_inscripciones');
+
+            $inscripciones = $tabla_inscripciones
+            ->select('c19_inscripcion_torneo_id AS torneo_id', 'c19_inscripcion_id_control_pagos AS pago_id')
+            ->where('c19_inscripcion_torneo_id', $request['torneo_id'])
+            ->whereNull('c19_inscripcion_id_control_pagos')
+            ->get()->toArray();
+
             $pago_id = DB::table('t19_control_pagos')->insertGetId([
                 'c19_control_pagos_torneo_id' => $request['torneo_id'],
                 'c19_control_pagos_responsable_id' => Auth::id(), //$request['responsable_id'],
                 'c19_control_pagos_valor' => $request['valor'],
                 'c19_control_pagos_estado' => $request['estado'],
             ], 'c19_control_pagos_id');
-            */
     
             foreach($inscripciones as $inscripcion)
             {
@@ -70,6 +69,7 @@ class InscripcionesController extends Controller
                     'c19_inscripcion_id_control_pagos' => $inscripcion->pago_id
                 ]);
             }
+            */
         }
         catch(Exception $e)
         {
