@@ -84,27 +84,31 @@ class JugadorController extends Controller
         //dd($request->all());
         $validated = $request->validate([
             'documento_anterior' => [ 'nullable', 'numeric' ],
-            'documento' => [ 'required', 'numeric' ],
+            'documento' => [ 'required', 'numeric', 'digits_between:6,10' ],
             'nombres' => [ 'required', 'string' ],
             'apellidos' => [ 'required', 'string' ],
             'genero' => [ 'required', 'string', 'size:1' ],
             'club' => [ 'required', 'numeric' ],
             'nacionalidad' => [ 'required', 'string' ],
-            'fecha_nacimiento' => [ 'nullable', 'date_format:Y-m-d' ],
-            'pais_residencia' => [ 'nullable', 'string', 'size:3' ],
-            'departamento_residencia' => [ 'nullable', 'numeric' ],
-            'municipio_residencia' => [ 'nullable', 'numeric' ]
+            'fecha_nacimiento' => [ 'required', 'date_format:Y-m-d' ],
+            //'pais_residencia' => [ 'required', 'string', 'size:3' ],
+            'departamento_residencia' => [ 'required', 'numeric' ],
+            'municipio_residencia' => [ 'required', 'numeric' ]
         ]);
+
+        $documento = 0;
 
         if($validated['documento_anterior'] == $validated['documento'] )
         {
             $campos_insert['c15_jugador_id'] = $validated['documento_anterior'];
+            $documento = $validated['documento_anterior'];
         }
         elseif($validated['documento_anterior'] == 0)
         {
             $check_responsable = DB::table('t15_jugadores')
                 ->where('c15_jugador_id', $validated['documento'])
-                ->where('c15_jugador_responsable_id', Auth::id())
+                ->whereNotNull('c15_jugador_responsable_id')
+                //->where('c15_jugador_responsable_id', Auth::id())
                 ->exists();
 
             if($check_responsable)
@@ -116,6 +120,7 @@ class JugadorController extends Controller
             }
 
             $campos_insert['c15_jugador_id'] = $validated['documento'];
+            $documento = $validated['documento'];
         }
         else
         {
@@ -131,6 +136,7 @@ class JugadorController extends Controller
                 ]);
 
             $campos_insert['c15_jugador_id'] = $validated['documento'];
+            $documento = $validated['documento_anterior'];
         }
 
         $campos_insert['c15_jugador_apellidos'] = $validated['apellidos'];
@@ -147,7 +153,7 @@ class JugadorController extends Controller
 
         DB::table('t15_jugadores')
         ->updateOrInsert(
-            [ 'c15_jugador_id' => $campos_insert['c15_jugador_id'] ],
+            [ 'c15_jugador_id' => $documento ],
             $campos_insert
         );
 
