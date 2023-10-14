@@ -1,33 +1,40 @@
 @props(['accion'])
 
 <form {{ $attributes->merge(['action' => $accion]) }} method="POST">
+    <div class="w-50 text-center" >
+        <h1 id="title" class="text-2xl font-bold mx-auto mb-5" ></h1>
+
+    </div>
     <div class="flex">
         @csrf
         <div class="mr-2 flex-auto">
-            <x-flowbite.label for="torneo">
+            <x-flowbite.label for="torneo" class="hidden ">
                 Torneo 
             </x-flowbite.label>
             
             <input type="hidden" name="torneo" id="torneo" value="{{ old('torneo') }}">
-            <x-flowbite.input type="text" :id="'torneo_text'" value="{{ old('torneo_text') }}" readonly />
+            <x-flowbite.input type="hidden" :id="'torneo_text'" value="{{ old('torneo_text') }}" readonly />
 
             @push('scripts')
                 <script>
                     const torneo_select = document.getElementById('torneo_seleccionado');
                     const torneo_hidden = document.getElementById('torneo');
                     const torneo_input = document.getElementById('torneo_text');
-
+                    const title = document.getElementById('title');
                     if(torneo_select.value != 0)
                     {
                         torneo_hidden.value = torneo_select.value;
                         torneo_input.value = torneo_select.selectedOptions[0].text;
                     }
-
-
-                    torneo_select.addEventListener('change', () => {
+                    const show = () => {
                         torneo_hidden.value = torneo_select.value;
+                        console.log(torneo_seleccionado.selectedOptions[0].text);
+
                         torneo_input.value = torneo_select.selectedOptions[0].text;
-                    });
+                        title.innerText = torneo_select.selectedOptions[0].text;
+                    }
+                    title.addEventListener('onload', show());
+                    torneo_select.addEventListener('change',show());                   
 
                 </script>
             @endpush

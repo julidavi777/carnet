@@ -21,7 +21,7 @@ class InscripcionesCategorias extends Component
         $this->clases = $clases;
         $this->categoriaId = $categoriaId;
 
-        $this->categorias = json_decode(CategoriasService::getCategorias());
+        $this->categorias = json_decode(CategoriasService::getCategoriasTorneo());
         //
     }
 

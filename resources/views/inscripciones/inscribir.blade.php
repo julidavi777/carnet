@@ -21,20 +21,30 @@
 
                     <form action="{{ route('inscripciones.inscripcion') }}" method="post" id="inscripciones-jugador">
                         @csrf
-                        <x-flowbite.label for="torneo_select_inscripcion">
-                            Torneo
-                        </x-flowbite.label>
-    
+
                         <input type="hidden" name="torneo_inscripcion" id="torneo_inscripcion">
-                        <x-global-forms.torneos torneo-id='torneo_select_inscripcion' :torneo-abierto="true" :is-register="false" clases="border-none" :is-read-only="true" />
+                        <x-global-forms.torneos torneo-id='torneo_select_inscripcion' :torneo-abierto="true" :is-register="false" clases="hidden border-none" :is-read-only="true" />
 
                         @push('scripts')
-                            <script>
-                                const torneo_select_inscripcion = document.getElementById('torneo_select_inscripcion');
-                                const torneo_real = document.getElementById('torneo_inscripcion');
+                        <script>
+                            const torneo_select_inscripcion = document.getElementById('torneo_select_inscripcion');
+                            const torneo_real = document.getElementById('torneo_inscripcion');
 
-                                torneo_real.value = torneo_select_inscripcion.value;
-                            </script>
+                            torneo_real.value = torneo_select_inscripcion.value;
+
+                            const checkboxex = document.getElementsByClassName('checkbox');
+
+                            /*                                 checkboxex.foreach(function(checkbox){
+                                                                console.log(checkbox);
+                                                            }) */
+                            for (let propiedad in checkboxex) {
+                                if(checkboxex[propiedad].id !== 'categoria_' + torneo_real.value){
+                                    console.log(checkboxex[propiedad].parentElement.parentElement.classList.add('hidden')); 
+                                }
+                            }
+                            console.log(typeof(checkboxex));
+                            console.log(torneo_real.value);
+                        </script>
                         @endpush
 
                         <x-flowbite.label class="mt-4" for="jugador_inscripcion">
