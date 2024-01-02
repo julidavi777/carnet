@@ -6,6 +6,9 @@ use App\Http\Controllers\CuadrosPrincipalesController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\InscripcionesController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PruebaController; 
+
+Route::get('prueba', [PruebaController::class, 'index']);
 
 Route::middleware('preventHistory')->group(function () {
     Route::get('/', [GruposRoundRobinController::class, 'index'])

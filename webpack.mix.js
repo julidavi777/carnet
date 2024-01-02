@@ -16,7 +16,9 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
         require('autoprefixer')
     ])
+
     .js('./node_modules/flowbite/dist/flowbite.js', 'public/js')
     .postCss('./node_modules/flowbite/dist/flowbite.css', 'public/css')
     .js('./node_modules/flowbite/dist/datepicker.js', 'public/js')
-    .js('resources/js/inscripciones/Jugador.js', 'public/js/inscripciones');
+    .js('resources/js/inscripciones/Jugador.js', 'public/js/inscripciones')
+    .browserSync('localhost:8000');

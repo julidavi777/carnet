@@ -12,7 +12,7 @@
                     </div>
                 --}}
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class=" space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @auth
                         <x-nav-link :href="route('inscripciones.inicio')" :active="request()->routeIs('inscripciones.inicio')">
                             {{ __('Administrar jugadores') }}
